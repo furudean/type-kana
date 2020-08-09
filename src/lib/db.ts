@@ -1,3 +1,5 @@
+import { toHiragana } from "wanakana";
+
 // https://en.wikipedia.org/wiki/Hiragana#Table_of_hiragana
 
 export const hiragana = {
@@ -35,4 +37,8 @@ export const hiragana = {
     "びゃ", "びゅ", "びょ",
     "ぴゃ", "ぴょ", "ぴょ"
   ]
+}
+
+export function isSameKana(a: string, b: string): boolean {
+  return toHiragana(a) === toHiragana(b)
 }

@@ -1,7 +1,10 @@
 <script lang="ts">
-  import { hiragana } from "./lib/kana";
-  import { randomArrayItem } from "./lib/random";
-  import { toRomaji } from "wanakana";
+  import { hiragana, isSameKana } from "./lib/db";
+  import Kana from "./Kana.svelte";
+  import Quiz from "./Quiz.svelte";
+  import Input from "./Input.svelte";
+  import { quizItem } from "./lib/quiz-item";
+  import type { QuizItem } from "./lib/quiz-item";
 
   const dictionary = [
     ...hiragana.monographs,
@@ -10,19 +13,28 @@
     ...hiragana.digraphsDiacritics,
   ];
 
-  let textField: string;
-
-  let randomKana = Array(5)
+  let queue = Array(50)
     .fill(null)
-    .map(() => randomArrayItem(dictionary));
+    .map((_, i) => quizItem(dictionary, i));
+  let quizzed = [] as QuizItem[];
+  let quizItemIndex = 0;
 
-  $: currentKana = randomKana[0];
+  function handleSubmit(event: CustomEvent) {
+    // add kana to quizzed array
+    quizzed = [
+      ...quizzed,
+      {
+        ...queue[0],
+        answer: isSameKana(event.detail.text, queue[0].kana)
+          ? "correct"
+          : "incorrect",
+      },
+    ];
 
-  function handleType() {
-    if (textField === toRomaji(currentKana)) {
-      textField = "";
-      randomKana = randomKana.filter((kana) => kana !== currentKana);
-    }
+    // remove item from queue
+    queue = queue.filter((item) => item.index !== quizItemIndex);
+
+    quizItemIndex += 1;
   }
 </script>
 
@@ -33,14 +45,7 @@
 </style>
 
 <main>
-  <p>Here is your random kana:</p>
-  <ol>
-    {#each randomKana as kana}
-      <li>{kana}</li>
-    {/each}
-  </ol>
-
-  <p>{currentKana}</p>
-
-  <input type="text" bind:value={textField} on:input={handleType} />
+  <p>{queue.length} left</p>
+  <Quiz {queue} {quizzed} />
+  <Input on:submitKana={handleSubmit} />
 </main>

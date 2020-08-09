@@ -21,6 +21,7 @@
     "@rollup/plugin-typescript": "^4.0.0",
     "@tsconfig/svelte": "^1.0.0",
     "@types/wanakana": "^4.0.0",
+    "node-sass": "^4.14.1",
     "rollup": "^2.3.4",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
