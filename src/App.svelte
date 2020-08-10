@@ -29,7 +29,12 @@
           ? "correct"
           : "incorrect",
       },
-    ];
+    ].sort((a, b) => {
+      // for some inexplicable reason, svelte likes to "optimize" this array
+      // by putting it in a completely random order.
+      // this works, but probably not very performant to do on every submit.
+      return a.index - b.index;
+    });
 
     // remove item from unquizzed
     unquizzed = unquizzed.filter((item) => item.index !== quizItemIndex);
