@@ -2,8 +2,11 @@
   import Kana from "./Kana.svelte";
   import type { QuizItem } from "./lib/quiz-item";
 
-  export let queue: QuizItem[];
+  export let unquizzed: QuizItem[];
   export let quizzed: QuizItem[];
+
+  $: queue = unquizzed.slice(1);
+  $: currentItem = unquizzed[0];
 </script>
 
 <style>
@@ -29,6 +32,9 @@
     {#each queue as { kana, answer }}
       <Kana {kana} {answer} />
     {/each}
+  </div>
+  <div class="current-kana">
+    <Kana kana={currentItem.kana} />
   </div>
   <div class="kana-quizzed">
     {#each [...quizzed.reverse()] as { kana, answer }}

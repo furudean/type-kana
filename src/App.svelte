@@ -13,7 +13,7 @@
     ...hiragana.digraphsDiacritics,
   ];
 
-  let queue = Array(50)
+  let unquizzed = Array(50)
     .fill(null)
     .map((_, i) => quizItem(dictionary, i));
   let quizzed = [] as QuizItem[];
@@ -24,15 +24,15 @@
     quizzed = [
       ...quizzed,
       {
-        ...queue[0],
-        answer: isSameKana(event.detail.text, queue[0].kana)
+        ...unquizzed[0],
+        answer: isSameKana(event.detail.text, unquizzed[0].kana)
           ? "correct"
           : "incorrect",
       },
     ];
 
-    // remove item from queue
-    queue = queue.filter((item) => item.index !== quizItemIndex);
+    // remove item from unquizzed
+    unquizzed = unquizzed.filter((item) => item.index !== quizItemIndex);
 
     quizItemIndex += 1;
   }
@@ -45,7 +45,7 @@
 </style>
 
 <main>
-  <p>{queue.length} left</p>
-  <Quiz {queue} {quizzed} />
+  <p>{unquizzed.length} left</p>
+  <Quiz {unquizzed} {quizzed} />
   <Input on:submitKana={handleSubmit} />
 </main>
