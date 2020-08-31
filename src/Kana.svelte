@@ -15,12 +15,13 @@
     visibility: hidden;
   }
 
-  .correct {
-    color: green;
+  .correct,
+  .incorrect {
+    color: #adadad;
   }
 
   .incorrect {
-    color: red;
+    text-decoration: red dotted underline;
 
     rt {
       visibility: visible;

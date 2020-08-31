@@ -9,8 +9,8 @@
   $: currentItem = unquizzed[0];
 </script>
 
-<style>
-  .kana-wrap {
+<style lang="scss">
+  .quiz {
     display: flex;
     overflow-x: hidden;
     flex-direction: row-reverse;
@@ -25,9 +25,23 @@
   .kana-quizzed {
     flex-direction: row-reverse;
   }
+
+  $margin: 0.25em;
+
+  .kana-queue :global(.kana) {
+    margin-left: $margin;
+
+    &:first {
+      margin-left: 0;
+    }
+  }
+
+  .kana-quizzed :global(.kana) {
+    margin-right: $margin;
+  }
 </style>
 
-<div class="kana-wrap">
+<div class="quiz">
   <div class="kana-queue">
     {#each queue as { kana, answer }}
       <Kana {kana} {answer} />
