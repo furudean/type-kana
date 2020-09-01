@@ -17,11 +17,11 @@
 
   .correct,
   .incorrect {
-    color: #adadad;
+    color: #7f7f7f;
   }
 
   .incorrect {
-    text-decoration: red dotted underline;
+    text-decoration: #f76c5e dotted underline;
 
     rt {
       visibility: visible;
