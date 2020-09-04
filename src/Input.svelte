@@ -26,6 +26,7 @@
     autocapitalize="none"
     autocomplete="off"
     autocorrect="off"
+    placeholder="ローマ字入力"
     spellcheck={false}
     bind:value={text} />
   <input type="submit" />
