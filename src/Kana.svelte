@@ -2,7 +2,7 @@
   import { toRomaji } from "wanakana";
 
   export let kana: string;
-  export let answer: string;
+  export let answer: string = null;
 </script>
 
 <style lang="scss">
