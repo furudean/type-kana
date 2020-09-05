@@ -55,10 +55,10 @@ export default {
 		format: 'iife',
 		name: 'app',
 		dir: outputDir,
-		entryFileNames: 'bundle.[hash].js',
+		entryFileNames: production ? 'bundle.[hash].js' : 'bundle.js',
 	},
 	plugins: [
-		del({ targets: `${outputDir}*` }),
+		production && del({ targets: `${outputDir}*` }),
 		copy({
 			targets: [{ src: 'public/*', dest: outputDir }]
 		}),
@@ -90,7 +90,7 @@ export default {
 
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
-		!production && livereload('public'),
+		!production && livereload(outputDir),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
