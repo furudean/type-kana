@@ -3,7 +3,7 @@
 <img src="assets/logo.png" 
   width="128" 
   height="128" 
-  align="left" 
+  align="right" 
   alt="Type Kana logo" />
 
 A quiz app to help you improve your
