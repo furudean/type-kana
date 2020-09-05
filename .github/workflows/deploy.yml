@@ -33,7 +33,9 @@ jobs:
         run: >-
           aws s3 cp build/static/ s3://$AWS_S3_BUCKET/static --recursive --acl public-read --cache-control max-age=86400
 
-          aws s3 cp build/ s3://$AWS_S3_BUCKET --exclude "*" --include "*.css" --exclude "*" --include "*.js" --acl public-read --cache-control max-age=86400
+          aws s3 cp build/ s3://$AWS_S3_BUCKET --exclude "*" --include "*.css" --acl public-read --cache-control max-age=86400
+
+          aws s3 cp build/ s3://$AWS_S3_BUCKET --exclude "*" --include "*.js" --acl public-read --cache-control max-age=86400
 
           aws s3 cp build/index.html s3://$AWS_S3_BUCKET --acl public-read --cache-control no-cache
         env:
