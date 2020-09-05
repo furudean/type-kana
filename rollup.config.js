@@ -60,7 +60,7 @@ export default {
 	plugins: [
 		production && del({ targets: `${outputDir}*` }),
 		copy({
-			targets: [{ src: 'public/*', dest: outputDir }]
+			targets: [{ src: 'static/', dest: outputDir }]
 		}),
 		svelte({
 			// enable run-time checks when not in production
