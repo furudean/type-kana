@@ -32,7 +32,7 @@ jobs:
       - name: S3 sync
         uses: jakejarvis/s3-sync-action@master
         with:
-          args: |
+          args: >-
             --acl public-read
             --follow-symlinks
             --delete
