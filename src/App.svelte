@@ -1,6 +1,5 @@
 <script lang="ts">
   import { hiragana, isSameKana } from "./lib/db";
-  import Kana from "./Kana.svelte";
   import Quiz from "./Quiz.svelte";
   import Input from "./Input.svelte";
   import { quizItem } from "./lib/quiz-item";
