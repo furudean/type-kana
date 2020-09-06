@@ -6,12 +6,14 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import del from 'rollup-plugin-delete'
-import copy from "rollup-plugin-copy";
-import html from "@rollup/plugin-html";
-import htmlTemplate from "./htmlTemplate";
+import copy from 'rollup-plugin-copy';
+import { join } from 'path';
+import posthtml from 'posthtml';
+import { hash } from 'posthtml-hash';
+import { writeFileSync, readFileSync } from "fs";
 
 const production = !process.env.ROLLUP_WATCH;
-const outputDir = "build/";
+const outputDir = 'build';
 
 function serve() {
 	let server;
@@ -34,37 +36,41 @@ function serve() {
 	};
 }
 
-const log = (opts) => {
-	console.log(opts)
-
+function hashStaticAssets() {
 	return {
-		name: 'log',
-		buildEnd(err) {
-			if (err && options.errors) {
-				process.stderr.write('\x07');
-			}
-		}
-	}
+		name: 'hash-static-assets',
+		writeBundle() {
+			posthtml([
+				// Hashes `bundle.[hash].css` and `bundle.[hash].js`
+				hash({ path: outputDir }),
+			])
+				.process(readFileSync('build/index.html'))
+				.then(result => writeFileSync('build/index.html', result.html));
+		},
+	};
 }
-
 
 export default {
 	input: 'src/main.ts',
 	output: {
-		sourcemap: true,
+		sourcemap: !production,
 		format: 'iife',
 		name: 'app',
-		dir: outputDir,
-		entryFileNames: production ? 'bundle.[hash].js' : 'bundle.js',
+		file: join(outputDir, 'bundle.[hash].js'),
 	},
 	plugins: [
-		production && del({ targets: `${outputDir}*` }),
+		production && del({ targets: join(outputDir, '*') }),
 		copy({
-			targets: [{ src: 'static/', dest: outputDir }]
+			targets: [{ src: 'public/*', dest: outputDir }]
 		}),
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
+			// we'll extract any component CSS out into
+			// a separate file - better for performance
+			css: css => {
+				css.write('bundle.[hash].css', !production);
+			},
 			preprocess: sveltePreprocess(),
 		}),
 
@@ -80,21 +86,18 @@ export default {
 		commonjs(),
 		typescript({ sourceMap: !production }),
 
-		// Write the index.html file which holds links to all 
-		//.css and .js files generated
-		html({ template: htmlTemplate }),
-
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(),
 
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
-		!production && livereload(outputDir),
+		!production && livereload({ watch: outputDir }),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+		production && hashStaticAssets()
 	],
 	watch: {
 		clearScreen: false

@@ -46,6 +46,10 @@
 <style>
   main {
     padding: 1em;
+    color: #080921;
+    background: #f9f6f1;
+    min-height: 100%;
+    box-sizing: border-box;
   }
 </style>
 
