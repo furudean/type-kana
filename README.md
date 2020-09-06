@@ -26,7 +26,7 @@ npm install
 npm run dev
 ```
 
-This will start a watch and reload job as you make any changes in the code.
+This will start a live preview of the app, with a watch and reload job as you make any changes in the code.
 
 ## Building for production
 
