@@ -18,7 +18,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "@rollup/plugin-typescript": "^5.0.2",
+    "@rollup/plugin-typescript": "^6.0.0",
     "@tsconfig/svelte": "^1.0.10",
     "@types/wanakana": "^4.0.0",
     "common-tags": "^1.8.0",
