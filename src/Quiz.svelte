@@ -49,7 +49,9 @@
     {/each}
   </div>
   <div class="current-kana">
-    <Kana kana={currentItem.kana} />
+    {#if currentItem}
+      <Kana kana={currentItem.kana} />
+    {/if}
   </div>
   <div class="kana-quizzed">
     {#each [...quizzed.reverse()] as { kana, answer }}
