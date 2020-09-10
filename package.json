@@ -22,6 +22,7 @@
     "@tsconfig/svelte": "^1.0.10",
     "@types/wanakana": "^4.0.0",
     "common-tags": "^1.8.0",
+    "htmlnano": "^0.2.6",
     "node-sass": "^4.14.1",
     "posthtml": "^0.13.3",
     "posthtml-hash": "^1.1.1",

@@ -11,6 +11,7 @@ import { join } from 'path';
 import posthtml from 'posthtml';
 import { hash } from 'posthtml-hash';
 import { writeFileSync, readFileSync } from "fs";
+import htmlnano from 'htmlnano';
 
 const production = !process.env.ROLLUP_WATCH;
 const outputDir = 'build';
@@ -42,7 +43,9 @@ function hashStaticAssets() {
     writeBundle() {
       posthtml([
         // Hashes `bundle.[hash].css` and `bundle.[hash].js`
-        hash({ path: outputDir }),
+        hash({ path: outputDir, hashLength: 8 }),
+        // Minify
+        htmlnano()
       ])
         .process(readFileSync('build/index.html'))
         .then(result => writeFileSync('build/index.html', result.html));
