@@ -6,7 +6,7 @@
   let text = "";
 
   function handleSubmit() {
-    dispatch("submitKana", {
+    dispatch("submitAnswer", {
       text: text.trim(),
     });
     text = "";

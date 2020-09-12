@@ -57,5 +57,5 @@
 <main>
   <p>{unquizzed.length} left</p>
   <Quiz {unquizzed} {quizzed} />
-  <Input on:submitKana={handleSubmit} />
+  <Input on:submitAnswer={handleSubmit} />
 </main>
