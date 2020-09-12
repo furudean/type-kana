@@ -19,10 +19,11 @@
   }
 
   .answered {
-    color: #7f7f7f;
+    color: #ccc;
   }
 
   .incorrect {
+    color: #7f7f7f;
     text-decoration: #f76c5e dotted underline;
 
     rt {
