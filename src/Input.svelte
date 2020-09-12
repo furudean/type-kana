@@ -83,7 +83,7 @@
   <button 
     type="submit" 
     class="submit-button" 
-    aria-label="Submit">
+    title="Submit">
     <ChevronRight size="1.5em"/>
   </button>
 </form>
