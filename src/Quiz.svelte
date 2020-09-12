@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Kana from "./Kana.svelte";
+  import QuizItemComponent from "./QuizItem.svelte";
   import type { QuizItem } from "./lib/quiz-item";
 
   export let unquizzed: QuizItem[];
@@ -29,7 +29,7 @@
 
   $margin: 0.25em;
 
-  .kana-queue :global(.kana) {
+  .kana-queue :global(.quiz-item) {
     margin-left: $margin;
 
     &:first {
@@ -37,7 +37,7 @@
     }
   }
 
-  .kana-quizzed :global(.kana) {
+  .kana-quizzed :global(.quiz-item) {
     margin-right: $margin;
   }
 </style>
@@ -45,17 +45,17 @@
 <div class="quiz">
   <div class="kana-queue">
     {#each queue as { kana, answer }}
-      <Kana {kana} {answer} />
+      <QuizItemComponent {kana} {answer} />
     {/each}
   </div>
   <div class="current-kana">
     {#if currentItem}
-      <Kana kana={currentItem.kana} />
+      <QuizItemComponent kana={currentItem.kana} />
     {/if}
   </div>
   <div class="kana-quizzed">
     {#each [...quizzed.reverse()] as { kana, answer }}
-      <Kana {kana} {answer} />
+      <QuizItemComponent {kana} {answer} />
     {/each}
   </div>
 </div>

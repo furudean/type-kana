@@ -24,9 +24,7 @@
       ...quizzed,
       {
         ...unquizzed[0],
-        answer: isSameKana(event.detail.text, unquizzed[0].kana)
-          ? "correct"
-          : "incorrect",
+        answer: event.detail.text
       },
     ].sort((a, b) => {
       // for some inexplicable reason, svelte likes to "optimize" this array

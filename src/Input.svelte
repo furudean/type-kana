@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
-  let text: string;
+  let text = "";
 
   function handleSubmit() {
     dispatch("submitKana", {

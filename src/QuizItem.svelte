@@ -1,12 +1,15 @@
 <script lang="ts">
   import { toRomaji } from "wanakana";
+  import { isSameKana } from "./lib/db";
 
   export let kana: string;
   export let answer: string = null;
+
+  $: hasAnswer = answer !== null;
 </script>
 
 <style lang="scss">
-  .kana {
+  .quiz-item {
     font-size: 5em;
     white-space: nowrap;
   }
@@ -15,8 +18,7 @@
     visibility: hidden;
   }
 
-  .correct,
-  .incorrect {
+  .answered {
     color: #7f7f7f;
   }
 
@@ -30,9 +32,10 @@
 </style>
 
 <div
-  class="kana"
-  class:correct={answer === 'correct'}
-  class:incorrect={answer === 'incorrect'}>
+  class="quiz-item"
+  class:correct={hasAnswer ? isSameKana(kana, answer) : false}
+  class:incorrect={hasAnswer ? !isSameKana(kana, answer) : false}
+  class:answered={hasAnswer}>
   <ruby>
     {kana}
     <rp>(</rp>
