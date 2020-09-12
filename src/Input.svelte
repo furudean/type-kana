@@ -6,7 +6,7 @@
 
   function handleSubmit() {
     dispatch("submitKana", {
-      text,
+      text: text.trim(),
     });
     text = "";
   }
