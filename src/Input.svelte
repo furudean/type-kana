@@ -31,9 +31,16 @@
     border: 0;
     border-bottom: 2px solid #ccc;
     border-radius: 10px;
-
+    
+    &:focus {
+      outline: none;
+    }
     &::placeholder {
+      transition: 250ms var(--standard-transition);
       color: #ccc;
+    }
+    &:focus::placeholder {
+      color: #9e9e9e;
     }
   }
 
