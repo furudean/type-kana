@@ -12,16 +12,48 @@
   }
 </script>
 
-<style>
+<style lang="scss">  
+  form {
+    display: flex;
+    position: relative;
+  }
+
   input {
+    margin: 0;
+    font-size: 1.5em;
+  }
+
+  .text-field {
     width: 100%;
     text-align: center;
+    height: 3em;
+    padding: 0;
+    border: 0;
+    border-bottom: 2px solid #ccc;
+    border-radius: 10px;
+
+    &::placeholder {
+      color: #ccc;
+    }
+  }
+
+  .submit-button {
+    background: none;
+    border: 0;
+    border-radius: 10px;
+    padding: 0 1em;
+    font-size: 2em;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    z-index: 1;
   }
 </style>
 
 <form on:submit|preventDefault={handleSubmit}>
   <input
     type="text"
+    class="text-field"
     lang="ja"
     autocapitalize="none"
     autocomplete="off"
@@ -29,5 +61,5 @@
     placeholder="ローマ字入力"
     spellcheck={false}
     bind:value={text} />
-  <input type="submit" />
+  <input class="submit-button" type="submit" value="→" />
 </form>
