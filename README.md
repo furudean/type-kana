@@ -36,3 +36,4 @@ The command `npm run build` spits out a production ready build in the `build/` d
 
 * [RealFaviconGenerator](https://realfavicongenerator.net/), for making favicons not suck on various devices
 * [Type Kana](https://lab.fleon.org/type-kana/), the app I stole the concept from
+* [Material Design Icons](https://github.com/Templarian/MaterialDesign)
