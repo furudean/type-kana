@@ -19,6 +19,10 @@
   let quizItemIndex = 0;
 
   function handleSubmit(event: CustomEvent) {
+    if (unquizzed.length === 0) {
+      return;
+    }
+
     // add kana to quizzed array
     quizzed = [
       ...quizzed,
