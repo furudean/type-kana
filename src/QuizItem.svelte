@@ -12,23 +12,33 @@
   .quiz-item {
     font-size: 5em;
     white-space: nowrap;
+    position: relative;
   }
 
-  rt {
-    visibility: hidden;
+  .furigana {
+    font-size: 0.5em;
+    text-align: center;
+    display: none;
+    position: absolute;
+    top: -1em;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
-  .answered {
+  .correct {
     color: #ccc;
   }
 
   .incorrect {
     color: #7f7f7f;
-    text-decoration: #f76c5e dotted underline;
+  }
 
-    rt {
-      visibility: visible;
-    }
+  .incorrect > .furigana {
+    display: block;
+  }
+
+  .incorrect > .question {
+    text-decoration: #f76c5e dotted underline;
   }
 </style>
 
@@ -37,10 +47,6 @@
   class:correct={hasAnswer ? isSameKana(kana, answer) : false}
   class:incorrect={hasAnswer ? !isSameKana(kana, answer) : false}
   class:answered={hasAnswer}>
-  <ruby>
-    {kana}
-    <rp>(</rp>
-    <rt>{toRomaji(kana)}</rt>
-    <rp>)</rp>
-  </ruby>
+  <div class="question">{kana}</div>
+  <div class="furigana">{toRomaji(kana)}</div>
 </div>
