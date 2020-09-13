@@ -14,7 +14,7 @@
 </script>
 
 <style lang="scss">  
-  form {
+  .answer-input {
     display: flex;
     position: relative;
     background: white;
@@ -53,6 +53,7 @@
     font-size: 2em;
     width: 2em;
     height: 100%;
+    cursor: pointer;
 
     position: absolute;
     right: 0;
@@ -68,7 +69,7 @@
   }
 </style>
 
-<form on:submit|preventDefault={handleSubmit}>
+<form class="answer-input" on:submit|preventDefault={handleSubmit}>
   <input
     type="text"
     class="text-field"

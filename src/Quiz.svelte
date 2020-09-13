@@ -42,7 +42,7 @@
   }
 </style>
 
-<div class="quiz">
+<section class="quiz">
   <div class="kana-queue">
     {#each [...queue.slice(0, 15)] as { kana, answer }}
       <QuizItemComponent {kana} {answer} />
@@ -58,4 +58,4 @@
       <QuizItemComponent {kana} {answer} />
     {/each}
   </div>
-</div>
+</section>
