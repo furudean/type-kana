@@ -44,7 +44,7 @@
 
 <div class="quiz">
   <div class="kana-queue">
-    {#each queue as { kana, answer }}
+    {#each [...queue.slice(0, 15)] as { kana, answer }}
       <QuizItemComponent {kana} {answer} />
     {/each}
   </div>
@@ -54,7 +54,7 @@
     {/if}
   </div>
   <div class="kana-quizzed">
-    {#each [...quizzed.reverse()] as { kana, answer }}
+    {#each [...quizzed.reverse().slice(0, 15)] as { kana, answer }}
       <QuizItemComponent {kana} {answer} />
     {/each}
   </div>
