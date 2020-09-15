@@ -20,6 +20,8 @@
     background: white;
     border-bottom: 2px solid #ccc;
     border-radius: 10px;
+    max-width: 50em;
+    margin: 0 auto;
   }
   
   .text-field {
