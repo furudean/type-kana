@@ -21,7 +21,7 @@
     display: flex;
     flex-wrap: nowrap;
     flex: 1 1 0;
-    width: 0;
+    min-width: 0;
   }
   .kana-quizzed {
     flex-direction: row-reverse;
