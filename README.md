@@ -6,7 +6,7 @@
   align="right" 
   alt="Type Kana logo" />
 
-A quiz app to help you learn to better recollect and type
+A quiz app to help you learn readings of
 <ruby>
 ひらがな<rp>(</rp><rt>hiragana</rt><rp>)</rp>
 </ruby>
