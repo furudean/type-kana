@@ -38,7 +38,9 @@
   }
 
   .incorrect > .question {
-    text-decoration: #f76c5e dotted underline;
+    text-decoration-color: #f76c5e;
+    text-decoration-style: dotted;
+    text-decoration-line: underline;
   }
 </style>
 
