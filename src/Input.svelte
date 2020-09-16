@@ -6,10 +6,15 @@
   let text = "";
 
   function handleSubmit() {
-    dispatch("submitAnswer", {
-      text: text.trim(),
-    });
+    dispatch("submitAnswer", { text });
     text = "";
+  }
+
+  function handleInput(event: InputEvent & { target: EventTarget & HTMLInputElement }) {
+    if (event.data === ' ') {
+      text = text.trim()
+      handleSubmit()
+    }
   }
 </script>
 
@@ -76,6 +81,7 @@
     type="text"
     class="text-field"
     bind:value={text}
+    on:input={handleInput}
     placeholder="ローマ字入力"
     aria-label="Input rōmaji"
     lang="ja"
