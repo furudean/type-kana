@@ -41,6 +41,24 @@ export const hiragana = {
   ]
 }
 
+// https://en.wikipedia.org/wiki/Katakana#Table_of_katakana
+
+export const katakana = {
+  monographs: [
+    "ア", "イ", "ウ", "エ", "オ",
+    "カ", "キ", "ク", "ケ", "コ",
+    "サ", "シ", "ス", "セ", "ソ",
+    "タ", "チ", "ツ", "テ", "ト",
+    "ナ", "ニ", "ヌ", "ネ", "ノ",
+    "ハ", "ヒ", "フ", "ヘ", "ホ",
+    "マ", "ミ", "ム", "メ", "モ",
+    "ヤ", "ユ", "ヨ",
+    "ラ", "リ", "ル", "レ", "ロ",
+    "ワ", "ヲ",
+    "ン",
+  ]
+}
+
 export function isSameKana(a: string, b: string): boolean {
   return toHiragana(a) === toHiragana(b)
 }

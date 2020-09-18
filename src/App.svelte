@@ -1,20 +1,15 @@
 <script lang="ts">
-  import { hiragana, isSameKana } from "./lib/db";
+  import { onDestroy } from 'svelte';
+  import { hiragana, katakana, isSameKana } from "./lib/db";
   import Quiz from "./Quiz.svelte";
   import Input from "./Input.svelte";
   import { quizItem } from "./lib/quiz-item";
   import type { QuizItem } from "./lib/quiz-item";
+  import Options from "./Options.svelte";
+  import { options } from "./lib/options";
+  import type { Options as GameOptions } from "./lib/options";
 
-  const dictionary = [
-    ...hiragana.monographs,
-    ...hiragana.monographDiacritics,
-    ...hiragana.digraphs,
-    ...hiragana.digraphsDiacritics,
-  ];
-
-  let unquizzed = Array(50)
-    .fill(null)
-    .map((_, i) => quizItem(dictionary, i));
+  let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
   let quizItemIndex = 0;
 
@@ -42,10 +37,42 @@
 
     quizItemIndex += 1;
   }
+
+  // move this logic out
+  function startGame(opts: GameOptions) {
+    let dictionary = [] as string[];
+
+    if (opts.kanaType === 'hiragana' || opts.kanaType === 'both') {
+      dictionary = [
+        ...dictionary,
+        ...hiragana.monographs,
+        ...hiragana.monographDiacritics,
+        ...hiragana.digraphs,
+        ...hiragana.digraphsDiacritics,
+      ]
+    }
+
+    if (opts.kanaType === 'katakana' || opts.kanaType === 'both') {
+      dictionary = [
+        ...dictionary,
+        ...katakana.monographs,
+      ]
+    }
+
+    quizItemIndex = 0;
+    quizzed = [];
+    unquizzed = Array(dictionary.length)
+      .fill(null)
+      .map((_, i) => quizItem(dictionary, i));
+  }
+
+  const unsubscribe = options.subscribe(opts => { startGame(opts) });
+  onDestroy(unsubscribe);
 </script>
 
 <style>
   :global(:root) {
+    /* https://coolors.co/e0d1b8-52154e-00a6a6-080921-f76c5e */
     --standard-transition: cubic-bezier(0.4, 0.0, 0.2, 1);
   }
 
@@ -62,4 +89,5 @@
   <p>{unquizzed.length} left</p>
   <Quiz {unquizzed} {quizzed} />
   <Input on:submitAnswer={handleSubmit} />
+  <Options/>
 </main>
