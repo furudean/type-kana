@@ -3,8 +3,8 @@
   import Quiz from "./Quiz.svelte";
   import Input from "./Input.svelte";
   import { getQuiz } from "./lib/quiz";
-  import type { QuizItem } from "./lib/quiz-item";
-  import Options from "./Options.svelte";
+  import type { QuizItem } from "./lib/quiz";
+  import Settings from "./Settings.svelte";
   import { settings } from "./lib/settings";
   import type { GameSettings } from "./lib/settings";
 
@@ -66,5 +66,5 @@
   <p>{unquizzed.length} left</p>
   <Quiz {unquizzed} {quizzed} />
   <Input on:submitAnswer={handleSubmit} />
-  <Options/>
+  <Settings/>
 </main>

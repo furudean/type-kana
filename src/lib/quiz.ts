@@ -1,6 +1,6 @@
-import { hiragana, katakana } from "./db"
 import type { GameSettings } from "./settings"
 import { randomArrayItem } from "./random"
+import { getDictionary } from "./dictionary"
 
 export interface QuizItem {
   index: number;
@@ -17,27 +17,7 @@ export function quizItem(dictionary: string[], i: number): QuizItem {
 }
 
 export function getQuiz(opts: GameSettings): QuizItem[] {
-  let dictionary = [] as string[];
-
-  if (opts.kanaType === 'hiragana' || opts.kanaType === 'both') {
-    dictionary = [
-      ...dictionary,
-      ...hiragana.monographs,
-      ...hiragana.monographDiacritics,
-      ...hiragana.digraphs,
-      ...hiragana.digraphsDiacritics,
-    ]
-  }
-
-  if (opts.kanaType === 'katakana' || opts.kanaType === 'both') {
-    dictionary = [
-      ...dictionary,
-      ...katakana.monographs,
-      ...katakana.monographDiacritics,
-      ...katakana.digraphs,
-      ...katakana.digraphsDiacritics,
-    ]
-  }
+  const dictionary = getDictionary(opts);
 
   return Array(dictionary.length)
     .fill(null)

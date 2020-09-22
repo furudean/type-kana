@@ -20,24 +20,24 @@
     <legend>I want to practice</legend>
 
     <input
-      id="hiragana-choice"
+      id="type-hiragana-choice"
       type="radio"
       bind:group={$settings.kanaType}
       value="hiragana" />
-    <label for="hiragana-choice">Hiragana</label>
+    <label for="type-hiragana-choice">Hiragana</label>
 
     <input
-      id="katakana-choice"
+      id="type-katakana-choice"
       type="radio"
       bind:group={$settings.kanaType}
       value="katakana" />
-    <label for="katakana-choice">Katakana</label>
+    <label for="type-katakana-choice">Katakana</label>
 
     <input
-      id="both-choice"
+      id="type-both-choice"
       type="radio"
       bind:group={$settings.kanaType}
       value="both" />
-    <label for="both-choice">Both</label>
+    <label for="type-both-choice">Both</label>
   </fieldset>
 </form>
