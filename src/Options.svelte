@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { options } from "./lib/options";
+  import { settings } from "./lib/settings";
 </script>
 
 <style>
@@ -22,21 +22,21 @@
     <input
       id="hiragana-choice"
       type="radio"
-      bind:group={$options.kanaType}
+      bind:group={$settings.kanaType}
       value="hiragana" />
     <label for="hiragana-choice">Hiragana</label>
 
     <input
       id="katakana-choice"
       type="radio"
-      bind:group={$options.kanaType}
+      bind:group={$settings.kanaType}
       value="katakana" />
     <label for="katakana-choice">Katakana</label>
 
     <input
       id="both-choice"
       type="radio"
-      bind:group={$options.kanaType}
+      bind:group={$settings.kanaType}
       value="both" />
     <label for="both-choice">Both</label>
   </fieldset>

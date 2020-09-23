@@ -1,13 +1,12 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
-  import { hiragana, katakana, isSameKana } from "./lib/db";
   import Quiz from "./Quiz.svelte";
   import Input from "./Input.svelte";
-  import { quizItem } from "./lib/quiz-item";
+  import { getQuiz } from "./lib/quiz";
   import type { QuizItem } from "./lib/quiz-item";
   import Options from "./Options.svelte";
-  import { options } from "./lib/options";
-  import type { Options as GameOptions } from "./lib/options";
+  import { settings } from "./lib/settings";
+  import type { GameSettings } from "./lib/settings";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -38,35 +37,13 @@
     quizItemIndex += 1;
   }
 
-  // move this logic out
-  function startGame(opts: GameOptions) {
-    let dictionary = [] as string[];
-
-    if (opts.kanaType === 'hiragana' || opts.kanaType === 'both') {
-      dictionary = [
-        ...dictionary,
-        ...hiragana.monographs,
-        ...hiragana.monographDiacritics,
-        ...hiragana.digraphs,
-        ...hiragana.digraphsDiacritics,
-      ]
-    }
-
-    if (opts.kanaType === 'katakana' || opts.kanaType === 'both') {
-      dictionary = [
-        ...dictionary,
-        ...katakana.monographs,
-      ]
-    }
-
+  function startGame(opts: GameSettings) {
     quizItemIndex = 0;
+    unquizzed = getQuiz(opts);
     quizzed = [];
-    unquizzed = Array(dictionary.length)
-      .fill(null)
-      .map((_, i) => quizItem(dictionary, i));
   }
 
-  const unsubscribe = options.subscribe(opts => { startGame(opts) });
+  const unsubscribe = settings.subscribe(startGame);
   onDestroy(unsubscribe);
 </script>
 

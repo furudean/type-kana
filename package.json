@@ -41,6 +41,7 @@
   "dependencies": {
     "sirv-cli": "^1.0.0",
     "svelte-material-icons": "^1.0.3",
+    "svelte-persistent-store": "^0.1.4",
     "wanakana": "^4.0.2"
   }
 }
