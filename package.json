@@ -41,6 +41,7 @@
   "dependencies": {
     "@c-bandy/svelte-material-icons": "^1.1.2",
     "sirv-cli": "^1.0.0",
+    "svelte-focus-trap": "^1.0.1",
     "svelte-persistent-store": "^0.1.4",
     "wanakana": "^4.0.2"
   }

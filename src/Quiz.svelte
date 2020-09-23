@@ -1,6 +1,6 @@
 <script lang="ts">
   import QuizItemComponent from "./QuizItem.svelte";
-  import type { QuizItem } from "./lib/quiz-item";
+  import type { QuizItem } from "./lib/quiz";
 
   export let unquizzed: QuizItem[];
   export let quizzed: QuizItem[];

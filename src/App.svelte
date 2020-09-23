@@ -7,10 +7,16 @@
   import Settings from "./Settings.svelte";
   import { settings } from "./lib/settings";
   import type { GameSettings } from "./lib/settings";
+  import Menu from "./Menu.svelte";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
   let quizItemIndex = 0;
+  let showMenu = false;
+
+  function handleMenuEvent(event: CustomEvent) {
+    if (event.detail.type === 'menuToggle') { showMenu = !showMenu }
+  }
 
   function handleSubmit(event: CustomEvent) {
     if (unquizzed.length === 0) {
@@ -51,14 +57,16 @@
   :global(:root) {
     /* https://coolors.co/e0d1b8-52154e-00a6a6-080921-f76c5e */
     --standard-transition: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --background-color: rgb(249, 246, 241);
   }
 
   main {
     padding: 1em;
     color: #080921;
-    background: #f9f6f1;
+    background: var(--background-color);
     min-height: 100%;
     box-sizing: border-box;
+    position: relative;
   }
 </style>
 
@@ -66,5 +74,6 @@
   <p>{unquizzed.length} left</p>
   <Quiz {unquizzed} {quizzed} />
   <Input on:submitAnswer={handleSubmit} />
-  <Settings/>
+  <Menu on:menuEvent={handleMenuEvent}/>
+  <Settings visible={showMenu}/>
 </main>
