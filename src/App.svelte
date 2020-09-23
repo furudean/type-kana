@@ -58,6 +58,7 @@
     /* https://coolors.co/e0d1b8-52154e-00a6a6-080921-f76c5e */
     --standard-transition: cubic-bezier(0.4, 0.0, 0.2, 1);
     --background-color: rgb(249, 246, 241);
+    --accent-color: rgb(112, 38, 50);
   }
 
   main {
