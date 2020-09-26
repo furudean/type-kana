@@ -2,12 +2,19 @@
   import { focusTrap } from 'svelte-focus-trap'
   import { settings } from "./lib/settings";
 
-  export let visible: boolean;
+  let isOpen = false;
+
+  export function open() {
+    isOpen = true;
+  }
+  export function close() {
+    isOpen = false;
+  }
 </script>
 
 <style lang="scss">
   @keyframes fade-in {
-    from { opacity: 0;}
+    from { opacity: 0; }
     to { opacity: 1; }
   }
 
@@ -56,7 +63,7 @@
   }
 </style>
 
-{#if visible}
+{#if isOpen}
   <section class="settings-container" use:focusTrap>
     <div class="settings-menu">
       <h2>Settings</h2>
@@ -85,7 +92,7 @@
         <label for="type-both-choice">Both</label>
       </fieldset>
       <br/>
-      <button on:click={() => { visible = !visible }}>Ok</button>
+      <button on:click={close}>Ok</button>
     </div>
   </section>
 {/if}

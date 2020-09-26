@@ -25,7 +25,6 @@
     background: none;
     margin: 0;
     margin-left: 0.25em;
-    border: 0;
     font-size: 2.5em;
     padding: 0.25em;
     cursor: pointer;
@@ -58,7 +57,7 @@
     type="button"
     title="Open game settings"
     on:click={() => {
-      menuEvent('menuToggle');
+      menuEvent('openSettings');
     }}>
     <CogOutline />
   </button>

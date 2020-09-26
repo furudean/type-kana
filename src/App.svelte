@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
+  import { onDestroy } from "svelte";
   import Quiz from "./Quiz.svelte";
   import Input from "./Input.svelte";
   import { getQuiz } from "./lib/quiz";
@@ -12,10 +12,12 @@
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
   let quizItemIndex = 0;
-  let showMenu = false;
+  let settingsComponent: Settings;
 
   function handleMenuEvent(event: CustomEvent) {
-    if (event.detail.type === 'menuToggle') { showMenu = !showMenu }
+    if (event.detail.type === "openSettings") {
+      settingsComponent.open()
+    }
   }
 
   function handleSubmit(event: CustomEvent) {
@@ -28,7 +30,7 @@
       ...quizzed,
       {
         ...unquizzed[0],
-        answer: event.detail.text
+        answer: event.detail.text,
       },
     ].sort((a, b) => {
       // for some inexplicable reason, svelte likes to "optimize" this array
@@ -56,7 +58,7 @@
 <style>
   :global(:root) {
     /* https://coolors.co/e0d1b8-52154e-00a6a6-080921-f76c5e */
-    --standard-transition: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
     --background-color: rgb(249, 246, 241);
     --accent-color: rgb(112, 38, 50);
   }
@@ -75,6 +77,6 @@
   <p>{unquizzed.length} left</p>
   <Quiz {unquizzed} {quizzed} />
   <Input on:submitAnswer={handleSubmit} />
-  <Menu on:menuEvent={handleMenuEvent}/>
-  <Settings visible={showMenu}/>
+  <Menu on:menuEvent={handleMenuEvent} />
+  <Settings bind:this={settingsComponent} />
 </main>
