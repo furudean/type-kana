@@ -11,49 +11,51 @@
 </script>
 
 <style lang="scss">
-  section {
+  .menu {
     margin: 0 auto;
     display: flex;
     justify-content: center;
     margin-top: 1.5em;
   }
 
-  button,
-  a {
+  .menu-item {
     display: flex;
     color: var(--accent-color);
     background: none;
     margin: 0;
     margin-left: 0.25em;
     font-size: 2.5em;
-    padding: 0.25em;
+    padding: 0.1em;
     cursor: pointer;
-    border-radius: 10000px;
+    border-radius: 50%;
     border: 3px dashed transparent;
-    transition: color 250ms var(--standard-transition),
-      background-color 250ms var(--standard-transition),
-      border 250ms var(--standard-transition);
+    transition: transform 125ms var(--standard-transition),
+      color 125ms var(--standard-transition),
+      background-color 125ms var(--standard-transition),
+      border 125ms var(--standard-transition);
 
     &:first-child {
       margin-left: 0;
     }
     &:focus {
       outline: none;
+      color: var(--background-color);
+      background-color: var(--accent-color);
+    }
+    &:hover {
       border: 3px dashed var(--accent-color);
     }
-    &:hover,
     &:active {
-      background-color: var(--accent-color);
       color: var(--background-color);
-    }
-    &:active {
-      border: 3px dashed var(--background-color);
+      background-color: var(--accent-color);
+      transform: translateY(4px);
     }
   }
 </style>
 
-<section>
+<section class="menu">
   <button
+    class="menu-item"
     type="button"
     title="Open game settings"
     on:click={() => {
@@ -62,6 +64,7 @@
     <CogOutline />
   </button>
   <a
+    class="menu-item"
     href="https://github.com/c-bandy/type-kana"
     target="_blank"
     title="Show GitHub repository">
