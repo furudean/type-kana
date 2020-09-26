@@ -1,22 +1,24 @@
 <script lang="ts">
-  import { hiragana, isSameKana } from "./lib/db";
+  import { onDestroy } from "svelte";
   import Quiz from "./Quiz.svelte";
   import Input from "./Input.svelte";
-  import { quizItem } from "./lib/quiz-item";
-  import type { QuizItem } from "./lib/quiz-item";
+  import { getQuiz } from "./lib/quiz";
+  import type { QuizItem } from "./lib/quiz";
+  import Settings from "./Settings.svelte";
+  import { settings } from "./lib/settings";
+  import type { GameSettings } from "./lib/settings";
+  import Menu from "./Menu.svelte";
 
-  const dictionary = [
-    ...hiragana.monographs,
-    ...hiragana.monographDiacritics,
-    ...hiragana.digraphs,
-    ...hiragana.digraphsDiacritics,
-  ];
-
-  let unquizzed = Array(50)
-    .fill(null)
-    .map((_, i) => quizItem(dictionary, i));
+  let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
   let quizItemIndex = 0;
+  let settingsComponent: Settings;
+
+  function handleMenuEvent(event: CustomEvent) {
+    if (event.detail.type === "openSettings") {
+      settingsComponent.open()
+    }
+  }
 
   function handleSubmit(event: CustomEvent) {
     if (unquizzed.length === 0) {
@@ -28,7 +30,7 @@
       ...quizzed,
       {
         ...unquizzed[0],
-        answer: event.detail.text
+        answer: event.detail.text,
       },
     ].sort((a, b) => {
       // for some inexplicable reason, svelte likes to "optimize" this array
@@ -42,19 +44,32 @@
 
     quizItemIndex += 1;
   }
+
+  function startGame(opts: GameSettings) {
+    quizItemIndex = 0;
+    unquizzed = getQuiz(opts);
+    quizzed = [];
+  }
+
+  const unsubscribe = settings.subscribe(startGame);
+  onDestroy(unsubscribe);
 </script>
 
 <style>
   :global(:root) {
-    --standard-transition: cubic-bezier(0.4, 0.0, 0.2, 1);
+    /* https://coolors.co/e0d1b8-52154e-00a6a6-080921-f76c5e */
+    --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
+    --background-color: rgb(249, 246, 241);
+    --accent-color: rgb(112, 38, 50);
   }
 
   main {
     padding: 1em;
     color: #080921;
-    background: #f9f6f1;
+    background: var(--background-color);
     min-height: 100%;
     box-sizing: border-box;
+    position: relative;
   }
 </style>
 
@@ -62,4 +77,6 @@
   <p>{unquizzed.length} left</p>
   <Quiz {unquizzed} {quizzed} />
   <Input on:submitAnswer={handleSubmit} />
+  <Menu on:menuEvent={handleMenuEvent} />
+  <Settings bind:this={settingsComponent} />
 </main>

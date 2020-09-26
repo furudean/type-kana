@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import ChevronRight from "svelte-material-icons/ChevronRight.svelte";
+  import ChevronRight from "@c-bandy/svelte-material-icons/dist/ChevronRight.svelte";
 
   const dispatch = createEventDispatcher();
   let text = "";

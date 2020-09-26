@@ -7,5 +7,11 @@
     "node_modules/*",
     "__sapper__/*",
     "public/*"
-  ]
+  ],
+  "compilerOptions": {
+    "typeRoots": [
+      "node_modules/@types",
+      "src/typings/**"
+    ]
+  }
 }

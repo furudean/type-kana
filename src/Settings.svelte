@@ -1,0 +1,98 @@
+<script lang="ts">
+  import { focusTrap } from 'svelte-focus-trap'
+  import { settings } from "./lib/settings";
+
+  let isOpen = false;
+
+  export function open() {
+    isOpen = true;
+  }
+  export function close() {
+    isOpen = false;
+  }
+</script>
+
+<style lang="scss">
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .settings-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.4);
+    animation: 400ms fade-in var(--standard-transition) forwards;
+  }
+
+  .settings-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--background-color);
+    padding: 2em 2em 6em;
+    border-radius: 1em;
+    min-width: 50%;
+
+    > :first-child {
+      margin-top: 0;
+    }
+  }
+
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  legend {
+    padding: 0;
+  }
+
+  input[type="radio"] {
+    margin: 1em 0.4em 1em 1em;
+  }
+
+  label {
+    display: inline-block;
+  }
+</style>
+
+{#if isOpen}
+  <section class="settings-container" use:focusTrap>
+    <div class="settings-menu">
+      <h2>Settings</h2>
+      <fieldset>
+        <legend>I want to practice</legend>
+
+        <input
+          id="type-hiragana-choice"
+          type="radio"
+          bind:group={$settings.kanaType}
+          value="hiragana" />
+        <label for="type-hiragana-choice">Hiragana</label>
+
+        <input
+          id="type-katakana-choice"
+          type="radio"
+          bind:group={$settings.kanaType}
+          value="katakana" />
+        <label for="type-katakana-choice">Katakana</label>
+
+        <input
+          id="type-both-choice"
+          type="radio"
+          bind:group={$settings.kanaType}
+          value="both" />
+        <label for="type-both-choice">Both</label>
+      </fieldset>
+      <br/>
+      <button on:click={close}>Ok</button>
+    </div>
+  </section>
+{/if}
