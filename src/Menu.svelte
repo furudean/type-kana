@@ -15,7 +15,7 @@
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    margin-top: 1.5em;
+    margin-top: 2em;
   }
 
   .menu-item {
