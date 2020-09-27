@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { focusTrap } from 'svelte-focus-trap'
+  import { focusTrap } from "svelte-focus-trap";
   import { settings } from "./lib/settings";
 
   let isOpen = false;
@@ -14,8 +14,12 @@
 
 <style lang="scss">
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .settings-container {
@@ -48,25 +52,33 @@
     margin: 0;
     padding: 0;
     border: 0;
+    margin-top: 1em;
   }
 
   legend {
     padding: 0;
+    font-size: 1.25em;
   }
 
-  input[type="radio"] {
+  input[type="radio"],
+  input[type="checkbox"] {
     margin: 1em 0.4em 1em 1em;
   }
 
   label {
     display: inline-block;
   }
+
+  p {
+    margin-top: 1em;
+    margin-bottom: 0;
+  }
 </style>
 
 {#if isOpen}
   <section class="settings-container" use:focusTrap>
     <div class="settings-menu">
-      <h2>Settings</h2>
+      <h1>Settings</h1>
       <fieldset>
         <legend>I want to practice</legend>
 
@@ -91,7 +103,16 @@
           value="both" />
         <label for="type-both-choice">Both</label>
       </fieldset>
-      <br/>
+      <fieldset>
+        <legend>Auto commit</legend>
+        <p>Automatically submit when input matches the correct answer.</p>
+        <input
+          type="checkbox"
+          name="Auto commit"
+          id="auto-commit" 
+          bind:checked={$settings.autoCommitEnabled} />
+        <label for="auto-commit">Enabled</label>
+      </fieldset>
       <button on:click={close}>Ok</button>
     </div>
   </section>

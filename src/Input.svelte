@@ -1,6 +1,10 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import ChevronRight from "@c-bandy/svelte-material-icons/dist/ChevronRight.svelte";
+  import { settings } from "./lib/settings";
+  import { toRomaji } from "wanakana";
+
+  export let correctAnswer: string = null;
 
   const dispatch = createEventDispatcher();
   let text = "";
@@ -10,15 +14,24 @@
     text = "";
   }
 
-  function handleInput(event: InputEvent & { target: EventTarget & HTMLInputElement }) {
-    if (event.data === ' ') {
-      text = text.trim()
-      handleSubmit()
+  function handleInput(
+    event: InputEvent & { target: EventTarget & HTMLInputElement }
+  ) {
+    if (event.data === " ") {
+      text = text.trim();
+      handleSubmit();
+    }
+    if (
+      $settings.autoCommitEnabled &&
+      correctAnswer !== null &&
+      text.length === toRomaji(correctAnswer).length
+    ) {
+      handleSubmit();
     }
   }
 </script>
 
-<style lang="scss">  
+<style lang="scss">
   .answer-input {
     display: flex;
     position: relative;
@@ -28,7 +41,7 @@
     max-width: 50em;
     margin: 0 auto;
   }
-  
+
   .text-field {
     font-size: 1.5em;
     margin: 0;
@@ -38,7 +51,7 @@
     padding: 0;
     border: 0;
     background: none;
-    
+
     &:focus {
       outline: none;
     }
@@ -70,7 +83,7 @@
     align-items: center;
     justify-content: center;
 
-    &:focus { 
+    &:focus {
       outline: black dotted 2px;
     }
   }
@@ -89,10 +102,7 @@
     autocomplete="off"
     autocorrect="off"
     spellcheck={false} />
-  <button 
-    type="submit" 
-    class="submit-button" 
-    title="Submit">
-    <ChevronRight size="1.5em"/>
+  <button type="submit" class="submit-button" title="Submit">
+    <ChevronRight size="1.5em" />
   </button>
 </form>
