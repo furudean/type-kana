@@ -31,7 +31,7 @@ jobs:
           npm run build
       - name: S3 sync
         run: >-
-          aws s3 sync build/ s3://$AWS_S3_BUCKET --delete --acl public-read --cache-control max-age=31536000
+          aws s3 sync build/ s3://$AWS_S3_BUCKET --delete --acl public-read --exclude index.html --cache-control max-age=31536000
 
           aws s3 cp build/index.html s3://$AWS_S3_BUCKET --acl public-read --cache-control no-cache
         env:
