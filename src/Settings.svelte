@@ -10,6 +10,16 @@
   export function close() {
     isOpen = false;
   }
+
+  function keyPress(event: KeyboardEvent) {
+    // avoid events during IME composition
+    if (event.isComposing) {
+      return;
+    }
+    if (isOpen && event.key === "Escape") {
+      close();
+    }
+  }
 </script>
 
 <style lang="scss">
@@ -75,6 +85,8 @@
   }
 </style>
 
+<svelte:window on:keyup={keyPress} />
+
 {#if isOpen}
   <section class="settings-container" use:focusTrap>
     <div class="settings-menu">
@@ -109,7 +121,7 @@
         <input
           type="checkbox"
           name="Auto commit"
-          id="auto-commit" 
+          id="auto-commit"
           bind:checked={$settings.autoCommitEnabled} />
         <label for="auto-commit">Enabled</label>
       </fieldset>
