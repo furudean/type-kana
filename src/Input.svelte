@@ -14,9 +14,7 @@
     text = "";
   }
 
-  function handleInput(
-    event: InputEvent & { target: EventTarget & HTMLInputElement }
-  ) {
+  function handleInput(event: any) {
     if (event.data === " ") {
       text = text.trim();
       handleSubmit();
