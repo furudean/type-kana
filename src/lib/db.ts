@@ -1,4 +1,4 @@
-import { toHiragana } from "wanakana";
+import { toHiragana, toRomaji } from "wanakana";
 
 // https://en.wikipedia.org/wiki/Hiragana#Table_of_hiragana
 
@@ -83,5 +83,5 @@ export const katakana = {
 }
 
 export function isSameKana(a: string, b: string): boolean {
-  return toHiragana(a) === toHiragana(b)
+  return toRomaji(a) === toRomaji(b)
 }
