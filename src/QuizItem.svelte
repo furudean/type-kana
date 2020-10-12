@@ -1,6 +1,6 @@
 <script lang="ts">
   import { toRomaji } from "wanakana";
-  import { isSameKana } from "./lib/db";
+  import { isCorrectAnswer } from "./lib/answer";
 
   export let kana: string;
   export let answer: string = null;
@@ -46,8 +46,8 @@
 
 <div
   class="quiz-item"
-  class:correct={hasAnswer ? isSameKana(kana, answer) : false}
-  class:incorrect={hasAnswer ? !isSameKana(kana, answer) : false}
+  class:correct={hasAnswer ? isCorrectAnswer(answer, kana) : false}
+  class:incorrect={hasAnswer ? !isCorrectAnswer(answer, kana) : false}
   class:answered={hasAnswer}>
   <div class="question">{kana}</div>
   <div class="furigana">{toRomaji(kana)}</div>

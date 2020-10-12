@@ -81,7 +81,3 @@ export const katakana = {
     "ピャ", "ピュ", "ピョ"
   ]
 }
-
-export function isSameKana(a: string, b: string): boolean {
-  return toRomaji(a) === toRomaji(b)
-}
