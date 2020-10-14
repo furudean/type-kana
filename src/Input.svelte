@@ -2,9 +2,9 @@
   import { createEventDispatcher } from "svelte";
   import ChevronRight from "@c-bandy/svelte-material-icons/dist/ChevronRight.svelte";
   import { settings } from "./lib/settings";
-  import { toRomaji } from "wanakana";
+  import { getAnswers, isCorrectAnswer } from "./lib/answer";
 
-  export let correctAnswer: string = null;
+  export let currentKana: string = null;
 
   const dispatch = createEventDispatcher();
   let text = "";
@@ -15,14 +15,17 @@
   }
 
   function handleInput(event: any) {
+    if (currentKana === null) {
+      return;
+    }
     if (event.data === " ") {
       text = text.trim();
       handleSubmit();
     }
     if (
       $settings.autoCommitEnabled &&
-      correctAnswer !== null &&
-      text.length === toRomaji(correctAnswer).length
+      (isCorrectAnswer(text, currentKana) ||
+      text.length === getAnswers(currentKana).map(s => s.length).sort().reverse()[0])
     ) {
       handleSubmit();
     }

@@ -76,7 +76,7 @@
 <main>
   <p>{unquizzed.length} left</p>
   <Quiz {unquizzed} {quizzed} />
-  <Input on:submitAnswer={handleSubmit} correctAnswer={unquizzed[0]?.kana} />
+  <Input on:submitAnswer={handleSubmit} currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />
   <Settings bind:this={settingsComponent} />
 </main>
