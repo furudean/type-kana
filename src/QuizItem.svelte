@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { toRomaji } from "wanakana";
-  import { isCorrectAnswer } from "./lib/answer";
+  import { getAnswers, isCorrectAnswer } from "./lib/answer";
 
   export let kana: string;
   export let answer: string = null;
@@ -50,5 +49,5 @@
   class:incorrect={hasAnswer ? !isCorrectAnswer(answer, kana) : false}
   class:answered={hasAnswer}>
   <div class="question">{kana}</div>
-  <div class="furigana">{toRomaji(kana)}</div>
+  <div class="furigana">{getAnswers(kana)[0]}</div>
 </div>
