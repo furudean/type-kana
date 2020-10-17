@@ -1,4 +1,4 @@
-# [type-kana](https://type-kana.cass.moe/)
+# [Type Kana](https://type-kana.cass.moe/)
 
 <img src="assets/logo.png" 
   width="128" 
@@ -6,7 +6,7 @@
   align="right" 
   alt="Type Kana logo" />
 
-A quiz app to help you learn readings of
+A quiz app to help you learn 
 <ruby>
 ひらがな<rp>(</rp><rt>hiragana</rt><rp>)</rp>
 </ruby>
