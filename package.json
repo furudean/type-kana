@@ -1,8 +1,7 @@
 {
   "name": "type-kana",
   "version": "1.0.0",
-  "description": "ひらがな and カタカナ practice app",
-  "author": "c-bandy",
+  "author": "c-bandy (https://github.com/c-bandy)",
   "homepage": "https://github.com/c-bandy/type-kana#readme",
   "repository": {
     "type": "git",
