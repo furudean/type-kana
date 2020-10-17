@@ -67,6 +67,7 @@
     class="menu-item"
     href="https://github.com/c-bandy/type-kana"
     target="_blank"
+    rel="noopener"
     title="Show GitHub repository">
     <Github />
   </a>
