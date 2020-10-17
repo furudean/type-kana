@@ -81,10 +81,6 @@
   }
 </style>
 
-<svelte:head>
-  <link href="/font/mplus-2p.css" rel="stylesheet" />
-</svelte:head>
-
 <main>
   <p>{unquizzed.length} left</p>
   <Quiz {unquizzed} {quizzed} />
