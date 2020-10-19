@@ -21,8 +21,9 @@
     display: none;
     position: absolute;
     top: -1em;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    text-align: center;
   }
 
   .correct {
