@@ -16,6 +16,7 @@
 
   .furigana {
     font-size: 0.5em;
+    font-weight: 500;
     text-align: center;
     display: none;
     position: absolute;
