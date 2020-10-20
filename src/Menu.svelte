@@ -1,6 +1,6 @@
 <script lang="ts">
-  import CogOutline from "@c-bandy/svelte-material-icons/dist/CogOutline.svelte";
-  import Github from "@c-bandy/svelte-material-icons/dist/Github.svelte";
+  import { mdiCogOutline, mdiGithub } from "@mdi/js"
+  import Icon from "./Icon.svelte";
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
@@ -61,7 +61,7 @@
     on:click={() => {
       menuEvent('openSettings');
     }}>
-    <CogOutline />
+    <Icon path={mdiCogOutline} />
   </button>
   <a
     class="menu-item"
@@ -69,6 +69,6 @@
     target="_blank"
     rel="noopener"
     title="Show GitHub repository">
-    <Github />
+    <Icon path={mdiGithub} />
   </a>
 </section>

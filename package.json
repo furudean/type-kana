@@ -38,7 +38,7 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "@c-bandy/svelte-material-icons": "^1.1.2",
+    "@mdi/js": "^5.7.55",
     "sirv-cli": "^1.0.0",
     "svelte-focus-trap": "^1.0.1",
     "svelte-persistent-store": "^0.1.4",

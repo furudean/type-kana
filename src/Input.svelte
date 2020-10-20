@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import ChevronRight from "@c-bandy/svelte-material-icons/dist/ChevronRight.svelte";
+  import { mdiChevronRight } from "@mdi/js"
+  import Icon from "./Icon.svelte";
   import { settings } from "./lib/settings";
   import { getAnswers, isCorrectAnswer } from "./lib/answer";
 
@@ -104,6 +105,6 @@
     autocorrect="off"
     spellcheck={false} />
   <button type="submit" class="submit-button" title="Submit">
-    <ChevronRight size="1.5em" />
+    <Icon size="1.5em" path={mdiChevronRight} />
   </button>
 </form>
