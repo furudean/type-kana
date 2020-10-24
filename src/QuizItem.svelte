@@ -27,11 +27,11 @@
   }
 
   .correct {
-    color: #ccc;
+    color: var(--text-color-lighter);
   }
 
   .incorrect {
-    color: #7f7f7f;
+    color: var(--text-color-light);
   }
 
   .incorrect > .furigana {
@@ -39,7 +39,7 @@
   }
 
   .incorrect > .question {
-    text-decoration-color: #f76c5e;
+    text-decoration-color: var(--highlight-color);
     text-decoration-style: dotted;
     text-decoration-line: underline;
   }

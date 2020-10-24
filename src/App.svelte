@@ -56,16 +56,46 @@
 </script>
 
 <style>
-  :global(:root) {
-    /* https://coolors.co/e0d1b8-52154e-00a6a6-080921-f76c5e */
-    --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
-    --background-color: rgb(249, 246, 241);
-    --accent-color: rgb(112, 38, 50);
+  @media (prefers-color-scheme: light) {
+    :global(:root) {
+      /* https://coolors.co/e0d1b8-52154e-00a6a6-080921-f76c5e */
+      --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
+
+      --background-color: hsl(38, 40%, 96%);
+
+      --background-contrast: hsl(0, 0%, 100%);
+      --background-contrast-light: hsl(0, 0%, 80%);
+
+      --text-color: hsl(238, 61%, 8%);
+      --text-color-light: hsl(0, 0%, 50%);
+      --text-color-lighter: hsl(0, 0%, 80%);
+
+      --accent-color: hsl(352, 47%, 25%);
+      --highlight-color: hsl(5, 91%, 67%);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root) {
+      --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
+
+      --background-color: rgb(36, 22, 37);
+
+      --background-contrast: hsl(300, 24%, 17%);
+      --background-contrast-light: hsl(300, 24%, 22%);
+
+      --text-color: hsl(326 18% 75% / 1);
+      --text-color-light: hsl(326 10% 46% / 1);
+      --text-color-lighter: hsl(326 14% 23% / 1);
+
+      --accent-color: hsl(304, 59%, 28%);
+      --highlight-color: hsl(180, 100%, 33%);
+    }
   }
 
   main {
     padding: 1em;
-    color: #080921;
+    color: var(--text-color);
     background: var(--background-color);
     min-height: 100%;
     box-sizing: border-box;
@@ -87,4 +117,5 @@
   <Input on:submitAnswer={handleSubmit} currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />
   <Settings bind:this={settingsComponent} />
+  <Theme/>
 </main>
