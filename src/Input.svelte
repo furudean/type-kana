@@ -37,10 +37,10 @@
   .answer-input {
     display: flex;
     position: relative;
-    background: white;
-    border-bottom: 2px solid #ccc;
+    background-color: var(--background-contrast);
+    border-bottom: 2px solid var(--background-contrast-light);
     border-radius: 10px;
-    max-width: 50em;
+    max-width: 40em;
     margin: 0 auto;
   }
 
@@ -53,16 +53,17 @@
     padding: 0;
     border: 0;
     background: none;
+    color: inherit;
 
     &:focus {
       outline: none;
     }
     &::placeholder {
       transition: 250ms var(--standard-transition) color;
-      color: #ccc;
+      color: var(--text-color-light);
     }
     &:focus::placeholder {
-      color: #9e9e9e;
+      color: var(--text-color-lighter);
     }
   }
 
@@ -86,7 +87,8 @@
     justify-content: center;
 
     &:focus {
-      outline: black dotted 2px;
+      outline: var(--text-color) dotted 3px;
+      outline-offset: 4px;
     }
   }
 </style>
