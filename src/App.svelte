@@ -59,9 +59,6 @@
 <style>
   main.light-theme,
   main {
-    /* https://coolors.co/e0d1b8-52154e-00a6a6-080921-f76c5e */
-    --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
-
     --background-color: hsl(38, 40%, 96%);
 
     --background-contrast: hsl(0, 0%, 100%);
@@ -76,8 +73,6 @@
   }
 
   main.dark-theme {
-    --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
-
     --background-color: rgb(36, 22, 37);
 
     --background-contrast: hsl(300, 24%, 17%);
@@ -92,6 +87,8 @@
   }
 
   main {
+    --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
+
     padding: 1em;
     color: var(--text-color);
     background: var(--background-color);
