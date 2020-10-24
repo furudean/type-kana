@@ -73,16 +73,16 @@
   }
 
   main.dark-theme {
-    --background-color: rgb(36, 22, 37);
+    --background-color: hsl(296, 25%, 12%);
 
     --background-contrast: hsl(300, 24%, 17%);
     --background-contrast-light: hsl(300, 24%, 22%);
 
-    --text-color: hsl(326 18% 75% / 1);
-    --text-color-light: hsl(326 10% 46% / 1);
-    --text-color-lighter: hsl(326 14% 23% / 1);
+    --text-color: hsl(326, 18%, 75%);
+    --text-color-light: hsl(326, 10%, 46%);
+    --text-color-lighter: hsl(326, 14%, 23%);
 
-    --accent-color: hsl(304 59% 40% / 1);
+    --accent-color: hsl(304, 59%, 40%);
     --highlight-color: hsl(180, 100%, 33%);
   }
 
