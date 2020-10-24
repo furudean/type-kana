@@ -82,7 +82,7 @@
     --text-color-light: hsl(326 10% 46% / 1);
     --text-color-lighter: hsl(326 14% 23% / 1);
 
-    --accent-color: hsl(304, 59%, 28%);
+    --accent-color: hsl(304 59% 40% / 1);
     --highlight-color: hsl(180, 100%, 33%);
   }
 
