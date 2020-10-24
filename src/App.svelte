@@ -8,7 +8,7 @@
   import { settings } from "./lib/settings";
   import type { GameSettings } from "./lib/settings";
   import Menu from "./Menu.svelte";
-  import { osTheme, resolvedTheme } from "./lib/theme";
+  import { resolvedTheme } from "./lib/theme";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
