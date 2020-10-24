@@ -1,6 +1,7 @@
 <script lang="ts">
   import { focusTrap } from "svelte-focus-trap";
   import { settings } from "./lib/settings";
+import { osTheme } from "./lib/theme";
 
   let isOpen = false;
 
@@ -125,6 +126,35 @@
           bind:checked={$settings.autoCommitEnabled} />
         <label for="auto-commit">Enabled</label>
       </fieldset>
+      <fieldset>
+        <legend>Theme</legend>
+  
+        <input
+          id="same-as-system-theme-choice"
+          type="radio"
+          bind:group={$settings.theme}
+          value="same-as-system" />
+        <label for="same-as-system-theme-choice">Same as system ({$osTheme})</label>
+        <br>
+
+        <input
+          id="light-theme-choice"
+          type="radio"
+          bind:group={$settings.theme}
+          value="light" />
+        <label for="light-theme-choice">Light</label>
+        <br>
+
+        <input
+          id="dark-theme-choice"
+          type="radio"
+          bind:group={$settings.theme}
+          value="dark" />
+        <label for="dark-theme-choice">Dark</label>
+        <br>
+
+      </fieldset>
+      <br>
       <button on:click={close}>Ok</button>
     </div>
   </section>

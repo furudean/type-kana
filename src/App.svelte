@@ -8,6 +8,7 @@
   import { settings } from "./lib/settings";
   import type { GameSettings } from "./lib/settings";
   import Menu from "./Menu.svelte";
+  import { osTheme, resolvedTheme } from "./lib/theme";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -56,41 +57,38 @@
 </script>
 
 <style>
-  @media (prefers-color-scheme: light) {
-    :global(:root) {
-      /* https://coolors.co/e0d1b8-52154e-00a6a6-080921-f76c5e */
-      --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
+  main.light-theme,
+  main {
+    /* https://coolors.co/e0d1b8-52154e-00a6a6-080921-f76c5e */
+    --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
 
-      --background-color: hsl(38, 40%, 96%);
+    --background-color: hsl(38, 40%, 96%);
 
-      --background-contrast: hsl(0, 0%, 100%);
-      --background-contrast-light: hsl(0, 0%, 80%);
+    --background-contrast: hsl(0, 0%, 100%);
+    --background-contrast-light: hsl(0, 0%, 80%);
 
-      --text-color: hsl(238, 61%, 8%);
-      --text-color-light: hsl(0, 0%, 50%);
-      --text-color-lighter: hsl(0, 0%, 80%);
+    --text-color: hsl(238, 61%, 8%);
+    --text-color-light: hsl(0, 0%, 50%);
+    --text-color-lighter: hsl(0, 0%, 80%);
 
-      --accent-color: hsl(352, 47%, 25%);
-      --highlight-color: hsl(5, 91%, 67%);
-    }
+    --accent-color: hsl(352, 47%, 25%);
+    --highlight-color: hsl(5, 91%, 67%);
   }
 
-  @media (prefers-color-scheme: dark) {
-    :global(:root) {
-      --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
+  main.dark-theme {
+    --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
 
-      --background-color: rgb(36, 22, 37);
+    --background-color: rgb(36, 22, 37);
 
-      --background-contrast: hsl(300, 24%, 17%);
-      --background-contrast-light: hsl(300, 24%, 22%);
+    --background-contrast: hsl(300, 24%, 17%);
+    --background-contrast-light: hsl(300, 24%, 22%);
 
-      --text-color: hsl(326 18% 75% / 1);
-      --text-color-light: hsl(326 10% 46% / 1);
-      --text-color-lighter: hsl(326 14% 23% / 1);
+    --text-color: hsl(326 18% 75% / 1);
+    --text-color-light: hsl(326 10% 46% / 1);
+    --text-color-lighter: hsl(326 14% 23% / 1);
 
-      --accent-color: hsl(304, 59%, 28%);
-      --highlight-color: hsl(180, 100%, 33%);
-    }
+    --accent-color: hsl(304, 59%, 28%);
+    --highlight-color: hsl(180, 100%, 33%);
   }
 
   main {
@@ -111,11 +109,10 @@
   }
 </style>
 
-<main>
+<main class={$resolvedTheme + '-theme'}>
   <p>{unquizzed.length} left</p>
   <Quiz {unquizzed} {quizzed} />
   <Input on:submitAnswer={handleSubmit} currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />
   <Settings bind:this={settingsComponent} />
-  <Theme/>
 </main>
