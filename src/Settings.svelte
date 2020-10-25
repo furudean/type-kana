@@ -24,15 +24,14 @@ import { osTheme } from "./lib/theme";
 </script>
 
 <style lang="scss">
-  @keyframes fade-in {
+  @keyframes slide-in-top {
     from {
-      opacity: 0;
+      transform: translateY(-100%);
     }
     to {
-      opacity: 1;
+      transform: translateY(0)
     }
   }
-
   .settings-container {
     position: fixed;
     top: 0;
@@ -41,18 +40,21 @@ import { osTheme } from "./lib/theme";
     bottom: 0;
     z-index: 999;
     background-color: rgba(0, 0, 0, 0.4);
-    animation: 400ms fade-in var(--standard-transition) forwards;
+    animation: 200ms fade-in var(--standard-transition) forwards;
   }
 
   .settings-menu {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
     background: var(--background-color);
     padding: 2em 2em 6em;
-    border-radius: 1em;
-    min-width: 50%;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    box-sizing: border-box;
+    width: 70%;
+    overflow-y: scroll;
+    max-height: 95%;
+    position: relative;
+    animation: 300ms slide-in-top var(--standard-transition) forwards;
 
     > :first-child {
       margin-top: 0;
@@ -73,7 +75,7 @@ import { osTheme } from "./lib/theme";
 
   input[type="radio"],
   input[type="checkbox"] {
-    margin: 1em 0.4em 1em 1em;
+    margin: 1.333em 1em 1em 1em;
   }
 
   label {
