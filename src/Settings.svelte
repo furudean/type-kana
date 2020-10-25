@@ -40,7 +40,7 @@ import { osTheme } from "./lib/theme";
     bottom: 0;
     z-index: 999;
     background-color: rgba(0, 0, 0, 0.4);
-    animation: 200ms fade-in var(--standard-transition) forwards;
+    animation: 300ms fade-in var(--standard-transition) forwards;
   }
 
   .settings-menu {
