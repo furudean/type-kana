@@ -50,7 +50,7 @@
     display: flex;
     justify-content: center;
     opacity: 0;
-    transition: 200ms var(--standard-transition) opacity;
+    transition: 150ms var(--standard-transition) opacity;
 
     &.visible {
       opacity: 1;
