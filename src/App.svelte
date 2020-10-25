@@ -93,7 +93,7 @@
     --text-color-lighter: hsl(326, 14%, 23%);
 
     --accent-color: hsl(304, 59%, 40%);
-    --highlight-color: hsl(180, 100%, 33%);
+    --highlight-color: hsl(27, 100%, 43%);
   }
 
   main {
