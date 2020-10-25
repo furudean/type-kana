@@ -127,6 +127,16 @@ import { osTheme } from "./lib/theme";
         <label for="auto-commit">Enabled</label>
       </fieldset>
       <fieldset>
+        <legend>Error marker</legend>
+        <p>Show an indicator below the current quiz item if written answer is wrong.</p>
+        <input
+          type="checkbox"
+          name="Error marker"
+          id="error-marker-setting"
+          bind:checked={$settings.showErrorMarker} />
+        <label for="error-marker-setting">Enabled</label>
+      </fieldset>
+      <fieldset>
         <legend>Theme</legend>
   
         <input

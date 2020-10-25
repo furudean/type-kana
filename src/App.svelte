@@ -14,6 +14,7 @@
   let quizzed = [] as QuizItem[];
   let quizItemIndex = 0;
   let settingsComponent: Settings;
+  let input = "";
 
   function handleMenuEvent(event: CustomEvent) {
     if (event.detail.type === "openSettings") {
@@ -57,6 +58,15 @@
 </script>
 
 <style>
+  @keyframes -global-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
   main.light-theme,
   main {
     --background-color: hsl(38, 40%, 96%);
@@ -108,8 +118,13 @@
 
 <main class={$resolvedTheme + '-theme'}>
   <p>{unquizzed.length} left</p>
-  <Quiz {unquizzed} {quizzed} />
-  <Input on:submitAnswer={handleSubmit} currentKana={unquizzed[0]?.kana} />
+  <Quiz {unquizzed} {quizzed} {input} />
+  <Input
+    on:input={(event) => {
+      input = event.detail.text;
+    }}
+    on:submitAnswer={handleSubmit}
+    currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />
   <Settings bind:this={settingsComponent} />
 </main>

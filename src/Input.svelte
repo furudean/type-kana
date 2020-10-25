@@ -11,11 +11,13 @@
   let text = "";
 
   function handleSubmit() {
+    dispatch("input", { text: "" });
     dispatch("submitAnswer", { text });
     text = "";
   }
 
   function handleInput(event: any) {
+    dispatch("input", { text });
     if (currentKana === null) {
       return;
     }
