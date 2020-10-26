@@ -100,6 +100,7 @@ import { osTheme } from "./lib/theme";
         <input
           id="type-hiragana-choice"
           type="radio"
+          name="kana-choice"
           bind:group={$settings.kanaType}
           value="hiragana" />
         <label for="type-hiragana-choice">Hiragana</label>
@@ -107,6 +108,7 @@ import { osTheme } from "./lib/theme";
         <input
           id="type-katakana-choice"
           type="radio"
+          name="kana-choice"
           bind:group={$settings.kanaType}
           value="katakana" />
         <label for="type-katakana-choice">Katakana</label>
@@ -114,6 +116,7 @@ import { osTheme } from "./lib/theme";
         <input
           id="type-both-choice"
           type="radio"
+          name="kana-choice"
           bind:group={$settings.kanaType}
           value="both" />
         <label for="type-both-choice">Both</label>
@@ -144,6 +147,7 @@ import { osTheme } from "./lib/theme";
         <input
           id="same-as-system-theme-choice"
           type="radio"
+          name="theme-choice"
           bind:group={$settings.theme}
           value="same-as-system" />
         <label for="same-as-system-theme-choice">Same as system ({$osTheme})</label>
@@ -152,6 +156,7 @@ import { osTheme } from "./lib/theme";
         <input
           id="light-theme-choice"
           type="radio"
+          name="theme-choice"
           bind:group={$settings.theme}
           value="light" />
         <label for="light-theme-choice">Light</label>
@@ -160,6 +165,7 @@ import { osTheme } from "./lib/theme";
         <input
           id="dark-theme-choice"
           type="radio"
+          name="theme-choice"
           bind:group={$settings.theme}
           value="dark" />
         <label for="dark-theme-choice">Dark</label>
