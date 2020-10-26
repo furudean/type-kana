@@ -26,9 +26,8 @@
       handleSubmit();
     }
     if (
-      $settings.autoCommitEnabled &&
-      (isCorrectAnswer(text, currentKana) ||
-      text.length === getAnswers(currentKana).map(s => s.length).sort().reverse()[0])
+      ($settings.autoCommit === 'lazy' && isCorrectAnswer(text, currentKana)) ||
+      ($settings.autoCommit === 'strict' && text.length === getAnswers(currentKana).map(s => s.length).sort().reverse()[0])
     ) {
       handleSubmit();
     }

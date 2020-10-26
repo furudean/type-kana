@@ -124,12 +124,32 @@
       <fieldset>
         <legend>Auto commit</legend>
         <p>Automatically submit when input matches the correct answer.</p>
+
         <input
-          type="checkbox"
-          name="Auto commit"
-          id="auto-commit"
-          bind:checked={$settings.autoCommitEnabled} />
-        <label for="auto-commit">Enabled</label>
+          id="auto-commit-disabled-choice"
+          name="auto-commit-choice"
+          type="radio"
+          bind:group={$settings.autoCommit}
+          value="disabled" />
+        <label for="auto-commit-disabled-choice">Disabled</label>
+        <br>
+
+        <input
+          id="auto-commit-lazy-choice"
+          name="auto-commit-choice"
+          type="radio"
+          bind:group={$settings.autoCommit}
+          value="lazy" />
+        <label for="auto-commit-lazy-choice">Lazy mode</label>
+        <br>
+
+        <input
+          id="auto-commit-strict-choice"
+          name="auto-commit-choice"
+          type="radio"
+          bind:group={$settings.autoCommit}
+          value="strict" />
+        <label for="auto-commit-strict-choice">Strict mode</label>
       </fieldset>
       <fieldset>
         <legend>Error marker</legend>

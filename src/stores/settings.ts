@@ -2,14 +2,14 @@ import { writable } from 'svelte-persistent-store/dist/local'
 
 export interface GameSettings {
   kanaType: 'hiragana' | 'katakana' | 'both',
-  autoCommitEnabled: boolean,
+  autoCommit: 'lazy' | 'strict' | 'disabled',
   theme: 'light' | 'dark' | 'same-as-system',
   showErrorMarker: boolean,
 }
 
 export const settings = writable<GameSettings>('game-settings', {
   kanaType: 'hiragana',
-  autoCommitEnabled: false,
+  autoCommit: 'disabled',
   theme: 'same-as-system',
   showErrorMarker: true,
 });
