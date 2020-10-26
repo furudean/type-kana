@@ -28,7 +28,7 @@
     display: flex;
     overflow-x: hidden;
     flex-direction: row-reverse;
-    padding: 3em 0 2em;
+    padding: 4em 0 2em;
   }
   .kana-quizzed,
   .kana-queue {
