@@ -99,7 +99,6 @@
   main {
     --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
 
-    padding: 1em;
     color: var(--text-color);
     background: var(--background-color);
     min-height: 100%;
@@ -117,7 +116,6 @@
 </style>
 
 <main class={$resolvedTheme + '-theme'}>
-  <p>{unquizzed.length} left</p>
   <Quiz {unquizzed} {quizzed} {input} />
   <Input
     on:input={(event) => {
