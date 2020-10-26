@@ -2,8 +2,8 @@
   import { createEventDispatcher } from "svelte";
   import { mdiChevronRight } from "@mdi/js"
   import Icon from "./Icon.svelte";
-  import { settings } from "./lib/settings";
-  import { getAnswers, isCorrectAnswer } from "./lib/answer";
+  import { settings } from "@/stores/settings";
+  import { getAnswers, isCorrectAnswer } from "@/lib/answer";
 
   export let currentKana: string = null;
 

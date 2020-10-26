@@ -1,7 +1,7 @@
 <script lang="ts">
   import { focusTrap } from "svelte-focus-trap";
-  import { settings } from "./lib/settings";
-import { osTheme } from "./lib/theme";
+  import { settings } from "@/stores/settings";
+  import { osTheme } from "@/stores/theme";
 
   let isOpen = false;
 

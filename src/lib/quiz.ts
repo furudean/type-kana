@@ -1,4 +1,4 @@
-import type { GameSettings } from "./settings"
+import type { GameSettings } from "@/stores/settings"
 import { randomArrayItem } from "./random"
 import { getDictionary } from "./dictionary"
 

@@ -2,13 +2,13 @@
   import { onDestroy } from "svelte";
   import Quiz from "./Quiz.svelte";
   import Input from "./Input.svelte";
-  import { getQuiz } from "./lib/quiz";
+  import { getQuiz } from "@/lib/quiz";
   import type { QuizItem } from "./lib/quiz";
   import Settings from "./Settings.svelte";
-  import { settings } from "./lib/settings";
-  import type { GameSettings } from "./lib/settings";
+  import { settings } from "@/stores/settings";
+  import type { GameSettings } from "./stores/settings";
   import Menu from "./Menu.svelte";
-  import { resolvedTheme } from "./lib/theme";
+  import { resolvedTheme } from "@/stores/theme";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];

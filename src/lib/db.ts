@@ -1,5 +1,3 @@
-import { toHiragana, toRomaji } from "wanakana";
-
 // https://en.wikipedia.org/wiki/Hiragana#Table_of_hiragana
 
 export const hiragana = {

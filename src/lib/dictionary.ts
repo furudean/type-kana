@@ -1,4 +1,4 @@
-import type { GameSettings } from "./settings";
+import type { GameSettings } from "@/stores/settings";
 import { hiragana, katakana } from "./db"
 
 export function getDictionary(opts: GameSettings): string[] {

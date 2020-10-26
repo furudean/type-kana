@@ -1,8 +1,8 @@
 <script lang="ts">
   import QuizItemComponent from "./QuizItem.svelte";
-  import type { QuizItem } from "./lib/quiz";
-  import { getAnswers } from "./lib/answer";
-  import { settings } from "./lib/settings";
+  import type { QuizItem } from "@/lib/quiz";
+  import { getAnswers } from "@/lib/answer";
+  import { settings } from "@/stores/settings";
   import Icon from "./Icon.svelte";
   import { mdiClose as errorMarkerIcon } from "@mdi/js";
 
