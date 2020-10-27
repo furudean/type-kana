@@ -123,7 +123,7 @@
       </fieldset>
       <fieldset>
         <legend>Auto commit</legend>
-        <p>Automatically submit when input matches the correct answer.</p>
+        <p>Automatically submit when input is correct.</p>
 
         <input
           id="auto-commit-disabled-choice"

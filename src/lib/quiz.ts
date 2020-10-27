@@ -1,5 +1,5 @@
 import type { GameSettings } from "@/stores/settings"
-import { randomArrayItem } from "./random"
+import { shuffleArray } from "./random"
 import { getDictionary } from "./dictionary"
 
 export interface QuizItem {
@@ -8,10 +8,10 @@ export interface QuizItem {
   answer: string;
 }
 
-export function quizItem(dictionary: string[], i: number): QuizItem {
+export function quizItem(kana: string, i: number): QuizItem {
   return {
     index: i,
-    kana: randomArrayItem(dictionary),
+    kana,
     answer: null,
   }
 }
@@ -19,7 +19,7 @@ export function quizItem(dictionary: string[], i: number): QuizItem {
 export function getQuiz(opts: GameSettings): QuizItem[] {
   const dictionary = getDictionary(opts);
 
-  return Array(dictionary.length)
-    .fill(null)
-    .map((_, i) => quizItem(dictionary, i));
+  const items = shuffleArray(dictionary).map(quizItem);
+
+  return items;
 }
