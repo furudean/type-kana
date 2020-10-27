@@ -153,7 +153,7 @@
       </fieldset>
       <fieldset>
         <legend>Error marker</legend>
-        <p>Show an indicator below the current quiz item if written answer is wrong.</p>
+        <p>Show an indicator item if written answer is wrong.</p>
         <input
           type="checkbox"
           name="Error marker"
