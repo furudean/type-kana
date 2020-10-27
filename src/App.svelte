@@ -78,7 +78,7 @@
     --text-color-light: hsl(0, 0%, 50%);
     --text-color-lighter: hsl(0, 0%, 80%);
 
-    --accent-color: hsl(352, 47%, 25%);
+    --accent-color: hsl(358, 45%, 37%);
     --highlight-color: hsl(5, 91%, 67%);
   }
 
