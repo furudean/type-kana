@@ -5,29 +5,27 @@
   import { settings } from "@/stores/settings";
   import { getAnswers, isCorrectAnswer } from "@/lib/answer";
 
+  export let input = "";
   export let currentKana: string = null;
 
   const dispatch = createEventDispatcher();
-  let text = "";
 
   function handleSubmit() {
-    dispatch("input", { text: "" });
-    dispatch("submitAnswer", { text });
-    text = "";
+    dispatch("submit", { input });
+    input = "";
   }
 
   function handleInput(event: any) {
-    dispatch("input", { text });
     if (currentKana === null) {
       return;
     }
     if (event.data === " ") {
-      text = text.trim();
+      input = input.trim();
       handleSubmit();
     }
     if (
-      ($settings.autoCommit === 'lazy' && isCorrectAnswer(text, currentKana)) ||
-      ($settings.autoCommit === 'strict' && text.length === getAnswers(currentKana).map(s => s.length).sort().reverse()[0])
+      ($settings.autoCommit === 'lazy' && isCorrectAnswer(input, currentKana)) ||
+      ($settings.autoCommit === 'strict' && input.length === getAnswers(currentKana).map(s => s.length).sort().reverse()[0])
     ) {
       handleSubmit();
     }
@@ -98,7 +96,7 @@
   <input
     type="text"
     class="text-field"
-    bind:value={text}
+    bind:value={input}
     on:input={handleInput}
     placeholder="ローマ字入力"
     aria-label="Input rōmaji"

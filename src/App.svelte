@@ -14,7 +14,7 @@
   let quizzed = [] as QuizItem[];
   let quizItemIndex = 0;
   let settingsComponent: Settings;
-  let input = "";
+  let input: string;
 
   function handleMenuEvent(event: CustomEvent) {
     if (event.detail.type === "openSettings") {
@@ -32,7 +32,7 @@
       ...quizzed,
       {
         ...unquizzed[0],
-        answer: event.detail.text,
+        answer: event.detail.input,
       },
     ].sort((a, b) => {
       // for some inexplicable reason, svelte likes to "optimize" this array
@@ -118,10 +118,8 @@
 <main class={$resolvedTheme + '-theme'}>
   <Quiz {unquizzed} {quizzed} {input} />
   <Input
-    on:input={(event) => {
-      input = event.detail.text;
-    }}
-    on:submitAnswer={handleSubmit}
+    bind:input={input}
+    on:submit={handleSubmit}
     currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />
   <Settings bind:this={settingsComponent} />
