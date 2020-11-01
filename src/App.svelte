@@ -9,6 +9,7 @@
   import type { GameSettings } from "./stores/settings";
   import Menu from "./Menu.svelte";
   import { resolvedTheme } from "@/stores/theme";
+  import Picker from "./Picker.svelte";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -116,6 +117,7 @@
 </style>
 
 <main class={$resolvedTheme + '-theme'}>
+  <Picker/>
   <Quiz {unquizzed} {quizzed} {input} />
   <Input
     bind:input={input}

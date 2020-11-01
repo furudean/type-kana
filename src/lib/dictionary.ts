@@ -7,10 +7,10 @@ export function getDictionary(opts: GameSettings): string[] {
   if (opts.kanaType === 'hiragana' || opts.kanaType === 'both') {
     dictionary = [
       ...dictionary,
-      ...hiragana.monographs,
-      ...hiragana.monographDiacritics,
-      ...hiragana.digraphs,
-      ...hiragana.digraphsDiacritics,
+      ...hiragana.monographs.flat(),
+      ...hiragana.monographDiacritics.flat(),
+      ...hiragana.digraphs.flat(),
+      ...hiragana.digraphsDiacritics.flat(),
     ]
   }
 
