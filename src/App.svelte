@@ -88,6 +88,8 @@
 
     --accent-color: hsl(358, 45%, 37%);
     --highlight-color: hsl(5, 91%, 67%);
+
+    --overlay-background-color: rgba(0, 0, 0, 0.4);
   }
 
   main.dark-theme {
@@ -102,6 +104,8 @@
 
     --accent-color: hsl(304, 59%, 40%);
     --highlight-color: hsl(27, 100%, 43%);
+
+    --overlay-background-color: rgba(255, 255, 255, 0.2);
   }
 
   main {
