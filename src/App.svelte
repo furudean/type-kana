@@ -4,7 +4,7 @@
   import Input from "./Input.svelte";
   import { getQuiz } from "@/lib/quiz";
   import type { QuizItem } from "./lib/quiz";
-  import Settings from "./Settings.svelte";
+  import SettingsModal from "./SettingsModal.svelte";
   import { settings } from "@/stores/settings";
   import type { GameSettings } from "./stores/settings";
   import Menu from "./Menu.svelte";
@@ -15,12 +15,12 @@
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
   let quizItemIndex = 0;
-  let settingsComponent: Settings;
+  let settingsModal: SettingsModal;
   let input: string;
 
   function handleMenuEvent(event: CustomEvent) {
     if (event.detail.type === "openSettings") {
-      settingsComponent.open();
+      settingsModal.open();
     }
   }
 
@@ -131,5 +131,5 @@
   <Quiz {unquizzed} {quizzed} {input} />
   <Input bind:input on:submit={handleSubmit} currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />
-  <Settings bind:this={settingsComponent} />
+  <SettingsModal bind:this={settingsModal} />
 </main>
