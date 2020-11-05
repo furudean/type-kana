@@ -2,14 +2,17 @@
   import { focusTrap } from "svelte-focus-trap";
   import { settings } from "@/stores/settings";
   import { osTheme } from "@/stores/theme";
+  import { playMaximizeSound, playMinimizeSound } from "@/lib/audio";
 
   let isOpen = false;
 
   export function open() {
     isOpen = true;
+    $settings.audioEnabled && playMaximizeSound();
   }
   export function close() {
     isOpen = false;
+    $settings.audioEnabled && playMinimizeSound();
   }
 
   function keyPress(event: KeyboardEvent) {
@@ -191,6 +194,16 @@
         <label for="dark-theme-choice">Dark</label>
         <br>
 
+      </fieldset>
+      <fieldset>
+        <legend>Audio</legend>
+
+        <input
+          type="checkbox"
+          name="audio-enabled-setting"
+          id="audio-enabled-setting"
+          bind:checked={$settings.audioEnabled} />
+        <label for="audio-enabled-setting">Enabled</label>
       </fieldset>
       <br>
       <button on:click={close}>Ok</button>

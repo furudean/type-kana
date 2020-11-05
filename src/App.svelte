@@ -9,6 +9,8 @@
   import type { GameSettings } from "./stores/settings";
   import Menu from "./Menu.svelte";
   import { resolvedTheme } from "@/stores/theme";
+  import { isCorrectAnswer } from "@/lib/answer";
+  import { playDropSound, playErrorSound } from "@/lib/audio";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -27,6 +29,12 @@
       return;
     }
 
+    if (isCorrectAnswer(event.detail.input, unquizzed[0].kana)) {
+      $settings.audioEnabled && playDropSound();
+    } else {
+      $settings.audioEnabled && playErrorSound();
+    }
+  
     // add kana to quizzed array
     quizzed = [
       ...quizzed,
@@ -66,7 +74,7 @@
       opacity: 1;
     }
   }
-  
+
   main.light-theme,
   main {
     --background-color: hsl(38, 40%, 96%);
@@ -117,10 +125,7 @@
 
 <main class={$resolvedTheme + '-theme'}>
   <Quiz {unquizzed} {quizzed} {input} />
-  <Input
-    bind:input={input}
-    on:submit={handleSubmit}
-    currentKana={unquizzed[0]?.kana} />
+  <Input bind:input on:submit={handleSubmit} currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />
   <Settings bind:this={settingsComponent} />
 </main>
