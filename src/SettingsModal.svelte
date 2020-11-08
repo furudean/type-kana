@@ -5,16 +5,21 @@
   import { playMaximizeSound, playMinimizeSound } from "@/lib/audio";
   import { fade, fly } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
+  import { onClickOutside } from "@/lib/clickOutside";
 
   let isOpen = false;
 
   export function open() {
-    isOpen = true;
-    $settings.audioEnabled && playMaximizeSound();
+    if (!isOpen) {
+      isOpen = true;
+      $settings.audioEnabled && playMaximizeSound();
+    }
   }
   export function close() {
-    isOpen = false;
-    $settings.audioEnabled && playMinimizeSound();
+    if (isOpen) {
+      isOpen = false;
+      $settings.audioEnabled && playMinimizeSound();
+    }
   }
 
   function keyPress(event: KeyboardEvent) {
@@ -103,7 +108,7 @@
     transition:fly={{ duration: 400, easing: cubicOut, y: -150 }}
     aria-modal="true"
     aria-describedby="settings-header">
-    <div class="settings-menu">
+    <div class="settings-menu" use:onClickOutside={close}>
       <h1 id="settings-header">Settings</h1>
       <fieldset>
         <legend>I want to practice</legend>
