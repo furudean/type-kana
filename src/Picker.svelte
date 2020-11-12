@@ -17,6 +17,10 @@
     return row.every((item) => item.checked);
   }
 
+  function isRowIndeterminate(row: Kana[]): boolean {
+    return row.some((item) => item.checked);
+  }
+
   function checkRow(state: boolean) {
     return function (row: Kana[]) {
       return row.map((item) => ({ ...item, checked: state }));
@@ -27,9 +31,16 @@
 </script>
 
 <style lang="scss">
+  input[type="checkbox"] {
+    transform: scale(1.5);
+    margin: 0 1.5em;
+  }
   .row {
     display: flex;
     align-items: center;
+  }
+  .row-items {
+    display: flex;
   }
   .item {
     font-size: 2em;
@@ -51,6 +62,7 @@
   <input
     type="checkbox"
     checked={rows.every(isRowChecked)}
+    indeterminate={rows.some(isRowIndeterminate) && !rows.every(isRowChecked)}
     on:click={() => {
       const everyRowChecked = rows.every(isRowChecked);
       rows = rows.map(checkRow(!everyRowChecked));
@@ -60,21 +72,24 @@
       <input
         type="checkbox"
         checked={isRowChecked(row)}
+        indeterminate={isRowIndeterminate(row) && !isRowChecked(row)}
+        label="Check entire row"
         on:click={() => {
           const checked = isRowChecked(row);
           row = checkRow(!checked)(row);
         }} />
-      <div class="row-items" />
-      {#each row as item}
-        <button
-          class="item"
-          class:enabled={item.checked}
-          on:click={() => {
-            item.checked = !item.checked;
-          }}>
-          {item.kana}
-        </button>
-      {/each}
+      <div class="row-items">
+        {#each row as rowItem}
+          <button
+            class="item"
+            class:enabled={rowItem.checked}
+            on:click={() => {
+              rowItem.checked = !rowItem.checked;
+            }}>
+            {rowItem.kana}
+          </button>
+        {/each}
+      </div>
     </div>
   {/each}
 </div>
