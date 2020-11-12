@@ -1,14 +1,29 @@
 <script lang="ts">
   import { hiragana } from "@/lib/db";
 
-  function row(items: string[]) {
-    return items.map((item) => ({
+  interface Kana {
+    kana: string;
+    checked: boolean;
+  }
+
+  function createKanaRow(kana: string[]): Kana[] {
+    return kana.map((item) => ({
       kana: item,
       checked: true,
     }));
   }
 
-  const rows = hiragana.monographs.map(row);
+  function isRowChecked(row: Kana[]): boolean {
+    return row.every((item) => item.checked);
+  }
+
+  function checkRow(state: boolean) {
+    return function (row: Kana[]) {
+      return row.map((item) => ({ ...item, checked: state }));
+    };
+  }
+
+  let rows = hiragana.monographs.map(createKanaRow);
 </script>
 
 <style lang="scss">
@@ -16,35 +31,43 @@
     display: flex;
     align-items: center;
   }
-  .kana {
+  .item {
     font-size: 2em;
     display: flex;
-    color: var(--text-color-on-accent-color);
-    background: var(--accent-color);
+    // color: var(--text-color-on-accent-color);
+    // background: var(--accent-color);
+    background: black;
+    color: white;
     border: none;
 
     &.enabled {
-      background: orange;
+      background: white;
+      color: black;
     }
   }
 </style>
 
 <div class="picker-grid">
+  <input
+    type="checkbox"
+    checked={rows.every(isRowChecked)}
+    on:click={() => {
+      const everyRowChecked = rows.every(isRowChecked);
+      rows = rows.map(checkRow(!everyRowChecked));
+    }} />
   {#each rows as row}
     <div class="row">
       <input
         type="checkbox"
-        checked={row.every((item) => item.checked)}
+        checked={isRowChecked(row)}
         on:click={() => {
-          row = row.map((item) => ({
-            ...item,
-            checked: true
-          }));
+          const checked = isRowChecked(row);
+          row = checkRow(!checked)(row);
         }} />
       <div class="row-items" />
       {#each row as item}
         <button
-          class="kana"
+          class="item"
           class:enabled={item.checked}
           on:click={() => {
             item.checked = !item.checked;
