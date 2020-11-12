@@ -15,13 +15,12 @@
     "validate": "svelte-check"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^15.0.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-typescript": "^6.0.0",
     "@tsconfig/svelte": "^1.0.10",
     "@types/wanakana": "^4.0.0",
     "htmlnano": "^0.2.6",
-    "node-sass": "^4.14.1",
     "posthtml": "^0.13.3",
     "posthtml-hash": "^1.1.1",
     "rollup": "^2.26.8",
@@ -30,6 +29,7 @@
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^6.0.0",
     "rollup-plugin-terser": "^7.0.1",
+    "sass": "^1.29.0",
     "svelte": "^3.24.1",
     "svelte-check": "^1.0.35",
     "svelte-preprocess": "^4.0.0",
@@ -40,7 +40,6 @@
     "@mdi/js": "^5.7.55",
     "sirv-cli": "^1.0.0",
     "svelte-focus-trap": "^1.0.1",
-    "svelte-persistent-store": "^0.1.4",
     "wanakana": "^4.0.2"
   }
 }

@@ -2,14 +2,24 @@
   import { focusTrap } from "svelte-focus-trap";
   import { settings } from "@/stores/settings";
   import { osTheme } from "@/stores/theme";
+  import { playMaximizeSound, playMinimizeSound } from "@/lib/audio";
+  import { fade, fly } from "svelte/transition";
+  import { cubicOut } from "svelte/easing";
+  import { onClickOutside } from "@/lib/clickOutside";
 
   let isOpen = false;
 
   export function open() {
-    isOpen = true;
+    if (!isOpen) {
+      isOpen = true;
+      $settings.audioEnabled && playMaximizeSound();
+    }
   }
   export function close() {
-    isOpen = false;
+    if (isOpen) {
+      isOpen = false;
+      $settings.audioEnabled && playMinimizeSound();
+    }
   }
 
   function keyPress(event: KeyboardEvent) {
@@ -17,6 +27,7 @@
     if (event.isComposing) {
       return;
     }
+    // close modal if escape is hit
     if (isOpen && event.key === "Escape") {
       close();
     }
@@ -24,13 +35,14 @@
 </script>
 
 <style lang="scss">
-  @keyframes slide-in-top {
-    from {
-      transform: translateY(-100%);
-    }
-    to {
-      transform: translateY(0)
-    }
+  .overlay {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--overlay-background-color);
   }
   .settings-container {
     position: fixed;
@@ -38,11 +50,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.4);
-    animation: 300ms fade-in var(--standard-transition) forwards;
   }
-
   .settings-menu {
     margin: 0 auto;
     background: var(--background-color);
@@ -54,7 +62,6 @@
     overflow-y: scroll;
     max-height: 95%;
     position: relative;
-    animation: 300ms slide-in-top var(--standard-transition) forwards;
 
     > :first-child {
       margin-top: 0;
@@ -91,9 +98,18 @@
 <svelte:window on:keyup={keyPress} />
 
 {#if isOpen}
-  <section class="settings-container" use:focusTrap>
-    <div class="settings-menu">
-      <h1>Settings</h1>
+  <div
+    class="overlay"
+    aria-hidden="true"
+    transition:fade={{ duration: 500, easing: cubicOut }} />
+  <section
+    class="settings-container"
+    use:focusTrap
+    transition:fly={{ duration: 400, easing: cubicOut, y: -150 }}
+    aria-modal="true"
+    aria-describedby="settings-header">
+    <div class="settings-menu" use:onClickOutside={close}>
+      <h1 id="settings-header">Settings</h1>
       <fieldset>
         <legend>I want to practice</legend>
 
@@ -132,7 +148,7 @@
           bind:group={$settings.autoCommit}
           value="disabled" />
         <label for="auto-commit-disabled-choice">Disabled</label>
-        <br>
+        <br />
 
         <input
           id="auto-commit-lazy-choice"
@@ -141,7 +157,7 @@
           bind:group={$settings.autoCommit}
           value="lazy" />
         <label for="auto-commit-lazy-choice">Lazy mode</label>
-        <br>
+        <br />
 
         <input
           id="auto-commit-strict-choice"
@@ -153,7 +169,7 @@
       </fieldset>
       <fieldset>
         <legend>Error marker</legend>
-        <p>Show an indicator item if written answer is wrong.</p>
+        <p>Show an indicator if written answer is wrong.</p>
         <input
           type="checkbox"
           name="Error marker"
@@ -163,7 +179,7 @@
       </fieldset>
       <fieldset>
         <legend>Theme</legend>
-  
+
         <input
           id="same-as-system-theme-choice"
           type="radio"
@@ -171,7 +187,7 @@
           bind:group={$settings.theme}
           value="same-as-system" />
         <label for="same-as-system-theme-choice">Same as system ({$osTheme})</label>
-        <br>
+        <br />
 
         <input
           id="light-theme-choice"
@@ -180,7 +196,7 @@
           bind:group={$settings.theme}
           value="light" />
         <label for="light-theme-choice">Light</label>
-        <br>
+        <br />
 
         <input
           id="dark-theme-choice"
@@ -189,11 +205,20 @@
           bind:group={$settings.theme}
           value="dark" />
         <label for="dark-theme-choice">Dark</label>
-        <br>
-
+        <br />
       </fieldset>
-      <br>
-      <button on:click={close}>Ok</button>
+      <fieldset>
+        <legend>Audio</legend>
+
+        <input
+          type="checkbox"
+          name="audio-enabled-setting"
+          id="audio-enabled-setting"
+          bind:checked={$settings.audioEnabled} />
+        <label for="audio-enabled-setting">Enabled</label>
+      </fieldset>
+      <br />
+      <button on:click={close}>Done</button>
     </div>
   </section>
 {/if}

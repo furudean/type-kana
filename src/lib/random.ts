@@ -6,3 +6,7 @@ export function shuffleArray<T extends unknown>(array: T[]): T[] {
   }
   return newArr
 };
+
+export function randomArrayItem<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}

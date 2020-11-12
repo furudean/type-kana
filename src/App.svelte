@@ -4,28 +4,36 @@
   import Input from "./Input.svelte";
   import { getQuiz } from "@/lib/quiz";
   import type { QuizItem } from "./lib/quiz";
-  import Settings from "./Settings.svelte";
+  import SettingsModal from "./SettingsModal.svelte";
   import { settings } from "@/stores/settings";
   import type { GameSettings } from "./stores/settings";
   import Menu from "./Menu.svelte";
   import { resolvedTheme } from "@/stores/theme";
   import Picker from "./Picker.svelte";
+  import { isCorrectAnswer } from "@/lib/answer";
+  import { playDropSound, playErrorSound } from "@/lib/audio";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
   let quizItemIndex = 0;
-  let settingsComponent: Settings;
+  let settingsModal: SettingsModal;
   let input: string;
 
   function handleMenuEvent(event: CustomEvent) {
     if (event.detail.type === "openSettings") {
-      settingsComponent.open();
+      settingsModal.open();
     }
   }
 
   function handleSubmit(event: CustomEvent) {
     if (unquizzed.length === 0) {
       return;
+    }
+
+    if (isCorrectAnswer(event.detail.input, unquizzed[0].kana)) {
+      $settings.audioEnabled && playDropSound();
+    } else {
+      $settings.audioEnabled && playErrorSound();
     }
 
     // add kana to quizzed array
@@ -67,7 +75,7 @@
       opacity: 1;
     }
   }
-  
+
   main.light-theme,
   main {
     --background-color: hsl(38, 40%, 96%);
@@ -81,6 +89,8 @@
 
     --accent-color: hsl(358, 45%, 37%);
     --highlight-color: hsl(5, 91%, 67%);
+
+    --overlay-background-color: rgba(0, 0, 0, 0.4);
   }
 
   main.dark-theme {
@@ -95,6 +105,8 @@
 
     --accent-color: hsl(304, 59%, 40%);
     --highlight-color: hsl(27, 100%, 43%);
+
+    --overlay-background-color: rgba(255, 255, 255, 0.2);
   }
 
   main {
@@ -117,12 +129,9 @@
 </style>
 
 <main class={$resolvedTheme + '-theme'}>
-  <Picker/>
+  <Picker />
   <Quiz {unquizzed} {quizzed} {input} />
-  <Input
-    bind:input={input}
-    on:submit={handleSubmit}
-    currentKana={unquizzed[0]?.kana} />
+  <Input bind:input on:submit={handleSubmit} currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />
-  <Settings bind:this={settingsComponent} />
+  <SettingsModal bind:this={settingsModal} />
 </main>
