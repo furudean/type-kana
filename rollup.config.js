@@ -74,7 +74,11 @@ export default {
       css: css => {
         css.write('bundle.[hash].css', !production);
       },
-      preprocess: sveltePreprocess(),
+      preprocess: sveltePreprocess({
+        typescript: true,
+        scss: true,
+        postcss: production,
+      }),
     }),
 
     // If you have external dependencies installed from

@@ -110,7 +110,7 @@
 
     --highlight-color: hsl(27, 100%, 43%);
 
-    --overlay-background-color: rgba(255, 255, 255, 0.2);
+    --overlay-background-color: rgba(255, 255, 255, 0.3);
   }
 
   main {
