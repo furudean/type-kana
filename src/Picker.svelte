@@ -29,6 +29,10 @@
   }
 
   let rows = hiragana.monographs.map(createKanaRow);
+  $: normalizedResult = rows
+    .flat(2)
+    .filter((item) => item.checked)
+    .map((item) => item.kana);
 </script>
 
 <style lang="scss">
@@ -115,4 +119,5 @@
       </div>
     </div>
   {/each}
+  <p>{normalizedResult.join(', ')}</p>
 </div>
