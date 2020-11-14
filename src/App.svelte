@@ -88,6 +88,8 @@
     --text-color-lighter: hsl(0, 0%, 80%);
 
     --accent-color: hsl(358, 45%, 37%);
+    --text-color-on-accent-color: white;
+
     --highlight-color: hsl(5, 91%, 67%);
 
     --overlay-background-color: rgba(0, 0, 0, 0.4);
@@ -104,6 +106,8 @@
     --text-color-lighter: hsl(326, 14%, 23%);
 
     --accent-color: hsl(304, 59%, 40%);
+    --text-color-on-accent-color: white;
+
     --highlight-color: hsl(27, 100%, 43%);
 
     --overlay-background-color: rgba(255, 255, 255, 0.2);
@@ -111,6 +115,7 @@
 
   main {
     --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
+    --standard-border-radius: 10px;
 
     color: var(--text-color);
     background: var(--background-color);
