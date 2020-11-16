@@ -9,10 +9,10 @@
   import type { GameSettings } from "./stores/settings";
   import Menu from "./Menu.svelte";
   import { resolvedTheme } from "@/stores/theme";
-  import Picker from "./Picker.svelte";
   import { isCorrectAnswer } from "@/lib/answer";
   import { playDropSound, playErrorSound } from "@/lib/audio";
   import Theme from "./Theme.svelte";
+  import Pickers from "./components/picker/Pickers.svelte";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -100,7 +100,7 @@
 
 <main id="type-kana" class={$resolvedTheme + '-theme'}>
   <Theme />
-  <Picker />
+  <Pickers />
   <Quiz {unquizzed} {quizzed} {input} />
   <Input bind:input on:submit={handleSubmit} currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />

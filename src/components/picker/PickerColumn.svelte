@@ -1,37 +1,19 @@
 <script lang="ts">
-  import { hiragana, katakana } from "@/lib/db";
-  import { isHiragana } from "wanakana";
-  import { getAnswers } from "./lib/answer";
+  import { getAnswers } from "../../lib/answer";
+  import type { PickerKana } from "./types";
 
-  interface Kana {
-    kana: string;
-    checked: boolean;
-    type: string;
-  }
+  export let rows: PickerKana[][];
+  export let label: string;
 
-  function createKanaRow(kana: string[]): Kana[] {
-    return kana.map((item) => ({
-      kana: item,
-      checked: true,
-      type: isHiragana(item) ? "hiragana" : "katakana",
-    }));
-  }
-
-  function isRowChecked(row: Kana[]): boolean {
+  function isRowChecked(row: PickerKana[]): boolean {
     return row.every((item) => item.checked);
   }
 
   function checkRow(state: boolean) {
-    return function (row: Kana[]) {
+    return function (row: PickerKana[]) {
       return row.map((item) => ({ ...item, checked: state }));
     };
   }
-
-  let rows = hiragana.monographs.map(createKanaRow);
-  $: normalizedResult = rows
-    .flat(2)
-    .filter((item) => item.checked)
-    .map((item) => item.kana);
 </script>
 
 <style lang="scss">
@@ -64,15 +46,15 @@
     display: flex;
   }
   .item {
-    font-size: 2em;
+    appearance: none;
     display: flex;
+    font-size: 2em;
     color: var(--text-color-light);
     background: transparent;
     border: 3px solid var(--text-color-lighter);
     border-radius: var(--standard-border-radius);
     outline: none;
     margin-left: $grid-margin;
-    user-select: none;
     cursor: pointer;
     line-height: 1;
     padding: 7px;
@@ -103,44 +85,50 @@
   }
 </style>
 
-<div class="picker-grid">
+<section class="picker-grid" aria-label={label}>
   <div class="row check-column">
-    <input
-      type="checkbox"
-      id="check-column"
-      checked={rows.every(isRowChecked)}
-      on:click={() => {
-        const everyRowChecked = rows.every(isRowChecked);
-        rows = rows.map(checkRow(!everyRowChecked));
-      }} />
-    <label for="check-column">Entire column</label>
-  </div>
-  {#each rows as row}
-    <div class="row">
+    <label>
       <input
         type="checkbox"
-        title={isRowChecked(row) ? 'Uncheck entire row' : 'Check entire row'}
-        checked={isRowChecked(row)}
-        indeterminate={!isRowChecked(row) && row.some((item) => item.checked)}
+        checked={rows.every(isRowChecked)}
         on:click={() => {
-          const checked = isRowChecked(row);
-          row = checkRow(!checked)(row);
+          const everyRowChecked = rows.every(isRowChecked);
+          rows = rows.map(checkRow(!everyRowChecked));
         }} />
-      <div class="row-items">
+      Select all
+    </label>
+  </div>
+  {#each rows as row}
+    <div
+      class="row"
+      role="row"
+      aria-label={getAnswers(row[0].kana)[0].slice(0, row[0].kana.length) + '- sounds'}>
+      <div class="row-items" role="group" aria-label="select kana in row">
+        <input
+          type="checkbox"
+          title={isRowChecked(row) ? 'Deselect row' : 'Select row'}
+          aria-label="select all"
+          checked={isRowChecked(row)}
+          indeterminate={!isRowChecked(row) && row.some((item) => item.checked)}
+          on:click={() => {
+            const checked = isRowChecked(row);
+            row = checkRow(!checked)(row);
+          }} />
         {#each row as item}
-          <div
+          <button
             class="item"
+            role="checkbox"
             class:checked={item.checked}
-            title={item.type + ' ' + getAnswers(item.kana)[0]}
+            aria-checked={item.checked}
+            title={'kana ' + getAnswers(item.kana)[0]}
+            aria-label={'kana ' + getAnswers(item.kana)[0]}
             on:click={() => {
               item.checked = !item.checked;
             }}>
-            <input type="checkbox" style="display: none" />
             {item.kana}
-          </div>
+          </button>
         {/each}
       </div>
     </div>
   {/each}
-  <p>{normalizedResult.join(', ')}</p>
-</div>
+</section>
