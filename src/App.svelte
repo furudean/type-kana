@@ -12,6 +12,7 @@
   import Picker from "./Picker.svelte";
   import { isCorrectAnswer } from "@/lib/answer";
   import { playDropSound, playErrorSound } from "@/lib/audio";
+  import Theme from "./Theme.svelte";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -76,43 +77,6 @@
     }
   }
 
-  main.light-theme,
-  main {
-    --background-color: hsl(38, 40%, 96%);
-
-    --background-contrast: hsl(0, 0%, 100%);
-    --background-contrast-light: hsl(0, 0%, 80%);
-
-    --text-color: hsl(238, 61%, 8%);
-    --text-color-light: hsl(0, 0%, 50%);
-    --text-color-lighter: hsl(0, 0%, 80%);
-
-    --accent-color: hsl(358, 45%, 37%);
-    --text-color-on-accent-color: white;
-
-    --highlight-color: hsl(5, 91%, 67%);
-
-    --overlay-background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  main.dark-theme {
-    --background-color: hsl(296, 25%, 12%);
-
-    --background-contrast: hsl(300, 24%, 17%);
-    --background-contrast-light: hsl(300, 24%, 22%);
-
-    --text-color: hsl(326, 18%, 75%);
-    --text-color-light: hsl(326, 10%, 46%);
-    --text-color-lighter: hsl(326, 14%, 23%);
-
-    --accent-color: hsl(304, 59%, 40%);
-    --text-color-on-accent-color: white;
-
-    --highlight-color: hsl(27, 100%, 43%);
-
-    --overlay-background-color: rgba(255, 255, 255, 0.3);
-  }
-
   main {
     --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
     --standard-border-radius: 10px;
@@ -122,6 +86,7 @@
     min-height: 100%;
     box-sizing: border-box;
     position: relative;
+    overflow: hidden;
     /*
       Primary font is M+ Type-2, followed by fallbacks
       https://stackoverflow.com/questions/14563064/japanese-standard-web-fonts/14573813#14573813
@@ -133,7 +98,8 @@
   }
 </style>
 
-<main class={$resolvedTheme + '-theme'}>
+<main id="type-kana" class={$resolvedTheme + '-theme'}>
+  <Theme />
   <Picker />
   <Quiz {unquizzed} {quizzed} {input} />
   <Input bind:input on:submit={handleSubmit} currentKana={unquizzed[0]?.kana} />
