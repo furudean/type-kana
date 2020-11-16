@@ -44,6 +44,7 @@
   }
   .row-items {
     display: flex;
+    align-items: center;
   }
   .item {
     appearance: none;
