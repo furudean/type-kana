@@ -2,19 +2,25 @@ import { randomArrayItem, randomInt } from "./random";
 import { createAudioBufferSourceNode } from "./audio";
 
 export async function playDropSound() {
-  const source = randomArrayItem([
-    await createAudioBufferSourceNode('./audio/drop_002.ogg'),
-    await createAudioBufferSourceNode('./audio/drop_003.ogg'),
-  ])
-  source.detune.value = randomInt(-1, 2) * 100;
-  source.start();
+  try {
+    const source = randomArrayItem([
+      await createAudioBufferSourceNode('./audio/drop_002.ogg'),
+      await createAudioBufferSourceNode('./audio/drop_003.ogg'),
+    ])
+    source.detune.value = randomInt(-1, 2) * 100;
+    source.start();
+  } catch (error) { }
 }
 
 export async function playErrorSound() {
-  const source = await createAudioBufferSourceNode('./audio/error_004.ogg');
-  source.detune.value = randomInt(-1, 2) * 100;
-  console.log(source.detune.value)
-  source.start();
+  try {
+    const source = await createAudioBufferSourceNode('./audio/error_004.ogg');
+    if (source.detune) {
+      source.detune.value = randomInt(-1, 2) * 100;
+    }
+    source.start();
+
+  } catch (error) { }
 }
 
 export function playMaximizeSound() {
