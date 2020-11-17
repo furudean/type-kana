@@ -10,7 +10,7 @@
   import Menu from "./Menu.svelte";
   import { resolvedTheme } from "@/stores/theme";
   import { isCorrectAnswer } from "@/lib/answer";
-  import { playDropSound, playErrorSound } from "@/lib/audio";
+  import { playDropSound, playErrorSound } from "@/lib/sound";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -34,7 +34,7 @@
     } else {
       $settings.audioEnabled && playErrorSound();
     }
-  
+
     // add kana to quizzed array
     quizzed = [
       ...quizzed,
