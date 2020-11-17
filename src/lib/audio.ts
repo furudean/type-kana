@@ -3,6 +3,7 @@ const AudioContext = window.AudioContext ?? window.webkitAudioContext;
 export const context = new AudioContext();
 export const gainNode = context.createGain();
 
+gainNode.gain.value = 0.5;
 gainNode.connect(context.destination);
 
 const audioCache = new Map<string, AudioBuffer>();
