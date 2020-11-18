@@ -8,23 +8,29 @@ gainNode.connect(context.destination);
 
 const audioCache = new Map<string, AudioBuffer>();
 
-export async function getAudioBuffer(url: string): Promise<AudioBuffer> {
-  if (audioCache.has(url)) {
-    return audioCache.get(url)
+export async function getAudioBuffer(urls: string | string[]): Promise<AudioBuffer> {
+  const urlsArray = typeof urls === "string" ? [urls] : urls;
+  const cachedUrl = urlsArray.find(url => audioCache.has(url));
+  if (cachedUrl) {
+    return audioCache.get(cachedUrl);
   }
 
-  const audio = await fetch(url)
-    .then(response => response.arrayBuffer())
-    .then(buffer => context.decodeAudioData(buffer));
+  for (const url of urlsArray) {
+    try {
+      const audio = await fetch(url)
+        .then(response => response.arrayBuffer())
+        .then(buffer => context.decodeAudioData(buffer));
 
-  audioCache.set(url, audio);
+      audioCache.set(url, audio);
+      return audio;
 
-  return audio;
+    } catch (error) { }
+  }
 }
 
-export async function createAudioBufferSourceNode(url: string) {
+export function createAudioBufferSourceNode(buffer: AudioBuffer) {
   const source = context.createBufferSource();
-  source.buffer = await getAudioBuffer(url);
+  source.buffer = buffer;
 
   source.connect(gainNode);
   source.addEventListener('ended', () => {
