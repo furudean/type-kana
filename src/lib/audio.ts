@@ -1,4 +1,4 @@
-const AudioContext = window.AudioContext ?? window.webkitAudioContext;
+import { AudioContext } from 'standardized-audio-context';
 
 export const context = new AudioContext();
 export const gainNode = context.createGain();
@@ -22,7 +22,7 @@ export async function getAudioBuffer(url: string): Promise<AudioBuffer> {
   return audio;
 }
 
-export async function createAudioBufferSourceNode(url: string): Promise<AudioBufferSourceNode> {
+export async function createAudioBufferSourceNode(url: string) {
   const source = context.createBufferSource();
   source.buffer = await getAudioBuffer(url);
 
@@ -32,4 +32,9 @@ export async function createAudioBufferSourceNode(url: string): Promise<AudioBuf
   })
 
   return source;
+}
+
+export function detuneWithPlaybackRate(cents: number): number {
+  const semitones = cents / 100;
+  return 2 ** (semitones / 12)
 }

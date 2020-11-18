@@ -1,29 +1,25 @@
 import { randomArrayItem, randomInt } from "./random";
-import { createAudioBufferSourceNode } from "./audio";
+import { createAudioBufferSourceNode, detuneWithPlaybackRate } from "./audio";
 
 export async function playProgressSound(mod: number) {
-  try {
-    const source = await createAudioBufferSourceNode('./audio/drop_002.ogg');
-    let cents = Math.min(mod, 5) * 200;
+  const source = await createAudioBufferSourceNode('./audio/drop_002.ogg');
+  let cents = Math.min(mod, 5) * 200;
 
-    if (mod > 5) {
-      cents += randomInt(0, 3) * 100
-    }
+  if (mod > 5) {
+    cents += randomInt(0, 3) * 100
+  }
 
-    source.detune.value = cents;
-    source.start();
-  } catch (error) { }
+  // detune using playbackRate since AudioBufferSourceNode.detune has bad 
+  // browser support
+  source.playbackRate.value = detuneWithPlaybackRate(cents);
+  source.start();
 }
 
 export async function playErrorSound() {
-  try {
-    const source = await createAudioBufferSourceNode('./audio/error_004.ogg');
-    if (source.detune) {
-      source.detune.value = randomInt(-1, 2) * 200;
-    }
-    source.start();
+  const source = await createAudioBufferSourceNode('./audio/error_004.ogg');
+  source.playbackRate.value = detuneWithPlaybackRate(randomInt(-1, 2) * 200);
 
-  } catch (error) { }
+  source.start();
 }
 
 export function playMaximizeSound() {
