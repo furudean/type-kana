@@ -7,7 +7,7 @@ export async function playProgressSound(mod: number) {
     './audio/drop_002.mp3',
   ]);
   const source = await createAudioBufferSourceNode(audioBuffer);
-  let cents = Math.min(mod, 5) * 200;
+  let cents = Math.min(mod, 5) * 100;
 
   if (mod > 5) {
     cents += randomInt(0, 3) * 100
