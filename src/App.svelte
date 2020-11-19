@@ -10,7 +10,7 @@
   import Menu from "./Menu.svelte";
   import { resolvedTheme } from "@/stores/theme";
   import { isCorrectAnswer } from "@/lib/answer";
-  import { playDropSound, playErrorSound } from "@/lib/audio";
+  import { playProgressSound, playErrorSound } from "@/lib/sound";
   import Theme from "./Theme.svelte";
   import Pickers from "./components/picker/Pickers.svelte";
 
@@ -19,6 +19,7 @@
   let quizItemIndex = 0;
   let settingsModal: SettingsModal;
   let input: string;
+  let correctStreak = 0;
 
   function handleMenuEvent(event: CustomEvent) {
     if (event.detail.type === "openSettings") {
@@ -32,9 +33,11 @@
     }
 
     if (isCorrectAnswer(event.detail.input, unquizzed[0].kana)) {
-      $settings.audioEnabled && playDropSound();
+      $settings.audioEnabled && playProgressSound(correctStreak);
+      correctStreak += 1;
     } else {
       $settings.audioEnabled && playErrorSound();
+      correctStreak = 0;
     }
 
     // add kana to quizzed array
@@ -61,6 +64,7 @@
     quizItemIndex = 0;
     unquizzed = getQuiz(opts);
     quizzed = [];
+    correctStreak = 0;
   }
 
   const unsubscribe = settings.subscribe(startGame);

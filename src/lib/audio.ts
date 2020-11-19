@@ -1,33 +1,46 @@
-import { settings } from "@/stores/settings";
-import { randomArrayItem } from "./random";
+import { AudioContext } from 'standardized-audio-context';
 
-export function playDropSound() {
-  const audio = randomArrayItem([
-    new Audio('./audio/drop_002.ogg'),
-    new Audio('./audio/drop_003.ogg'),
-  ]);
-  audio.volume = 0.33;
+export const context = new AudioContext();
+export const gainNode = context.createGain();
 
-  return audio.play();
+gainNode.gain.value = 0.5;
+gainNode.connect(context.destination);
+
+const audioCache = new Map<string, AudioBuffer>();
+
+export async function getAudioBuffer(urls: string | string[]): Promise<AudioBuffer> {
+  const urlsArray = typeof urls === "string" ? [urls] : urls;
+  const cachedUrl = urlsArray.find(url => audioCache.has(url));
+  if (cachedUrl) {
+    return audioCache.get(cachedUrl);
+  }
+
+  for (const url of urlsArray) {
+    try {
+      const audio = await fetch(url)
+        .then(response => response.arrayBuffer())
+        .then(buffer => context.decodeAudioData(buffer));
+
+      audioCache.set(url, audio);
+      return audio;
+
+    } catch (error) { }
+  }
 }
 
-export function playErrorSound() {
-  const audio = new Audio('./audio/error_004.ogg');
-  audio.volume = 0.33;
+export function createAudioBufferSourceNode(buffer: AudioBuffer) {
+  const source = context.createBufferSource();
+  source.buffer = buffer;
 
-  return audio.play();
+  source.connect(gainNode);
+  source.addEventListener('ended', () => {
+    source.disconnect(gainNode);
+  })
+
+  return source;
 }
 
-export function playMaximizeSound() {
-  const audio = new Audio('./audio/maximize_006.ogg');
-  audio.volume = 0.5;
-
-  return audio.play();
-}
-
-export function playMinimizeSound() {
-  const audio = new Audio('./audio/minimize_006.ogg');
-  audio.volume = 0.5;
-
-  return audio.play();
+export function detuneWithPlaybackRate(cents: number): number {
+  const semitones = cents / 100;
+  return 2 ** (semitones / 12)
 }

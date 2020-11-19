@@ -2,7 +2,7 @@
   import { focusTrap } from "svelte-focus-trap";
   import { settings } from "@/stores/settings";
   import { osTheme } from "@/stores/theme";
-  import { playMaximizeSound, playMinimizeSound } from "@/lib/audio";
+  import { playMaximizeSound, playMinimizeSound } from "@/lib/sound";
   import { fade, fly } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
   import { onClickOutside } from "@/lib/clickOutside";

@@ -43,6 +43,7 @@
   "dependencies": {
     "@mdi/js": "^5.7.55",
     "sirv-cli": "^1.0.0",
+    "standardized-audio-context": "^25.1.5",
     "svelte-focus-trap": "^1.0.1",
     "wanakana": "^4.0.2"
   }
