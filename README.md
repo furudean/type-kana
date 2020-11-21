@@ -1,8 +1,8 @@
 # [Type Kana](https://type-kana.cass.moe/)
 
 <img src="assets/logo.png" 
-  width="128" 
-  height="128" 
+  width="192" 
+  height="192" 
   align="right" 
   alt="Type Kana logo" />
 
