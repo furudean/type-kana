@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { mdiChevronRight } from "@mdi/js";
+  import { mdiChevronRight } from "@mdi/js"
   import Icon from "./Icon.svelte";
   import { settings } from "@/stores/settings";
   import { getAnswers, isCorrectAnswer } from "@/lib/answer";
@@ -15,13 +15,6 @@
     input = "";
   }
 
-  function longestStringLength(list: string[]) {
-    return list
-      .map((s) => s.length)
-      .sort()
-      .reverse()[0];
-  }
-
   function handleInput(event: any) {
     if (currentKana === null) {
       return;
@@ -31,10 +24,8 @@
       handleSubmit();
     }
     if (
-      ($settings.autoCommit !== "disabled" &&
-        isCorrectAnswer(input, currentKana)) ||
-      ($settings.autoCommit === "strict" &&
-        input.length === longestStringLength(getAnswers(currentKana)))
+      ($settings.autoCommit !== 'disabled' && isCorrectAnswer(input, currentKana)) ||
+      ($settings.autoCommit === 'strict' && input.length === getAnswers(currentKana).map(s => s.length).sort().reverse()[0])
     ) {
       handleSubmit();
     }
