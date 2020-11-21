@@ -15,7 +15,7 @@
     input = "";
   }
 
-  function shortestStringLength(list: string[]) {
+  function longestStringLength(list: string[]) {
     return list
       .map((s) => s.length)
       .sort()
@@ -34,7 +34,7 @@
       ($settings.autoCommit !== "disabled" &&
         isCorrectAnswer(input, currentKana)) ||
       ($settings.autoCommit === "strict" &&
-        input.length === shortestStringLength(getAnswers(currentKana)))
+        input.length === longestStringLength(getAnswers(currentKana)))
     ) {
       handleSubmit();
     }
