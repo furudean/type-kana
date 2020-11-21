@@ -11,6 +11,7 @@
   import { resolvedTheme } from "@/stores/theme";
   import { isCorrectAnswer } from "@/lib/answer";
   import { playProgressSound, playErrorSound } from "@/lib/sound";
+  import { audioContext } from "@/lib/audio";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -130,6 +131,14 @@
       TakaoPGothic, sans-serif;
   }
 </style>
+
+<svelte:window
+  on:mousedown|once={() => {
+    // https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
+    if (audioContext.state !== 'running') {
+      audioContext.resume();
+    }
+  }} />
 
 <main class={$resolvedTheme + '-theme'}>
   <Quiz {unquizzed} {quizzed} {input} />
