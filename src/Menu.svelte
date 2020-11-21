@@ -1,6 +1,6 @@
 <script lang="ts">
   import { mdiCogOutline, mdiGithub } from "@mdi/js";
-  import Icon from "./Icon.svelte";
+  import Icon from "./Icon.svelte"
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
