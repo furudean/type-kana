@@ -26,7 +26,7 @@
     margin-left: 0.75em;
 
     &:first-child {
-      margin-left: 0;
+      margin-left: 0 !important;
     }
   }
   .button.menu-item {
