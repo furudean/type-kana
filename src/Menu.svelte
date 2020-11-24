@@ -63,7 +63,7 @@
 
 <section class="menu">
   <button
-    class="menu-item button"
+    class="button"
     type="button"
     title="Open game settings"
     on:click={() => {
@@ -72,7 +72,7 @@
     <Icon path={mdiCogOutline} />
   </button>
   <a
-    class="menu-item button"
+    class="button"
     href="https://github.com/c-bandy/type-kana"
     target="_blank"
     rel="noopener"
