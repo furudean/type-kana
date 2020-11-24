@@ -37,6 +37,6 @@
   }
 </style>
 
-<a {href} {target} {rel} {...$$props}>
+<a {href} {target} {rel} {...$$restProps}>
   <slot />
 </a>
