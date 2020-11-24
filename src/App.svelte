@@ -12,7 +12,6 @@
   import { isCorrectAnswer } from "@/lib/answer";
   import { playProgressSound, playErrorSound } from "@/lib/sound";
   import { audioContext } from "@/lib/audio";
-  import Styles from "./Styles.svelte";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -142,7 +141,6 @@
   }} />
 
 <main class={$resolvedTheme + '-theme'}>
-  <Styles />
   <Quiz {unquizzed} {quizzed} {input} />
   <Input bind:input on:submit={handleSubmit} currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />

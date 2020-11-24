@@ -3,6 +3,7 @@
   import Icon from "./Icon.svelte";
   import { createEventDispatcher } from "svelte";
   import { commitHash } from "@/lib/version";
+  import Link from "./Link.svelte";
 
   const dispatch = createEventDispatcher();
 
@@ -20,8 +21,7 @@
     margin-top: 2em;
   }
 
-  .menu-item {
-    color: var(--accent-color);
+  .menu > :global(*) {
     margin: 0;
     margin-left: 0.75em;
 
@@ -29,7 +29,7 @@
       margin-left: 0 !important;
     }
   }
-  .button.menu-item {
+  .button {
     display: flex;
     appearance: none;
     background: none;
@@ -43,6 +43,7 @@
       color 125ms var(--standard-transition),
       background-color 125ms var(--standard-transition),
       border 125ms var(--standard-transition);
+    color: var(--accent-color);
 
     &:focus {
       outline: none;
@@ -57,9 +58,6 @@
       background-color: var(--accent-color);
       transform: translateY(4px);
     }
-  }
-  a.menu-item {
-    color: var(--accent-color);
   }
 </style>
 
@@ -81,11 +79,10 @@
     title="Show GitHub repository">
     <Icon path={mdiGithub} />
   </a>
-  <a
-    class="menu-item text-link external"
+  <Link
     href="https://github.com/c-bandy/type-kana/commit/{commitHash}"
     target="_blank"
     rel="noopener">
     {commitHash}
-  </a>
+  </Link>
 </section>
