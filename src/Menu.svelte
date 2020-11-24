@@ -82,7 +82,7 @@
     <Icon path={mdiGithub} />
   </a>
   <a
-    class="menu-item external"
+    class="menu-item text-link external"
     href="https://github.com/c-bandy/type-kana/commit/{commitHash}"
     target="_blank"
     rel="noopener">
