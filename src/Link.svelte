@@ -2,7 +2,6 @@
   export let href: string;
   export let target = "_self";
   export let rel = "noopener";
-  export let title: string = undefined;
 </script>
 
 <style lang="scss">
@@ -38,6 +37,6 @@
   }
 </style>
 
-<a {href} {target} {rel} {title} {...$$props}>
+<a {href} {target} {rel} {...$$props}>
   <slot />
 </a>
