@@ -6,7 +6,6 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import del from 'rollup-plugin-delete'
-import copy from 'rollup-plugin-copy';
 import { join } from 'path';
 import posthtml from 'posthtml';
 import { hash } from 'posthtml-hash';
@@ -14,6 +13,7 @@ import { writeFileSync, readFileSync } from "fs";
 import htmlnano from 'htmlnano';
 import { execSync, spawn } from 'child_process';
 import replace from '@rollup/plugin-replace';
+import copyAssets from 'rollup-plugin-copy-assets';
 
 const production = !process.env.ROLLUP_WATCH;
 const outputDir = 'build';
@@ -44,13 +44,13 @@ function hashStaticAssets() {
     name: 'hash-static-assets',
     writeBundle() {
       posthtml([
-        // Hashes `bundle.[hash].css` and `bundle.[hash].js`
+        // Hashes `bundle.[hash].css`, `bundle.[hash].js` and assets with [hash] in the name
         hash({ path: outputDir, hashLength: 8 }),
         // Minify
         htmlnano()
       ])
-        .process(readFileSync('build/index.html'))
-        .then(result => writeFileSync('build/index.html', result.html));
+        .process(readFileSync('src/index.html'))
+        .then(result => writeFileSync(join(outputDir, 'index.html'), result.html));
     },
   };
 }
@@ -65,8 +65,8 @@ export default {
   },
   plugins: [
     production && del({ targets: join(outputDir, '*') }),
-    copy({
-      targets: [{ src: 'public/*', dest: outputDir }]
+    copyAssets({
+      assets: ['assets/']
     }),
     replace({
       include: '**/version.ts',
