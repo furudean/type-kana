@@ -2,7 +2,7 @@
   import { mdiCogOutline, mdiGithub, mdiLaunch } from "@mdi/js";
   import Icon from "./Icon.svelte";
   import { createEventDispatcher } from "svelte";
-  import { commitHash } from "@/lib/version";
+  import { commitHashShort, commitHashLong } from "@/lib/version";
   import Link from "./Link.svelte";
 
   const dispatch = createEventDispatcher();
@@ -80,9 +80,9 @@
     <Icon path={mdiGithub} />
   </a>
   <Link
-    href="https://github.com/c-bandy/type-kana/commit/{commitHash}"
+    href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
     target="_blank"
     rel="noopener">
-    {commitHash}
+    {commitHashShort}
   </Link>
 </section>

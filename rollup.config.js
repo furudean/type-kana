@@ -71,7 +71,8 @@ export default {
     replace({
       include: '**/version.ts',
       values: {
-        COMMIT_HASH: execSync('git rev-parse --short HEAD').toString().trim(),
+        COMMIT_HASH_SHORT: execSync('git rev-parse --short HEAD').toString().trim(),
+        COMMIT_HASH_LONG: execSync('git rev-parse HEAD').toString().trim(),
       }
     }),
     svelte({
