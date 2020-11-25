@@ -1,7 +1,9 @@
 <script lang="ts">
-  import { mdiCogOutline, mdiGithub } from "@mdi/js";
-  import Icon from "./Icon.svelte"
+  import { mdiCogOutline, mdiGithub, mdiLaunch } from "@mdi/js";
+  import Icon from "./Icon.svelte";
   import { createEventDispatcher } from "svelte";
+  import { commitHashShort, commitHashLong } from "@/lib/version";
+  import Link from "./Link.svelte";
 
   const dispatch = createEventDispatcher();
 
@@ -15,16 +17,24 @@
     margin: 0 auto;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 2em;
   }
 
-  .menu-item {
-    display: flex;
-    color: var(--accent-color);
-    background: none;
+  .menu > :global(*) {
     margin: 0;
-    margin-left: 0.25em;
+    margin-left: 0.75em;
+
+    &:first-child {
+      margin-left: 0 !important;
+    }
+  }
+  .button {
+    display: flex;
+    appearance: none;
+    background: none;
     font-size: 2.5em;
+    margin-left: 0.25em;
     padding: 0.1em;
     cursor: pointer;
     border-radius: 50%;
@@ -33,10 +43,8 @@
       color 125ms var(--standard-transition),
       background-color 125ms var(--standard-transition),
       border 125ms var(--standard-transition);
+    color: var(--accent-color);
 
-    &:first-child {
-      margin-left: 0;
-    }
     &:focus {
       outline: none;
       color: var(--background-color);
@@ -55,7 +63,7 @@
 
 <section class="menu">
   <button
-    class="menu-item"
+    class="button"
     type="button"
     title="Open game settings"
     on:click={() => {
@@ -64,11 +72,17 @@
     <Icon path={mdiCogOutline} />
   </button>
   <a
-    class="menu-item"
+    class="button"
     href="https://github.com/c-bandy/type-kana"
     target="_blank"
     rel="noopener"
     title="Show GitHub repository">
     <Icon path={mdiGithub} />
   </a>
+  <Link
+    href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
+    target="_blank"
+    rel="noopener">
+    {commitHashShort}
+  </Link>
 </section>

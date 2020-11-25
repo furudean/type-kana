@@ -13,6 +13,7 @@
   import { playProgressSound, playErrorSound } from "@/lib/sound";
   import Theme from "./Theme.svelte";
   import Pickers from "./components/picker/Pickers.svelte";
+  import { audioContext } from "@/lib/audio";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -101,6 +102,14 @@
       TakaoPGothic, sans-serif;
   }
 </style>
+
+<svelte:window
+  on:mousedown|once={() => {
+    // https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
+    if (audioContext.state !== 'running') {
+      audioContext.resume();
+    }
+  }} />
 
 <main id="type-kana" class={$resolvedTheme + '-theme'}>
   <Theme />

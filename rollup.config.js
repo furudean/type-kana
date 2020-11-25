@@ -12,6 +12,8 @@ import posthtml from 'posthtml';
 import { hash } from 'posthtml-hash';
 import { writeFileSync, readFileSync } from "fs";
 import htmlnano from 'htmlnano';
+import { execSync, spawn } from 'child_process';
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 const outputDir = 'build';
@@ -26,7 +28,7 @@ function serve() {
   return {
     writeBundle() {
       if (server) return;
-      server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
+      server = spawn('npm', ['run', 'start', '--', '--dev'], {
         stdio: ['ignore', 'inherit', 'inherit'],
         shell: true
       });
@@ -65,6 +67,13 @@ export default {
     production && del({ targets: join(outputDir, '*') }),
     copy({
       targets: [{ src: 'public/*', dest: outputDir }]
+    }),
+    replace({
+      include: '**/version.ts',
+      values: {
+        COMMIT_HASH_SHORT: execSync('git rev-parse --short HEAD').toString().trim(),
+        COMMIT_HASH_LONG: execSync('git rev-parse HEAD').toString().trim(),
+      }
     }),
     svelte({
       // enable run-time checks when not in production

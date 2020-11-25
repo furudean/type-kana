@@ -3,19 +3,19 @@
   "short_name": "Type Kana",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable monochrome"
-    },
-    {
-      "src": "/android-chrome-256x256.png",
+      "src": "/icon.png",
       "sizes": "256x256",
       "type": "image/png",
-      "purpose": "any maskable monochrome"
+      "purpose": "any"
+    },
+    {
+      "src": "/maskable-icon.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "theme_color": "#f9f6f1",
+  "theme_color": "#893437",
   "background_color": "#f9f6f1",
   "display": "standalone"
 }
