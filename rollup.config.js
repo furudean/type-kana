@@ -45,7 +45,11 @@ function hashStaticAssets() {
     writeBundle() {
       posthtml([
         // Hashes `bundle.[hash].css`, `bundle.[hash].js` and assets with [hash] in the name
-        hash({ path: outputDir, hashLength: 8 }),
+        hash({
+          path: outputDir,
+          hashLength: 8,
+          transformPath: (filepath) => filepath.replace("https://type-kana.cass.moe", "")
+        }),
         // Minify
         htmlnano()
       ])
