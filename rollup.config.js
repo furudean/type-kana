@@ -70,7 +70,7 @@ export default {
   plugins: [
     production && del({ targets: join(outputDir, '*') }),
     copyAssets({
-      assets: ['assets/']
+      assets: ['index.html', 'assets/']
     }),
     replace({
       include: '**/version.ts',
