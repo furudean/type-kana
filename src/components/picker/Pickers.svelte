@@ -1,6 +1,6 @@
 <script lang="ts">
   import Picker from "./PickerColumn.svelte";
-  import { kanaType, kanaColumns, pickedKana } from "@/stores/gameConfig";
+  import { kanaType, kanaColumns, dictionary } from "@/stores/gameConfig";
 </script>
 
 <style lang="scss">
@@ -49,6 +49,14 @@
         bind:group={$kanaType}
         value="katakana" />
       <label for="katakana-choice">Katakana</label>
+
+    <input
+      type="radio"
+      id="both-choice"
+      name="kana-choice"
+      bind:group={$kanaType}
+      value="both" />
+    <label for="both-choice">Both</label>
     </fieldset>
   </section>
   <section class="picker-columns">
@@ -57,6 +65,6 @@
     <Picker bind:rows={$kanaColumns.digraphs} label="Digraphs" />
     <Picker bind:rows={$kanaColumns.digraphsDiacritics} label="Digraphs with diacritics" />
   </section>
-  <p>[{$pickedKana.join(', ')}]</p>
-  <p>length = {$pickedKana.length}</p>
+  <p>[{$dictionary.join(', ')}]</p>
+  <p>length = {$dictionary.length}</p>
 </section>

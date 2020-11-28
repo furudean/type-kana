@@ -1,7 +1,8 @@
 import { writable, derived } from "svelte/store";
 import { hiragana } from "@/lib/db";
+import { toKatakana } from "wanakana";
 
-export type KanaType = 'hiragana' | 'katakana';
+export type KanaType = 'hiragana' | 'katakana' | 'both';
 export const kanaType = writable<KanaType>('hiragana');
 
 export interface KanaCheckbox {
@@ -41,4 +42,23 @@ export const pickedKana = derived(kanaColumns, ($kanaColumns) => {
     ...toDictionary($kanaColumns.digraphs),
     ...toDictionary($kanaColumns.digraphsDiacritics),
   ]
+});
+
+export const dictionary = derived([pickedKana, kanaType], ([$pickedKana, $kanaType]) => {
+  let result: string[] = [];
+
+  if ($kanaType === 'hiragana' || $kanaType === 'both') {
+    result = [
+      ...result,
+      ...$pickedKana,
+    ];
+  }
+  if ($kanaType === 'katakana' || $kanaType === 'both') {
+    result = [
+      ...result,
+      ...$pickedKana.map((kana) => toKatakana(kana)),
+    ];
+  }
+
+  return result;
 })
