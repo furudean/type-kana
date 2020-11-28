@@ -3,8 +3,8 @@ import { createAudioBufferSourceNode, getAudioBuffer, detuneWithPlaybackRate } f
 
 export async function playProgressSound(mod: number) {
   const audioBuffer = await getAudioBuffer([
-    './audio/drop_002.ogg',
-    './audio/drop_002.mp3',
+    '/assets/audio/drop_002.ogg',
+    '/assets/audio/drop_002.mp3',
   ]);
   const source = await createAudioBufferSourceNode(audioBuffer);
   let cents = Math.min(mod, 5) * 100;
@@ -21,8 +21,8 @@ export async function playProgressSound(mod: number) {
 
 export async function playErrorSound() {
   const audioBuffer = await getAudioBuffer([
-    './audio/error_004.ogg',
-    './audio/error_004.mp3',
+    '/assets/audio/error_004.ogg',
+    '/assets/audio/error_004.mp3',
   ]);
   const source = createAudioBufferSourceNode(audioBuffer);
   source.playbackRate.value = detuneWithPlaybackRate(randomInt(-1, 2) * 200);
@@ -32,8 +32,8 @@ export async function playErrorSound() {
 
 export async function playMaximizeSound() {
   const audioBuffer = await getAudioBuffer([
-    './audio/maximize_008.ogg',
-    './audio/maximize_008.mp3',
+    '/assets/audio/maximize_008.ogg',
+    '/assets/audio/maximize_008.mp3',
   ]);
   const source = createAudioBufferSourceNode(audioBuffer);
 
@@ -42,8 +42,8 @@ export async function playMaximizeSound() {
 
 export async function playMinimizeSound() {
   const audioBuffer = await getAudioBuffer([
-    './audio/minimize_008.ogg',
-    './audio/minimize_008.mp3',
+    '/assets/audio/minimize_008.ogg',
+    '/assets/audio/minimize_008.mp3',
   ]);
   const source = createAudioBufferSourceNode(audioBuffer);
 

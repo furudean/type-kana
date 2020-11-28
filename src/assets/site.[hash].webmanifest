@@ -3,13 +3,13 @@
   "short_name": "Type Kana",
   "icons": [
     {
-      "src": "/icon.png",
+      "src": "/assets/icon.png",
       "sizes": "256x256",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/maskable-icon.png",
+      "src": "/assets/maskable-icon.png",
       "sizes": "256x256",
       "type": "image/png",
       "purpose": "maskable"
