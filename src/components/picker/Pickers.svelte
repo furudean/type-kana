@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Picker from "./PickerColumn.svelte";
+  import PickerColumn from "./PickerColumn.svelte";
   import { kanaType, kanaColumns, dictionary } from "@/stores/gameConfig";
 </script>
 
@@ -60,10 +60,10 @@
     </fieldset>
   </section>
   <section class="picker-columns">
-    <Picker bind:rows={$kanaColumns.monographs} label="Monographs" />
-    <Picker bind:rows={$kanaColumns.monographsDiacritics} label="Monographs with diacritics" />
-    <Picker bind:rows={$kanaColumns.digraphs} label="Digraphs" />
-    <Picker bind:rows={$kanaColumns.digraphsDiacritics} label="Digraphs with diacritics" />
+    <PickerColumn bind:rows={$kanaColumns.monographs} label="Monographs" />
+    <PickerColumn bind:rows={$kanaColumns.monographsDiacritics} label="Monographs with diacritics" />
+    <PickerColumn bind:rows={$kanaColumns.digraphs} label="Digraphs" />
+    <PickerColumn bind:rows={$kanaColumns.digraphsDiacritics} label="Digraphs with diacritics" />
   </section>
   <p>[{$dictionary.join(', ')}]</p>
   <p>length = {$dictionary.length}</p>
