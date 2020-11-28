@@ -1,44 +1,15 @@
 <script lang="ts">
-  import { hiragana, katakana } from "@/lib/db";
-  import { isHiragana } from "wanakana";
-  import type { PickerKana } from "@/components/picker/types";
   import Picker from "./PickerColumn.svelte";
-
-  function createKanaRow(kana: string[]): PickerKana[] {
-    return kana.map((item) => ({
-      kana: item,
-      checked: true,
-    }));
-  }
-
-  function toDictionary(row: PickerKana[][]) {
-    return row
-      .flat(2)
-      .filter((item) => item.checked)
-      .map((item) => item.kana);
-  }
-
-  let monographs = hiragana.monographs.map(createKanaRow);
-  let monographsDiacritics = hiragana.monographDiacritics.map(createKanaRow);
-  let digraphs = hiragana.digraphs.map(createKanaRow);
-  let digraphsDiacritics = hiragana.digraphsDiacritics.map(createKanaRow);
-
-  $: dictionary = [
-    ...toDictionary(monographs),
-    ...toDictionary(monographsDiacritics),
-    ...toDictionary(digraphs),
-    ...toDictionary(digraphsDiacritics),
-  ];
+  import { kanaType, kanaColumns, pickedKana } from "@/stores/gameConfig";
 </script>
 
 <style lang="scss">
-  .pickers {
+  .picker-columns {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr 1fr;
     gap: 2em;
   }
-  .pickers > :global(*) {
+  .picker-columns > :global(*) {
     &:nth-child(1) {
       grid-column: 1;
       grid-row: 1 / 3;
@@ -59,10 +30,33 @@
 </style>
 
 <section class="pickers">
-  <Picker bind:rows={monographs} label="Monographs" />
-  <Picker bind:rows={monographsDiacritics} label="Monographs with diacritics" />
-  <Picker bind:rows={digraphs} label="Digraphs" />
-  <Picker bind:rows={digraphsDiacritics} label="Digraphs with diacritics" />
+  <section>
+    <fieldset>
+      <legend>I want to practice</legend>
+
+      <input
+        type="radio"
+        id="hiragana-choice"
+        name="kana-choice"
+        bind:group={$kanaType}
+        value="hiragana" />
+      <label for="hiragana-choice">Hiragana</label>
+
+      <input
+        type="radio"
+        id="katakana-choice"
+        name="kana-choice"
+        bind:group={$kanaType}
+        value="katakana" />
+      <label for="katakana-choice">Katakana</label>
+    </fieldset>
+  </section>
+  <section class="picker-columns">
+    <Picker bind:rows={$kanaColumns.monographs} label="Monographs" />
+    <Picker bind:rows={$kanaColumns.monographsDiacritics} label="Monographs with diacritics" />
+    <Picker bind:rows={$kanaColumns.digraphs} label="Digraphs" />
+    <Picker bind:rows={$kanaColumns.digraphsDiacritics} label="Digraphs with diacritics" />
+  </section>
+  <p>[{$pickedKana.join(', ')}]</p>
+  <p>length = {$pickedKana.length}</p>
 </section>
-<p>[{dictionary.join(', ')}]</p>
-<p>length = {dictionary.length}</p>
