@@ -38,7 +38,7 @@
     grid-template-rows: 1fr 1fr;
     gap: 2em;
   }
-  :global(.pickers > *) {
+  .pickers > :global(*) {
     &:nth-child(1) {
       grid-column: 1;
       grid-row: 1 / 3;
