@@ -71,10 +71,14 @@ export default {
     file: join(outputDir, 'bundle.[hash].js'),
   },
   plugins: [
+    // delete anything in output dir
     production && del({ targets: join(outputDir, '*') }),
+
+    // include index.html and assets/ in bundle
     copyAssets({
       assets: ['index.html', 'assets/']
     }),
+
     replace({
       include: '**/version.ts',
       values: {
@@ -115,6 +119,8 @@ export default {
       dedupe: ['svelte']
     }),
     commonjs(),
+
+    // process typescript to javascript
     typescript({ sourceMap: !production }),
 
     // In dev mode, call `npm run start` once
