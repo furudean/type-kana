@@ -26,7 +26,7 @@
     "htmlnano": "^0.2.6",
     "postcss": "^8.1.7",
     "postcss-load-config": "^3.0.0",
-    "posthtml": "^0.14.0",
+    "posthtml": "^0.15.1",
     "posthtml-hash": "^1.2.2",
     "rollup": "^2.26.8",
     "rollup-plugin-copy-assets": "^2.0.3",
