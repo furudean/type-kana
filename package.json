@@ -21,7 +21,7 @@
     "@rollup/plugin-typescript": "^6.0.0",
     "@tsconfig/svelte": "^1.0.10",
     "@types/wanakana": "^4.0.0",
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^10.0.4",
     "cssnano": "^4.1.10",
     "htmlnano": "^0.2.6",
     "postcss": "^8.1.7",
