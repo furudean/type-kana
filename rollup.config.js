@@ -93,7 +93,6 @@ export default {
         dev: !production
       },
       preprocess: sveltePreprocess({
-        typescript: true,
         scss: true,
       }),
     }),
