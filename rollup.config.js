@@ -14,6 +14,9 @@ import htmlnano from 'htmlnano';
 import { execSync, spawn } from 'child_process';
 import replace from '@rollup/plugin-replace';
 import copyAssets from 'rollup-plugin-copy-assets';
+import postcss from 'rollup-plugin-postcss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
 const production = !process.env.ROLLUP_WATCH;
 const outputDir = 'build';
@@ -79,19 +82,27 @@ export default {
         COMMIT_HASH_LONG: execSync('git rev-parse HEAD').toString().trim(),
       }
     }),
+
     svelte({
-      // enable run-time checks when not in production
-      dev: !production,
-      // we'll extract any component CSS out into
-      // a separate file - better for performance
-      css: css => {
-        css.write('bundle.[hash].css', !production);
+      compilerOptions: {
+        // enable run-time checks when not in production
+        dev: !production
       },
       preprocess: sveltePreprocess({
         typescript: true,
         scss: true,
-        postcss: production,
       }),
+    }),
+
+    postcss({
+      plugins: [
+        // process CSS for production
+        production && autoprefixer(),
+        production && cssnano(),
+      ],
+      // we'll extract any component CSS out into
+      // a separate file - better for performance
+      extract: 'bundle.[hash].css',
     }),
 
     // If you have external dependencies installed from
