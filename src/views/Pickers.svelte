@@ -1,6 +1,6 @@
 <script lang="ts">
-  import PickerColumn from "./PickerColumn.svelte";
-  import { kanaType, kanaColumns, dictionary } from "@/stores/gameConfig";
+  import PickerColumn from "../PickerColumn.svelte";
+  import { kanaType, pickerKana, dictionary } from "@/stores/gameConfig";
 </script>
 
 <style lang="scss">
@@ -8,6 +8,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2em;
+    justify-content: center;
   }
   .picker-columns > :global(*) {
     &:nth-child(1) {
@@ -60,10 +61,10 @@
     </fieldset>
   </section>
   <section class="picker-columns">
-    <PickerColumn bind:rows={$kanaColumns.monographs} label="Monographs" />
-    <PickerColumn bind:rows={$kanaColumns.monographsDiacritics} label="Monographs with diacritics" />
-    <PickerColumn bind:rows={$kanaColumns.digraphs} label="Digraphs" />
-    <PickerColumn bind:rows={$kanaColumns.digraphsDiacritics} label="Digraphs with diacritics" />
+    <PickerColumn bind:rows={$pickerKana.monographs} label="Monographs" />
+    <PickerColumn bind:rows={$pickerKana.monographsDiacritics} label="Monographs with diacritics" />
+    <PickerColumn bind:rows={$pickerKana.digraphs} label="Digraphs" />
+    <PickerColumn bind:rows={$pickerKana.digraphsDiacritics} label="Digraphs with diacritics" />
   </section>
   <p>[{$dictionary.join(', ')}]</p>
   <p>length = {$dictionary.length}</p>

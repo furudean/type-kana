@@ -111,33 +111,6 @@
     <div class="settings-menu" use:onClickOutside={close}>
       <h1 id="settings-header">Settings</h1>
       <fieldset>
-        <legend>I want to practice</legend>
-
-        <input
-          id="type-hiragana-choice"
-          type="radio"
-          name="kana-choice"
-          bind:group={$settings.kanaType}
-          value="hiragana" />
-        <label for="type-hiragana-choice">Hiragana</label>
-
-        <input
-          id="type-katakana-choice"
-          type="radio"
-          name="kana-choice"
-          bind:group={$settings.kanaType}
-          value="katakana" />
-        <label for="type-katakana-choice">Katakana</label>
-
-        <input
-          id="type-both-choice"
-          type="radio"
-          name="kana-choice"
-          bind:group={$settings.kanaType}
-          value="both" />
-        <label for="type-both-choice">Both</label>
-      </fieldset>
-      <fieldset>
         <legend>Auto commit</legend>
         <p>Automatically submit when input is correct.</p>
 
