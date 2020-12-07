@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getAnswers, isCorrectAnswer } from "@/lib/answer";
+  import { getAnswers, isCorrectAnswer } from "./lib/answer";
 
   export let kana: string;
   export let answer: string = null;
