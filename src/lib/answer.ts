@@ -1,12 +1,12 @@
 import { toHiragana, toRomaji } from "wanakana";
 
-// https://www.tofugu.com/japanese/how-to-type-in-japanese/
-
-// Replacements from `toHiragana`, for conversions that don't work the other 
-// way or have multiple valid answers.
-
-// The key here is hiragana, but it works with katakana as well.
-
+/**
+ * Replacements to answers from `wanakana.toHiragana()`, for conversions that
+ * don't work the other way or have multiple valid answers.
+ *
+ * The key here is hiragana, but it works with katakana as well.
+ * https://www.tofugu.com/japanese/how-to-type-in-japanese/
+ */
 export const exceptionalAnswers = new Map([
   ["し", ["shi", "si"]],
   ["ち", ["chi", "ti"]],
