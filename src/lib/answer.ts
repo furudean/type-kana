@@ -1,12 +1,25 @@
 import { toHiragana, toRomaji } from "wanakana";
 
-// https://en.wikipedia.org/wiki/Hiragana#Table_of_hiragana
-// alternate ways of writing the same kana
+// https://www.tofugu.com/japanese/how-to-type-in-japanese/
+
+// Replacements from `toHiragana`, for conversions that don't work the other 
+// way or have multiple valid answers.
+
+// The key here is hiragana, but it works with katakana as well.
+
 export const exceptionalAnswers = new Map([
-  ["し", ["shi", "si"]], // also シ
-  ["つ", ["tsu", "tu"]], // also ツ
-  ["ぢ", ["di", "ji", "dji", "jyi"]], // also ジ
-  ["づ", ["du", "zu", "dzu"]] // also ヂ
+  ["し", ["shi", "si"]],
+  ["ち", ["chi", "ti"]],
+  ["つ", ["tsu", "tu"]],
+  ["ふ", ["hu", "fu"]],
+
+  ["じ", ["ji", "zi"]],
+  ["ぢ", ["di",]],
+  ["づ", ["du"]],
+
+  ["じゃ", ["ja", "jya"]],
+  ["じゅ", ["ju", "jyu"]],
+  ["じょ", ["jo", "jyo"]],
 ]);
 
 /** Gets acceptable answers for the given kana */
