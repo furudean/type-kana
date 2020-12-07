@@ -11,7 +11,7 @@ export const exceptionalAnswers = new Map([
   ["し", ["shi", "si"]],
   ["ち", ["chi", "ti"]],
   ["つ", ["tsu", "tu"]],
-  ["ふ", ["hu", "fu"]],
+  ["ふ", ["fu", "hu"]],
 
   ["じ", ["ji", "zi"]],
   ["ぢ", ["di",]],
