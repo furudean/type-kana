@@ -82,7 +82,7 @@
 
   main.light-theme,
   main {
-    --background-color: hsl(38, 40%, 96%);
+    --background-color: hsl(38 70% 96%);
 
     --background-contrast: hsl(0, 0%, 100%);
     --background-contrast-light: hsl(0, 0%, 80%);
