@@ -1,6 +1,8 @@
 <script lang="ts">
   import { getAnswers } from "@/lib/answer";
   import type { KanaCheckbox } from "@/stores/gameConfig";
+  import { kanaType } from "@/stores/gameConfig";
+  import { toKatakana } from "wanakana";
 
   export let item: KanaCheckbox;
 </script>
@@ -52,10 +54,16 @@
   role="checkbox"
   class:checked={item.checked}
   aria-checked={item.checked}
-  title={`${item.checked ? 'Deselect' : 'Select'} kana '${getAnswers(item.kana)[0]}'`}
+  title={`${item.checked ? 'Deselect' : 'Select'} '${getAnswers(item.kana)[0]}'`}
   aria-label={`kana '${getAnswers(item.kana)[0]}'`}
   on:click={() => {
     item.checked = !item.checked;
   }}>
-  {item.kana}
+  {#if $kanaType === 'hiragana' || $kanaType === 'both'}
+    <span>{item.kana}</span>
+  {/if}
+  {#if $kanaType === 'both'}<span>・</span>{/if}
+  {#if $kanaType === 'katakana' || ($kanaType === 'both')}
+    <span>{toKatakana(item.kana)}</span>
+  {/if}
 </button>
