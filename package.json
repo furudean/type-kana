@@ -11,7 +11,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv build",
+    "start": "sirv build --maxage 0",
     "validate": "svelte-check"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 <style lang="scss">
   :global(#type-kana.light-theme, #type-kana) {
-    --background-color: hsl(38, 40%, 96%);
+    --background-color: hsl(38 70% 96%);
 
     --background-contrast: hsl(0, 0%, 100%);
     --background-contrast-light: hsl(0, 0%, 80%);
