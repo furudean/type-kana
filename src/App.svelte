@@ -12,6 +12,7 @@
   import { isCorrectAnswer } from "@/lib/answer";
   import { playProgressSound, playErrorSound } from "@/lib/sound";
   import { audioContext } from "@/lib/audio";
+  import Theme from './Theme.svelte'
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -80,39 +81,6 @@
     }
   }
 
-  main.light-theme,
-  main {
-    --background-color: hsl(38 70% 96%);
-
-    --background-contrast: hsl(0, 0%, 100%);
-    --background-contrast-light: hsl(0, 0%, 80%);
-
-    --text-color: hsl(238, 61%, 8%);
-    --text-color-light: hsl(0, 0%, 50%);
-    --text-color-lighter: hsl(0, 0%, 80%);
-
-    --accent-color: hsl(358, 45%, 37%);
-    --highlight-color: hsl(5, 91%, 67%);
-
-    --overlay-background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  main.dark-theme {
-    --background-color: hsl(296, 25%, 12%);
-
-    --background-contrast: hsl(300, 24%, 17%);
-    --background-contrast-light: hsl(300, 24%, 22%);
-
-    --text-color: hsl(326, 18%, 75%);
-    --text-color-light: hsl(326, 10%, 46%);
-    --text-color-lighter: hsl(326, 14%, 23%);
-
-    --accent-color: hsl(304, 59%, 40%);
-    --highlight-color: hsl(27, 100%, 43%);
-
-    --overlay-background-color: rgba(255, 255, 255, 0.3);
-  }
-
   main {
     --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -140,7 +108,8 @@
     }
   }} />
 
-<main class={$resolvedTheme + '-theme'}>
+<main id="type-kana" class={$resolvedTheme + '-theme'}>
+  <Theme/>
   <Quiz {unquizzed} {quizzed} {input} />
   <Input bind:input on:submit={handleSubmit} currentKana={unquizzed[0]?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />
