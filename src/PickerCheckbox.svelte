@@ -7,9 +7,10 @@
 
 <style lang="scss">
   .checkbox-kana {
+    font-family: "M+ 2c";
     appearance: none;
     display: flex;
-    font-size: 2em;
+    font-size: 1.75em;
     color: var(--text-color-light);
     background: transparent;
     border: 3px solid var(--text-color-lighter);
@@ -18,7 +19,7 @@
     margin-left: 8px;
     cursor: pointer;
     line-height: 1;
-    padding: 7px;
+    padding: 0.25em;
     transition: 100ms var(--standard-transition) color,
       150ms var(--standard-transition) background,
       150ms var(--standard-transition) border-color;
