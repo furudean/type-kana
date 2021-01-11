@@ -42,13 +42,16 @@
     align-items: center;
 
     &:not(:first-of-type) {
-      margin-top: 8px;
+      margin-top: 10px;
     }
   }
 
   .row-items {
     display: flex;
     align-items: center;
+    // required for pseudo-element in checkbox to render behind box
+    position: relative;
+    z-index: 0;
   }
 </style>
 

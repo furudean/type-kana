@@ -32,6 +32,8 @@
     --text-color-on-accent-color: white;
     --border-color-on-accent-color: white;
 
+    --secondary-accent-color: hsl(202, 87%, 40%);
+
     --highlight-color: hsl(27, 100%, 43%);
 
     --overlay-background-color: rgba(255, 255, 255, 0.3);
