@@ -1,6 +1,7 @@
 <script lang="ts">
   import PickerColumn from "../PickerColumn.svelte";
   import { kanaType, pickerKana, dictionary } from "@/stores/gameConfig";
+  import ViewLink from "../ViewLink.svelte";
 </script>
 
 <style lang="scss">
@@ -68,4 +69,5 @@
   </section>
   <p>[{$dictionary.join(', ')}]</p>
   <p>length = {$dictionary.length}</p>
+  <ViewLink viewName="quiz">Done</ViewLink>
 </section>

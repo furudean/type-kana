@@ -4,6 +4,7 @@
   import Theme from "./Theme.svelte";
   import Pickers from "./views/Pickers.svelte";
   import Quiz from "./views/Quiz.svelte";
+  import { view } from "@/stores/state";
 </script>
 
 <style>
@@ -46,7 +47,11 @@
   }} />
 
 <main id="type-kana" class={$resolvedTheme + '-theme'}>
-  <Theme /> 
-  <Pickers />
-  <Quiz/>
+  <Theme />
+  {#if $view === 'pickers'}
+    <Pickers />
+  {/if}
+  {#if $view === 'quiz'}
+    <Quiz />
+  {/if}
 </main>
