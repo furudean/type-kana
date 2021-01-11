@@ -12,7 +12,7 @@
     font-family: "M+ 2c";
     appearance: none;
     display: flex;
-    font-size: 1.75em;
+    font-size: 1.5em;
     color: var(--text-color-light);
     background: transparent;
     border: 3px solid var(--text-color-lighter);
@@ -25,6 +25,7 @@
     transition: 100ms var(--standard-transition) color,
       150ms var(--standard-transition) background,
       150ms var(--standard-transition) border-color;
+    white-space: nowrap;
 
     &:first-of-type {
       margin-left: 0;
@@ -63,7 +64,7 @@
     <span>{item.kana}</span>
   {/if}
   {#if $kanaType === 'both'}<span>・</span>{/if}
-  {#if $kanaType === 'katakana' || ($kanaType === 'both')}
+  {#if $kanaType === 'katakana' || $kanaType === 'both'}
     <span>{toKatakana(item.kana)}</span>
   {/if}
 </button>
