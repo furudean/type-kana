@@ -23,7 +23,7 @@
     cursor: pointer;
     line-height: 1;
     padding: 0.25em;
-    transition: 100ms var(--standard-transition) color,
+    transition: 150ms var(--standard-transition) color,
       150ms var(--standard-transition) background,
       150ms var(--standard-transition) border-color;
     white-space: nowrap;
