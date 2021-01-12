@@ -4,6 +4,8 @@
   import { kanaType } from "@/stores/gameConfig";
   import { toKatakana } from "wanakana";
   import { fall } from "@/lib/animate";
+  import { fade } from "svelte/transition"
+  import { quintOut } from 'svelte/easing';
 
   export let item: KanaCheckbox;
   export let delay = 0;
@@ -94,6 +96,7 @@
     <div
       class="block hiragana popover"
       in:fall={{ duration: 200, delay }}
+      out:fade={{ duration: 200, easing: quintOut }}
       on:introend={() => {
         // after animation has been played, we reset the delay in case it was
         // changed by something external
