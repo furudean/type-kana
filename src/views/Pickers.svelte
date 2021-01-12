@@ -88,7 +88,5 @@
       bind:rows={$pickerKana.digraphsDiacritics}
       label="Digraphs with diacritics" />
   </section>
-  <p>[{$dictionary.join(', ')}]</p>
-  <p>length = {$dictionary.length}</p>
   <ViewLink viewName="quiz">Done</ViewLink>
 </section>
