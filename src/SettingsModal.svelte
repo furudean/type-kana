@@ -8,6 +8,7 @@
   import { onClickOutside } from "@/lib/clickOutside";
 
   let isOpen = false;
+  let resetOnClose = false;
 
   export function open() {
     if (!isOpen) {
@@ -19,6 +20,11 @@
     if (isOpen) {
       isOpen = false;
       $settings.audioEnabled && playMinimizeSound();
+
+      if (resetOnClose) {
+        localStorage.clear();
+        location.reload();
+      }
     }
   }
 
@@ -218,6 +224,16 @@
           id="audio-enabled-setting"
           bind:checked={$settings.audioEnabled} />
         <label for="audio-enabled-setting">Enabled</label>
+      </fieldset>
+      <br />
+      <fieldset>
+        <legend>Clear local storage</legend>
+        <input
+          type="checkbox"
+          name="reset-on-close-setting"
+          id="reset-on-close-setting"
+          bind:checked={resetOnClose} />
+        <label for="reset-on-close-setting">Reset all saved data when I exit this menu</label>
       </fieldset>
       <br />
       <button on:click={close}>Done</button>
