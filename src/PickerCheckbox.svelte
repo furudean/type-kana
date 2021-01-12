@@ -7,6 +7,8 @@
 
   export let item: KanaCheckbox;
   export let delay = 0;
+
+  const initDelay = delay;
 </script>
 
 <style lang="scss">
@@ -71,9 +73,6 @@
     top: -5px;
     left: -5px;
   }
-  .popunder {
-    pointer-events: none;
-  }
 </style>
 
 <button
@@ -84,18 +83,23 @@
   title={`${item.checked ? 'Deselect' : 'Select'} '${getAnswers(item.kana)[0]}'`}
   aria-label={`kana '${getAnswers(item.kana)[0]}'`}
   on:click={() => {
+    delay = 0;
     item.checked = !item.checked;
   }}>
   {#if $kanaType === 'hiragana'}
     <div class="block hiragana">{item.kana}</div>
   {/if}
-  {#if $kanaType === 'katakana'}
-    <div class="block katakana">{toKatakana(item.kana)}</div>
-  {/if}
-  {#if $kanaType === 'both'}
-    <div class="block hiragana popover" in:fall={{ duration: 200, delay }}>
+  {#if $kanaType === 'both' && item.checked}
+    <div
+      class="block hiragana popover"
+      in:fall={{ duration: 200, delay }}
+      on:introend={() => {
+        delay = initDelay;
+      }}>
       {item.kana}
     </div>
-    <div class="block katakana popunder">{toKatakana(item.kana)}</div>
+  {/if}
+  {#if $kanaType === 'katakana' || $kanaType === 'both'}
+    <div class="block katakana">{toKatakana(item.kana)}</div>
   {/if}
 </button>
