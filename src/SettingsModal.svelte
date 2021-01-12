@@ -176,14 +176,14 @@
         <label for="auto-commit-strict-choice">Strict mode</label>
       </fieldset>
       <fieldset>
-        <legend>Error marker</legend>
-        <p>Show an indicator if written answer is wrong.</p>
+        <legend>Error indicator</legend>
         <input
           type="checkbox"
           name="Error marker"
           id="error-marker-setting"
           bind:checked={$settings.showErrorMarker} />
-        <label for="error-marker-setting">Enabled</label>
+        <label for="error-marker-setting">Display an icon if written answer is
+          wrong</label>
       </fieldset>
       <fieldset>
         <legend>Theme</legend>
@@ -233,7 +233,8 @@
           name="reset-on-close-setting"
           id="reset-on-close-setting"
           bind:checked={resetOnClose} />
-        <label for="reset-on-close-setting">Reset all saved data when I exit this menu</label>
+        <label for="reset-on-close-setting">Reset all saved data after closing
+          settings</label>
       </fieldset>
       <br />
       <button on:click={close}>Done</button>
