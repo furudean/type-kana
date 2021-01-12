@@ -72,6 +72,8 @@
     margin: 0;
     padding: 0;
     border: 0;
+    border-bottom: 1px solid var(--text-color-lighter);
+    padding-bottom: 1em;
     margin-top: 1em;
   }
 
