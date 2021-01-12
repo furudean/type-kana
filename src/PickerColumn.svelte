@@ -2,17 +2,19 @@
   import { getAnswers } from "./lib/answer";
   import type { KanaCheckbox } from "@/stores/gameConfig";
   import PickerCheckbox from "./PickerCheckbox.svelte";
+  import PickerCheckboxSpacer from "./PickerCheckboxSpacer.svelte";
 
   export let rows: KanaCheckbox[][];
   export let label: string;
 
   function isRowChecked(row: KanaCheckbox[]): boolean {
-    return row.every((item) => item.checked);
+    return row.filter((item) => item !== null)
+      .every((item) => item.checked);
   }
 
   function checkRow(state: boolean) {
     return function (row: KanaCheckbox[]) {
-      return row.map((item) => ({ ...item, checked: state }));
+      return row.map((item) => item !== null ? { ...item, checked: state } : null);
     };
   }
 </script>
@@ -76,13 +78,17 @@
           title={isRowChecked(row) ? 'Deselect row' : 'Select row'}
           aria-label="select all"
           checked={isRowChecked(row)}
-          indeterminate={!isRowChecked(row) && row.some((item) => item.checked)}
+          indeterminate={!isRowChecked(row) && row.filter((item) => item !== null).some((item) => item.checked)}
           on:click={() => {
             const checked = isRowChecked(row);
             row = checkRow(!checked)(row);
           }} />
         {#each row as item, j}
-          <PickerCheckbox bind:item delay={30 * j + 30 * i} />
+          {#if item}
+            <PickerCheckbox bind:item delay={30 * j + 30 * i} />
+          {:else} 
+            <PickerCheckboxSpacer/>
+          {/if}
         {/each}
       </div>
     </div>

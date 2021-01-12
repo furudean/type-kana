@@ -8,9 +8,13 @@ export interface KanaCheckbox {
 }
 
 function createKanaCheckbox(kana: string, checked: boolean): KanaCheckbox {
-  return {
-    kana: kana,
-    checked: checked,
+  if (kana) {
+    return {
+      kana: kana,
+      checked: checked,
+    }
+  } else {
+    return null;
   }
 }
 
@@ -52,7 +56,7 @@ pickerKana.subscribe(value => {
 function toDictionary(column: KanaCheckboxColumn): string[] {
   return column
     .flat(2)
-    .filter((item) => item.checked)
+    .filter((item) => item?.checked)
     .map((item) => item.kana);
 }
 

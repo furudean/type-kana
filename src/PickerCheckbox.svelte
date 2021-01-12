@@ -7,7 +7,6 @@
 
   export let item: KanaCheckbox;
   export let delay = 0;
-  let visible = false;
 </script>
 
 <style lang="scss">
