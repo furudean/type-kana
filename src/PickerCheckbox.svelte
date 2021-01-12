@@ -3,7 +3,7 @@
   import type { KanaCheckbox } from "@/stores/gameConfig";
   import { kanaType } from "@/stores/gameConfig";
   import { toKatakana } from "wanakana";
-  import { drop, fall } from "@/lib/animate";
+  import { drop } from "@/lib/animate";
 
   export let item: KanaCheckbox;
   export let delay = 0;
@@ -93,8 +93,7 @@
   {#if $kanaType === 'both' && item.checked}
     <div
       class="block hiragana popover"
-      in:drop={{ duration: 200, delay }}
-      out:fall={{ duration: 200 }}
+      in:drop={{ duration: 150, delay }}
       on:introend={() => {
         // after animation has been played, we reset the delay in case it was
         // changed by something external
