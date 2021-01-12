@@ -43,12 +43,6 @@
       150ms var(--standard-transition) background,
       150ms var(--standard-transition) border-color;
     padding: 0.25em;
-
-    &:hover,
-    &:focus {
-      color: var(--text-color);
-      border-color: var(--text-color-light);
-    }
   }
 
   .checked > .block {
@@ -65,8 +59,7 @@
 
   .checkbox-kana:hover > .block,
   .checkbox-kana:focus > .block {
-    border-color: var(--border-color-on-accent-color);
-    color: var(--text-color-on-accent-color);
+    border-color: var(--focus-color);
   }
 
   .popover {
