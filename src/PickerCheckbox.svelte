@@ -95,6 +95,8 @@
       class="block hiragana popover"
       in:fall={{ duration: 200, delay }}
       on:introend={() => {
+        // after animation has been played, we reset the delay in case it was
+        // changed by something external
         delay = initDelay;
       }}>
       {item.kana}
