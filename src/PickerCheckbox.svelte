@@ -71,8 +71,8 @@
 
   .popover {
     position: absolute;
-    top: -5px;
-    left: -5px;
+    top: -4px;
+    left: -4px;
   }
 </style>
 
