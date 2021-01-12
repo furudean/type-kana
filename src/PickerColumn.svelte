@@ -49,9 +49,6 @@
   .row-items {
     display: flex;
     align-items: center;
-    // required for pseudo-element in checkbox to render behind box
-    position: relative;
-    z-index: 0;
   }
 </style>
 
@@ -68,7 +65,7 @@
       Select all
     </label>
   </div>
-  {#each rows as row}
+  {#each rows as row, i}
     <div
       class="row"
       role="row"
@@ -84,8 +81,8 @@
             const checked = isRowChecked(row);
             row = checkRow(!checked)(row);
           }} />
-        {#each row as item}
-          <PickerCheckbox bind:item />
+        {#each row as item, j}
+          <PickerCheckbox bind:item delay={50 * j + 50 * i} />
         {/each}
       </div>
     </div>
