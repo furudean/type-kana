@@ -59,10 +59,12 @@
     &.katakana {
       background: var(--secondary-accent-color);
     }
-    &:hover,
-    &:focus {
-      border-color: var(--border-color-on-accent-color);
-    }
+  }
+
+  .checkbox-kana:hover > .block,
+  .checkbox-kana:focus > .block {
+    border-color: var(--border-color-on-accent-color);
+    color: var(--text-color-on-accent-color);
   }
 
   .popover {
@@ -92,7 +94,7 @@
     <div class="block katakana">{toKatakana(item.kana)}</div>
   {/if}
   {#if $kanaType === 'both'}
-    <div class="block hiragana popover" in:fall={{ duration: 250, delay }}>
+    <div class="block hiragana popover" in:fall={{ duration: 200, delay }}>
       {item.kana}
     </div>
     <div class="block katakana popunder">{toKatakana(item.kana)}</div>

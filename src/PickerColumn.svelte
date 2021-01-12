@@ -82,7 +82,7 @@
             row = checkRow(!checked)(row);
           }} />
         {#each row as item, j}
-          <PickerCheckbox bind:item delay={50 * j + 50 * i} />
+          <PickerCheckbox bind:item delay={30 * j + 30 * i} />
         {/each}
       </div>
     </div>

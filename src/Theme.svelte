@@ -28,7 +28,7 @@
     --text-color-light: hsl(326, 10%, 46%);
     --text-color-lighter: hsl(326, 14%, 23%);
 
-    --accent-color: hsl(304, 59%, 40%);
+    --accent-color: hsl(304, 75%, 40%);
     --text-color-on-accent-color: white;
     --border-color-on-accent-color: white;
 
