@@ -37,6 +37,7 @@
   .select-all {
     margin-top: 1em;
     margin-bottom: 1em;
+    user-select: none;
   }
 
   .row {

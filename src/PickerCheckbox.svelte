@@ -27,6 +27,7 @@
     background: none;
     border: none;
     padding: 0;
+    user-select: none;
 
     &:first-of-type {
       margin-left: 0;
