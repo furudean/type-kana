@@ -45,7 +45,7 @@
     padding: 0.25em;
   }
 
-  .checked > .block {
+  .checkbox-kana.selected > .block {
     color: var(--text-color-on-accent-color);
     border-color: transparent;
 
@@ -57,22 +57,22 @@
     }
   }
 
-  .checkbox-kana:hover > .block,
-  .checkbox-kana:focus > .block {
-    border-color: var(--focus-color);
-  }
-
-  .popover {
+  .block.popover {
     position: absolute;
     top: -4px;
     left: -4px;
+  }
+
+  .checkbox-kana:hover > .block,
+  .checkbox-kana:focus > .block {
+    border-color: var(--focus-color);
   }
 </style>
 
 <button
   class="checkbox-kana"
   role="checkbox"
-  class:checked={item.checked}
+  class:selected={item.checked}
   aria-checked={item.checked}
   title={`${item.checked ? 'Deselect' : 'Select'} '${getAnswers(item.kana)[0]}'`}
   aria-label={`kana '${getAnswers(item.kana)[0]}'`}
