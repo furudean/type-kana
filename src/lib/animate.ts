@@ -9,7 +9,7 @@ export function fall(node: HTMLElement, { duration, delay }) {
 
       return `
         transform: translateY(${(1 - eased) * -100}%);
-        opacity: ${Math.min(eased * 2, 1)};
+        opacity: ${eased};
       `;
     },
   };
