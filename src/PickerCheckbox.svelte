@@ -77,7 +77,7 @@
   title={`${item.checked ? 'Deselect' : 'Select'} '${getAnswers(item.kana)[0]}'`}
   aria-label={`kana '${getAnswers(item.kana)[0]}'`}
   on:click={() => {
-    delay = 0;
+    delay = 100;
     item.checked = !item.checked;
   }}>
   {#if $kanaType === 'hiragana'}
