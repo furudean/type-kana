@@ -13,7 +13,7 @@ A quiz app to help you learn
 and
 <ruby>
 カタカナ<rp>(</rp><rt>katakana</rt><rp>)</rp>
-</ruby>.
+</ruby>, the two Japanese syllabaries.
 
 If you are just looking to play, a hosted version of whatever is currently on `master` should be available [here](https://type-kana.cass.moe/). No promises though.
 
