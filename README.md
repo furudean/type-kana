@@ -26,7 +26,7 @@ npm install
 npm run dev
 ```
 
-This will start a live preview of the app, with a watch and reload job as you make any changes in the code.
+This will install the dependencies needed, then start a live preview of the app as you edit the code.
 
 ## Building for production
 
