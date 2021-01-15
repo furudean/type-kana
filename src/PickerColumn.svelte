@@ -68,7 +68,7 @@
       Select all
     </label>
   </div>
-  {#each rows as row, i}
+  {#each rows as row}
     <div
       class="row"
       role="row"
@@ -84,9 +84,9 @@
             const checked = isRowChecked(row);
             row = checkRow(!checked)(row);
           }} />
-        {#each row as item, j}
+        {#each row as item}
           {#if item}
-            <PickerCheckbox bind:item delay={30 * j + 30 * i} />
+            <PickerCheckbox bind:item />
           {:else} 
             <PickerCheckboxSpacer/>
           {/if}

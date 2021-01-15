@@ -3,12 +3,8 @@
   import type { KanaCheckbox } from "@/stores/gameConfig";
   import { kanaType } from "@/stores/gameConfig";
   import { toKatakana } from "wanakana";
-  import { drop } from "@/lib/animate";
 
   export let item: KanaCheckbox;
-  export let delay = 0;
-
-  const initDelay = delay;
 </script>
 
 <style lang="scss">
@@ -57,10 +53,27 @@
     }
   }
 
+  @keyframes drop {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
   .block.popover {
     position: absolute;
     top: -4px;
     left: -4px;
+    opacity: 0; // overwritten by animation
+    animation-name: drop;
+    animation-duration: 150ms;
+    animation-delay: 150ms; // wait for main block to finish transition before dropping in
+    animation-timing-function: var(--standard-transition);
+    animation-fill-mode: forwards;
   }
 
   .checkbox-kana:hover > .block,
@@ -77,23 +90,13 @@
   title={`${item.checked ? 'Deselect' : 'Select'} '${getAnswers(item.kana)[0]}'`}
   aria-label={`kana '${getAnswers(item.kana)[0]}'`}
   on:click={() => {
-    delay = 100;
     item.checked = !item.checked;
   }}>
   {#if $kanaType === 'hiragana'}
     <div class="block hiragana">{item.kana}</div>
   {/if}
   {#if $kanaType === 'both' && item.checked}
-    <div
-      class="block hiragana popover"
-      in:drop={{ duration: 150, delay }}
-      on:introend={() => {
-        // after animation has been played, we reset the delay in case it was
-        // changed by something external
-        delay = initDelay;
-      }}>
-      {item.kana}
-    </div>
+    <div class="block hiragana popover">{item.kana}</div>
   {/if}
   {#if $kanaType === 'katakana' || $kanaType === 'both'}
     <div class="block katakana">{toKatakana(item.kana)}</div>
