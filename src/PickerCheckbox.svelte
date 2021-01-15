@@ -92,13 +92,13 @@
   on:click={() => {
     item.checked = !item.checked;
   }}>
-  {#if $kanaType === 'hiragana'}
-    <div class="block hiragana">{item.kana}</div>
-  {/if}
+  <div
+    class="block"
+    class:hiragana={$kanaType === 'hiragana'}
+    class:katakana={$kanaType === 'katakana' || $kanaType === 'both'}>
+    {$kanaType === 'katakana' || $kanaType === 'both' ? toKatakana(item.kana) : item.kana}
+  </div>
   {#if $kanaType === 'both' && item.checked}
     <div class="block hiragana popover">{item.kana}</div>
-  {/if}
-  {#if $kanaType === 'katakana' || $kanaType === 'both'}
-    <div class="block katakana">{toKatakana(item.kana)}</div>
   {/if}
 </button>
