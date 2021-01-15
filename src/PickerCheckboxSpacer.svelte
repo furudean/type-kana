@@ -9,7 +9,7 @@
     line-height: 1;
     width: 1em;
     height: 1em;
-    opacity: 0.25;
+    opacity: 0.4;
   }
 </style>
 
