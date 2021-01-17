@@ -26,7 +26,7 @@
 
   input[type="checkbox"] {
     transform: scale(1.5);
-    margin: 0 1.5em;
+    margin: 0 2em;
     cursor: pointer;
   }
 
