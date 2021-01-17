@@ -40,6 +40,11 @@
     user-select: none;
   }
 
+  .select-all label {
+    display: flex;
+    flex-direction: row;
+  }
+
   .row {
     display: flex;
     align-items: center;
@@ -65,7 +70,7 @@
           const everyRowChecked = rows.every(isRowChecked);
           rows = rows.map(checkRow(!everyRowChecked));
         }} />
-      Select all
+      <span>Select all</span>
     </label>
   </div>
   {#each rows as row}

@@ -3,6 +3,22 @@
   import { pickerKana } from "@/stores/pickerKana";
   import { kanaType } from "@/stores/kanaType"
   import ViewLink from "../ViewLink.svelte";
+  import RadioButtons from "../components/RadioButtons.svelte";
+
+  const options = [
+    {
+      label: "Hiragana",
+      value: "hiragana"
+    },
+    {
+      label: "Katakana",
+      value: "katakana"
+    },
+    {
+      label: "Both",
+      value: "both"
+    }
+  ]
 </script>
 
 <style lang="scss">
@@ -47,38 +63,36 @@
         "d";
     }
   }
+
+  fieldset {
+    border: none;
+    padding: 0;
+    display: flex;
+    margin: 1em 0;
+  }
+
+  fieldset > * {
+    margin: 0 auto;
+  }
+
+  legend {
+    font-weight: 500;
+    font-size: 1.2em;
+  }
+
+  .radio-buttons {
+    display: flex;
+    margin-top: 1em;
+  }
 </style>
 
 <section class="pickers">
-  <section>
-    <fieldset>
-      <legend>I want to practice</legend>
-
-      <input
-        type="radio"
-        id="hiragana-choice"
-        name="kana-choice"
-        bind:group={$kanaType}
-        value="hiragana" />
-      <label for="hiragana-choice">Hiragana</label>
-
-      <input
-        type="radio"
-        id="katakana-choice"
-        name="kana-choice"
-        bind:group={$kanaType}
-        value="katakana" />
-      <label for="katakana-choice">Katakana</label>
-
-      <input
-        type="radio"
-        id="both-choice"
-        name="kana-choice"
-        bind:group={$kanaType}
-        value="both" />
-      <label for="both-choice">Both</label>
-    </fieldset>
-  </section>
+  <fieldset>
+    <legend>I want to practice...</legend>
+    <div class="radio-buttons">
+      <RadioButtons name="kana-type-radio" {options} bind={kanaType} />
+    </div>
+  </fieldset>
   <section class="picker-columns">
     <PickerColumn bind:rows={$pickerKana.monographs} label="Monographs" />
     <PickerColumn
