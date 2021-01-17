@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getAnswers } from "./lib/answer";
-  import type { KanaCheckbox } from "@/stores/gameConfig";
+  import type { KanaCheckbox } from "@/stores/pickerKana";
   import PickerCheckbox from "./PickerCheckbox.svelte";
   import PickerCheckboxSpacer from "./PickerCheckboxSpacer.svelte";
 

@@ -1,6 +1,7 @@
 <script lang="ts">
   import PickerColumn from "../PickerColumn.svelte";
-  import { kanaType, pickerKana, dictionary } from "@/stores/gameConfig";
+  import { pickerKana } from "@/stores/pickerKana";
+  import { kanaType } from "@/stores/kanaType"
   import ViewLink from "../ViewLink.svelte";
 </script>
 

@@ -9,7 +9,7 @@
   import { settings } from "@/stores/settings";
   import { isCorrectAnswer } from "@/lib/answer";
   import { playProgressSound, playErrorSound } from "@/lib/sound";
-  import { dictionary } from "@/stores/gameConfig";
+  import { dictionary } from "@/stores/dictionary";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];

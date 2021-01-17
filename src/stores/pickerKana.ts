@@ -1,6 +1,5 @@
-import { writable, derived } from "svelte/store";
+import { writable } from "svelte/store";
 import { hiragana } from "@/lib/db";
-import { toKatakana } from "wanakana";
 
 export interface KanaCheckbox {
   kana: string;
@@ -51,52 +50,3 @@ export const pickerKana = writable<PickerKana>({
 pickerKana.subscribe(value => {
   localStorage.setItem('game-config-kana', JSON.stringify(value))
 });
-
-
-function toDictionary(column: KanaCheckboxColumn): string[] {
-  return column
-    .flat(2)
-    .filter((item) => item?.checked)
-    .map((item) => item.kana);
-}
-
-export const pickedKana = derived(pickerKana, ($kanaColumns) => {
-  return [
-    ...toDictionary($kanaColumns.monographs),
-    ...toDictionary($kanaColumns.monographsDiacritics),
-    ...toDictionary($kanaColumns.digraphs),
-    ...toDictionary($kanaColumns.digraphsDiacritics),
-  ]
-});
-
-export type KanaType = 'hiragana' | 'katakana' | 'both';
-
-export const kanaType = writable<KanaType>(
-  localStorage.getItem('game-config-kana-type') as KanaType || 'hiragana'
-);
-
-// writes to local storage on update
-kanaType.subscribe(value => {
-  localStorage.setItem('game-config-kana-type', value)
-});
-
-export const dictionary = derived(
-  [pickedKana, kanaType],
-  ([$pickedKana, $kanaType]): string[] => {
-  let result: string[] = [];
-
-  if ($kanaType === 'hiragana' || $kanaType === 'both') {
-    result = [
-      ...result,
-      ...$pickedKana,
-    ];
-  }
-  if ($kanaType === 'katakana' || $kanaType === 'both') {
-    result = [
-      ...result,
-      ...$pickedKana.map((kana) => toKatakana(kana)),
-    ];
-  }
-
-  return result;
-})

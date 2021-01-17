@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getAnswers } from "@/lib/answer";
-  import type { KanaCheckbox } from "@/stores/gameConfig";
-  import { kanaType } from "@/stores/gameConfig";
+  import type { KanaCheckbox } from "@/stores/pickerKana";
+  import { kanaType } from "@/stores/kanaType";
   import { toKatakana } from "wanakana";
 
   export let item: KanaCheckbox;
