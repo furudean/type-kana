@@ -23,7 +23,9 @@
     &:after {
       content: "";
       display: inline-block;
-      vertical-align: middle;
+      vertical-align: baseline;
+      position: relative;
+      top: 2px; // visual balance
       width: 1em;
       height: 1em;
       background-color: var(--accent-color);
