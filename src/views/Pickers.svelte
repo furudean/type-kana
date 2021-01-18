@@ -84,6 +84,11 @@
     display: flex;
     margin-top: 1em;
   }
+  
+  .continue { 
+    display: flex;
+    justify-content: center;
+  }
 </style>
 
 <section class="pickers">
@@ -103,5 +108,7 @@
       bind:rows={$pickerKana.digraphsDiacritics}
       label="Digraphs with diacritics" />
   </section>
-  <ViewLink viewName="quiz">Done</ViewLink>
+  <section class="continue">
+    <ViewLink viewName="quiz">Start quiz</ViewLink>
+  </section>
 </section>
