@@ -35,5 +35,9 @@
   input[type="radio"] {
     margin: 0 1em;
     display: inline-block;
+    vertical-align: top;
+  }
+  label {
+    line-height: 1;
   }
 </style>
