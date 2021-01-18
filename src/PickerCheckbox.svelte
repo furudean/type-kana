@@ -91,7 +91,7 @@
   class="checkbox-kana"
   role="checkbox"
   class:selected={item.checked}
-  aria-checked={item.checked}
+  aria-pressed={item.checked}
   title={`${item.checked ? 'Deselect' : 'Select'} '${getAnswers(item.kana)[0]}'`}
   aria-label={`kana '${getAnswers(item.kana)[0]}'`}
   on:click={() => {
