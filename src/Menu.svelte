@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { mdiCogOutline, mdiGithub, mdiLaunch } from "@mdi/js";
+  import { mdiCogOutline, mdiGithub, mdiLaunch, mdiArrowLeft } from "@mdi/js";
   import Icon from "./Icon.svelte";
   import { createEventDispatcher } from "svelte";
   import { commitHashShort, commitHashLong } from "@/lib/version";
   import Link from "./Link.svelte";
+  import ViewLink from "./ViewLink.svelte";
 
   const dispatch = createEventDispatcher();
 
@@ -29,7 +30,7 @@
       margin-left: 0 !important;
     }
   }
-  .button {
+  .menu > :global(.button) {
     display: flex;
     appearance: none;
     background: none;
@@ -62,6 +63,10 @@
 </style>
 
 <section class="menu">
+  <ViewLink class="button" title="Go back" viewName="pickers">
+    <Icon path={mdiArrowLeft} />
+  </ViewLink>
+
   <button
     class="button"
     type="button"

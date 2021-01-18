@@ -47,7 +47,7 @@
     position: relative;
     background-color: var(--background-contrast);
     border-bottom: 2px solid var(--background-contrast-light);
-    border-radius: 10px;
+    border-radius: var(--standard-border-radius);
     max-width: 40em;
     margin: 0 auto;
   }

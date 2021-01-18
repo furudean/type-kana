@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store'
 
 export interface GameSettings {
-  kanaType: 'hiragana' | 'katakana' | 'both';
   autoCommit: 'lazy' | 'strict' | 'disabled';
   theme: 'light' | 'dark' | 'same-as-system';
   showErrorMarker: boolean;
@@ -10,7 +9,6 @@ export interface GameSettings {
 
 export const settings = writable<GameSettings>({
   // set defaults
-  kanaType: 'hiragana',
   autoCommit: 'disabled',
   theme: 'same-as-system',
   showErrorMarker: true,
