@@ -1,6 +1,6 @@
 <script lang="ts">
   import { mdiCogOutline, mdiGithub, mdiLaunch, mdiArrowLeft } from "@mdi/js";
-  import Icon from "./Icon.svelte";
+  import Icon from "./components/Icon.svelte";
   import { createEventDispatcher } from "svelte";
   import { commitHashShort, commitHashLong } from "@/lib/version";
   import Link from "./components/Link.svelte";
