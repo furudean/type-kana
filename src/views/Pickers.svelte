@@ -2,7 +2,7 @@
   import PickerColumn from "../PickerColumn.svelte";
   import { pickerKana } from "@/stores/pickerKana";
   import { kanaType } from "@/stores/kanaType"
-  import ViewLink from "../ViewLink.svelte";
+  import ViewLink from "../components/ViewLink.svelte";
   import RadioButtons from "../components/RadioButtons.svelte";
 
   const options = [

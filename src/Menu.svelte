@@ -3,8 +3,8 @@
   import Icon from "./Icon.svelte";
   import { createEventDispatcher } from "svelte";
   import { commitHashShort, commitHashLong } from "@/lib/version";
-  import Link from "./Link.svelte";
-  import ViewLink from "./ViewLink.svelte";
+  import Link from "./components/Link.svelte";
+  import ViewLink from "./components/ViewLink.svelte";
 
   const dispatch = createEventDispatcher();
 
