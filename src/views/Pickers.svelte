@@ -96,7 +96,7 @@
   .start-quiz { 
     display: flex;
     justify-content: center;
-    padding: 1em 0;
+    padding: 3em 0;
   }
 
   .start-quiz > :global(button) {
