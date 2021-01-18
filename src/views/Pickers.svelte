@@ -84,6 +84,10 @@
     display: flex;
     margin-top: 1em;
   }
+
+  .radio-buttons > :global(*) {
+    margin-left: -3px; // visual offset
+  }
   
   .start-quiz { 
     display: flex;
