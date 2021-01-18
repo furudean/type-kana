@@ -95,8 +95,7 @@
     justify-content: center;
 
     &:focus {
-      outline: var(--text-color) dotted 3px;
-      outline-offset: 4px;
+      outline: var(--focus-color) solid 3px;
     }
   }
 </style>
