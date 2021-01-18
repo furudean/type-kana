@@ -36,8 +36,10 @@
     margin: 0 1em;
     display: inline-block;
     vertical-align: top;
+    cursor: pointer;
   }
   label {
     line-height: 1;
+    cursor: pointer;
   }
 </style>
