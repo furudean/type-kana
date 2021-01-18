@@ -4,7 +4,7 @@
   import { createEventDispatcher } from "svelte";
   import { commitHashShort, commitHashLong } from "@/lib/version";
   import Link from "./components/Link.svelte";
-  import ViewLink from "./components/ViewLink.svelte";
+  import { view } from "@/stores/state";
 
   const dispatch = createEventDispatcher();
 
@@ -12,6 +12,42 @@
     dispatch("menuEvent", { type });
   }
 </script>
+
+<section class="menu">
+  <button
+    class="button"
+    title="Go back"
+    on:click={() => {
+      view.set("pickers");
+    }}>
+    <Icon path={mdiArrowLeft} />
+  </button>
+
+  <button
+    class="button"
+    type="button"
+    title="Open game settings"
+    on:click={() => {
+      menuEvent("openSettings");
+    }}>
+    <Icon path={mdiCogOutline} />
+  </button>
+  <a
+    class="button"
+    href="https://github.com/c-bandy/type-kana"
+    target="_blank"
+    rel="noopener"
+    title="Show GitHub repository">
+    <Icon path={mdiGithub} />
+  </a>
+  <Link
+    href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
+    target="_blank"
+    rel="noopener"
+  >
+    {commitHashShort}
+  </Link>
+</section>
 
 <style lang="scss">
   .menu {
@@ -61,33 +97,3 @@
     }
   }
 </style>
-
-<section class="menu">
-  <ViewLink class="button" title="Go back" viewName="pickers">
-    <Icon path={mdiArrowLeft} />
-  </ViewLink>
-
-  <button
-    class="button"
-    type="button"
-    title="Open game settings"
-    on:click={() => {
-      menuEvent('openSettings');
-    }}>
-    <Icon path={mdiCogOutline} />
-  </button>
-  <a
-    class="button"
-    href="https://github.com/c-bandy/type-kana"
-    target="_blank"
-    rel="noopener"
-    title="Show GitHub repository">
-    <Icon path={mdiGithub} />
-  </a>
-  <Link
-    href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
-    target="_blank"
-    rel="noopener">
-    {commitHashShort}
-  </Link>
-</section>
