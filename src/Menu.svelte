@@ -40,10 +40,10 @@
     cursor: pointer;
     border-radius: 50%;
     border: 3px dashed transparent;
-    transition: transform 125ms var(--standard-transition),
+    transition: transform 50ms var(--standard-transition),
       color 125ms var(--standard-transition),
       background-color 125ms var(--standard-transition),
-      border 125ms var(--standard-transition);
+      border-color 125ms var(--standard-transition);
     color: var(--accent-color);
 
     &:focus {
@@ -52,12 +52,12 @@
       background-color: var(--accent-color);
     }
     &:hover {
-      border: 3px dashed var(--accent-color);
+      border-color: var(--accent-color);
     }
     &:active {
       color: var(--background-color);
       background-color: var(--accent-color);
-      transform: translateY(4px);
+      transform: translateY(10%);
     }
   }
 </style>

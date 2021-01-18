@@ -2,8 +2,11 @@
   import PickerColumn from "../PickerColumn.svelte";
   import { pickerKana } from "@/stores/pickerKana";
   import { kanaType } from "@/stores/kanaType"
-  import ViewLink from "../components/ViewLink.svelte";
   import RadioButtons from "../components/RadioButtons.svelte";
+  import Button from "../components/Button.svelte";
+  import { view } from "@/stores/state";
+  import Icon from "../components/Icon.svelte";
+  import { mdiArrowRight } from "@mdi/js";
 
   const options = [
     {
@@ -94,6 +97,10 @@
     justify-content: center;
     padding: 1em 0;
   }
+
+  .start-quiz > :global(button) {
+    --icon-visual-offset-right: -5px;
+  }
 </style>
 
 <section class="pickers">
@@ -114,6 +121,9 @@
       label="Digraphs with diacritics" />
   </section>
   <section class="start-quiz">
-    <ViewLink viewName="quiz">Start quiz</ViewLink>
+    <Button on:click={() => { view.set('quiz') }}>
+      Start quiz
+      <Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
+    </Button>
   </section>
 </section>

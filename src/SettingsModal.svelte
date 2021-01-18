@@ -6,6 +6,9 @@
   import { fade, fly } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
   import { onClickOutside } from "@/lib/clickOutside";
+  import Button from "./components/Button.svelte";
+  import { mdiArrowLeft } from "@mdi/js";
+  import Icon from "./components/Icon.svelte";
 
   let isOpen = false;
   let resetOnClose = false;
@@ -100,6 +103,10 @@
   p {
     margin-top: 1em;
     margin-bottom: 0;
+  }
+
+  .settings-menu > :global(button) {
+    --icon-visual-offset-left: -5px;
   }
 </style>
 
@@ -210,7 +217,10 @@
           settings</label>
       </fieldset>
       <br />
-      <button on:click={close}>Done</button>
+      <Button on:click={close}>
+        <Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
+        Done
+      </Button>
     </div>
   </section>
 {/if}

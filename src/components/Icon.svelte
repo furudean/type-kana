@@ -5,8 +5,24 @@
   export let color = "currentColor";
   export let viewBox = "0 0 24 24";
   export let path: string;
+  export let title = undefined;
 </script>
 
-<svg {width} {height} {viewBox}>
+<svg
+  class="svg-icon"
+  {width}
+  {height}
+  role="img"
+  {viewBox}
+  aria-hidden={title === undefined}>
+  {#if title}
+    <title>{title}</title>
+  {/if}
   <path d={path} fill={color} />
 </svg>
+
+<style>
+  .svg-icon {
+    vertical-align: top;
+  }
+</style>
