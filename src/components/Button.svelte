@@ -4,11 +4,13 @@
   const dispatch = createEventDispatcher();
 
   export let title: string = undefined;
+  export let disabled = false;
 </script>
 
 <button
   type="button"
   {title}
+  {disabled}
   on:click={() => {
     dispatch("click");
   }}>
@@ -44,15 +46,23 @@
         var(--icon-visual-offset-left)
     );
     transition: transform 50ms var(--standard-transition),
+      color 125ms var(--standard-transition),
+      background-color 125ms var(--standard-transition),
       border 125ms var(--standard-transition);
   }
 
-  button:focus,
-  button:hover {
+  button:focus:not(:disabled),
+  button:hover:not(:disabled) {
     border-color: var(--focus-color);
   }
 
-  button:active {
+  button:active:not(:disabled) {
     transform: translateY(10%);
+  }
+
+  button:disabled {
+    background: var(--text-color-light);
+    color: var(--text-color-lighter);
+    cursor: not-allowed;
   }
 </style>

@@ -7,6 +7,7 @@
   import { view } from "@/stores/state";
   import Icon from "../components/Icon.svelte";
   import { mdiArrowRight } from "@mdi/js";
+  import { dictionary } from "@/stores/dictionary";
 
   const options = [
     {
@@ -121,7 +122,7 @@
       label="Digraphs with diacritics" />
   </section>
   <section class="start-quiz">
-    <Button on:click={() => { view.set('quiz') }}>
+    <Button on:click={() => { view.set('quiz') }} disabled={$dictionary.length === 0}>
       Start quiz
       <Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
     </Button>
