@@ -24,10 +24,15 @@
     border: none;
     padding: 0;
     user-select: none;
+    transition: transform 50ms var(--standard-transition);
 
     &:first-of-type {
       margin-left: 0;
     }
+  }
+
+  .checkbox-kana:active {
+    transform: translateY(10%);
   }
 
   .block {
