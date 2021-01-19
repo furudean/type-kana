@@ -16,13 +16,13 @@
   export function open() {
     if (!isOpen) {
       isOpen = true;
-      $settings.audioEnabled && playMaximizeSound();
+      playMaximizeSound();
     }
   }
   export function close() {
     if (isOpen) {
       isOpen = false;
-      $settings.audioEnabled && playMinimizeSound();
+      playMinimizeSound();
 
       if (resetOnClose) {
         localStorage.clear();

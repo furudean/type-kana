@@ -30,10 +30,10 @@
     }
 
     if (isCorrectAnswer(event.detail.input, unquizzed[0].kana)) {
-      $settings.audioEnabled && playProgressSound(correctStreak);
+      playProgressSound(correctStreak);
       correctStreak += 1;
     } else {
-      $settings.audioEnabled && playErrorSound();
+      playErrorSound();
       correctStreak = 0;
     }
 

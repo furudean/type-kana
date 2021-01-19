@@ -1,10 +1,15 @@
 import { AudioContext } from 'standardized-audio-context';
+import { settings } from "@/stores/settings";
 
 export const audioContext = new AudioContext();
 export const gainNode = audioContext.createGain();
 
-gainNode.gain.value = 0.5;
 gainNode.connect(audioContext.destination);
+
+// set audio volume depending on settings
+settings.subscribe($settings => {
+  gainNode.gain.value = $settings.audioEnabled ? 0.5 : 0;
+});
 
 const audioCache = new Map<string, AudioBuffer>();
 
