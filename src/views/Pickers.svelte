@@ -72,7 +72,7 @@
     border: none;
     padding: 0;
     display: flex;
-    margin: 1em 0;
+    margin: 2em 0;
     justify-content: center;
   }
 
@@ -95,7 +95,7 @@
   .start-quiz { 
     display: flex;
     justify-content: center;
-    padding: 3em 0;
+    padding: 2em 0;
   }
 
   .start-quiz > :global(button) {
