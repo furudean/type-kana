@@ -73,15 +73,14 @@
     padding: 0;
     display: flex;
     margin: 1em 0;
-  }
-
-  fieldset > * {
-    margin: 0 auto;
+    justify-content: center;
   }
 
   legend {
     font-weight: 500;
     font-size: 1.2em;
+    text-align: center;
+    width: 100%;
   }
 
   .radio-buttons {
