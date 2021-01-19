@@ -3,8 +3,11 @@
   import type { KanaCheckbox } from "@/stores/pickerKana";
   import { kanaType } from "@/stores/kanaType";
   import { toKatakana } from "wanakana";
+  import { playCheckboxSelectSound } from "./lib/sound";
 
   export let item: KanaCheckbox;
+  export let rowIndex: number;
+  export let rowLength: number;
 </script>
 
 <style lang="scss">
@@ -96,6 +99,7 @@
   aria-label={`kana '${getAnswers(item.kana)[0]}'`}
   on:click={() => {
     item.checked = !item.checked;
+    playCheckboxSelectSound(rowIndex, rowLength, item.checked);
   }}>
   <div
     class="block"
