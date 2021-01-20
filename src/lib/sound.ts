@@ -1,5 +1,8 @@
 import { randomArrayItem, randomInt } from "./random";
-import { createAudioBufferSourceNode, getAudioBuffer, detuneWithPlaybackRate } from "./audio";
+import {
+  createAudioBufferSourceNode, getAudioBuffer, detuneWithPlaybackRate,
+  createGainNode
+} from "./audio";
 import { sleep } from "@/lib/sleep";
 
 export async function playProgressSound(mod: number) {
@@ -51,11 +54,16 @@ export async function playMinimizeSound() {
   source.start();
 }
 
-export async function playCheckboxSelectSound(index: number, length: number, selected: boolean) {
+export async function playCheckboxSelectSound(
+  index: number,
+  length: number,
+  selected: boolean,
+) {
   const audioBuffer = await getAudioBuffer([
-    '/assets/audio/select_002.ogg',
-    '/assets/audio/select_002.mp3',
+    '/assets/audio/click_002.ogg',
+    '/assets/audio/click_002.mp3',
   ]);
+
   const source = createAudioBufferSourceNode(audioBuffer);
 
   let cents = index * (600 / length)
@@ -70,15 +78,45 @@ export async function playCheckboxSelectSound(index: number, length: number, sel
 }
 
 export async function playCheckboxSelectSeriesSound(length: number, selected: boolean) {
+  const gainNode = createGainNode();
+  const offset = randomInt(-2, 2) * 100;
+
+  async function createSource(i: number) {
+    const audioBuffer = await getAudioBuffer([
+      '/assets/audio/click_002.ogg',
+      '/assets/audio/click_002.mp3',
+    ]);
+    const source = createAudioBufferSourceNode(audioBuffer, gainNode);
+
+    source.playbackRate.value = detuneWithPlaybackRate(
+      i * (600 / length) - offset
+    );
+
+    return source;
+  }
+
+  // TODO: this is ugly
   if (selected) {
     for (let i = 0; i < length; i++) {
-      playCheckboxSelectSound(i, length, selected)
-      await sleep(300 / length);
+      const source = await createSource(i);
+
+      // slowly decrease volume over time
+      gainNode.gain.value = 1 - (1 / length) * i;
+
+      source.start();
+
+      await sleep(400 / length);
     }
   } else {
     for (let i = length - 1; i >= 0; i--) {
-      playCheckboxSelectSound(i, length, selected)
-      await sleep(300 / length);
+      const source = await createSource(i);
+
+      // slowly decrease volume over time
+      gainNode.gain.value = (1 / length) * i;
+
+      source.start();
+
+      await sleep(400 / length);
     }
   }
 }

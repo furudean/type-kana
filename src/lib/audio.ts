@@ -2,13 +2,13 @@ import { AudioContext } from 'standardized-audio-context';
 import { settings } from "@/stores/settings";
 
 export const audioContext = new AudioContext();
-export const gainNode = audioContext.createGain();
+export const rootGainNode = audioContext.createGain();
 
-gainNode.connect(audioContext.destination);
+rootGainNode.connect(audioContext.destination);
 
 // set audio volume depending on settings
 settings.subscribe($settings => {
-  gainNode.gain.value = $settings.audioEnabled ? 0.5 : 0;
+  rootGainNode.gain.value = $settings.audioEnabled ? 0.5 : 0;
 });
 
 const audioCache = new Map<string, AudioBuffer>();
@@ -36,7 +36,10 @@ export async function getAudioBuffer(urls: string | string[]): Promise<AudioBuff
   throw new Error(`No more urls to try: ${urlsArray.join(', ')}`)
 }
 
-export function createAudioBufferSourceNode(buffer: AudioBuffer) {
+export function createAudioBufferSourceNode(
+  buffer: AudioBuffer,
+  gainNode = rootGainNode
+) {
   const source = audioContext.createBufferSource();
   source.buffer = buffer;
 
@@ -46,6 +49,14 @@ export function createAudioBufferSourceNode(buffer: AudioBuffer) {
   })
 
   return source;
+}
+
+export function createGainNode() {
+  const gainNode = audioContext.createGain();
+
+  gainNode.connect(rootGainNode);
+
+  return gainNode;
 }
 
 export function detuneWithPlaybackRate(cents: number): number {

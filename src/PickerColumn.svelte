@@ -8,11 +8,11 @@
   export let rows: KanaCheckbox[][];
   export let label: string;
 
-  function isRowChecked(row: KanaCheckbox[]): boolean {
+  function isRowSelected(row: KanaCheckbox[]): boolean {
     return row.filter((item) => item !== null).every((item) => item.checked);
   }
 
-  function checkRow(state: boolean) {
+  function selectRow(state: boolean) {
     return function (row: KanaCheckbox[]) {
       return row.map((item) =>
         item !== null ? { ...item, checked: state } : null
@@ -26,10 +26,10 @@
     <label>
       <input
         type="checkbox"
-        checked={rows.every(isRowChecked)}
+        checked={rows.every(isRowSelected)}
         on:click={() => {
-          const everyRowChecked = rows.every(isRowChecked);
-          rows = rows.map(checkRow(!everyRowChecked));
+          const everyRowChecked = rows.every(isRowSelected);
+          rows = rows.map(selectRow(!everyRowChecked));
           
           playCheckboxSelectSeriesSound(8, !everyRowChecked);
         }}
@@ -47,17 +47,18 @@
       <div class="row-items" role="group" aria-label="select kana in row">
         <input
           type="checkbox"
-          title={isRowChecked(row) ? "Deselect row" : "Select row"}
+          title={isRowSelected(row) ? "Deselect row" : "Select row"}
           aria-label="select all"
-          checked={isRowChecked(row)}
-          indeterminate={!isRowChecked(row) &&
+          checked={isRowSelected(row)}
+          indeterminate={!isRowSelected(row) &&
             row.filter((item) => item !== null).some((item) => item.checked)}
           on:click={() => {
-            const checked = isRowChecked(row);
-            row = checkRow(!checked)(row);
+            const newState = !isRowSelected(row);
+            const diffItems = row.filter((item) => item && item.checked !== newState);
+            const toPlay = Math.min(diffItems.length, 4);
 
-            const validRowItems = row.filter((item) => item);
-            playCheckboxSelectSeriesSound(validRowItems.length, !checked);
+            playCheckboxSelectSeriesSound(toPlay, newState);
+            row = selectRow(newState)(row);
           }}
         />
         {#each row as item, index}
