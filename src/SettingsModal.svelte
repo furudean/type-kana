@@ -67,7 +67,7 @@
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
     box-sizing: border-box;
-    width: 70%;
+    max-width: 800px;
     overflow-y: scroll;
     max-height: 95%;
     position: relative;
