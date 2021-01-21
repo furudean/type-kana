@@ -8,6 +8,7 @@
   export let min: string | number = 0;
   export let max: string | number = 100;
   export let step: string | number = 1;
+  export let list: string;
 
   export let tooltip = false;
   export let unit = "";
@@ -72,6 +73,7 @@
     {min}
     {max}
     {step}
+    {list}
     bind:value
     bind:this={rangeElement}
     on:input={handleInput}
