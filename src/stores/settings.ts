@@ -4,7 +4,7 @@ export interface GameSettings {
   autoCommit: 'lazy' | 'strict' | 'disabled';
   theme: 'light' | 'dark' | 'same-as-system';
   showErrorMarker: boolean;
-  audioEnabled: boolean;
+  volume: number;
 }
 
 export const settings = writable<GameSettings>({
@@ -12,7 +12,7 @@ export const settings = writable<GameSettings>({
   autoCommit: 'disabled',
   theme: 'same-as-system',
   showErrorMarker: true,
-  audioEnabled: true,
+  volume: 50,
 
   // overwrite with anything previously saved from local storage
   ...JSON.parse(localStorage.getItem('game-settings'))

@@ -8,7 +8,7 @@ rootGainNode.connect(audioContext.destination);
 
 // set audio volume depending on settings
 settings.subscribe($settings => {
-  rootGainNode.gain.value = $settings.audioEnabled ? 0.5 : 0;
+  rootGainNode.gain.value = $settings.volume / 100;
 });
 
 const audioCache = new Map<string, AudioBuffer>();

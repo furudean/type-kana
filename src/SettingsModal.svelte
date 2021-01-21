@@ -9,6 +9,7 @@
   import Button from "./components/Button.svelte";
   import { mdiArrowLeft } from "@mdi/js";
   import Icon from "./components/Icon.svelte";
+  import Range from "./components/Range.svelte";
 
   let isOpen = false;
   let resetOnClose = false;
@@ -116,13 +117,15 @@
   <div
     class="overlay"
     aria-hidden="true"
-    transition:fade={{ duration: 500, easing: cubicOut }} />
+    transition:fade={{ duration: 500, easing: cubicOut }}
+  />
   <section
     class="settings-container"
     use:focusTrap
     transition:fly={{ duration: 400, easing: cubicOut, y: -150 }}
     aria-modal="true"
-    aria-describedby="settings-header">
+    aria-describedby="settings-header"
+  >
     <div class="settings-menu" use:onClickOutside={close}>
       <h1 id="settings-header">Settings</h1>
       <fieldset>
@@ -134,7 +137,8 @@
           name="auto-commit-choice"
           type="radio"
           bind:group={$settings.autoCommit}
-          value="disabled" />
+          value="disabled"
+        />
         <label for="auto-commit-disabled-choice">Disabled</label>
         <br />
 
@@ -143,7 +147,8 @@
           name="auto-commit-choice"
           type="radio"
           bind:group={$settings.autoCommit}
-          value="lazy" />
+          value="lazy"
+        />
         <label for="auto-commit-lazy-choice">Lazy mode</label>
         <br />
 
@@ -152,7 +157,8 @@
           name="auto-commit-choice"
           type="radio"
           bind:group={$settings.autoCommit}
-          value="strict" />
+          value="strict"
+        />
         <label for="auto-commit-strict-choice">Strict mode</label>
       </fieldset>
       <fieldset>
@@ -161,9 +167,11 @@
           type="checkbox"
           name="Error marker"
           id="error-marker-setting"
-          bind:checked={$settings.showErrorMarker} />
-        <label for="error-marker-setting">Display an icon if written answer is
-          wrong</label>
+          bind:checked={$settings.showErrorMarker}
+        />
+        <label for="error-marker-setting">
+          Display an icon if written answer is wrong
+        </label>
       </fieldset>
       <fieldset>
         <legend>Theme</legend>
@@ -173,8 +181,11 @@
           type="radio"
           name="theme-choice"
           bind:group={$settings.theme}
-          value="same-as-system" />
-        <label for="same-as-system-theme-choice">Same as system ({$osTheme})</label>
+          value="same-as-system"
+        />
+        <label for="same-as-system-theme-choice">
+          Same as system ({$osTheme})
+        </label>
         <br />
 
         <input
@@ -182,7 +193,8 @@
           type="radio"
           name="theme-choice"
           bind:group={$settings.theme}
-          value="light" />
+          value="light"
+        />
         <label for="light-theme-choice">Light</label>
         <br />
 
@@ -191,19 +203,22 @@
           type="radio"
           name="theme-choice"
           bind:group={$settings.theme}
-          value="dark" />
+          value="dark"
+        />
         <label for="dark-theme-choice">Dark</label>
         <br />
       </fieldset>
       <fieldset>
         <legend>Audio</legend>
-
-        <input
-          type="checkbox"
-          name="audio-enabled-setting"
-          id="audio-enabled-setting"
-          bind:checked={$settings.audioEnabled} />
-        <label for="audio-enabled-setting">Enabled</label>
+        <label for="audio-volume-setting">Volume</label>
+        <Range
+          id="audio-volume-setting"
+          bind:value={$settings.volume}
+          min={0}
+          max={100}
+          tooltip={true}
+          unit="%"
+        />
       </fieldset>
       <br />
       <fieldset>
@@ -212,9 +227,11 @@
           type="checkbox"
           name="reset-on-close-setting"
           id="reset-on-close-setting"
-          bind:checked={resetOnClose} />
-        <label for="reset-on-close-setting">Reset all saved data after closing
-          settings</label>
+          bind:checked={resetOnClose}
+        />
+        <label for="reset-on-close-setting">
+          Reset all saved data after closing settings
+        </label>
       </fieldset>
       <br />
       <Button on:click={close}>
