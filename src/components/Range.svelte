@@ -112,11 +112,6 @@
     background: var(--thumb-color);
     border-radius: 50%;
     outline: none;
-    cursor: grab;
-
-    &:active {
-      cursor: grabbing;
-    }
   }
 
   // Firefox
@@ -128,13 +123,8 @@
     background: var(--thumb-color);
     border-radius: 50%;
     outline: none;
-    cursor: grab;
     border: none;
     margin: 0;
-
-    &:active {
-      cursor: grabbing;
-    }
   }
 
   input[type="range"]::-moz-range-progress {
