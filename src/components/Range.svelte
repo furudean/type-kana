@@ -8,7 +8,7 @@
   export let min: string | number = 0;
   export let max: string | number = 100;
   export let step: string | number = 1;
-  export let list: string;
+  export let list: string | undefined = undefined;
 
   export let tooltip = false;
   export let unit = "";
