@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from "svelte";
-  import { fade } from 'svelte/transition';
-  import { cubicOut } from 'svelte/easing';
+  import { fade } from "svelte/transition";
+  import { cubicOut } from "svelte/easing";
 
   export let id: string = undefined;
   export let value: number;
@@ -27,7 +27,7 @@
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
       isTooltipVisible = false;
-    }, 2000)
+    }, 2000);
   }
 
   function updateTooltipPosition() {
@@ -35,12 +35,12 @@
       const p = value / Number(max);
       const rangeWidth = rangeElement.clientWidth;
       const thumbWidth = 22; // hardcoded, cannot read shadow DOM width
-      
+
       const start = thumbWidth / 2;
       const end = rangeWidth - thumbWidth;
-      
+
       const offset = start + end * p;
-  
+
       tooltipStyle = `left: ${offset}px`;
     }
   }
@@ -192,7 +192,8 @@
     left: 50%;
     border-width: 4px;
     border-style: solid;
-    border-color: var(--background-color-inverse) transparent transparent transparent;
+    border-color: var(--background-color-inverse) transparent transparent
+      transparent;
     transform: translateX(-50%);
   }
 </style>
