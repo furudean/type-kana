@@ -25,12 +25,14 @@
   let timeoutId: number | undefined;
 
   function touchTooltip() {
-    isTooltipVisible = true;
+    if (tooltip) {
+      isTooltipVisible = true;
 
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      isTooltipVisible = false;
-    }, 1000);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        isTooltipVisible = false;
+      }, 1000);
+    }
   }
 
   function updateTooltipPosition() {
@@ -97,9 +99,9 @@
   input[type="range"] {
     --thumb-size: 18px;
     --thumb-color: var(--ui-element-primary-color);
-    --track-height: 8px;
-    --track-background-color: var(--ui-element-secondary-color);
-    --track-border-radius: 4px;
+    --track-height: 6px;
+    --track-border-radius: calc(var(--track-height) / 2);
+    --track-color: var(--ui-element-secondary-color);
 
     display: inline-block;
     appearance: none;
@@ -114,7 +116,7 @@
   // Chrome
 
   input::-webkit-slider-runnable-track {
-    background: var(--track-background-color);
+    background: var(--track-color);
     height: var(--track-height);
     border-radius: var(--track-border-radius);
   }
@@ -151,7 +153,7 @@
   }
 
   input[type="range"]::-moz-range-track {
-    background: var(--track-background-color);
+    background: var(--track-color);
     border-radius: var(--track-border-radius);
     border: none;
     height: var(--track-height);
