@@ -103,11 +103,14 @@
   }}>
   <div
     class="block"
+    aria-hidden="true"
     class:hiragana={$kanaType === 'hiragana'}
     class:katakana={$kanaType === 'katakana' || $kanaType === 'both'}>
     {$kanaType === 'katakana' || $kanaType === 'both' ? toKatakana(item.kana) : item.kana}
   </div>
   {#if $kanaType === 'both' && item.checked}
-    <div class="block hiragana popover">{item.kana}</div>
+    <div class="block hiragana popover" aria-hidden="true">
+      {item.kana}
+    </div>
   {/if}
 </button>
