@@ -7,9 +7,11 @@
   export let value: number;
   export let min: string | number = 0;
   export let max: string | number = 100;
-  export let step: string | number = 1;
+  export let step: string | number = undefined;
   export let list: string | undefined = undefined;
 
+  export let width = "100%";
+  export let inline = false;
   export let tooltip = false;
   export let unit = "";
 
@@ -28,14 +30,14 @@
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
       isTooltipVisible = false;
-    }, 2000);
+    }, 1000);
   }
 
   function updateTooltipPosition() {
     if (tooltip) {
       const p = value / Number(max);
       const rangeWidth = rangeElement.clientWidth;
-      const thumbWidth = 22; // hardcoded, cannot read shadow DOM width
+      const thumbWidth = 18; // hardcoded, cannot read shadow DOM width
 
       const start = thumbWidth / 2;
       const end = rangeWidth - thumbWidth;
@@ -58,7 +60,7 @@
 
 <svelte:window on:resize|passive={updateTooltipPosition} />
 
-<div class="range-container">
+<div class="range-container" class:inline={inline || width !== "100%"}>
   {#if tooltip && isTooltipVisible}
     <div
       class="tooltip"
@@ -75,6 +77,7 @@
     {step}
     {list}
     bind:value
+    style={`width: ${width};`}
     bind:this={rangeElement}
     on:input={handleInput}
     on:change
@@ -84,28 +87,37 @@
 <style lang="scss">
   .range-container {
     position: relative;
+    line-height: 0;
+
+    &.inline {
+      display: inline-block;
+    }
   }
 
   input[type="range"] {
-    --thumb-size: 22px;
+    --thumb-size: 18px;
     --thumb-color: var(--ui-element-primary-color);
+    --track-height: 8px;
     --track-background-color: var(--ui-element-secondary-color);
     --track-border-radius: 4px;
-    --track-progress-color: transparent;
 
     display: inline-block;
     appearance: none;
     border: none;
-    width: 100%;
-    height: 8px;
-    background-color: var(--track-background-color);
-    border-radius: var(--track-border-radius);
+    background: none;
+    height: var(--thumb-size);
     outline: none;
     margin: 0;
     cursor: pointer;
   }
 
   // Chrome
+
+  input::-webkit-slider-runnable-track {
+    background: var(--track-background-color);
+    height: var(--track-height);
+    border-radius: var(--track-border-radius);
+  }
 
   input::-webkit-slider-thumb {
     appearance: none;
@@ -114,6 +126,7 @@
     background: var(--thumb-color);
     border-radius: 50%;
     outline: none;
+    transform: translateY(-25%);
   }
 
   // Firefox
@@ -130,38 +143,33 @@
   }
 
   input[type="range"]::-moz-range-progress {
-    background: var(--track-progress-color);
+    background: var(--thumb-color);
     border-radius: var(--track-border-radius);
     border: none;
-    height: 100%;
+    height: var(--track-height);
+    opacity: 0.66;
   }
 
   input[type="range"]::-moz-range-track {
     background: var(--track-background-color);
     border-radius: var(--track-border-radius);
     border: none;
-    height: 100%;
+    height: var(--track-height);
   }
 
-  // IE
-
-  // input[type="range"]::-ms-fill-lower {
-  //   background-color: #fff;
-  //   height: 100%;
-  //   border-radius: var(--track-border-radius);
-  //   border: none;
-  // }
-  // input[type="range"]::-ms-fill-upper {
-  //   background-color: #ccc;
-  //   border-radius: var(--track-border-radius);
-  //   border: none;
-  //   height: 100%;
-  // }
+  input[type="range"]:focus {
+    &::-webkit-slider-thumb {
+      border-color: var(--focus-color);
+    }
+    &::-moz-range-thumb {
+      border-color: var(--focus-color);
+    }
+  }
 
   .tooltip {
     display: inline-block;
     position: absolute;
-    top: calc(-100% - 3px);
+    top: calc(-100% - 1em);
     background: var(--background-color-inverse);
     color: var(--text-color-inverse);
     border-radius: 100px;
