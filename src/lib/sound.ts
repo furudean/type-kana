@@ -3,7 +3,7 @@ import {
   createAudioBufferSourceNode, getAudioBuffer, detuneWithPlaybackRate,
   createGainNode
 } from "./audio";
-import { sleep } from "@/lib/sleep";
+import { sleep } from "@/lib/util";
 
 export async function playProgressSound(mod: number) {
   const audioBuffer = await getAudioBuffer([
@@ -119,4 +119,14 @@ export async function playCheckboxSelectSeriesSound(length: number, selected: bo
       await sleep(400 / length);
     }
   }
+}
+
+export async function playTapSound() {
+  const audioBuffer = await getAudioBuffer([
+    '/assets/audio/bong_001.ogg',
+    '/assets/audio/bong_001.mp3',
+  ]);
+  const source = createAudioBufferSourceNode(audioBuffer);
+
+  source.start();
 }

@@ -6,6 +6,7 @@
   export let viewBox = "0 0 24 24";
   export let path: string;
   export let title = undefined;
+  export let ariaHidden = false;
 </script>
 
 <svg
@@ -14,7 +15,7 @@
   {height}
   role="img"
   {viewBox}
-  aria-hidden={title === undefined}>
+  aria-hidden={ariaHidden || title === undefined}>
   {#if title}
     <title>{title}</title>
   {/if}
