@@ -21,6 +21,8 @@
   import Icon from "./components/Icon.svelte";
   import Range from "./components/Range.svelte";
   import { throttle } from "@/lib/util";
+  import Checkbox from "./components/Checkbox.svelte";
+
   let isOpen = false;
   let resetOnClose = false;
 
@@ -131,13 +133,10 @@
       </fieldset>
       <fieldset>
         <legend>Error indicator</legend>
-        <input
-          type="checkbox"
-          name="Error marker"
+        <Checkbox
           id="error-marker-setting"
           bind:checked={$settings.showErrorMarker}
-        />
-        <label for="error-marker-setting">
+        /><label for="error-marker-setting">
           Display an icon if written answer is wrong
         </label>
       </fieldset>
@@ -203,13 +202,10 @@
       <br />
       <fieldset>
         <legend>Clear local storage</legend>
-        <input
-          type="checkbox"
-          name="reset-on-close-setting"
+        <Checkbox
           id="reset-on-close-setting"
           bind:checked={resetOnClose}
-        />
-        <label for="reset-on-close-setting">
+        /><label for="reset-on-close-setting">
           Reset all saved data after closing settings
         </label>
       </fieldset>
@@ -256,6 +252,15 @@
     }
   }
 
+  .settings-menu {
+    :global(input[type="checkbox"]) {
+      margin: 1em;
+    }
+    :global(input[type="checkbox"] + label) {
+      cursor: pointer;
+    }
+  }
+
   fieldset {
     margin: 0;
     padding: 0;
@@ -270,8 +275,7 @@
     font-size: 1.25em;
   }
 
-  input[type="radio"],
-  input[type="checkbox"] {
+  input[type="radio"] {
     margin: 1.333em 1em 1em 1em;
   }
 

@@ -10,6 +10,36 @@
   export let rowLength: number;
 </script>
 
+<button
+  class="checkbox-kana"
+  role="checkbox"
+  class:selected={item.checked}
+  aria-pressed={item.checked}
+  title={`${item.checked ? "Deselect" : "Select"} '${
+    getAnswers(item.kana)[0]
+  }'`}
+  aria-label={`kana '${getAnswers(item.kana)[0]}'`}
+  on:click={() => {
+    item.checked = !item.checked;
+    playCheckboxSelectSound(rowIndex, rowLength, item.checked);
+  }}>
+  <div
+    class="block"
+    aria-hidden="true"
+    class:hiragana={$kanaType === "hiragana"}
+    class:katakana={$kanaType === "katakana" || $kanaType === "both"}
+  >
+    {$kanaType === "katakana" || $kanaType === "both"
+      ? toKatakana(item.kana)
+      : item.kana}
+  </div>
+  {#if $kanaType === "both" && item.checked}
+    <div class="block hiragana popover" aria-hidden="true">
+      {item.kana}
+    </div>
+  {/if}
+</button>
+
 <style lang="scss">
   $border-width: 3px;
 
@@ -18,7 +48,6 @@
     appearance: none;
     font-size: 1.5em;
     outline: none;
-    margin-left: 10px;
     cursor: pointer;
     line-height: 1;
     white-space: nowrap;
@@ -26,12 +55,9 @@
     background: none;
     border: none;
     padding: 0;
+    margin: 0;
     user-select: none;
     transition: transform 50ms var(--standard-transition);
-
-    &:first-of-type {
-      margin-left: 0;
-    }
   }
 
   .checkbox-kana:active {
@@ -45,7 +71,7 @@
     border-radius: var(--standard-border-radius);
     transition: 150ms var(--standard-transition) color,
       150ms var(--standard-transition) background,
-      150ms var(--standard-transition) border-color;
+      70ms var(--standard-transition) border-color;
     padding: 0.25em;
   }
 
@@ -89,28 +115,3 @@
     border-color: var(--focus-color);
   }
 </style>
-
-<button
-  class="checkbox-kana"
-  role="checkbox"
-  class:selected={item.checked}
-  aria-pressed={item.checked}
-  title={`${item.checked ? 'Deselect' : 'Select'} '${getAnswers(item.kana)[0]}'`}
-  aria-label={`kana '${getAnswers(item.kana)[0]}'`}
-  on:click={() => {
-    item.checked = !item.checked;
-    playCheckboxSelectSound(rowIndex, rowLength, item.checked);
-  }}>
-  <div
-    class="block"
-    aria-hidden="true"
-    class:hiragana={$kanaType === 'hiragana'}
-    class:katakana={$kanaType === 'katakana' || $kanaType === 'both'}>
-    {$kanaType === 'katakana' || $kanaType === 'both' ? toKatakana(item.kana) : item.kana}
-  </div>
-  {#if $kanaType === 'both' && item.checked}
-    <div class="block hiragana popover" aria-hidden="true">
-      {item.kana}
-    </div>
-  {/if}
-</button>

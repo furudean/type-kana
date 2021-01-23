@@ -4,6 +4,7 @@
   import PickerCheckbox from "./PickerCheckbox.svelte";
   import PickerCheckboxSpacer from "./PickerCheckboxSpacer.svelte";
   import { playCheckboxSelectSeriesSound } from "@/lib/sound";
+  import Checkbox from "./components/Checkbox.svelte";
 
   export let rows: KanaCheckbox[][];
   export let label: string;
@@ -23,14 +24,14 @@
 
 <section class="picker-column" aria-label={label}>
   <div class="row select-all">
+    <!-- svelte-ignore a11y-label-has-associated-control -->
     <label>
-      <input
-        type="checkbox"
+      <Checkbox
         checked={rows.every(isRowSelected)}
         on:click={() => {
           const everyRowChecked = rows.every(isRowSelected);
           rows = rows.map(selectRow(!everyRowChecked));
-          
+
           playCheckboxSelectSeriesSound(8, !everyRowChecked);
         }}
       />
@@ -44,31 +45,30 @@
       aria-label={getAnswers(row[0].kana)[0].slice(0, row[0].kana.length) +
         "- sounds"}
     >
-      <div class="row-items" role="group" aria-label="select kana in row">
-        <input
-          type="checkbox"
-          title={isRowSelected(row) ? "Deselect row" : "Select row"}
-          aria-label="select all"
-          checked={isRowSelected(row)}
-          indeterminate={!isRowSelected(row) &&
-            row.filter((item) => item !== null).some((item) => item.checked)}
-          on:click={() => {
-            const newState = !isRowSelected(row);
-            const diffItems = row.filter((item) => item && item.checked !== newState);
-            const toPlay = Math.min(diffItems.length, 4);
+      <Checkbox
+        title={isRowSelected(row) ? "Deselect row" : "Select row"}
+        ariaLabel="select all"
+        checked={isRowSelected(row)}
+        indeterminate={!isRowSelected(row) &&
+          row.filter((item) => item !== null).some((item) => item.checked)}
+        on:click={() => {
+          const newState = !isRowSelected(row);
+          const diffItems = row.filter(
+            (item) => item && item.checked !== newState
+          );
+          const toPlay = Math.min(diffItems.length, 4);
 
-            playCheckboxSelectSeriesSound(toPlay, newState);
-            row = selectRow(newState)(row);
-          }}
-        />
-        {#each row as item, index}
-          {#if item}
-            <PickerCheckbox bind:item rowIndex={index} rowLength={row.length} />
-          {:else}
-            <PickerCheckboxSpacer />
-          {/if}
-        {/each}
-      </div>
+          playCheckboxSelectSeriesSound(toPlay, newState);
+          row = selectRow(newState)(row);
+        }}
+      />
+      {#each row as item, index}
+        {#if item}
+          <PickerCheckbox bind:item rowIndex={index} rowLength={row.length} />
+        {:else}
+          <PickerCheckboxSpacer />
+        {/if}
+      {/each}
     </div>
   {/each}
 </section>
@@ -76,16 +76,6 @@
 <style lang="scss">
   .picker-column {
     display: inline-block;
-  }
-
-  input[type="checkbox"] {
-    transform: scale(1.5);
-    margin: 0 2em;
-    cursor: pointer;
-  }
-
-  label {
-    cursor: pointer;
   }
 
   .select-all {
@@ -97,19 +87,31 @@
   .select-all label {
     display: flex;
     flex-direction: row;
+    cursor: pointer;
+    align-items: center;
+  }
+
+  .select-all label span {
+    margin-left: 10px;
   }
 
   .row {
     display: flex;
     align-items: center;
 
-    &:not(:first-of-type) {
+    &:not(:first-of-type):not(.select-all) {
       margin-top: 10px;
     }
   }
 
-  .row-items {
-    display: flex;
-    align-items: center;
+  // checkbox
+  .row :global(input[type=checkbox]) {
+    margin-right: 10px;
+    font-size: 1.1em;
+  }
+
+  // kana
+  .row > :global(*:not(:first-child)) {
+    margin-left: 10px;
   }
 </style>

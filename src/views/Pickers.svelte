@@ -31,8 +31,9 @@
     grid-template-areas:
       "a b c"
       "a . d";
-    gap: 2em;
-    padding-right: 2em;
+    column-gap: 3em;
+    row-gap: 2em;
+    padding: 0 20px;
     justify-content: center;
   }
   .picker-columns > :global(*) {
@@ -50,7 +51,7 @@
     }
   }
 
-  @media screen and (max-width: 973px) {
+  @media screen and (max-width: 978px) {
     .picker-columns {
       grid-template-areas:
         "a c"
@@ -58,7 +59,7 @@
         "b .";
     }
   }
-  @media screen and (max-width: 630px) {
+  @media screen and (max-width: 638px) {
     .picker-columns {
       grid-template-areas:
         "a"
