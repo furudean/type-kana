@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { mdiOpenInNew } from '@mdi/js';
-  import { svgToDataUrl } from '@/lib/util';
+  import { onMount } from "svelte";
+  import { mdiOpenInNew } from "@mdi/js";
+  import { svgToDataUrl } from "@/lib/util";
 
   export let href: string;
   export let target = "_self";
@@ -11,15 +11,21 @@
 
   onMount(() => {
     const iconDataUrl = svgToDataUrl(mdiOpenInNew);
-    element.style.setProperty('--icon-url', `url("${iconDataUrl}")`);
+    element.style.setProperty("--icon-url", `url("${iconDataUrl}")`);
   });
 </script>
+
+<a {href} {target} {rel} {...$$restProps} bind:this={element}>
+  <slot />
+</a>
 
 <style lang="scss">
   a,
   a:visited {
     color: var(--accent-color);
     text-decoration: none;
+    transition: transform 50ms var(--standard-transition);
+
     &:hover {
       text-decoration: underline dotted var(--accent-color);
     }
@@ -29,7 +35,11 @@
       background-color: var(--accent-color);
       text-decoration: underline dotted var(--background-color);
     }
+    &:active {
+      transform: translateY(10%);
+    }
   }
+
   a[target="_blank"] {
     &:after {
       content: "";
@@ -49,7 +59,3 @@
     }
   }
 </style>
-
-<a {href} {target} {rel} {...$$restProps} bind:this={element}>
-  <slot />
-</a>
