@@ -291,7 +291,9 @@
   .slider-container {
     display: flex;
     align-items: center;
-    gap: 0.5em;
-    margin-top: 0.5em;
+
+    :global(:first-child) {
+      margin-right: 0.5em;
+    }
   }
 </style>
