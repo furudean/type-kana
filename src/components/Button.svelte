@@ -32,6 +32,7 @@
     font-family: "M+ 2c";
     font-size: 1em;
     font-weight: 500;
+    letter-spacing: 1px;
     color: var(--text-color-on-accent-color);
     border: var(--border-size) solid transparent;
     border-radius: var(--standard-border-radius);
