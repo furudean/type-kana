@@ -229,7 +229,7 @@
   .settings-menu {
     margin: 0 auto;
     background: var(--background-color);
-    padding: 2em 2em 6em;
+    padding: 2em 2em 0;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
     box-sizing: border-box;
@@ -237,6 +237,13 @@
     overflow-y: scroll;
     max-height: 95%;
     position: relative;
+
+    // https://github.com/w3c/csswg-drafts/issues/129
+    &:after {
+      content: "";
+      display: block;
+      height: 6em;
+    }
 
     > :first-child {
       margin-top: 0;
