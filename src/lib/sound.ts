@@ -108,7 +108,7 @@ export async function playCheckboxSelectSeriesSound(length: number, selected: bo
       await sleep(400 / length);
     }
   } else {
-    for (let i = length - 1; i >= 0; i--) {
+    for (let i = length; i > 0; i--) {
       const source = await createSource(i);
 
       // slowly decrease volume over time
