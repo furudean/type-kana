@@ -256,12 +256,14 @@
     }
     :global(input[type="checkbox"] + label) {
       cursor: pointer;
+      user-select: none;
     }
     :global(input[type="radio"]) {
       margin: 1em;
     }
     :global(input[type="radio"] + label) {
       cursor: pointer;
+      user-select: none;
     }
   }
 
