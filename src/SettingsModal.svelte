@@ -22,6 +22,7 @@
   import Range from "./components/Range.svelte";
   import { throttle } from "@/lib/util";
   import Checkbox from "./components/Checkbox.svelte";
+  import Radio from "./components/Radio.svelte";
 
   let isOpen = false;
   let resetOnClose = false;
@@ -102,30 +103,27 @@
         <legend>Auto commit</legend>
         <p>Automatically submit when input is correct.</p>
 
-        <input
+        <Radio
           id="auto-commit-disabled-choice"
           name="auto-commit-choice"
-          type="radio"
           bind:group={$settings.autoCommit}
           value="disabled"
         />
         <label for="auto-commit-disabled-choice">Disabled</label>
         <br />
 
-        <input
+        <Radio
           id="auto-commit-lazy-choice"
           name="auto-commit-choice"
-          type="radio"
           bind:group={$settings.autoCommit}
           value="lazy"
         />
         <label for="auto-commit-lazy-choice">Lazy mode</label>
         <br />
 
-        <input
+        <Radio
           id="auto-commit-strict-choice"
           name="auto-commit-choice"
-          type="radio"
           bind:group={$settings.autoCommit}
           value="strict"
         />
@@ -143,36 +141,30 @@
       <fieldset>
         <legend>Theme</legend>
 
-        <input
+        <Radio
           id="same-as-system-theme-choice"
-          type="radio"
           name="theme-choice"
           bind:group={$settings.theme}
           value="same-as-system"
-        />
-        <label for="same-as-system-theme-choice">
+        /><label for="same-as-system-theme-choice">
           Same as system ({$osTheme})
         </label>
         <br />
 
-        <input
+        <Radio
           id="light-theme-choice"
-          type="radio"
           name="theme-choice"
           bind:group={$settings.theme}
           value="light"
-        />
-        <label for="light-theme-choice">Light</label>
+        /><label for="light-theme-choice">Light</label>
         <br />
 
-        <input
+        <Radio
           id="dark-theme-choice"
-          type="radio"
           name="theme-choice"
           bind:group={$settings.theme}
           value="dark"
-        />
-        <label for="dark-theme-choice">Dark</label>
+        /><label for="dark-theme-choice">Dark</label>
         <br />
       </fieldset>
       <fieldset>
@@ -199,7 +191,6 @@
           />
         </div>
       </fieldset>
-      <br />
       <fieldset>
         <legend>Clear local storage</legend>
         <Checkbox
@@ -259,6 +250,12 @@
     :global(input[type="checkbox"] + label) {
       cursor: pointer;
     }
+    :global(input[type="radio"]) {
+      margin: 1em;
+    }
+    :global(input[type="radio"] + label) {
+      cursor: pointer;
+    }
   }
 
   fieldset {
@@ -273,10 +270,6 @@
   legend {
     padding: 0;
     font-size: 1.25em;
-  }
-
-  input[type="radio"] {
-    margin: 1.333em 1em 1em 1em;
   }
 
   label {
@@ -295,6 +288,7 @@
   .slider-container {
     display: flex;
     align-items: center;
+    margin-top: 1em;
 
     :global(:first-child) {
       margin-right: 0.5em;
