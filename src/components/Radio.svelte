@@ -23,8 +23,8 @@
     line-height: inherit;
     cursor: pointer;
     font-size: inherit;
-    width: 1.25em;
-    height: 1.25em;
+    width: 1em;
+    height: 1em;
     background-color: white;
     border-radius: 50%;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);

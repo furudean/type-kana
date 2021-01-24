@@ -47,8 +47,8 @@
     line-height: inherit;
     cursor: pointer;
     font-size: inherit;
-    width: 1.25em;
-    height: 1.25em;
+    width: 1em;
+    height: 1em;
     background: white;
     border-radius: 25%;
     margin: 0;

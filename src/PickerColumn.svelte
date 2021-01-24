@@ -105,9 +105,9 @@
   }
 
   // checkbox
-  .row :global(input[type=checkbox]) {
+  .row :global(input[type="checkbox"]) {
     margin-right: 10px;
-    font-size: 1.1em;
+    font-size: 1.25em;
   }
 
   // kana
