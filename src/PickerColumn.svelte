@@ -79,9 +79,9 @@
   }
 
   .select-all {
-    margin-top: 1em;
-    margin-bottom: 1em;
     user-select: none;
+    margin-bottom: 1.25em;
+    font-weight: 500;
   }
 
   .select-all label {
