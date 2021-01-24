@@ -6,17 +6,15 @@
   import SettingsModal from "../SettingsModal.svelte";
   import { getQuiz } from "@/lib/quiz";
   import type { QuizItem } from "@/lib/quiz";
-  import { settings } from "@/stores/settings";
   import { isCorrectAnswer } from "@/lib/answer";
   import { playProgressSound, playErrorSound } from "@/lib/sound";
   import { dictionary } from "@/stores/dictionary";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
-  let quizItemIndex = 0;
   let settingsModal: SettingsModal;
   let input: string;
-  let correctStreak = 0;
+  let streakLength = 0;
 
   function handleMenuEvent(event: CustomEvent) {
     if (event.detail.type === "openSettings") {
@@ -30,11 +28,11 @@
     }
 
     if (isCorrectAnswer(event.detail.input, unquizzed[0].kana)) {
-      playProgressSound(correctStreak);
-      correctStreak += 1;
+      playProgressSound(streakLength);
+      streakLength += 1;
     } else {
       playErrorSound();
-      correctStreak = 0;
+      streakLength = 0;
     }
 
     // add kana to quizzed array
@@ -47,16 +45,13 @@
     ];
 
     // remove item from unquizzed
-    unquizzed = unquizzed.filter((item) => item.index !== quizItemIndex);
-
-    quizItemIndex += 1;
+    unquizzed = unquizzed.slice(1);
   }
 
   function startGame(dictionary: string[]) {
     unquizzed = getQuiz(dictionary);
     quizzed = [];
-    quizItemIndex = 0;
-    correctStreak = 0;
+    streakLength = 0;
   }
 
   const unsubscribe = dictionary.subscribe(startGame);
