@@ -36,5 +36,6 @@
   label {
     cursor: pointer;
     margin-left: 1em;
+    user-select: none;
   }
 </style>
