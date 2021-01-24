@@ -235,7 +235,7 @@
     box-sizing: border-box;
     max-width: 800px;
     overflow-y: scroll;
-    max-height: 95%;
+    max-height: 80%;
     position: relative;
 
     // https://github.com/w3c/csswg-drafts/issues/129
