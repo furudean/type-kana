@@ -77,7 +77,7 @@ export async function playCheckboxSelectSound(
   source.start();
 }
 
-export async function playCheckboxSelectSeriesSound(length: number, selected: boolean) {
+export async function playCheckboxSelectSeriesSound(times: number, selected: boolean) {
   const gainNode = createGainNode();
   const offset = randomInt(-2, 2) * 100;
 
@@ -89,7 +89,7 @@ export async function playCheckboxSelectSeriesSound(length: number, selected: bo
     const source = createAudioBufferSourceNode(audioBuffer, gainNode);
 
     source.playbackRate.value = detuneWithPlaybackRate(
-      i * (600 / length) - offset
+      i * (600 / times) - offset
     );
 
     return source;
@@ -97,26 +97,26 @@ export async function playCheckboxSelectSeriesSound(length: number, selected: bo
 
   // TODO: this is ugly
   if (selected) {
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < times; i++) {
       const source = await createSource(i);
 
       // slowly decrease volume over time
-      gainNode.gain.value = 1 - (1 / length) * i;
+      gainNode.gain.value = 1 - (1 / times) * i;
 
       source.start();
 
-      await sleep(400 / length);
+      await sleep(400 / times);
     }
   } else {
-    for (let i = length; i > 0; i--) {
+    for (let i = times; i > 0; i--) {
       const source = await createSource(i);
 
       // slowly decrease volume over time
-      gainNode.gain.value = (1 / length) * i;
+      gainNode.gain.value = (1 / times) * i;
 
       source.start();
 
-      await sleep(400 / length);
+      await sleep(400 / times);
     }
   }
 }
