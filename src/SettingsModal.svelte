@@ -230,7 +230,7 @@
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
     box-sizing: border-box;
-    max-width: 800px;
+    max-width: 700px;
     overflow-y: scroll;
     max-height: 80%;
     position: relative;
