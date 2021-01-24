@@ -58,6 +58,7 @@
     margin: 0;
     user-select: none;
     transition: transform 50ms var(--standard-transition);
+    flex-grow: 1; // grow to fill any remaining space (used for ん/ン)
   }
 
   .checkbox-kana:active {
@@ -102,6 +103,8 @@
     position: absolute;
     top: -4px;
     left: -4px;
+    right: 4px;
+    bottom: 4px;
     opacity: 0; // overwritten by animation
     animation-name: drop;
     animation-duration: 150ms;
