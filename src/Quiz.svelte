@@ -74,8 +74,8 @@
 
 <section class="quiz">
   <div class="kana-queue">
-    {#each [...queue.slice(0, 15)] as { kana, answer }}
-      <QuizItemComponent {kana} {answer} />
+    {#each queue as { kana }}
+      <QuizItemComponent {kana} />
     {/each}
   </div>
   <div class="current-kana">
@@ -90,7 +90,7 @@
     </div>
   </div>
   <div class="kana-quizzed">
-    {#each [...quizzed.reverse().slice(0, 15)] as { kana, answer }}
+    {#each [...quizzed].reverse() as { kana, answer }}
       <QuizItemComponent {kana} {answer} />
     {/each}
   </div>
