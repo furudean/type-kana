@@ -52,7 +52,7 @@
   }
 
   input[type="radio"]:checked:after {
-    transform: scale(40%);
+    transform: scale(0.4);
   }
 
   // Focus state
