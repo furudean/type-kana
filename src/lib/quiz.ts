@@ -3,12 +3,14 @@ import { shuffleArray } from "./random"
 export interface QuizItem {
   kana: string;
   answer: string;
+  incorrectTimes: number;
 }
 
 export function quizItem(kana: string): QuizItem {
   return {
     kana,
     answer: null,
+    incorrectTimes: 0,
   }
 }
 

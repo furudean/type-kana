@@ -9,12 +9,16 @@
   import { isCorrectAnswer } from "@/lib/answer";
   import { playProgressSound, playErrorSound } from "@/lib/sound";
   import { dictionary } from "@/stores/dictionary";
+  import { randomInt } from "@/lib/random";
+  import { settings } from "@/stores/settings";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
   let settingsModal: SettingsModal;
   let input: string;
   let streakLength = 0;
+
+  $: currentItem = unquizzed[0];
 
   function handleMenuEvent(event: CustomEvent) {
     if (event.detail.type === "openSettings") {
@@ -27,19 +31,33 @@
       return;
     }
 
-    if (isCorrectAnswer(event.detail.input, unquizzed[0].kana)) {
+    if (isCorrectAnswer(event.detail.input, currentItem.kana)) {
       playProgressSound(streakLength);
       streakLength += 1;
     } else {
       playErrorSound();
       streakLength = 0;
+
+      // Add item back at the end of queue at a random position;
+      if ($settings.retryIncorrectAnswers) {
+        const insertIndex = Math.min(randomInt(10, 25), unquizzed.length);
+        const itemsBefore = unquizzed.slice(0, insertIndex);
+        const itemsAfter = unquizzed.slice(insertIndex);
+    
+        const item: QuizItem = {
+          ...currentItem,
+          incorrectTimes: currentItem.incorrectTimes + 1,
+        };
+
+        unquizzed = [...itemsBefore, item, ...itemsAfter];
+      }
     }
 
     // add kana to quizzed array
     quizzed = [
       ...quizzed,
       {
-        ...unquizzed[0],
+        ...currentItem,
         answer: event.detail.input,
       },
     ];
@@ -60,7 +78,7 @@
 
 <section>
   <Quiz {unquizzed} {quizzed} {input} />
-  <Input bind:input on:submit={handleSubmit} currentKana={unquizzed[0]?.kana} />
+  <Input bind:input on:submit={handleSubmit} currentKana={currentItem?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />
   <SettingsModal bind:this={settingsModal} />
 </section>

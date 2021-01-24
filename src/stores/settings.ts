@@ -5,6 +5,7 @@ export interface GameSettings {
   theme: 'light' | 'dark' | 'same-as-system';
   showErrorMarker: boolean;
   volume: number;
+  retryIncorrectAnswers: boolean;
 }
 
 export const settings = writable<GameSettings>({
@@ -13,6 +14,7 @@ export const settings = writable<GameSettings>({
   theme: 'same-as-system',
   showErrorMarker: true,
   volume: 50,
+  retryIncorrectAnswers: true,
 
   // overwrite with anything previously saved from local storage
   ...JSON.parse(localStorage.getItem('game-settings'))

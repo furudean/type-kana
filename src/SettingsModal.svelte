@@ -129,7 +129,14 @@
         /><label for="auto-commit-strict-choice">Strict mode</label>
       </fieldset>
       <fieldset>
-        <legend>Error indicator</legend>
+        <legend>Quiz</legend>
+        <Checkbox
+          id="retry-incorrect-answers-setting"
+          bind:checked={$settings.retryIncorrectAnswers}
+        /><label for="retry-incorrect-answers-setting">
+          Put incorrect answers back in queue
+        </label>
+        <br />
         <Checkbox
           id="error-marker-setting"
           bind:checked={$settings.showErrorMarker}
