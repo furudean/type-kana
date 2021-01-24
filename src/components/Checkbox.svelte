@@ -104,4 +104,11 @@
   input[type="checkbox"]:focus:before {
     opacity: 1;
   }
+
+  // Active state
+
+  input[type="checkbox"]:checked:active {
+    background-color: var(--checked-highlight-color);
+    transition: 60ms var(--standard-transition) transform;
+  }
 </style>
