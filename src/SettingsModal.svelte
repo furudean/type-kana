@@ -23,6 +23,8 @@
   import { throttle } from "@/lib/util";
   import Checkbox from "./components/Checkbox.svelte";
   import Radio from "./components/Radio.svelte";
+  import { commitHashShort, commitHashLong } from "@/lib/version";
+  import Link from "./components/Link.svelte";
 
   let isOpen = false;
   let resetOnClose = false;
@@ -198,10 +200,21 @@
         </label>
       </fieldset>
       <br />
-      <Button on:click={close}>
-        <Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
-        Done
-      </Button>
+      <section class="menu">
+        <Button on:click={close}>
+          <Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
+          Done
+        </Button>
+        <Link
+          href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
+          target="_blank"
+          rel="noopener"
+          title="Open commit for current build in GitHub"
+          aria-label="Open commit for current build in GitHub"
+        >
+          {commitHashShort}
+        </Link>
+      </section>
     </div>
   </section>
 {/if}
@@ -299,5 +312,11 @@
     :global(:first-child) {
       margin-right: 0.5em;
     }
+  }
+
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 </style>
