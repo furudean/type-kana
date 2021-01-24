@@ -35,6 +35,7 @@
     row-gap: 2em;
     padding: 0 20px;
     justify-content: center;
+    margin-top: 3em;
   }
   .picker-columns > :global(*) {
     &:nth-child(1) {
@@ -73,7 +74,7 @@
     border: none;
     padding: 0;
     display: flex;
-    margin: 2em 0;
+    margin-top: 2em;
     justify-content: center;
   }
 
@@ -90,7 +91,7 @@
   }
 
   .radio-buttons > :global(*) {
-    margin-left: -3px; // visual offset
+    margin-left: -0.4em; // visual offset
   }
   
   .start-quiz { 
