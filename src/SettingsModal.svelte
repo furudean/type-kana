@@ -108,8 +108,7 @@
           name="auto-commit-choice"
           bind:group={$settings.autoCommit}
           value="disabled"
-        />
-        <label for="auto-commit-disabled-choice">Disabled</label>
+        /><label for="auto-commit-disabled-choice">Disabled</label>
         <br />
 
         <Radio
@@ -117,8 +116,7 @@
           name="auto-commit-choice"
           bind:group={$settings.autoCommit}
           value="lazy"
-        />
-        <label for="auto-commit-lazy-choice">Lazy mode</label>
+        /><label for="auto-commit-lazy-choice">Lazy mode</label>
         <br />
 
         <Radio
@@ -126,8 +124,7 @@
           name="auto-commit-choice"
           bind:group={$settings.autoCommit}
           value="strict"
-        />
-        <label for="auto-commit-strict-choice">Strict mode</label>
+        /><label for="auto-commit-strict-choice">Strict mode</label>
       </fieldset>
       <fieldset>
         <legend>Error indicator</legend>
