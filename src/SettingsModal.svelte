@@ -275,19 +275,17 @@
   }
 
   .settings-menu {
-    :global(input[type="checkbox"]) {
-      margin: 1em;
-    }
-    :global(input[type="checkbox"] + label) {
-      cursor: pointer;
-      user-select: none;
-    }
+    :global(input[type="checkbox"]),
     :global(input[type="radio"]) {
       margin: 1em;
     }
+    :global(input[type="checkbox"] + label),
     :global(input[type="radio"] + label) {
-      cursor: pointer;
       user-select: none;
+    }
+    :global(input[type="checkbox"]:not(:disabled) + label),
+    :global(input[type="radio"]:not(:disabled) + label) {
+      cursor: pointer;
     }
   }
 

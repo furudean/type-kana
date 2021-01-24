@@ -7,6 +7,7 @@
   export let id: string = undefined;
   export let checked: boolean;
   export let indeterminate: boolean = undefined;
+  export let disabled: boolean = undefined;
   export let ariaLabel: string = undefined;
 
   let element: HTMLElement;
@@ -29,6 +30,7 @@
   {id}
   bind:checked
   bind:this={element}
+  {disabled}
   {indeterminate}
   aria-label={ariaLabel}
   on:click
@@ -86,6 +88,14 @@
     background-color: hsl(0, 0%, 60%);
   }
 
+  // Disabled state
+
+  input[type="checkbox"]:disabled {
+    background-color: hsl(0, 0%, 50%);
+    box-shadow: inset 0 1px 3px hsl(0, 0%, 55%);
+    cursor: auto;
+  }
+
   // Focus state
 
   input[type="checkbox"]:before {
@@ -107,7 +117,7 @@
 
   // Active state
 
-  input[type="checkbox"]:checked:active {
+  input[type="checkbox"]:checked:not(:disabled):active {
     background-color: var(--checked-highlight-color);
     transition: 60ms var(--standard-transition) transform;
   }
