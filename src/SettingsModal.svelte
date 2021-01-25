@@ -250,9 +250,9 @@
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
     box-sizing: border-box;
-    max-width: 700px;
+    max-width: 800px;
     overflow-y: scroll;
-    max-height: 80%;
+    max-height: 85%;
     position: relative;
 
     // https://github.com/w3c/csswg-drafts/issues/129
@@ -264,6 +264,13 @@
 
     > :first-child {
       margin-top: 0;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .settings-menu {
+      max-height: 100%;
+      border-radius: 0;
     }
   }
 
