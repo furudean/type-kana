@@ -11,6 +11,7 @@
   import { dictionary } from "@/stores/dictionary";
   import { randomInt } from "@/lib/random";
   import { settings } from "@/stores/settings";
+  import ProgressBar from "../ProgressBar.svelte";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
@@ -43,7 +44,7 @@
         const insertIndex = Math.min(randomInt(10, 25), unquizzed.length);
         const itemsBefore = unquizzed.slice(0, insertIndex);
         const itemsAfter = unquizzed.slice(insertIndex);
-    
+
         const item: QuizItem = {
           ...currentItem,
           incorrectTimes: currentItem.incorrectTimes + 1,
@@ -77,6 +78,7 @@
 </script>
 
 <section>
+  <ProgressBar {unquizzed} {quizzed} />
   <Quiz {unquizzed} {quizzed} {input} />
   <Input bind:input on:submit={handleSubmit} currentKana={currentItem?.kana} />
   <Menu on:menuEvent={handleMenuEvent} />

@@ -137,11 +137,20 @@
           Put incorrect answers back in queue
         </label>
         <br />
+
         <Checkbox
           id="error-marker-setting"
           bind:checked={$settings.showErrorMarker}
         /><label for="error-marker-setting">
           Display an icon if written answer is wrong
+        </label>
+        <br />
+
+        <Checkbox
+          id="progress-bar-setting"
+          bind:checked={$settings.showProgressBar}
+        /><label for="progress-bar-setting">
+          Show a bar that indicates completion percentage
         </label>
       </fieldset>
       <fieldset>

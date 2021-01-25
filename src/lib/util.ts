@@ -34,3 +34,8 @@ export function svgToDataUrl(path: string, viewBox = "0 0 24 24") {
 
   return "data:image/svg+xml," + encodeURI(svg);
 }
+
+export function roundN(num: number, decimalPlaces: number): number {
+  const factor = 10 ** (decimalPlaces + 2);
+  return Math.round((num + Number.EPSILON) * factor) / factor;
+}
