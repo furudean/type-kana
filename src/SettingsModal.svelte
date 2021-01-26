@@ -274,7 +274,7 @@
     }
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 700px) {
     .settings-menu {
       max-height: 100%;
       border-radius: 0;
