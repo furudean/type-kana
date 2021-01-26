@@ -39,7 +39,7 @@
 <style lang="scss">
   input[type="checkbox"] {
     --checked-color: hsl(202, 87%, 40%);
-    --checked-highlight-color: hsl(202, 87%, 52%);
+    --checked-highlight-color: hsl(202, 87%, 48%);
 
     appearance: none;
     position: relative;
@@ -54,7 +54,8 @@
     background: white;
     border-radius: 25%;
     margin: 0;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.10);
+    border: 1px solid rgba(0, 0, 0, 0.15);
     transition: 125ms var(--standard-transition) background-color;
   }
 
@@ -74,6 +75,7 @@
   input[type="checkbox"]:checked {
     background: var(--checked-color);
     box-shadow: inset 0 1px 3px var(--checked-highlight-color);
+    border: 1px solid var(--checked-highlight-color);
 
     &:after {
       mask-image: var(--checked-icon-url);
