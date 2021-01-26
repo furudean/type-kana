@@ -93,145 +93,150 @@
     transition:fade={{ duration: 500, easing: cubicOut }}
   />
   <section
-    class="settings-container"
+    class="settings-menu"
+    use:onClickOutside={close}
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="settings-heading"
     use:focusTrap
     transition:fly={{ duration: 400, easing: cubicOut, y: -150 }}
-    aria-modal="true"
-    aria-describedby="settings-header"
   >
-    <div class="settings-menu" use:onClickOutside={close}>
-      <h1 id="settings-header">Settings</h1>
-      <fieldset>
-        <legend>Auto commit</legend>
-        <p>Automatically submit when input is correct.</p>
+    <h1 id="settings-heading">Settings</h1>
 
-        <Radio
-          id="auto-commit-disabled-choice"
-          name="auto-commit-choice"
-          bind:group={$settings.autoCommit}
-          value="disabled"
-        /><label for="auto-commit-disabled-choice">Disabled</label>
-        <br />
+    <hr />
 
-        <Radio
-          id="auto-commit-lazy-choice"
-          name="auto-commit-choice"
-          bind:group={$settings.autoCommit}
-          value="lazy"
-        /><label for="auto-commit-lazy-choice">Lazy mode</label>
-        <br />
+    <h2>Quiz</h2>
+    <Checkbox
+      id="retry-incorrect-answers-setting"
+      bind:checked={$settings.retryIncorrectAnswers}
+    /><label for="retry-incorrect-answers-setting">
+      Put incorrect answers back in queue
+    </label>
 
-        <Radio
-          id="auto-commit-strict-choice"
-          name="auto-commit-choice"
-          bind:group={$settings.autoCommit}
-          value="strict"
-        /><label for="auto-commit-strict-choice">Strict mode</label>
-      </fieldset>
-      <fieldset>
-        <legend>Quiz</legend>
-        <Checkbox
-          id="retry-incorrect-answers-setting"
-          bind:checked={$settings.retryIncorrectAnswers}
-        /><label for="retry-incorrect-answers-setting">
-          Put incorrect answers back in queue
-        </label>
-        <br />
+    <fieldset>
+      <legend>Auto submit</legend>
 
-        <Checkbox
-          id="error-marker-setting"
-          bind:checked={$settings.showErrorMarker}
-        /><label for="error-marker-setting">
-          Display an icon if written answer is wrong
-        </label>
-        <br />
-
-        <Checkbox
-          id="progress-bar-setting"
-          bind:checked={$settings.showProgressBar}
-        /><label for="progress-bar-setting">
-          Show a bar that indicates completion percentage
-        </label>
-      </fieldset>
-      <fieldset>
-        <legend>Theme</legend>
-
-        <Radio
-          id="same-as-system-theme-choice"
-          name="theme-choice"
-          bind:group={$settings.theme}
-          value="same-as-system"
-        /><label for="same-as-system-theme-choice">
-          Same as system ({$osTheme})
-        </label>
-        <br />
-
-        <Radio
-          id="light-theme-choice"
-          name="theme-choice"
-          bind:group={$settings.theme}
-          value="light"
-        /><label for="light-theme-choice">Light</label>
-        <br />
-
-        <Radio
-          id="dark-theme-choice"
-          name="theme-choice"
-          bind:group={$settings.theme}
-          value="dark"
-        /><label for="dark-theme-choice">Dark</label>
-        <br />
-      </fieldset>
-      <fieldset>
-        <legend>Audio</legend>
-        <label for="audio-volume-setting" class="sr-only">Volume (%)</label>
-        <div class="slider-container">
-          <Icon
-            title="Volume icon"
-            bind:path={volumeIconPath}
-            bind:viewBox={volumeIconViewBox}
-            color={volumeIconColor}
-            size="1.5em"
-            ariaHidden={true}
-          />
-          <Range
-            id="audio-volume-setting"
-            bind:value={$settings.volume}
-            min={0}
-            max={100}
-            tooltip={true}
-            unit="%"
-            width="200px"
-            on:input={playTapSoundThrottled}
-          />
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Clear local storage</legend>
-        <Checkbox
-          id="reset-on-close-setting"
-          bind:checked={resetOnClose}
-        /><label for="reset-on-close-setting">
-          Reset all saved data after closing settings
-        </label>
-      </fieldset>
+      <Radio
+        id="auto-commit-disabled-choice"
+        name="auto-commit-choice"
+        bind:group={$settings.autoCommit}
+        value="disabled"
+      /><label for="auto-commit-disabled-choice">Disabled</label>
       <br />
-      <section class="menu">
-        <Button on:click={close}>
-          <Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
-          Done
-        </Button>
-        <Link
-          href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
-          target="_blank"
-          rel="noopener"
-          title="Open commit for current build in GitHub"
-          aria-label="Open commit for current build in GitHub"
-        >
-          {commitHashShort}
-        </Link>
-      </section>
+
+      <Radio
+        id="auto-commit-lazy-choice"
+        name="auto-commit-choice"
+        bind:group={$settings.autoCommit}
+        value="lazy"
+      /><label for="auto-commit-lazy-choice">Lazy mode</label>
+      <br />
+
+      <Radio
+        id="auto-commit-strict-choice"
+        name="auto-commit-choice"
+        bind:group={$settings.autoCommit}
+        value="strict"
+      /><label for="auto-commit-strict-choice">Strict mode</label>
+    </fieldset>
+
+    <hr />
+
+    <h2>Appearance</h2>
+    <Checkbox
+      id="error-marker-setting"
+      bind:checked={$settings.showErrorMarker}
+    /><label for="error-marker-setting">
+      Display an icon if written answer is wrong
+    </label>
+    <br />
+
+    <Checkbox
+      id="progress-bar-setting"
+      bind:checked={$settings.showProgressBar}
+    /><label for="progress-bar-setting">
+      Show a bar that indicates completion percentage
+    </label>
+
+    <fieldset>
+      <legend>Theme</legend>
+
+      <Radio
+        id="same-as-system-theme-choice"
+        name="theme-choice"
+        bind:group={$settings.theme}
+        value="same-as-system"
+      /><label for="same-as-system-theme-choice">
+        Same as system ({$osTheme})
+      </label>
+      <br />
+
+      <Radio
+        id="light-theme-choice"
+        name="theme-choice"
+        bind:group={$settings.theme}
+        value="light"
+      /><label for="light-theme-choice">Light</label>
+      <br />
+
+      <Radio
+        id="dark-theme-choice"
+        name="theme-choice"
+        bind:group={$settings.theme}
+        value="dark"
+      /><label for="dark-theme-choice">Dark</label>
+    </fieldset>
+
+    <hr />
+
+    <h2>Audio</h2>
+    <label for="audio-volume-setting" class="sr-only">Volume (%)</label>
+    <div class="volume-slider">
+      <Icon
+        title="Volume icon"
+        bind:path={volumeIconPath}
+        bind:viewBox={volumeIconViewBox}
+        color={volumeIconColor}
+        size="1.5em"
+        ariaHidden={true}
+      />
+      <Range
+        id="audio-volume-setting"
+        bind:value={$settings.volume}
+        min={0}
+        max={100}
+        tooltip={true}
+        unit="%"
+        width="200px"
+        on:input={playTapSoundThrottled}
+      />
     </div>
+
+    <hr />
+
+    <h2>Danger zone</h2>
+    <Checkbox id="reset-on-close-setting" bind:checked={resetOnClose} /><label
+      for="reset-on-close-setting">
+      Reset all saved data after closing settings
+    </label>
+
+    <hr />
+
+    <section class="menu">
+      <Button on:click={close}>
+        <Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
+        Done
+      </Button>
+      <Link
+        href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
+        target="_blank"
+        rel="noopener"
+        title="Open commit for current build in GitHub"
+        aria-label="Open commit for current build in GitHub"
+      >
+        {commitHashShort}
+      </Link>
+    </section>
   </section>
 {/if}
 
@@ -245,34 +250,27 @@
     bottom: 0;
     background-color: var(--overlay-background-color);
   }
-  .settings-container {
+
+  .settings-menu {
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  .settings-menu {
-    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--background-color);
-    padding: 2em 2em 0;
+    padding: 0 2em;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
     box-sizing: border-box;
-    max-width: 800px;
+    width: 700px;
+    max-width: 100%;
     overflow-y: scroll;
     max-height: 85%;
-    position: relative;
 
     // https://github.com/w3c/csswg-drafts/issues/129
     &:after {
       content: "";
       display: block;
-      height: 6em;
-    }
-
-    > :first-child {
-      margin-top: 0;
+      height: 4em;
     }
   }
 
@@ -280,6 +278,8 @@
     .settings-menu {
       max-height: 100%;
       border-radius: 0;
+      left: 0;
+      transform: none;
     }
   }
 
@@ -298,34 +298,45 @@
     }
   }
 
+  h1 {
+    font-size: 1.6em;
+    margin: 1em 0;
+  }
+
+  h2 {
+    font-size: 1.3em;
+    margin: 1em 0;
+  }
+
+  hr {
+    border: none;
+    background: var(--text-color-lighter);
+    height: 1px;
+    margin: 2em 0;
+  }
+
   fieldset {
+    appearance: none;
     margin: 0;
     padding: 0;
     border: 0;
-    border-bottom: 1px solid var(--text-color-lighter);
-    padding-bottom: 1em;
-    margin-top: 1em;
   }
 
   legend {
     padding: 0;
-    font-size: 1.25em;
+    margin: 1em 0;
+    font-size: 1.1em;
   }
 
   label {
     display: inline-block;
   }
 
-  p {
-    margin-top: 1em;
-    margin-bottom: 0;
-  }
-
   .settings-menu > :global(button) {
     --icon-visual-offset-left: -5px;
   }
 
-  .slider-container {
+  .volume-slider {
     display: flex;
     align-items: center;
     margin-top: 1em;
@@ -339,5 +350,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 3em;
   }
 </style>
