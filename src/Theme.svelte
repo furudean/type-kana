@@ -15,7 +15,7 @@
     --text-color-on-accent-color: white;
     --border-color-on-accent-color: hsl(238, 61%, 8%);
 
-    --secondary-accent-color: hsl(25, 68%, 49%);
+    --secondary-accent-color: hsl(22, 62%, 42%);
 
     --focus-color: hsl(205, 100%, 51%);
 
