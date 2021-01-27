@@ -1,6 +1,6 @@
 <style lang="scss">
   :global(#type-kana.light-theme, #type-kana) {
-    --background-color: #fff6e0;
+    --background-color: hsl(43, 100%, 94%);
     --background-color-inverse: hsl(296, 25%, 12%);
     --text-color-inverse: white;
 
