@@ -1,5 +1,6 @@
-<style lang="scss">
-  :global(#type-kana.light-theme, #type-kana) {
+<style lang="scss" global>
+  #type-kana.light-theme,
+  #type-kana {
     --background-color: hsl(43, 100%, 94%);
     --background-color-inverse: hsl(296, 25%, 12%);
     --text-color-inverse: white;
@@ -30,11 +31,11 @@
     --form-element-secondary-background-color: hsl(205, 100%, 87%);
   }
 
-  :global(#type-kana.dark-theme) {
+  #type-kana.dark-theme {
     --background-color: hsl(296, 25%, 12%);
     --background-color-inverse: hsl(38, 70%, 96%);
     --text-color-inverse: hsl(238, 61%, 8%);
-    
+
     --background-contrast: hsl(300, 24%, 17%);
     --background-contrast-light: hsl(300, 24%, 22%);
 
