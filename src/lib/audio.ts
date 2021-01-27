@@ -13,6 +13,7 @@ settings.subscribe($settings => {
 
 const audioCache = new Map<string, AudioBuffer>();
 
+/** Fetches and caches an audio file */
 export async function getAudioBuffer(urls: string | string[]): Promise<AudioBuffer> {
   const urlsArray = typeof urls === "string" ? [urls] : urls;
   const cachedUrl = urlsArray.find(url => audioCache.has(url));
@@ -36,7 +37,7 @@ export async function getAudioBuffer(urls: string | string[]): Promise<AudioBuff
   throw new Error(`No more urls to try: ${urlsArray.join(', ')}`)
 }
 
-export function createAudioBufferSourceNode(
+export function createAudioSource(
   buffer: AudioBuffer,
   gainNode = rootGainNode
 ) {
@@ -48,6 +49,7 @@ export function createAudioBufferSourceNode(
   return source;
 }
 
+/** Creates a gain node that is relative to root gain */
 export function createGainNode() {
   const gainNode = audioContext.createGain();
 

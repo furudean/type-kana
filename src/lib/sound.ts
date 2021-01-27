@@ -1,6 +1,6 @@
-import { randomArrayItem, randomInt } from "./random";
+import { randomInt } from "./random";
 import {
-  createAudioBufferSourceNode, getAudioBuffer, detuneWithPlaybackRate,
+  createAudioSource, getAudioBuffer, detuneWithPlaybackRate,
   createGainNode
 } from "./audio";
 import { sleep } from "@/lib/util";
@@ -10,7 +10,7 @@ export async function playProgressSound(mod: number) {
     '/assets/audio/drop_002.ogg',
     '/assets/audio/drop_002.mp3',
   ]);
-  const source = await createAudioBufferSourceNode(audioBuffer);
+  const source = createAudioSource(audioBuffer);
   let cents = Math.min(mod, 5) * 100;
 
   if (mod > 5) {
@@ -28,7 +28,7 @@ export async function playErrorSound() {
     '/assets/audio/error_004.ogg',
     '/assets/audio/error_004.mp3',
   ]);
-  const source = createAudioBufferSourceNode(audioBuffer);
+  const source = createAudioSource(audioBuffer);
   source.playbackRate.value = detuneWithPlaybackRate(randomInt(-1, 2) * 200);
 
   source.start();
@@ -39,7 +39,7 @@ export async function playMaximizeSound() {
     '/assets/audio/maximize_008.ogg',
     '/assets/audio/maximize_008.mp3',
   ]);
-  const source = createAudioBufferSourceNode(audioBuffer);
+  const source = createAudioSource(audioBuffer);
 
   source.start();
 }
@@ -49,7 +49,7 @@ export async function playMinimizeSound() {
     '/assets/audio/minimize_008.ogg',
     '/assets/audio/minimize_008.mp3',
   ]);
-  const source = createAudioBufferSourceNode(audioBuffer);
+  const source = createAudioSource(audioBuffer);
 
   source.start();
 }
@@ -64,7 +64,7 @@ export async function playCheckboxSelectSound(
     '/assets/audio/click_002.mp3',
   ]);
 
-  const source = createAudioBufferSourceNode(audioBuffer);
+  const source = createAudioSource(audioBuffer);
 
   let cents = index * (600 / length)
 
@@ -86,7 +86,7 @@ export async function playCheckboxSelectSeriesSound(times: number, selected: boo
       '/assets/audio/click_002.ogg',
       '/assets/audio/click_002.mp3',
     ]);
-    const source = createAudioBufferSourceNode(audioBuffer, gainNode);
+    const source = createAudioSource(audioBuffer, gainNode);
 
     source.playbackRate.value = detuneWithPlaybackRate(
       i * (600 / times) - offset
@@ -126,7 +126,7 @@ export async function playTapSound() {
     '/assets/audio/bong_001.ogg',
     '/assets/audio/bong_001.mp3',
   ]);
-  const source = createAudioBufferSourceNode(audioBuffer);
+  const source = createAudioSource(audioBuffer);
 
   source.start();
 }
