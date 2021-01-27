@@ -2,8 +2,6 @@
   #type-kana.light-theme,
   #type-kana {
     --background-color: hsl(43, 100%, 94%);
-    --background-color-inverse: hsl(296, 25%, 12%);
-    --text-color-inverse: white;
 
     --background-contrast: hsl(43, 100%, 98%);
     --background-contrast-light: hsl(41, 37%, 80%);
@@ -24,6 +22,9 @@
     --form-element-secondary-color: var(--form-element-primary-color);
     --form-element-secondary-background-color: hsl(220, 100%, 84%);
 
+    --background-color-inverse: hsl(296, 25%, 12%);
+    --text-color-inverse: white;
+
     --focus-color: hsl(205, 94%, 75%);
 
     --highlight-color: hsl(5, 91%, 67%);
@@ -33,8 +34,6 @@
 
   #type-kana.dark-theme {
     --background-color: hsl(296, 25%, 12%);
-    --background-color-inverse: hsl(38, 70%, 96%);
-    --text-color-inverse: hsl(238, 61%, 8%);
 
     --background-contrast: hsl(300, 24%, 17%);
     --background-contrast-light: hsl(300, 24%, 22%);
@@ -54,6 +53,9 @@
 
     --form-element-secondary-color: white;
     --form-element-secondary-background-color: hsl(326, 10%, 46%);
+
+    --background-color-inverse: hsl(43, 100%, 94%);
+    --text-color-inverse: hsl(165, 100%, 7%);
 
     --focus-color: white;
 
