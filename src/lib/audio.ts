@@ -44,9 +44,6 @@ export function createAudioBufferSourceNode(
   source.buffer = buffer;
 
   source.connect(gainNode);
-  source.addEventListener('ended', () => {
-    source.disconnect(gainNode);
-  })
 
   return source;
 }
