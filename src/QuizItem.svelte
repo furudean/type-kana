@@ -5,7 +5,21 @@
   export let answer: string = null;
 
   $: hasAnswer = answer !== null;
+  $: hasCorrectAnswer = hasAnswer ? isCorrectAnswer(answer, kana) : false;
+  $: hasIncorrectAnswer = hasAnswer ? !isCorrectAnswer(answer, kana) : false;
 </script>
+
+<div
+  class="quiz-item"
+  class:answered={hasAnswer}
+  class:correct={hasCorrectAnswer}
+  class:incorrect={hasIncorrectAnswer}
+>
+  <div class="question">{kana}</div>
+  {#if hasIncorrectAnswer}
+    <div class="furigana">{getAnswers(kana)[0]}</div>
+  {/if}
+</div>
 
 <style lang="scss">
   .quiz-item {
@@ -17,8 +31,6 @@
   .furigana {
     font-size: 0.5em;
     font-weight: 500;
-    text-align: center;
-    display: none;
     position: absolute;
     top: -1em;
     left: 0;
@@ -34,22 +46,9 @@
     color: var(--text-color-light);
   }
 
-  .incorrect > .furigana {
-    display: block;
-  }
-
   .incorrect > .question {
     text-decoration-color: var(--highlight-color);
     text-decoration-style: dotted;
     text-decoration-line: underline;
   }
 </style>
-
-<div
-  class="quiz-item"
-  class:correct={hasAnswer ? isCorrectAnswer(answer, kana) : false}
-  class:incorrect={hasAnswer ? !isCorrectAnswer(answer, kana) : false}
-  class:answered={hasAnswer}>
-  <div class="question">{kana}</div>
-  <div class="furigana">{getAnswers(kana)[0]}</div>
-</div>
