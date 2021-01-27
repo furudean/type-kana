@@ -5,12 +5,12 @@
     --background-color-inverse: hsl(296, 25%, 12%);
     --text-color-inverse: white;
 
-    --background-contrast: hsl(0, 0%, 100%);
-    --background-contrast-light: hsl(0, 0%, 85%);
+    --background-contrast: hsl(43, 100%, 98%);
+    --background-contrast-light: hsl(41, 37%, 80%);
 
-    --text-color: hsl(238, 61%, 8%);
+    --text-color: hsl(165, 100%, 7%);
     --text-color-light: hsl(41, 10%, 53%);
-    --text-color-lighter: hsl(39, 22%, 77%);
+    --text-color-lighter: hsl(41, 37%, 80%);
 
     --accent-color: hsl(340, 63%, 52%);
     --text-color-on-accent-color: white;
