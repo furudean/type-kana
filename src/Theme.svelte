@@ -1,6 +1,6 @@
 <style lang="scss">
   :global(#type-kana.light-theme, #type-kana) {
-    --background-color: hsl(40, 100%, 95%);
+    --background-color: #fff6e0;
     --background-color-inverse: hsl(296, 25%, 12%);
     --text-color-inverse: white;
 
@@ -11,11 +11,11 @@
     --text-color-light: hsl(41, 10%, 53%);
     --text-color-lighter: hsl(39, 22%, 77%);
 
-    --accent-color: hsl(358, 45%, 37%);
+    --accent-color: hsl(340, 63%, 52%);
     --text-color-on-accent-color: white;
     --border-color-on-accent-color: hsl(238, 61%, 8%);
 
-    --secondary-accent-color: hsl(22, 62%, 42%);
+    --secondary-accent-color: hsl(180, 73%, 40%);
 
     --focus-color: hsl(205, 100%, 51%);
 
