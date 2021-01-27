@@ -18,17 +18,17 @@
 
     --secondary-accent-color: hsl(180, 73%, 40%);
 
-    --focus-color: hsl(205, 94%, 80%);
-
-    --highlight-color: hsl(5, 91%, 67%);
-
-    --overlay-background-color: rgba(0, 0, 0, 0.4);
-
     --form-element-primary-color: hsl(220, 100%, 57%);
     --form-element-primary-color-contrast: hsl(220, 100%, 64%);
 
     --form-element-secondary-color: var(--form-element-primary-color);
     --form-element-secondary-background-color: hsl(220, 100%, 84%);
+
+    --focus-color: hsl(205, 94%, 80%);
+
+    --highlight-color: hsl(5, 91%, 67%);
+
+    --overlay-background-color: rgba(0, 0, 0, 0.4);
   }
 
   #type-kana.dark-theme {
@@ -49,16 +49,16 @@
 
     --secondary-accent-color: hsl(202, 87%, 40%);
 
-    --focus-color: white;
-
-    --highlight-color: hsl(27, 100%, 43%);
-
-    --overlay-background-color: rgba(255, 255, 255, 0.3);
-
     --form-element-primary-color: hsl(220, 100%, 57%);
     --form-element-primary-color-contrast: hsl(220, 100%, 64%);
 
     --form-element-secondary-color: white;
     --form-element-secondary-background-color: hsl(326, 10%, 46%);
+
+    --focus-color: white;
+
+    --highlight-color: hsl(27, 100%, 43%);
+
+    --overlay-background-color: rgba(255, 255, 255, 0.3);
   }
 </style>
