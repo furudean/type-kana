@@ -23,8 +23,11 @@
 
     --overlay-background-color: rgba(0, 0, 0, 0.4);
 
-    --ui-element-primary-color: hsl(205, 100%, 51%);
-    --ui-element-secondary-color: hsl(205, 100%, 87%)
+    --form-element-primary-color: hsl(205, 100%, 51%);
+    --form-element-primary-color-contrast: hsl(205, 100%, 60%);
+
+    --form-element-secondary-color: var(--form-element-primary-color);
+    --form-element-secondary-background-color: hsl(205, 100%, 87%);
   }
 
   :global(#type-kana.dark-theme) {
@@ -51,7 +54,10 @@
 
     --overlay-background-color: rgba(255, 255, 255, 0.3);
 
-    --ui-element-primary-color: white;
-    --ui-element-secondary-color: hsl(326, 10%, 46%);
+    --form-element-primary-color: hsl(205, 100%, 51%);
+    --form-element-primary-color-contrast: hsl(205, 100%, 60%);
+
+    --form-element-secondary-color: white;
+    --form-element-secondary-background-color: hsl(326, 10%, 46%);
   }
 </style>

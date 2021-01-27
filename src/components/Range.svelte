@@ -98,10 +98,10 @@
 
   input[type="range"] {
     --thumb-size: 18px;
-    --thumb-color: var(--ui-element-primary-color);
+    --thumb-color: var(--form-element-secondary-color);
     --track-height: 6px;
     --track-border-radius: calc(var(--track-height) / 2);
-    --track-color: var(--ui-element-secondary-color);
+    --track-color: var(--form-element-secondary-background-color);
 
     display: inline-block;
     appearance: none;

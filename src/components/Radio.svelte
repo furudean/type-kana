@@ -11,8 +11,8 @@
 
 <style lang="scss">
   input[type="radio"] {
-    --checked-color: hsl(202, 87%, 40%);
-    --checked-highlight-color: hsl(202, 87%, 48%);
+    --checked-color: var(--form-element-primary-color);
+    --checked-highlight-color: var(--form-element-primary-color-contrast);
 
     appearance: none;
     position: relative;
