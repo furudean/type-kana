@@ -299,13 +299,15 @@
   }
 
   h1 {
-    font-size: 1.6em;
     margin: 1em 0;
+    font-size: 1.8em;
+    font-weight: 700;
   }
 
   h2 {
-    font-size: 1.3em;
     margin: 1em 0;
+    font-size: 1.4em;
+    font-weight: 500;
   }
 
   hr {
@@ -324,8 +326,9 @@
 
   legend {
     padding: 0;
-    margin: 1em 0;
-    font-size: 1.1em;
+    margin: 1em 0 0.5em;
+    font-size: 1.2em;
+    font-weight: normal;
   }
 
   label {
