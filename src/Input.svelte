@@ -62,6 +62,7 @@
     border: 0;
     background: none;
     color: inherit;
+    font-family: inherit;
 
     &:focus {
       outline: none;
