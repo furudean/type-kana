@@ -24,7 +24,7 @@
     --form-element-secondary-color: var(--form-element-primary-color);
     --form-element-secondary-background-color: hsl(220, 100%, 84%);
 
-    --focus-color: hsl(205, 94%, 80%);
+    --focus-color: hsl(205, 94%, 75%);
 
     --highlight-color: hsl(5, 91%, 67%);
 
