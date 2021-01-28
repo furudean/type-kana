@@ -41,7 +41,7 @@
 
       // Add item back at the end of queue at a random position;
       if ($settings.retryIncorrectAnswers) {
-        const insertIndex = Math.min(randomInt(10, 25), unquizzed.length);
+        const insertIndex = Math.min(randomInt(5, 12), unquizzed.length);
         const itemsBefore = unquizzed.slice(0, insertIndex);
         const itemsAfter = unquizzed.slice(insertIndex);
 
