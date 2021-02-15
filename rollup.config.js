@@ -99,8 +99,7 @@ export default {
 
     postcss({
       plugins: [
-        // process CSS for production
-        production && autoprefixer(),
+        autoprefixer(),
         production && cssnano(),
       ],
       // we'll extract any component CSS out into
