@@ -31,7 +31,6 @@
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
-    padding: 0 1em;
     /*
       Primary font is M+ Type-2, followed by fallbacks
       https://stackoverflow.com/questions/14563064/japanese-standard-web-fonts/14573813#14573813
