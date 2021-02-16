@@ -19,7 +19,7 @@ If you are just looking to play, a hosted version of whatever is currently on `m
 
 ## Quick start
 
-Make sure you have at least Node.js 14 installed, then run:
+Make sure you have at least Node.js 14 installed, then run this in your shell:
 
 ```bash
 npm install
