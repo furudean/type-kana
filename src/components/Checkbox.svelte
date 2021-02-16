@@ -111,7 +111,7 @@
 
   // Active state
 
-  input[type="checkbox"]:checked:not(:disabled):active {
+  input[type="checkbox"]:checked:active:not(:disabled) {
     background-color: var(--checked-highlight-color);
     transition: 60ms var(--standard-transition) transform;
   }
