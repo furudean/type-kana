@@ -21,15 +21,6 @@
 </main>
 
 <style>
-  @keyframes -global-fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
   main {
     --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
     --standard-border-radius: 10px;
