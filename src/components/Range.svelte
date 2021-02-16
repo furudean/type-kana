@@ -36,7 +36,7 @@
   }
 
   function updateTooltipPosition() {
-    if (tooltip) {
+    if (rangeElement && tooltip) {
       const p = value / Number(max);
       const rangeWidth = rangeElement.clientWidth;
       const thumbWidth = 18; // hardcoded, cannot read shadow DOM width
@@ -69,7 +69,9 @@
       aria-hidden="true"
       style={tooltipStyle}
       out:fade={{ duration: 1000, easing: cubicOut }}
-    >{value + unit}</div>
+    >
+      {value + unit}
+    </div>
   {/if}
   <input
     type="range"
