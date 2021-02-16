@@ -1,24 +1,43 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
-
-  const dispatch = createEventDispatcher();
+  import { link } from "svelte-spa-router";
 
   export let title: string = undefined;
   export let disabled = false;
+
+  // link props
+  export let href: string = undefined;
+  export let target = "_self";
+  export let rel = "noopener";
 </script>
 
-<button
-  type="button"
-  {title}
-  {disabled}
-  on:click={() => {
-    dispatch("click");
-  }}>
-  <slot />
-</button>
+{#if !href}
+  <button
+    type="button"
+    class="button"
+    class:disabled
+    {title}
+    {disabled}
+    on:click
+  >
+    <slot />
+  </button>
+{:else}
+  <a
+    {href}
+    class="button"
+    class:disabled
+    aria-disabled={disabled}
+    {target}
+    {rel}
+    {title}
+    use:link
+  >
+    <slot />
+  </a>
+{/if}
 
 <style lang="scss">
-  button {
+  .button {
     --border-size: 3px;
     --padding-horizontal: 1.5em;
     --padding-vertical: 0.75em;
@@ -50,20 +69,23 @@
       color 125ms var(--standard-transition),
       background-color 125ms var(--standard-transition),
       border 125ms var(--standard-transition);
+    text-decoration: none;
+    user-select: none;
   }
 
-  button:focus:not(:disabled),
-  button:hover:not(:disabled) {
+  .button:focus:not(.disabled),
+  .button:hover:not(.disabled) {
     border-color: var(--focus-color);
   }
 
-  button:active:not(:disabled) {
+  .button:active:not(.disabled) {
     transform: translateY(10%);
   }
 
-  button:disabled {
+  .button.disabled {
     background: var(--text-color-light);
     color: var(--text-color-lighter);
     cursor: not-allowed;
+    pointer-events: none;
   }
 </style>

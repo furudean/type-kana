@@ -1,10 +1,9 @@
 <script lang="ts">
   import PickerColumn from "../PickerColumn.svelte";
   import { pickerKana } from "@/stores/pickerKana";
-  import { kanaType } from "@/stores/kanaType"
+  import { kanaType } from "@/stores/kanaType";
   import RadioButtons from "../components/RadioButtons.svelte";
   import Button from "../components/Button.svelte";
-  import { view } from "@/stores/state";
   import Icon from "../components/Icon.svelte";
   import { mdiArrowRight } from "@mdi/js";
   import { dictionary } from "@/stores/dictionary";
@@ -12,18 +11,49 @@
   const options = [
     {
       label: "Hiragana",
-      value: "hiragana"
+      value: "hiragana",
     },
     {
       label: "Katakana",
-      value: "katakana"
+      value: "katakana",
     },
     {
       label: "Both",
-      value: "both"
-    }
-  ]
+      value: "both",
+    },
+  ];
 </script>
+
+<svelte:head>
+  <title>Setup · Type Kana</title>
+</svelte:head>
+
+<section class="pickers">
+  <fieldset>
+    <legend>I want to practice...</legend>
+    <div class="radio-buttons">
+      <RadioButtons name="kana-type-radio" {options} bind={kanaType} />
+    </div>
+  </fieldset>
+  <section class="picker-columns">
+    <PickerColumn bind:rows={$pickerKana.monographs} label="Monographs" />
+    <PickerColumn
+      bind:rows={$pickerKana.monographsDiacritics}
+      label="Monographs with diacritics"
+    />
+    <PickerColumn bind:rows={$pickerKana.digraphs} label="Digraphs" />
+    <PickerColumn
+      bind:rows={$pickerKana.digraphsDiacritics}
+      label="Digraphs with diacritics"
+    />
+  </section>
+  <section class="start-quiz">
+    <Button href="/session" disabled={$dictionary.length === 0}>
+      Start quiz
+      <Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
+    </Button>
+  </section>
+</section>
 
 <style lang="scss">
   .picker-columns {
@@ -93,8 +123,8 @@
   .radio-buttons > :global(*) {
     margin-left: -0.4em; // visual offset
   }
-  
-  .start-quiz { 
+
+  .start-quiz {
     display: flex;
     justify-content: center;
     padding: 2em 0;
@@ -104,28 +134,3 @@
     --icon-visual-offset-right: -5px;
   }
 </style>
-
-<section class="pickers">
-  <fieldset>
-    <legend>I want to practice...</legend>
-    <div class="radio-buttons">
-      <RadioButtons name="kana-type-radio" {options} bind={kanaType} />
-    </div>
-  </fieldset>
-  <section class="picker-columns">
-    <PickerColumn bind:rows={$pickerKana.monographs} label="Monographs" />
-    <PickerColumn
-      bind:rows={$pickerKana.monographsDiacritics}
-      label="Monographs with diacritics" />
-    <PickerColumn bind:rows={$pickerKana.digraphs} label="Digraphs" />
-    <PickerColumn
-      bind:rows={$pickerKana.digraphsDiacritics}
-      label="Digraphs with diacritics" />
-  </section>
-  <section class="start-quiz">
-    <Button on:click={() => { view.set('quiz') }} disabled={$dictionary.length === 0}>
-      Start quiz
-      <Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
-    </Button>
-  </section>
-</section>

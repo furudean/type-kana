@@ -48,6 +48,7 @@
     "common-tags": "^1.8.0",
     "standardized-audio-context": "^25.1.5",
     "svelte-focus-trap": "^1.0.1",
+    "svelte-spa-router": "^3.1.0",
     "wanakana": "^4.0.2"
   }
 }

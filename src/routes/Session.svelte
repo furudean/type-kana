@@ -77,6 +77,10 @@
   onDestroy(unsubscribe);
 </script>
 
+<svelte:head>
+  <title>Session · Type Kana</title>
+</svelte:head>
+
 <section>
   <ProgressBar {unquizzed} {quizzed} />
   <Quiz {unquizzed} {quizzed} {input} />

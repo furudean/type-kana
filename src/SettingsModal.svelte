@@ -216,7 +216,8 @@
 
     <h2>Danger zone</h2>
     <Checkbox id="reset-on-close-setting" bind:checked={resetOnClose} /><label
-      for="reset-on-close-setting">
+      for="reset-on-close-setting"
+    >
       Reset all saved data after closing settings
     </label>
 
@@ -230,7 +231,6 @@
       <Link
         href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
         target="_blank"
-        rel="noopener"
         title="Open commit for current build in GitHub"
         aria-label="Open commit for current build in GitHub"
       >

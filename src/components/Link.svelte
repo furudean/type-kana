@@ -1,23 +1,27 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { link } from "svelte-spa-router";
   import { mdiOpenInNew } from "@mdi/js";
   import { svgToDataUrl } from "@/lib/util";
 
   export let href: string;
   export let target = "_self";
   export let rel = "noopener";
+  export let routeLink = false;
 
-  let element: HTMLElement;
-
-  onMount(() => {
-    const iconDataUrl = svgToDataUrl(mdiOpenInNew);
-    element.style.setProperty("--icon-url", `url("${iconDataUrl}")`);
-  });
+  const iconDataUrl = svgToDataUrl(mdiOpenInNew);
+  const style = `--icon-url: url("${iconDataUrl}")`;
 </script>
 
-<a {href} {target} {rel} {...$$restProps} bind:this={element}>
-  <slot />
-</a>
+{#if !routeLink}
+  <a {href} {target} {rel} {...$$restProps} {style}>
+    <slot />
+  </a>
+{:else}
+  <!-- route link needs special use:link directive -->
+  <a {href} {target} {rel} {...$$restProps} {style} use:link>
+    <slot />
+  </a>
+{/if}
 
 <style lang="scss">
   a,

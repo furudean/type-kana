@@ -2,10 +2,23 @@
   import { resolvedTheme } from "@/stores/theme";
   import { audioContext } from "@/lib/audio";
   import Theme from "./Theme.svelte";
-  import Pickers from "./views/Pickers.svelte";
-  import Quiz from "./views/Quiz.svelte";
-  import { view } from "@/stores/state";
+  import Router from "svelte-spa-router";
+  import { routes } from "./routes";
 </script>
+
+<svelte:window
+  on:mousedown|once={() => {
+    // https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
+    if (audioContext.state !== "running") {
+      audioContext.resume();
+    }
+  }}
+/>
+
+<main id="type-kana" class={$resolvedTheme + "-theme"}>
+  <Theme />
+  <Router {routes} />
+</main>
 
 <style>
   @keyframes -global-fade-in {
@@ -27,6 +40,7 @@
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
+    padding: 0 1em;
     /*
       Primary font is M+ Type-2, followed by fallbacks
       https://stackoverflow.com/questions/14563064/japanese-standard-web-fonts/14573813#14573813
@@ -37,21 +51,3 @@
       TakaoPGothic, sans-serif;
   }
 </style>
-
-<svelte:window
-  on:mousedown|once={() => {
-    // https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
-    if (audioContext.state !== 'running') {
-      audioContext.resume();
-    }
-  }} />
-
-<main id="type-kana" class={$resolvedTheme + '-theme'}>
-  <Theme />
-  {#if $view === 'pickers'}
-    <Pickers />
-  {/if}
-  {#if $view === 'quiz'}
-    <Quiz />
-  {/if}
-</main>

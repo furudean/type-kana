@@ -2,7 +2,7 @@
   import { mdiCogOutline, mdiGithub, mdiLaunch, mdiArrowLeft } from "@mdi/js";
   import Icon from "./components/Icon.svelte";
   import { createEventDispatcher } from "svelte";
-  import { view } from "@/stores/state";
+  import { link } from "svelte-spa-router";
 
   const dispatch = createEventDispatcher();
 
@@ -12,14 +12,9 @@
 </script>
 
 <section class="menu">
-  <button
-    class="button"
-    title="Go back"
-    on:click={() => {
-      view.set("pickers");
-    }}>
+  <a href="/" class="button" title="Go back" use:link>
     <Icon path={mdiArrowLeft} />
-  </button>
+  </a>
 
   <button
     class="button"
@@ -27,7 +22,8 @@
     title="Open game settings"
     on:click={() => {
       menuEvent("openSettings");
-    }}>
+    }}
+  >
     <Icon path={mdiCogOutline} />
   </button>
   <a
@@ -35,7 +31,8 @@
     href="https://github.com/c-bandy/type-kana"
     target="_blank"
     rel="noopener"
-    title="Show GitHub repository">
+    title="Show GitHub repository"
+  >
     <Icon path={mdiGithub} />
   </a>
 </section>
