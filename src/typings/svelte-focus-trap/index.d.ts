@@ -1,3 +1,3 @@
 declare module 'svelte-focus-trap' {
-  export function focusTrap(): any;
+  export function focusTrap(element: HTMLElement, ...args: any[]): any;
 }
