@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { mdiCheckBold, mdiMinusThick } from "@mdi/js";
   import { svgToDataUrl } from "@/lib/util";
 
@@ -10,18 +9,11 @@
   export let disabled: boolean = undefined;
   export let ariaLabel: string = undefined;
 
-  let element: HTMLElement;
-
-  onMount(() => {
-    const checkedIcon = svgToDataUrl(mdiCheckBold);
-    element.style.setProperty("--checked-icon-url", `url("${checkedIcon}")`);
-
-    const indeterminateIcon = svgToDataUrl(mdiMinusThick);
-    element.style.setProperty(
-      "--indeterminate-icon-url",
-      `url("${indeterminateIcon}")`
-    );
-  });
+  const checkedIcon = svgToDataUrl(mdiCheckBold);
+  const indeterminateIcon = svgToDataUrl(mdiMinusThick);
+  const style =
+    `--checked-icon-url: url("${checkedIcon}");` +
+    `--indeterminate-icon-url: url("${indeterminateIcon}");`;
 </script>
 
 <input
@@ -29,10 +21,10 @@
   {title}
   {id}
   bind:checked
-  bind:this={element}
   {disabled}
   {indeterminate}
   aria-label={ariaLabel}
+  {style}
   on:click
 />
 
@@ -54,7 +46,7 @@
     background: white;
     border-radius: 25%;
     margin: 0;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.10);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.15);
     transition: 125ms var(--standard-transition) background-color;
   }
