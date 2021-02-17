@@ -20,6 +20,7 @@
     "@rollup/plugin-replace": "^2.3.4",
     "@rollup/plugin-typescript": "^8.1.0",
     "@tsconfig/svelte": "^1.0.10",
+    "@types/body-scroll-lock": "^2.6.1",
     "@types/common-tags": "^1.8.0",
     "@types/wanakana": "^4.0.0",
     "autoprefixer": "^10.0.4",
@@ -45,6 +46,7 @@
   },
   "dependencies": {
     "@mdi/js": "^5.7.55",
+    "body-scroll-lock": "^3.1.5",
     "common-tags": "^1.8.0",
     "standardized-audio-context": "^25.1.5",
     "svelte-focus-trap": "^1.0.1",

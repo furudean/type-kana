@@ -25,6 +25,7 @@
   import Radio from "./components/Radio.svelte";
   import { commitHashShort, commitHashLong } from "@/lib/version";
   import Link from "./components/Link.svelte";
+  import { scrollLock } from "./lib/scollLock";
 
   let isOpen = false;
   let resetOnClose = false;
@@ -99,6 +100,7 @@
     aria-modal="true"
     aria-labelledby="settings-heading"
     use:focusTrap
+    use:scrollLock
     transition:fly={{ duration: 400, easing: cubicOut, y: -150 }}
   >
     <h1 id="settings-heading">Settings</h1>
@@ -243,7 +245,7 @@
 <style lang="scss">
   .overlay {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
