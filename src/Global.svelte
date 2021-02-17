@@ -2,6 +2,8 @@
   :root {
     --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
     --standard-border-radius: 10px;
+
+    height: 100%;
   }
 
   body {
