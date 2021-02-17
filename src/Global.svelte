@@ -1,14 +1,17 @@
 <style global>
+  :root,
+  body {
+    height: 100%;
+    width: 100%;
+  }
+
   :root {
     --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
     --standard-border-radius: 10px;
-
-    height: 100%;
   }
 
   body {
     margin: 0;
-    min-height: 100%;
     color: var(--text-color);
     background: var(--background-color);
     position: relative;
