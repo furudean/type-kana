@@ -66,8 +66,7 @@
       This gracefully degrades to a slightly worse-looking version on
       unsupported browsers. */
     grid-template-rows: masonry;
-    column-gap: 3em;
-    row-gap: 2em;
+    gap: 3em;
     padding: 0 20px;
     justify-content: center;
     margin-top: 3em;
