@@ -1,9 +1,19 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
   import { resolvedTheme } from "@/stores/theme";
   import { audioContext } from "@/lib/audio";
   import Theme from "./Theme.svelte";
+  import Global from "./Global.svelte";
   import Router from "svelte-spa-router";
   import { routes } from "./routes";
+
+  const unsubscribe = resolvedTheme.subscribe((theme) => {
+    const root = document.querySelector(":root");
+
+    root.classList.remove("light-theme", "dark-theme");
+    root.classList.add(theme + "-theme");
+  });
+  onDestroy(unsubscribe);
 </script>
 
 <svelte:window
@@ -15,29 +25,8 @@
   }}
 />
 
-<main id="type-kana" class={$resolvedTheme + "-theme"}>
+<main>
+  <Global />
   <Theme />
   <Router {routes} />
 </main>
-
-<style>
-  main {
-    --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
-    --standard-border-radius: 10px;
-
-    color: var(--text-color);
-    background: var(--background-color);
-    min-height: 100%;
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-    /*
-      Primary font is M+ Type-2, followed by fallbacks
-      https://stackoverflow.com/questions/14563064/japanese-standard-web-fonts/14573813#14573813
-    */
-    font-family: "M+ 2p", "MS PGothic", "ヒラギノ角ゴ Pro W3",
-      "Hiragino Kaku Gothic Pro", Osaka, メイリオ, Meiryo, "ＭＳ Ｐゴシック",
-      "MS PGothic", "ＭＳ ゴシック", "MS Gothic", "Noto Sans CJK JP",
-      TakaoPGothic, sans-serif;
-  }
-</style>

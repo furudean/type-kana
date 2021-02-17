@@ -1,6 +1,6 @@
 <style lang="scss" global>
-  #type-kana.light-theme,
-  #type-kana {
+  :root.light-theme,
+  :root {
     --background-color: hsl(43, 100%, 94%);
 
     --background-contrast: hsl(43, 100%, 98%);
@@ -32,7 +32,7 @@
     --overlay-background-color: rgba(0, 0, 0, 0.4);
   }
 
-  #type-kana.dark-theme {
+  :root.dark-theme {
     --background-color: hsl(296, 25%, 12%);
 
     --background-contrast: hsl(300, 24%, 17%);
