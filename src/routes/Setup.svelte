@@ -28,31 +28,29 @@
   <title>Setup · Type Kana</title>
 </svelte:head>
 
-<section class="pickers">
-  <fieldset>
-    <legend>I want to practice...</legend>
-    <div class="radio-buttons">
-      <RadioButtons name="kana-type-radio" {options} bind={kanaType} />
-    </div>
-  </fieldset>
-  <section class="picker-columns">
-    <PickerColumn bind:rows={$pickerKana.monographs} label="Monographs" />
-    <PickerColumn
-      bind:rows={$pickerKana.monographsDiacritics}
-      label="Monographs with diacritics"
-    />
-    <PickerColumn bind:rows={$pickerKana.digraphs} label="Digraphs" />
-    <PickerColumn
-      bind:rows={$pickerKana.digraphsDiacritics}
-      label="Digraphs with diacritics"
-    />
-  </section>
-  <section class="start-quiz">
-    <Button href="/session" disabled={$dictionary.length === 0}>
-      Start quiz
-      <Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
-    </Button>
-  </section>
+<fieldset>
+  <legend>I want to practice...</legend>
+  <div class="radio-buttons">
+    <RadioButtons name="kana-type-radio" {options} bind={kanaType} />
+  </div>
+</fieldset>
+<section class="picker-columns">
+  <PickerColumn bind:rows={$pickerKana.monographs} label="Monographs" />
+  <PickerColumn
+    bind:rows={$pickerKana.monographsDiacritics}
+    label="Monographs with diacritics"
+  />
+  <PickerColumn bind:rows={$pickerKana.digraphs} label="Digraphs" />
+  <PickerColumn
+    bind:rows={$pickerKana.digraphsDiacritics}
+    label="Digraphs with diacritics"
+  />
+</section>
+<section class="start-quiz">
+  <Button href="/session" disabled={$dictionary.length === 0}>
+    Start quiz
+    <Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
+  </Button>
 </section>
 
 <style lang="scss">

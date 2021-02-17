@@ -81,10 +81,8 @@
   <title>Session · Type Kana</title>
 </svelte:head>
 
-<section>
-  <ProgressBar {unquizzed} {quizzed} />
-  <Quiz {unquizzed} {quizzed} {input} />
-  <Input bind:input on:submit={handleSubmit} currentKana={currentItem?.kana} />
-  <Menu on:menuEvent={handleMenuEvent} />
-  <SettingsModal bind:this={settingsModal} />
-</section>
+<ProgressBar {unquizzed} {quizzed} />
+<Quiz {unquizzed} {quizzed} {input} />
+<Input bind:input on:submit={handleSubmit} currentKana={currentItem?.kana} />
+<Menu on:menuEvent={handleMenuEvent} />
+<SettingsModal bind:this={settingsModal} />
