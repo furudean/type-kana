@@ -6,7 +6,7 @@
 
   body {
     margin: 0;
-    height: 100vh;
+    min-height: 100%;
     color: var(--text-color);
     background: var(--background-color);
     position: relative;
