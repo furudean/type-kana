@@ -61,6 +61,11 @@
     grid-template-areas:
       "a b c"
       "a . d";
+    /*  As of writing, 'grid-template-rows: masonry;' is experimental, and only
+      renders in firefox with 'layout.css.grid-template-masonry-value.enabled'.
+      This gracefully degrades to a slightly worse-looking version on
+      unsupported browsers. */
+    grid-template-rows: masonry;
     column-gap: 3em;
     row-gap: 2em;
     padding: 0 20px;
