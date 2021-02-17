@@ -105,12 +105,14 @@
   fieldset {
     border: none;
     padding: 0;
+    margin: 0;
     display: flex;
     margin-top: 2em;
     justify-content: center;
   }
 
   legend {
+    padding: 0;
     font-weight: 500;
     font-size: 1.2em;
     text-align: center;
