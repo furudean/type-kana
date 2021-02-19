@@ -1,9 +1,9 @@
 <script lang="ts">
-  import QuizItemComponent from "./QuizItem.svelte";
+  import QuizItemComponent from "./_QuizItem.svelte";
   import type { QuizItem } from "@/lib/quiz";
   import { getAnswers } from "@/lib/answer";
   import { settings } from "@/stores/settings";
-  import Icon from "./components/Icon.svelte";
+  import Icon from "../../components/Icon.svelte";
   import { mdiClose as errorMarkerIcon } from "@mdi/js";
 
   export let unquizzed: QuizItem[];
@@ -22,6 +22,31 @@
     }
   }
 </script>
+
+<section class="quiz">
+  <div class="kana-queue">
+    {#each [...queue].slice(0, 15) as { kana }}
+      <QuizItemComponent {kana} />
+    {/each}
+  </div>
+  <div class="current-kana">
+    {#if currentItem}
+      <QuizItemComponent kana={currentItem.kana} />
+    {/if}
+    <div
+      class="error-marker"
+      class:visible={errorMarkerVisible}
+      aria-hidden={!errorMarkerVisible}
+    >
+      <Icon path={errorMarkerIcon} />
+    </div>
+  </div>
+  <div class="kana-quizzed">
+    {#each [...quizzed].reverse().slice(0, 15) as { kana, answer }}
+      <QuizItemComponent {kana} {answer} />
+    {/each}
+  </div>
+</section>
 
 <style lang="scss">
   .quiz {
@@ -71,27 +96,3 @@
     margin-right: $margin;
   }
 </style>
-
-<section class="quiz">
-  <div class="kana-queue">
-    {#each [...queue].slice(0, 15) as { kana }}
-      <QuizItemComponent {kana} />
-    {/each}
-  </div>
-  <div class="current-kana">
-    {#if currentItem}
-      <QuizItemComponent kana={currentItem.kana} />
-    {/if}
-    <div
-      class="error-marker"
-      class:visible={errorMarkerVisible}
-      aria-hidden={!errorMarkerVisible}>
-      <Icon path={errorMarkerIcon} />
-    </div>
-  </div>
-  <div class="kana-quizzed">
-    {#each [...quizzed].reverse().slice(0, 15) as { kana, answer }}
-      <QuizItemComponent {kana} {answer} />
-    {/each}
-  </div>
-</section>

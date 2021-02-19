@@ -1,5 +1,5 @@
-import Setup from "./routes/Setup.svelte";
-import Session from "./routes/Session.svelte";
+import Setup from "./routes/setup/index.svelte";
+import Session from "./routes/session/index.svelte";
 import NotFound from "./routes/NotFound.svelte";
 
 export const routes = {

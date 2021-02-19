@@ -1,6 +1,6 @@
 <script lang="ts">
   import { mdiCogOutline, mdiGithub, mdiArrowLeft } from "@mdi/js";
-  import Icon from "./components/Icon.svelte";
+  import Icon from "../../components/Icon.svelte";
   import { createEventDispatcher } from "svelte";
   import { link } from "svelte-spa-router";
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { mdiChevronRight } from "@mdi/js";
-  import Icon from "./components/Icon.svelte";
+  import Icon from "../../components/Icon.svelte";
   import { settings } from "@/stores/settings";
   import { getAnswers, isCorrectAnswer } from "@/lib/answer";
 
@@ -40,6 +40,25 @@
     }
   }
 </script>
+
+<form class="answer-input" on:submit|preventDefault={handleSubmit}>
+  <input
+    type="text"
+    class="text-field"
+    bind:value={input}
+    on:input={handleInput}
+    placeholder="ローマ字入力"
+    aria-label="Input rōmaji"
+    lang="ja"
+    autocapitalize="none"
+    autocomplete="off"
+    autocorrect="off"
+    spellcheck={false}
+  />
+  <button type="submit" class="submit-button" title="Submit">
+    <Icon size="1.5em" path={mdiChevronRight} />
+  </button>
+</form>
 
 <style lang="scss">
   .answer-input {
@@ -100,21 +119,3 @@
     }
   }
 </style>
-
-<form class="answer-input" on:submit|preventDefault={handleSubmit}>
-  <input
-    type="text"
-    class="text-field"
-    bind:value={input}
-    on:input={handleInput}
-    placeholder="ローマ字入力"
-    aria-label="Input rōmaji"
-    lang="ja"
-    autocapitalize="none"
-    autocomplete="off"
-    autocorrect="off"
-    spellcheck={false} />
-  <button type="submit" class="submit-button" title="Submit">
-    <Icon size="1.5em" path={mdiChevronRight} />
-  </button>
-</form>

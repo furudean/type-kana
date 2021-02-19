@@ -3,7 +3,7 @@
   import type { KanaCheckbox } from "@/stores/pickerKana";
   import { kanaType } from "@/stores/kanaType";
   import { toKatakana } from "wanakana";
-  import { playCheckboxSelectSound } from "./lib/sound";
+  import { playCheckboxSelectSound } from "@/lib/sound";
 
   export let item: KanaCheckbox;
   export let rowIndex: number;
@@ -22,7 +22,8 @@
   on:click={() => {
     item.checked = !item.checked;
     playCheckboxSelectSound(rowIndex, rowLength, item.checked);
-  }}>
+  }}
+>
   <div
     class="block"
     aria-hidden="true"

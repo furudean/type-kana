@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { getAnswers } from "./lib/answer";
+  import { getAnswers } from "@/lib/answer";
   import type { KanaCheckbox } from "@/stores/pickerKana";
-  import PickerCheckbox from "./PickerCheckbox.svelte";
-  import PickerCheckboxSpacer from "./PickerCheckboxSpacer.svelte";
+  import PickerCheckbox from "./_PickerCheckbox.svelte";
+  import PickerCheckboxSpacer from "./_PickerCheckboxSpacer.svelte";
   import { playCheckboxSelectSeriesSound } from "@/lib/sound";
-  import Checkbox from "./components/Checkbox.svelte";
+  import Checkbox from "../../components/Checkbox.svelte";
 
   export let rows: KanaCheckbox[][];
   export let label: string;

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import PickerColumn from "../PickerColumn.svelte";
+  import PickerColumn from "./_PickerColumn.svelte";
   import { pickerKana } from "@/stores/pickerKana";
   import { kanaType } from "@/stores/kanaType";
-  import RadioButtons from "../components/RadioButtons.svelte";
-  import Button from "../components/Button.svelte";
-  import Icon from "../components/Icon.svelte";
+  import RadioButtons from "../../components/RadioButtons.svelte";
+  import Button from "../../components/Button.svelte";
+  import Icon from "../../components/Icon.svelte";
   import { mdiArrowRight } from "@mdi/js";
   import { dictionary } from "@/stores/dictionary";
 

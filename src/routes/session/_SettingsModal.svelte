@@ -11,21 +11,21 @@
   import { cubicOut } from "svelte/easing";
   import { onDestroy } from "svelte";
   import { onClickOutside } from "@/lib/clickOutside";
-  import Button from "./components/Button.svelte";
+  import Button from "../../components/Button.svelte";
   import {
     mdiArrowLeft,
     mdiVolumeOff,
     mdiVolumeMedium,
     mdiVolumeHigh,
   } from "@mdi/js";
-  import Icon from "./components/Icon.svelte";
-  import Range from "./components/Range.svelte";
+  import Icon from "../../components/Icon.svelte";
+  import Range from "../../components/Range.svelte";
   import { throttle } from "@/lib/util";
-  import Checkbox from "./components/Checkbox.svelte";
-  import Radio from "./components/Radio.svelte";
+  import Checkbox from "../../components/Checkbox.svelte";
+  import Radio from "../../components/Radio.svelte";
   import { commitHashShort, commitHashLong } from "@/lib/version";
-  import Link from "./components/Link.svelte";
-  import { scrollLock } from "./lib/scollLock";
+  import Link from "../../components/Link.svelte";
+  import { scrollLock } from "@/lib/scollLock";
 
   let isOpen = false;
   let resetOnClose = false;

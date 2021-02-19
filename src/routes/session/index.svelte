@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
-  import Quiz from "../Quiz.svelte";
-  import Input from "../Input.svelte";
-  import Menu from "../Menu.svelte";
-  import SettingsModal from "../SettingsModal.svelte";
+  import Quiz from "./_Quiz.svelte";
+  import Input from "./_Input.svelte";
+  import Menu from "./_Menu.svelte";
+  import SettingsModal from "./_SettingsModal.svelte";
   import { getQuiz } from "@/lib/quiz";
   import type { QuizItem } from "@/lib/quiz";
   import { isCorrectAnswer } from "@/lib/answer";
@@ -11,7 +11,7 @@
   import { dictionary } from "@/stores/dictionary";
   import { randomInt } from "@/lib/random";
   import { settings } from "@/stores/settings";
-  import ProgressBar from "../ProgressBar.svelte";
+  import ProgressBar from "./_ProgressBar.svelte";
 
   let unquizzed = [] as QuizItem[];
   let quizzed = [] as QuizItem[];
