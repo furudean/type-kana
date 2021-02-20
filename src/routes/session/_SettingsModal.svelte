@@ -293,11 +293,12 @@
   .settings-menu {
     :global(input[type="checkbox"]),
     :global(input[type="radio"]) {
-      margin: 1em;
+      margin: 1em 0 1em 1em;
     }
     :global(input[type="checkbox"] + label),
     :global(input[type="radio"] + label) {
       user-select: none;
+      padding-left: 1em;
     }
     :global(input[type="checkbox"]:not(:disabled) + label),
     :global(input[type="radio"]:not(:disabled) + label) {
