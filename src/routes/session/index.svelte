@@ -1,25 +1,30 @@
 <script lang="ts">
-  import { onDestroy } from "svelte";
   import Quiz from "./_Quiz.svelte";
   import Input from "./_Input.svelte";
   import Menu from "./_Menu.svelte";
   import SettingsModal from "./_SettingsModal.svelte";
-  import { getQuiz } from "@/lib/quiz";
-  import type { QuizItem } from "@/lib/quiz";
+  import { quiz } from "@/stores/quiz";
+  import type { QuizItem } from "@/stores/quiz";
   import { isCorrectAnswer } from "@/lib/answer";
   import { playProgressSound, playErrorSound } from "@/lib/sound";
-  import { dictionary } from "@/stores/dictionary";
   import { randomInt } from "@/lib/random";
   import { settings } from "@/stores/settings";
   import ProgressBar from "./_ProgressBar.svelte";
 
-  let unquizzed = [] as QuizItem[];
-  let quizzed = [] as QuizItem[];
   let settingsModal: SettingsModal;
   let input: string;
   let streakLength = 0;
 
+  let unquizzed: QuizItem[];
+  let quizzed: QuizItem[];
   $: currentItem = unquizzed[0];
+
+  // is there a better way to set up automatic subscriptions for a derived store
+  // that returns a store?
+  $quiz.subscribe((value) => {
+    unquizzed = value.unquizzed;
+    quizzed = value.quizzed;
+  });
 
   function handleMenuEvent(event: CustomEvent) {
     if (event.detail.type === "openSettings") {
@@ -41,40 +46,19 @@
 
       // Add item back at the end of queue at a random position;
       if ($settings.retryIncorrectAnswers) {
-        const insertIndex = Math.min(randomInt(5, 12), unquizzed.length);
-        const itemsBefore = unquizzed.slice(0, insertIndex);
-        const itemsAfter = unquizzed.slice(insertIndex);
+        const index = Math.min(randomInt(5, 12), unquizzed.length);
 
         const item: QuizItem = {
           ...currentItem,
           incorrectTimes: currentItem.incorrectTimes + 1,
         };
 
-        unquizzed = [...itemsBefore, item, ...itemsAfter];
+        $quiz.insert(index, item);
       }
     }
 
-    // add kana to quizzed array
-    quizzed = [
-      ...quizzed,
-      {
-        ...currentItem,
-        answer: event.detail.input,
-      },
-    ];
-
-    // remove item from unquizzed
-    unquizzed = unquizzed.slice(1);
+    $quiz.pop({ answer: event.detail.input });
   }
-
-  function startGame(dictionary: string[]) {
-    unquizzed = getQuiz(dictionary);
-    quizzed = [];
-    streakLength = 0;
-  }
-
-  const unsubscribe = dictionary.subscribe(startGame);
-  onDestroy(unsubscribe);
 </script>
 
 <svelte:head>
