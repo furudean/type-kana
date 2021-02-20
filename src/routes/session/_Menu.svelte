@@ -38,7 +38,7 @@
 
   <button
     type="button"
-    class="button tilt reverse"
+    class="button tilt"
     class:reset-animation-playing={isRestartAnimationPlaying}
     title="Restart quiz"
     on:click={() => {
@@ -121,7 +121,7 @@
     }
   }
 
-  @keyframes reverse {
+  @keyframes counter-clockwise-turn {
     from {
       transform: rotate(0deg);
     }
@@ -131,6 +131,6 @@
   }
 
   .button.reset-animation-playing .reset-animation-container {
-    animation: 500ms reverse var(--standard-transition);
+    animation: 500ms counter-clockwise-turn var(--standard-transition);
   }
 </style>
