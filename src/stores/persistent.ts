@@ -37,14 +37,14 @@ export function createPersistentStore<T>(
   optionsOrKey: string | Options,
   startValue: T
 ): PersistentStore<T> {
+  const normalizedOptionsOrKey = isObject(optionsOrKey) ?
+    optionsOrKey as Options :
+    { key: optionsOrKey as string };
 
   const options: Options = {
-    key: undefined,
     storage: localStorage,
     assign: false,
-    ...(isObject(optionsOrKey) ?
-      optionsOrKey as Options :
-      { key: optionsOrKey as string })
+    ...normalizedOptionsOrKey
   };
   const { key, storage, assign } = options;
 
