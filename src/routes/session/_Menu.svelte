@@ -7,7 +7,6 @@
 
   const dispatch = createEventDispatcher();
 
-  let spinElement: HTMLElement;
   let isRestartAnimationPlaying = false;
 
   function menuEvent(type: string) {
@@ -51,7 +50,6 @@
     <span class="tilt-animation-container">
       <span
         class="reset-animation-container"
-        bind:this={spinElement}
         on:animationend={() => {
           isRestartAnimationPlaying = false;
         }}
