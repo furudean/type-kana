@@ -1,6 +1,6 @@
 import { derived } from "svelte/store";
 import { toKatakana } from "wanakana";
-import { KanaCheckboxColumn, pickerKana } from "./pickerKana";
+import { KanaCheckboxColumn, configKana } from "./configKana";
 import { kanaType } from "./kanaType";
 
 function toDictionary(column: KanaCheckboxColumn): string[] {
@@ -10,30 +10,30 @@ function toDictionary(column: KanaCheckboxColumn): string[] {
     .map((item) => item.kana);
 }
 
-export const pickedKana = derived(pickerKana, ($kanaColumns) => {
+export const selectedKana = derived(configKana, ($columns) => {
   return [
-    ...toDictionary($kanaColumns.monographs),
-    ...toDictionary($kanaColumns.monographsDiacritics),
-    ...toDictionary($kanaColumns.digraphs),
-    ...toDictionary($kanaColumns.digraphsDiacritics),
+    ...toDictionary($columns.monographs),
+    ...toDictionary($columns.monographsDiacritics),
+    ...toDictionary($columns.digraphs),
+    ...toDictionary($columns.digraphsDiacritics),
   ]
 });
 
 export const dictionary = derived(
-  [pickedKana, kanaType],
-  ([$pickedKana, $kanaType]): string[] => {
+  [selectedKana, kanaType],
+  ([$selectedKana, $kanaType]): string[] => {
     let result: string[] = [];
 
     if ($kanaType === 'hiragana' || $kanaType === 'both') {
       result = [
         ...result,
-        ...$pickedKana,
+        ...$selectedKana,
       ];
     }
     if ($kanaType === 'katakana' || $kanaType === 'both') {
       result = [
         ...result,
-        ...$pickedKana.map((kana) => toKatakana(kana)),
+        ...$selectedKana.map((kana) => toKatakana(kana)),
       ];
     }
 

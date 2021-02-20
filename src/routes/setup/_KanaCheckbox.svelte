@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getAnswers } from "@/lib/answer";
-  import type { KanaCheckbox } from "@/stores/pickerKana";
+  import type { KanaCheckbox } from "@/stores/configKana";
   import { kanaType } from "@/stores/kanaType";
   import { toKatakana } from "wanakana";
   import { playCheckboxSelectSound } from "@/lib/sound";

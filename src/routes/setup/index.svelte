@@ -1,6 +1,6 @@
 <script lang="ts">
-  import PickerColumn from "./_PickerColumn.svelte";
-  import { pickerKana } from "@/stores/pickerKana";
+  import Column from "./_Column.svelte";
+  import { configKana } from "@/stores/configKana";
   import { kanaType } from "@/stores/kanaType";
   import RadioButtons from "../../components/RadioButtons.svelte";
   import Button from "../../components/Button.svelte";
@@ -40,19 +40,19 @@
     <RadioButtons name="kana-type-radio" {options} bind={kanaType} />
   </div>
 </fieldset>
-<section class="picker-columns">
-  <PickerColumn bind:rows={$pickerKana.monographs} label="Monographs" />
-  <PickerColumn
-    bind:rows={$pickerKana.monographsDiacritics}
+<section class="columns">
+  <Column bind:rows={$configKana.monographs} label="Monographs" />
+  <Column
+    bind:rows={$configKana.monographsDiacritics}
     label="Monographs with diacritics"
   />
-  <PickerColumn bind:rows={$pickerKana.digraphs} label="Digraphs" />
-  <PickerColumn
-    bind:rows={$pickerKana.digraphsDiacritics}
+  <Column bind:rows={$configKana.digraphs} label="Digraphs" />
+  <Column
+    bind:rows={$configKana.digraphsDiacritics}
     label="Digraphs with diacritics"
   />
 </section>
-<section class="start-quiz">
+<section class="menu">
   <Button href="/session" disabled={$dictionary.length === 0}>
     Start quiz
     <Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
@@ -60,7 +60,7 @@
 </section>
 
 <style lang="scss">
-  .picker-columns {
+  .columns {
     display: grid;
     grid-template-areas:
       "a b c"
@@ -75,7 +75,7 @@
     justify-content: center;
     margin-top: 3em;
   }
-  .picker-columns > :global(*) {
+  .columns > :global(*) {
     &:nth-child(1) {
       grid-area: a;
     }
@@ -91,7 +91,7 @@
   }
 
   @media screen and (max-width: 978px) {
-    .picker-columns {
+    .columns {
       grid-template-areas:
         "a c"
         "a d"
@@ -99,7 +99,7 @@
     }
   }
   @media screen and (max-width: 638px) {
-    .picker-columns {
+    .columns {
       grid-template-areas:
         "a"
         "b"
@@ -134,13 +134,13 @@
     margin-left: -0.4em; // visual offset
   }
 
-  .start-quiz {
+  .menu {
     display: flex;
     justify-content: center;
     padding: 2em 0;
   }
 
-  .start-quiz > :global(button) {
+  .menu > :global(button) {
     --icon-visual-offset-right: -5px;
   }
 </style>

@@ -1,20 +1,20 @@
 <script lang="ts">
   import { getAnswers } from "@/lib/answer";
-  import type { KanaCheckbox } from "@/stores/pickerKana";
-  import PickerCheckbox from "./_PickerCheckbox.svelte";
-  import PickerCheckboxSpacer from "./_PickerCheckboxSpacer.svelte";
+  import type { KanaCheckboxRow } from "@/stores/configKana";
+  import KanaCheckbox from "./_KanaCheckbox.svelte";
+  import KanaCheckboxSpacer from "./_KanaCheckboxSpacer.svelte";
   import { playCheckboxSelectSeriesSound } from "@/lib/sound";
   import Checkbox from "../../components/Checkbox.svelte";
 
-  export let rows: KanaCheckbox[][];
+  export let rows: KanaCheckboxRow[];
   export let label: string;
 
-  function isRowSelected(row: KanaCheckbox[]): boolean {
+  function isRowSelected(row: KanaCheckboxRow): boolean {
     return row.filter((item) => item !== null).every((item) => item.checked);
   }
 
   function selectRow(state: boolean) {
-    return function (row: KanaCheckbox[]) {
+    return function (row: KanaCheckboxRow) {
       return row.map((item) =>
         item !== null ? { ...item, checked: state } : null
       );
@@ -22,7 +22,7 @@
   }
 </script>
 
-<section class="picker-column" aria-label={label}>
+<section class="column" aria-label={label}>
   <div class="row select-all">
     <!-- svelte-ignore a11y-label-has-associated-control -->
     <label>
@@ -63,9 +63,9 @@
       />
       {#each row as item, index}
         {#if item}
-          <PickerCheckbox bind:item rowIndex={index} rowLength={row.length} />
+          <KanaCheckbox bind:item rowIndex={index} rowLength={row.length} />
         {:else}
-          <PickerCheckboxSpacer />
+          <KanaCheckboxSpacer />
         {/if}
       {/each}
     </div>
@@ -73,7 +73,7 @@
 </section>
 
 <style lang="scss">
-  .picker-column {
+  .column {
     display: inline-block;
   }
 

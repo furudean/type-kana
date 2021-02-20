@@ -29,14 +29,14 @@ function createKanaCheckboxColumn(kanaRows: string[][], checked: boolean): KanaC
   return kanaRows.map(row => createKanaCheckboxRow(row, checked));
 }
 
-interface PickerKana {
+interface ConfigKana {
   monographs: KanaCheckboxColumn;
   monographsDiacritics: KanaCheckboxColumn;
   digraphs: KanaCheckboxColumn;
   digraphsDiacritics: KanaCheckboxColumn;
 }
 
-export const pickerKana = createPersistentStore<PickerKana>(
+export const configKana = createPersistentStore<ConfigKana>(
   'game-config-kana',
   {
     monographs: createKanaCheckboxColumn(hiragana.monographs, true),
