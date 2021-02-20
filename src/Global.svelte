@@ -26,6 +26,25 @@
       TakaoPGothic, sans-serif;
   }
 
+  h1 {
+    margin: 1em 0;
+    font-size: 1.8em;
+    font-weight: 700;
+  }
+
+  h2 {
+    margin: 1em 0;
+    font-size: 1.4em;
+    font-weight: 500;
+  }
+
+  hr {
+    border: none;
+    background: var(--text-color-lighter);
+    height: 1px;
+    margin: 2em 0;
+  }
+
   .sr-only {
     clip: rect(1px, 1px, 1px, 1px);
     clip-path: inset(50%);
