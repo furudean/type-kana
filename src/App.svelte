@@ -35,9 +35,9 @@
   }}
 />
 
+<Global />
+<Theme />
 <main>
-  <Global />
-  <Theme />
   <Router {routes} />
 </main>
 
