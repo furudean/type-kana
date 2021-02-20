@@ -42,7 +42,7 @@
     class="button tilt"
     class:spin-animation-playing={isRestartAnimationPlaying}
     title="Restart quiz"
-    on:click={(e) => {
+    on:click={() => {
       menuEvent("restart");
       playDropSound();
       isRestartAnimationPlaying = true;
