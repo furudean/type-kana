@@ -117,8 +117,8 @@
     & .tilt-animation-container {
       transition: transform 150ms var(--standard-transition);
     }
-    &:hover > :global(*),
-    &:focus > :global(*) {
+    &:hover .tilt-animation-container,
+    &:focus .tilt-animation-container {
       transform: rotate(-45deg);
     }
   }
