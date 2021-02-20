@@ -64,7 +64,7 @@
     disabled={$dictionary.length === 0}
     on:click={() => {
       playDropSound();
-      $quiz.reset();
+      quiz.reset();
     }}
   >
     Start quiz

@@ -16,12 +16,7 @@
     kanaType.useWebStorage();
     configKana.useWebStorage();
     settings.useWebStorage();
-
-    // VERY funky, but it works!
-    // this store returns a store on subscription
-    quiz.subscribe((store) => {
-      store.useWebStorage();
-    });
+    quiz.useWebStorage();
   });
 
   const unsubscribe = resolvedTheme.subscribe((theme) => {

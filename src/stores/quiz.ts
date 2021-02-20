@@ -1,7 +1,7 @@
-import { dictionary } from "@/stores/dictionary";
-import { derived } from "svelte/store";
 import { shuffleArray } from "@/lib/random"
-import { createPersistentStore, PersistentStore } from "./persistent";
+import type { Readable } from "svelte/store";
+import { dictionary as dictionaryStore } from "./dictionary";
+import { createPersistentStore } from "./persistent";
 
 export interface QuizItem {
   kana: string;
@@ -29,13 +29,15 @@ function createQuiz(dictionary: string[]): Quiz {
   }
 }
 
-export interface QuizStore extends PersistentStore<Quiz> {
+export interface QuizStore extends Readable<Quiz> {
+  useWebStorage(): void;
   insert(index: number, item: QuizItem): void;
   pop(props: Partial<QuizItem>): void;
   reset(): void;
 }
 
-export function createQuizStore(dictionary: string[]): QuizStore {
+export function createQuizStore(): QuizStore {
+  let dictionary: string[] = [];
   const { subscribe, set, update, useWebStorage } = createPersistentStore(
     {
       key: "quiz-session",
@@ -44,10 +46,15 @@ export function createQuizStore(dictionary: string[]): QuizStore {
     createQuiz(dictionary),
   );
 
+  const reset = () => { set(createQuiz(dictionary)); }
+
+  dictionaryStore.subscribe(value => {
+    dictionary = value;
+    reset();
+  });
+
   return {
     subscribe,
-    set,
-    update,
     useWebStorage,
     insert(index, item) {
       update(({ unquizzed, quizzed }) => {
@@ -75,11 +82,8 @@ export function createQuizStore(dictionary: string[]): QuizStore {
       })
       )
     },
-    reset() {
-      set(createQuiz(dictionary));
-    }
+    reset
   };
 }
 
-// this is funky!
-export const quiz = derived(dictionary, ($dictionary) => createQuizStore($dictionary));
+export const quiz = createQuizStore();

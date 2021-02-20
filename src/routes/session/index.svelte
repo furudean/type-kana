@@ -23,16 +23,9 @@
   let input: string;
   let streakLength = 0;
 
-  let unquizzed: QuizItem[];
-  let quizzed: QuizItem[];
+  $: unquizzed = $quiz.unquizzed;
+  $: quizzed = $quiz.quizzed;
   $: currentItem = unquizzed[0];
-
-  // is there a better way to set up automatic subscriptions for a derived store
-  // that returns a store?
-  $quiz.subscribe((value) => {
-    unquizzed = value.unquizzed;
-    quizzed = value.quizzed;
-  });
 
   function handleMenuEvent(event: CustomEvent) {
     switch (event.detail.type) {
@@ -41,7 +34,7 @@
         break;
 
       case "restart":
-        $quiz.reset();
+        quiz.reset();
         break;
 
       default:
@@ -70,11 +63,11 @@
           incorrectTimes: currentItem.incorrectTimes + 1,
         };
 
-        $quiz.insert(index, item);
+        quiz.insert(index, item);
       }
     }
 
-    $quiz.pop({ answer: event.detail.input });
+    quiz.pop({ answer: event.detail.input });
   }
 
   onMount(() => {
