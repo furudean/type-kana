@@ -11,7 +11,7 @@ export interface Options {
   /** Key to save as in storage */
   key: string;
   /** 
-   * `localStorage` or `sessionStorage`
+   * Storage object to use. `localStorage` or `sessionStorage`.
    * 
    * @default localStorage
    */
@@ -27,16 +27,16 @@ export interface Options {
   assign?: boolean;
 }
 
-export interface WebStorageStore<T> extends Writable<T> {
-  useWebStorageAPI(): void;
+export interface PersistentStore<T> extends Writable<T> {
+  useWebStorage(): void;
 }
 
-export function createPersistentStore<T>(key: string, startValue: T): WebStorageStore<T>;
-export function createPersistentStore<T>(options: Options, startValue: T): WebStorageStore<T>
+export function createPersistentStore<T>(key: string, startValue: T): PersistentStore<T>;
+export function createPersistentStore<T>(options: Options, startValue: T): PersistentStore<T>
 export function createPersistentStore<T>(
   optionsOrKey: string | Options,
   startValue: T
-): WebStorageStore<T> {
+): PersistentStore<T> {
 
   const options: Options = {
     key: undefined,
@@ -51,7 +51,7 @@ export function createPersistentStore<T>(
   const value = storage.getItem(key);
   const { subscribe, set, update } = writable(startValue);
 
-  function useWebStorageAPI() {
+  function useWebStorage() {
     if (value !== null) {
       const json = parseJSONSafe(value);
 
@@ -77,6 +77,6 @@ export function createPersistentStore<T>(
     subscribe,
     set,
     update,
-    useWebStorageAPI,
+    useWebStorage,
   }
 }

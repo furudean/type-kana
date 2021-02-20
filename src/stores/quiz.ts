@@ -1,7 +1,7 @@
 import { dictionary } from "@/stores/dictionary";
 import { derived } from "svelte/store";
 import { shuffleArray } from "@/lib/random"
-import { createPersistentStore, WebStorageStore } from "./persistent";
+import { createPersistentStore, PersistentStore } from "./persistent";
 
 export interface QuizItem {
   kana: string;
@@ -29,14 +29,14 @@ function createQuiz(dictionary: string[]): Quiz {
   }
 }
 
-export interface QuizStore extends WebStorageStore<Quiz> {
+export interface QuizStore extends PersistentStore<Quiz> {
   insert(index: number, item: QuizItem): void;
   pop(props: Partial<QuizItem>): void;
   reset(): void;
 }
 
 export function createQuizStore(dictionary: string[]): QuizStore {
-  const { subscribe, set, update, useWebStorageAPI } = createPersistentStore(
+  const { subscribe, set, update, useWebStorage } = createPersistentStore(
     {
       key: "quiz-session",
       storage: sessionStorage,
@@ -48,7 +48,7 @@ export function createQuizStore(dictionary: string[]): QuizStore {
     subscribe,
     set,
     update,
-    useWebStorageAPI,
+    useWebStorage,
     insert(index, item) {
       update(({ unquizzed, quizzed }) => {
         const before = unquizzed.slice(0, index);

@@ -13,14 +13,14 @@
 
   onMount(() => {
     // Initialize web storage if we are running in browser
-    kanaType.useWebStorageAPI();
-    configKana.useWebStorageAPI();
-    settings.useWebStorageAPI();
+    kanaType.useWebStorage();
+    configKana.useWebStorage();
+    settings.useWebStorage();
 
     // VERY funky, but it works!
     // this store returns a store on subscription
     quiz.subscribe((store) => {
-      store.useWebStorageAPI();
+      store.useWebStorage();
     });
   });
 
