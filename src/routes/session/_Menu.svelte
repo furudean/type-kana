@@ -32,15 +32,15 @@
       menuEvent("openSettings");
     }}
   >
-    <span class="tilt-container">
+    <span class="tilt-animation-container">
       <Icon path={mdiCogOutline} />
     </span>
   </button>
 
   <button
     type="button"
-    class="button tilt"
-    class:spin-animation-playing={isRestartAnimationPlaying}
+    class="button tilt reverse"
+    class:reset-animation-playing={isRestartAnimationPlaying}
     title="Restart quiz"
     on:click={() => {
       menuEvent("restart");
@@ -48,9 +48,9 @@
       isRestartAnimationPlaying = true;
     }}
   >
-    <span class="tilt-container">
+    <span class="tilt-animation-container">
       <span
-        class="spin-animation-container"
+        class="reset-animation-container"
         bind:this={spinElement}
         on:animationend={() => {
           isRestartAnimationPlaying = false;
@@ -114,25 +114,25 @@
   }
 
   .button.tilt {
-    & .tilt-container {
-      transition: transform 100ms var(--standard-transition);
+    & .tilt-animation-container {
+      transition: transform 150ms var(--standard-transition);
     }
     &:hover > :global(*),
     &:focus > :global(*) {
-      transform: rotate(45deg);
+      transform: rotate(-45deg);
     }
   }
 
-  @keyframes spin {
+  @keyframes reverse {
     from {
       transform: rotate(0deg);
     }
     to {
-      transform: rotate(360deg);
+      transform: rotate(-360deg);
     }
   }
 
-  .button.spin-animation-playing .spin-animation-container {
-    animation: 500ms spin var(--standard-transition);
+  .button.reset-animation-playing .reset-animation-container {
+    animation: 500ms reverse var(--standard-transition);
   }
 </style>
