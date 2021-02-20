@@ -1,5 +1,5 @@
-import { writable } from "svelte/store";
 import { hiragana } from "@/lib/db";
+import { createPersistentStore } from "./persistent";
 
 export interface KanaCheckbox {
   kana: string;
@@ -36,17 +36,12 @@ interface PickerKana {
   digraphsDiacritics: KanaCheckboxColumn;
 }
 
-export const pickerKana = writable<PickerKana>({
-  monographs: createKanaCheckboxColumn(hiragana.monographs, true),
-  monographsDiacritics: createKanaCheckboxColumn(hiragana.monographDiacritics, true),
-  digraphs: createKanaCheckboxColumn(hiragana.digraphs, false),
-  digraphsDiacritics: createKanaCheckboxColumn(hiragana.digraphsDiacritics, false),
-
-  // overwrite with anything previously saved from local storage
-  ...JSON.parse(localStorage.getItem('game-config-kana'))
-});
-
-// writes to local storage on update
-pickerKana.subscribe(value => {
-  localStorage.setItem('game-config-kana', JSON.stringify(value))
-});
+export const pickerKana = createPersistentStore<PickerKana>(
+  'game-config-kana',
+  {
+    monographs: createKanaCheckboxColumn(hiragana.monographs, true),
+    monographsDiacritics: createKanaCheckboxColumn(hiragana.monographDiacritics, true),
+    digraphs: createKanaCheckboxColumn(hiragana.digraphs, false),
+    digraphsDiacritics: createKanaCheckboxColumn(hiragana.digraphsDiacritics, false),
+  }
+);

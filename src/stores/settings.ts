@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { createPersistentStore } from './persistent';
 
 export interface GameSettings {
   autoCommit: 'lazy' | 'strict' | 'disabled';
@@ -9,20 +9,17 @@ export interface GameSettings {
   retryIncorrectAnswers: boolean;
 }
 
-export const settings = writable<GameSettings>({
-  // set defaults
-  autoCommit: 'disabled',
-  theme: 'same-as-system',
-  showErrorMarker: true,
-  showProgressBar: true,
-  volume: 50,
-  retryIncorrectAnswers: true,
-
-  // overwrite with anything previously saved from local storage
-  ...JSON.parse(localStorage.getItem('game-settings'))
-});
-
-// writes to local storage on update
-settings.subscribe(value => {
-  localStorage.setItem('game-settings', JSON.stringify(value))
-});
+export const settings = createPersistentStore<GameSettings>(
+  {
+    key: 'game-settings',
+    assign: true
+  },
+  {
+    autoCommit: 'disabled',
+    theme: 'same-as-system',
+    showErrorMarker: true,
+    showProgressBar: true,
+    volume: 50,
+    retryIncorrectAnswers: true,
+  }
+);

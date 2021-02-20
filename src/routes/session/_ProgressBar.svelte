@@ -1,6 +1,6 @@
 <script lang="ts">
   import { isCorrectAnswer } from "@/lib/answer";
-  import type { QuizItem } from "@/lib/quiz";
+  import type { QuizItem } from "@/stores/quiz";
   import { roundN } from "@/lib/util";
   import { settings } from "@/stores/settings";
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import QuizItemComponent from "./_QuizItem.svelte";
-  import type { QuizItem } from "@/lib/quiz";
+  import type { QuizItem } from "@/stores/quiz";
   import { getAnswers } from "@/lib/answer";
   import { settings } from "@/stores/settings";
   import Icon from "../../components/Icon.svelte";
