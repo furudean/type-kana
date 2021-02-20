@@ -241,7 +241,7 @@
         title="Open commit for current build in GitHub"
         aria-label="Open commit for current build in GitHub"
       >
-        {commitHashShort}
+        build {commitHashShort}
       </Link>
     </section>
   </section>
