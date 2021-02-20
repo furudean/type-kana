@@ -35,8 +35,17 @@
   });
 
   function handleMenuEvent(event: CustomEvent) {
-    if (event.detail.type === "openSettings") {
-      settingsModal.open();
+    switch (event.detail.type) {
+      case "openSettings":
+        settingsModal.open();
+        break;
+
+      case "restart":
+        $quiz.reset();
+        break;
+
+      default:
+        break;
     }
   }
 

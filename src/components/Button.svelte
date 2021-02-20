@@ -30,6 +30,7 @@
     {target}
     {rel}
     {title}
+    on:click
     use:link
   >
     <slot />

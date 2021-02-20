@@ -1,6 +1,7 @@
 import { dictionary } from "@/stores/dictionary";
-import { derived, writable } from "svelte/store";
+import { derived } from "svelte/store";
 import { shuffleArray } from "@/lib/random"
+import { createPersistentStore, WebStorageStore } from "./persistent";
 
 export interface QuizItem {
   kana: string;
@@ -8,7 +9,7 @@ export interface QuizItem {
   incorrectTimes: number;
 }
 
-export function createQuizItem(kana: string): QuizItem {
+function createQuizItem(kana: string): QuizItem {
   return {
     kana,
     answer: null,
@@ -16,15 +17,39 @@ export function createQuizItem(kana: string): QuizItem {
   }
 }
 
-export function createQuiz(dictionary: string[]) {
-  const { subscribe, update } = writable({
+export interface Quiz {
+  unquizzed: QuizItem[];
+  quizzed: QuizItem[];
+}
+
+function createQuiz(dictionary: string[]): Quiz {
+  return {
     unquizzed: shuffleArray(dictionary).map(createQuizItem),
-    quizzed: [] as QuizItem[]
-  });
+    quizzed: []
+  }
+}
+
+export interface QuizStore extends WebStorageStore<Quiz> {
+  insert(index: number, item: QuizItem): void;
+  pop(props: Partial<QuizItem>): void;
+  reset(): void;
+}
+
+export function createQuizStore(dictionary: string[]): QuizStore {
+  const { subscribe, set, update, useWebStorageAPI } = createPersistentStore(
+    {
+      key: "quiz-session",
+      storage: sessionStorage,
+    },
+    createQuiz(dictionary),
+  );
 
   return {
     subscribe,
-    insert(index: number, item: QuizItem) {
+    set,
+    update,
+    useWebStorageAPI,
+    insert(index, item) {
       update(({ unquizzed, quizzed }) => {
         const before = unquizzed.slice(0, index);
         const after = unquizzed.slice(index);
@@ -35,24 +60,26 @@ export function createQuiz(dictionary: string[]) {
         }
       })
     },
-    pop(props: Partial<QuizItem>) {
-      update(({ unquizzed, quizzed }) => {
-        return {
-          // remove item from unquizzed
-          unquizzed: unquizzed.slice(1),
-          // add kana to quizzed array
-          quizzed: [
-            ...quizzed,
-            {
-              ...unquizzed[0],
-              ...props,
-            },
-          ]
-        }
+    pop(props) {
+      update(({ unquizzed, quizzed }) => ({
+        // remove item from unquizzed
+        unquizzed: unquizzed.slice(1),
+        // add kana to quizzed array
+        quizzed: [
+          ...quizzed,
+          {
+            ...unquizzed[0],
+            ...props,
+          },
+        ]
       })
+      )
     },
+    reset() {
+      set(createQuiz(dictionary));
+    }
   };
 }
 
 // this is funky!
-export const quiz = derived(dictionary, ($dictionary) => createQuiz($dictionary));
+export const quiz = derived(dictionary, ($dictionary) => createQuizStore($dictionary));

@@ -8,7 +8,12 @@
   import { mdiArrowRight } from "@mdi/js";
   import { dictionary } from "@/stores/dictionary";
   import { onMount } from "svelte";
-  import { loadCheckboxSelectSound } from "@/lib/sound";
+  import {
+    loadCheckboxSelectSound,
+    loadDropSound,
+    playDropSound,
+  } from "@/lib/sound";
+  import { quiz } from "@/stores/quiz";
 
   const options = [
     {
@@ -27,6 +32,7 @@
 
   onMount(() => {
     loadCheckboxSelectSound();
+    loadDropSound();
   });
 </script>
 
@@ -53,7 +59,14 @@
   />
 </section>
 <section class="menu">
-  <Button href="/session" disabled={$dictionary.length === 0}>
+  <Button
+    href="/session"
+    disabled={$dictionary.length === 0}
+    on:click={() => {
+      playDropSound();
+      $quiz.reset();
+    }}
+  >
     Start quiz
     <Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
   </Button>

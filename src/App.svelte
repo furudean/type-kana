@@ -9,12 +9,19 @@
   import { configKana } from "@/stores/configKana";
   import { settings } from "@/stores/settings";
   import { kanaType } from "@/stores/kanaType";
+  import { quiz } from "@/stores/quiz";
 
   onMount(() => {
     // Initialize web storage if we are running in browser
     kanaType.useWebStorageAPI();
     configKana.useWebStorageAPI();
     settings.useWebStorageAPI();
+
+    // VERY funky, but it works!
+    // this store returns a store on subscription
+    quiz.subscribe((store) => {
+      store.useWebStorageAPI();
+    });
   });
 
   const unsubscribe = resolvedTheme.subscribe((theme) => {

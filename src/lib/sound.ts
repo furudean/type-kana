@@ -164,3 +164,18 @@ export async function playTapSound() {
 
   source.start();
 }
+
+export const loadDropSound = createPreloader([
+  '/assets/audio/drop_004.ogg',
+  '/assets/audio/drop_004.mp3',
+]);
+
+export async function playDropSound() {
+  const audioBuffer = await getAudioBuffer([
+    '/assets/audio/drop_004.ogg',
+    '/assets/audio/drop_004.mp3',
+  ]);
+  const source = createAudioSource(audioBuffer);
+
+  source.start();
+}

@@ -27,7 +27,7 @@ export interface Options {
   assign?: boolean;
 }
 
-interface WebStorageStore<T> extends Writable<T> {
+export interface WebStorageStore<T> extends Writable<T> {
   useWebStorageAPI(): void;
 }
 

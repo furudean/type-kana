@@ -1,14 +1,22 @@
 <script lang="ts">
-  import { mdiCogOutline, mdiGithub, mdiArrowLeft } from "@mdi/js";
+  import { mdiCogOutline, mdiArrowLeft, mdiRestart } from "@mdi/js";
   import Icon from "../../components/Icon.svelte";
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   import { link } from "svelte-spa-router";
+  import { loadDropSound, playDropSound } from "@/lib/sound";
 
   const dispatch = createEventDispatcher();
+
+  let spinElement: HTMLElement;
+  let isRestartAnimationPlaying = false;
 
   function menuEvent(type: string) {
     dispatch("menuEvent", { type });
   }
+
+  onMount(() => {
+    loadDropSound();
+  });
 </script>
 
 <section class="menu">
@@ -17,24 +25,41 @@
   </a>
 
   <button
-    class="button"
     type="button"
+    class="button tilt"
     title="Open game settings"
     on:click={() => {
       menuEvent("openSettings");
     }}
   >
-    <Icon path={mdiCogOutline} />
+    <span class="tilt-container">
+      <Icon path={mdiCogOutline} />
+    </span>
   </button>
-  <a
-    class="button"
-    href="https://github.com/c-bandy/type-kana"
-    target="_blank"
-    rel="noopener"
-    title="Show GitHub repository"
+
+  <button
+    type="button"
+    class="button tilt"
+    class:spin-animation-playing={isRestartAnimationPlaying}
+    title="Restart quiz"
+    on:click={(e) => {
+      menuEvent("restart");
+      playDropSound();
+      isRestartAnimationPlaying = true;
+    }}
   >
-    <Icon path={mdiGithub} />
-  </a>
+    <span class="tilt-container">
+      <span
+        class="spin-animation-container"
+        bind:this={spinElement}
+        on:animationend={() => {
+          isRestartAnimationPlaying = false;
+        }}
+      >
+        <Icon path={mdiRestart} />
+      </span>
+    </span>
+  </button>
 </section>
 
 <style lang="scss">
@@ -46,7 +71,7 @@
     margin-top: 2em;
   }
 
-  .menu > :global(*) {
+  .menu > * {
     margin: 0;
     margin-left: 0.75em;
 
@@ -54,7 +79,8 @@
       margin-left: 0 !important;
     }
   }
-  .menu > :global(.button) {
+
+  .button {
     display: flex;
     appearance: none;
     background: none;
@@ -79,9 +105,34 @@
       border-color: var(--accent-color);
     }
     &:active {
-      color: var(--background-color);
-      background-color: var(--accent-color);
-      transform: translateY(10%);
+      transform: translateY(8%);
     }
+  }
+
+  .button span {
+    display: flex;
+  }
+
+  .button.tilt {
+    & .tilt-container {
+      transition: transform 100ms var(--standard-transition);
+    }
+    &:hover > :global(*),
+    &:focus > :global(*) {
+      transform: rotate(45deg);
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .button.spin-animation-playing .spin-animation-container {
+    animation: 500ms spin var(--standard-transition);
   }
 </style>
