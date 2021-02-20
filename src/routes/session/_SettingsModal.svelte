@@ -3,13 +3,14 @@
   import { settings } from "@/stores/settings";
   import { osTheme } from "@/stores/theme";
   import {
+    loadTapSound,
     playMaximizeSound,
     playMinimizeSound,
     playTapSound,
   } from "@/lib/sound";
   import { fade, fly } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
-  import { onDestroy } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { onClickOutside } from "@/lib/clickOutside";
   import Button from "../../components/Button.svelte";
   import {
@@ -83,6 +84,10 @@
   onDestroy(unsubscribe);
 
   const playTapSoundThrottled = throttle(playTapSound, 80);
+
+  onMount(() => {
+    loadTapSound();
+  });
 </script>
 
 <svelte:window on:keyup={keyPress} />

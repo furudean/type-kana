@@ -5,6 +5,15 @@ import {
 } from "./audio";
 import { sleep } from "@/lib/util";
 
+function createPreloader(urls: string[]) {
+  return async () => { await getAudioBuffer(urls) };
+}
+
+export const loadProgressSound = createPreloader([
+  '/assets/audio/drop_002.ogg',
+  '/assets/audio/drop_002.mp3',
+]);
+
 export async function playProgressSound(mod: number) {
   const audioBuffer = await getAudioBuffer([
     '/assets/audio/drop_002.ogg',
@@ -23,6 +32,11 @@ export async function playProgressSound(mod: number) {
   source.start();
 }
 
+export const loadErrorSound = createPreloader([
+  '/assets/audio/error_004.ogg',
+  '/assets/audio/error_004.mp3',
+]);
+
 export async function playErrorSound() {
   const audioBuffer = await getAudioBuffer([
     '/assets/audio/error_004.ogg',
@@ -34,6 +48,11 @@ export async function playErrorSound() {
   source.start();
 }
 
+export const loadMaximizeSound = createPreloader([
+  '/assets/audio/maximize_008.ogg',
+  '/assets/audio/maximize_008.mp3',
+]);
+
 export async function playMaximizeSound() {
   const audioBuffer = await getAudioBuffer([
     '/assets/audio/maximize_008.ogg',
@@ -44,6 +63,11 @@ export async function playMaximizeSound() {
   source.start();
 }
 
+export const loadMinimizeSound = createPreloader([
+  '/assets/audio/minimize_008.ogg',
+  '/assets/audio/minimize_008.mp3',
+]);
+
 export async function playMinimizeSound() {
   const audioBuffer = await getAudioBuffer([
     '/assets/audio/minimize_008.ogg',
@@ -53,6 +77,11 @@ export async function playMinimizeSound() {
 
   source.start();
 }
+
+export const loadCheckboxSelectSound = createPreloader([
+  '/assets/audio/click_002.ogg',
+  '/assets/audio/click_002.mp3',
+]);
 
 export async function playCheckboxSelectSound(
   index: number,
@@ -120,6 +149,11 @@ export async function playCheckboxSelectSeriesSound(times: number, selected: boo
     }
   }
 }
+
+export const loadTapSound = createPreloader([
+  '/assets/audio/bong_001.ogg',
+  '/assets/audio/bong_001.mp3',
+]);
 
 export async function playTapSound() {
   const audioBuffer = await getAudioBuffer([

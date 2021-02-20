@@ -6,10 +6,18 @@
   import { quiz } from "@/stores/quiz";
   import type { QuizItem } from "@/stores/quiz";
   import { isCorrectAnswer } from "@/lib/answer";
-  import { playProgressSound, playErrorSound } from "@/lib/sound";
+  import {
+    loadProgressSound,
+    playProgressSound,
+    loadErrorSound,
+    playErrorSound,
+    loadMaximizeSound,
+    loadMinimizeSound,
+  } from "@/lib/sound";
   import { randomInt } from "@/lib/random";
   import { settings } from "@/stores/settings";
   import ProgressBar from "./_ProgressBar.svelte";
+  import { onMount } from "svelte";
 
   let settingsModal: SettingsModal;
   let input: string;
@@ -59,6 +67,13 @@
 
     $quiz.pop({ answer: event.detail.input });
   }
+
+  onMount(() => {
+    loadProgressSound();
+    loadErrorSound();
+    loadMaximizeSound();
+    loadMinimizeSound();
+  });
 </script>
 
 <svelte:head>

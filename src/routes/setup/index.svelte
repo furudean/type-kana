@@ -7,6 +7,8 @@
   import Icon from "../../components/Icon.svelte";
   import { mdiArrowRight } from "@mdi/js";
   import { dictionary } from "@/stores/dictionary";
+  import { onMount } from "svelte";
+  import { loadCheckboxSelectSound } from "@/lib/sound";
 
   const options = [
     {
@@ -22,6 +24,10 @@
       value: "both",
     },
   ];
+
+  onMount(() => {
+    loadCheckboxSelectSound();
+  });
 </script>
 
 <svelte:head>
