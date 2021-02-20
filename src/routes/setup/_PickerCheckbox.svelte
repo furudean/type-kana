@@ -15,10 +15,7 @@
   role="checkbox"
   class:selected={item.checked}
   aria-pressed={item.checked}
-  title={`${item.checked ? "Deselect" : "Select"} '${
-    getAnswers(item.kana)[0]
-  }'`}
-  aria-label={`kana '${getAnswers(item.kana)[0]}'`}
+  title={`Select '${getAnswers(item.kana)[0]}'`}
   on:click={() => {
     item.checked = !item.checked;
     playCheckboxSelectSound(rowIndex, rowLength, item.checked);

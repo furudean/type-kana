@@ -46,8 +46,7 @@
         "- sounds"}
     >
       <Checkbox
-        title={isRowSelected(row) ? "Deselect row" : "Select row"}
-        ariaLabel="select all"
+        title="Select row"
         checked={isRowSelected(row)}
         indeterminate={!isRowSelected(row) &&
           row.filter((item) => item !== null).some((item) => item.checked)}
