@@ -1,21 +1,22 @@
 <script lang="ts">
-  import { getAnswers, isCorrectAnswer } from "@/lib/answer";
+  import { getAnswers } from "@/lib/answer";
 
   export let kana: string;
-  export let answer: string = null;
+  export let answered: string = undefined;
+  export let isCorrectAnswer: boolean = undefined;
 
-  $: hasAnswer = answer !== null;
-  $: hasCorrectAnswer = hasAnswer ? isCorrectAnswer(answer, kana) : false;
-  $: hasIncorrectAnswer = hasAnswer ? !isCorrectAnswer(answer, kana) : false;
+  $: hasAnswer = answered !== undefined;
+  $: hasCorrectAnswer = hasAnswer ? isCorrectAnswer : false;
+  $: hasIncorrectAnswer = hasAnswer ? !isCorrectAnswer : false;
 </script>
 
 <div
   class="quiz-item"
-  class:answered={hasAnswer}
-  class:correct={hasCorrectAnswer}
-  class:incorrect={hasIncorrectAnswer}
+  class:has-answer={hasAnswer}
+  class:is-correct={hasCorrectAnswer}
+  class:is-incorrect={hasIncorrectAnswer}
 >
-  <div class="question">{kana}</div>
+  <div class="kana">{kana}</div>
   {#if hasIncorrectAnswer}
     <div class="furigana">{getAnswers(kana)[0]}</div>
   {/if}
@@ -38,15 +39,15 @@
     text-align: center;
   }
 
-  .correct {
+  .is-correct {
     color: var(--text-color-lighter);
   }
 
-  .incorrect {
+  .is-incorrect {
     color: var(--text-color-light);
   }
 
-  .incorrect > .question {
+  .is-incorrect > .kana {
     text-decoration-color: var(--highlight-color);
     text-decoration-style: dotted;
     text-decoration-line: underline;

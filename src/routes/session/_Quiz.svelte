@@ -42,8 +42,10 @@
     </div>
   </div>
   <div class="kana-quizzed">
-    {#each [...quizzed].reverse().slice(0, 15) as { kana, answer }}
-      <QuizItemComponent {kana} {answer} />
+    {#each [...quizzed]
+      .reverse()
+      .slice(0, 15) as { kana, answered, isCorrectAnswer }}
+      <QuizItemComponent {kana} {answered} {isCorrectAnswer} />
     {/each}
   </div>
 </section>

@@ -4,7 +4,6 @@
   import Menu from "./_Menu.svelte";
   import SettingsModal from "./_SettingsModal.svelte";
   import { quiz } from "@/stores/quiz";
-  import type { QuizItem } from "@/stores/quiz";
   import { isCorrectAnswer } from "@/lib/answer";
   import {
     loadProgressSound,
@@ -47,7 +46,9 @@
       return;
     }
 
-    if (isCorrectAnswer(event.detail.input, currentItem.kana)) {
+    const input = event.detail.input;
+
+    if (isCorrectAnswer(input, currentItem.kana)) {
       playProgressSound(streakLength);
       streakLength += 1;
     } else {
@@ -57,17 +58,15 @@
       // Add item back at the end of queue at a random position;
       if ($settings.retryIncorrectAnswers) {
         const index = Math.min(randomInt(5, 12), unquizzed.length);
-
-        const item: QuizItem = {
-          ...currentItem,
-          incorrectTimes: currentItem.incorrectTimes + 1,
-        };
-
-        quiz.insert(index, item);
+        quiz.insert(index, currentItem);
       }
     }
 
-    quiz.pop({ answer: event.detail.input });
+    quiz.pop((item) => ({
+      ...item,
+      answered: input,
+      isCorrectAnswer: isCorrectAnswer(input, item.kana),
+    }));
   }
 
   onMount(() => {

@@ -5,16 +5,13 @@ import { createPersistentStore } from "./persistent";
 
 export interface QuizItem {
   kana: string;
-  answer: string;
-  incorrectTimes: number;
+  answered?: string;
+  incorrectTimes?: number;
+  isCorrectAnswer?: boolean;
 }
 
 function createQuizItem(kana: string): QuizItem {
-  return {
-    kana,
-    answer: null,
-    incorrectTimes: 0,
-  }
+  return { kana }
 }
 
 export interface Quiz {
@@ -32,7 +29,7 @@ function createQuiz(dictionary: string[]): Quiz {
 export interface QuizStore extends Readable<Quiz> {
   useWebStorage(): void;
   insert(index: number, item: QuizItem): void;
-  pop(props: Partial<QuizItem>): void;
+  pop(callback: (item: QuizItem) => QuizItem): void;
   reset(): void;
 }
 
@@ -67,20 +64,17 @@ export function createQuizStore(): QuizStore {
         }
       })
     },
-    pop(props) {
+    pop(callback) {
       update(({ unquizzed, quizzed }) => ({
         // remove item from unquizzed
         unquizzed: unquizzed.slice(1),
         // add kana to quizzed array
         quizzed: [
           ...quizzed,
-          {
-            ...unquizzed[0],
-            ...props,
-          },
+          callback(unquizzed[0]),
         ]
-      })
-      )
+      }
+      ));
     },
     reset
   };
