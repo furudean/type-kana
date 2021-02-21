@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { isCorrectAnswer } from "@/lib/answer";
   import type { QuizItem } from "@/stores/quiz";
   import { roundN } from "@/lib/util";
   import { settings } from "@/stores/settings";
@@ -9,9 +8,7 @@
 
   // filter quizzed items that had a correct answer, only these count toward
   // the total
-  $: quizzedCorrect = quizzed.filter((item) =>
-    isCorrectAnswer(item.answer, item.kana)
-  );
+  $: quizzedCorrect = quizzed.filter((item) => item.isCorrectAnswer);
 
   $: progress =
     quizzedCorrect.length / (quizzedCorrect.length + unquizzed.length);
