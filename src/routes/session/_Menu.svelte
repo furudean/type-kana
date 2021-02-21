@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mdiCogOutline, mdiArrowLeft, mdiRestart } from "@mdi/js";
+  import { mdiCogOutline, mdiArrowLeft, mdiRestart, mdiCheck } from "@mdi/js";
   import Icon from "../../components/Icon.svelte";
   import { createEventDispatcher, onMount } from "svelte";
   import { link } from "svelte-spa-router";
@@ -58,6 +58,9 @@
       </span>
     </span>
   </button>
+  <a href="/summary" class="button" title="Finish session" use:link>
+    <Icon path={mdiCheck} />
+  </a>
 </section>
 
 <style lang="scss">

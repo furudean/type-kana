@@ -16,7 +16,8 @@
   import { randomInt } from "@/lib/random";
   import { settings } from "@/stores/settings";
   import ProgressBar from "./_ProgressBar.svelte";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
+  import { replace } from "svelte-spa-router";
 
   let settingsModal: SettingsModal;
   let input: string;
@@ -25,6 +26,12 @@
   $: unquizzed = $quiz.unquizzed;
   $: quizzed = $quiz.quizzed;
   $: currentItem = unquizzed[0];
+
+  const unsubscribe = quiz.subscribe(async (value) => {
+    if (value.unquizzed.length === 0) {
+      replace("/summary");
+    }
+  });
 
   function handleMenuEvent(event: CustomEvent) {
     switch (event.detail.type) {
@@ -75,6 +82,7 @@
     loadMaximizeSound();
     loadMinimizeSound();
   });
+  onDestroy(unsubscribe);
 </script>
 
 <svelte:head>
