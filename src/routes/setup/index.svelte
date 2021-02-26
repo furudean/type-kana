@@ -193,7 +193,7 @@
   }
 
   .menu {
-    --border-size: 4px;
+    --border-size: 3px;
 
     display: flex;
     justify-content: center;
