@@ -30,15 +30,40 @@
     },
   ];
 
+  let menuElement: HTMLElement;
+  let menuHeight = 0;
+  let menuIsSticky = false;
+
+  function updateMenuHeight() {
+    menuHeight = menuElement.offsetHeight;
+  }
+
+  function updateMenuSticky() {
+    const bottomOfMenuY =
+      Math.ceil(window.scrollY + menuElement.getBoundingClientRect().top) +
+      menuElement.offsetHeight;
+    menuIsSticky = document.documentElement.scrollHeight > bottomOfMenuY;
+  }
+
   onMount(() => {
     loadCheckboxSelectSound();
     loadDropSound();
+    updateMenuHeight();
+    requestAnimationFrame(updateMenuSticky); // run after menu height has been painted
   });
 </script>
 
 <svelte:head>
   <title>Setup · Type Kana</title>
 </svelte:head>
+
+<svelte:window
+  on:resize|passive={() => {
+    updateMenuHeight();
+    requestAnimationFrame(updateMenuSticky);
+  }}
+  on:scroll|passive={updateMenuSticky}
+/>
 
 <fieldset>
   <legend>I want to practice...</legend>
@@ -58,7 +83,8 @@
     label="Digraphs with diacritics"
   />
 </section>
-<section class="menu">
+<div class="menu-push" aria-hidden="true" style={`height: ${menuHeight}px`} />
+<section class="menu" class:is-sticky={menuIsSticky} bind:this={menuElement}>
   <Button
     href="/session"
     disabled={$dictionary.length === 0}
@@ -84,7 +110,7 @@
       unsupported browsers. */
     grid-template-rows: masonry;
     gap: 3em;
-    padding: 0 20px;
+    padding: 0 2em;
     justify-content: center;
     margin-top: 3em;
   }
@@ -110,7 +136,22 @@
         "a d"
         "b .";
     }
+
+    .menu-push {
+      display: block !important;
+    }
+    .menu {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transition: 250ms border-color var(--standard-transition);
+    }
+    .menu.is-sticky {
+      border-color: var(--background-contrast-light);
+    }
   }
+
   @media screen and (max-width: 638px) {
     .columns {
       grid-template-areas:
@@ -147,10 +188,18 @@
     margin-left: -0.4em; // visual offset
   }
 
+  .menu-push {
+    display: none;
+  }
+
   .menu {
+    --border-size: 4px;
+
     display: flex;
     justify-content: center;
-    padding: 2em 0;
+    padding: calc(2em - var(--border-size)) 0 2em;
+    background-color: var(--background-color);
+    border-top: var(--border-size) solid transparent;
   }
 
   .menu > :global(button) {
