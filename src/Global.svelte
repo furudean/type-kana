@@ -17,13 +17,17 @@
     position: relative;
 
     /*
-    Primary font is M+ Type-2, followed by fallbacks
-    https://stackoverflow.com/questions/14563064/japanese-standard-web-fonts/14573813#14573813
-  */
+      Primary font is M+ Type-2, followed by fallbacks
+      https://stackoverflow.com/questions/14563064/japanese-standard-web-fonts/14573813#14573813
+    */
     font-family: "M+ 2p", "MS PGothic", "ヒラギノ角ゴ Pro W3",
       "Hiragino Kaku Gothic Pro", Osaka, メイリオ, Meiryo, "ＭＳ Ｐゴシック",
       "MS PGothic", "ＭＳ ゴシック", "MS Gothic", "Noto Sans CJK JP",
       TakaoPGothic, sans-serif;
+  }
+
+  * {
+    touch-action: pan-y; /* Prevent zooming in mobile Safari. */
   }
 
   h1 {
