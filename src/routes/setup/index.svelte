@@ -197,7 +197,7 @@
 
     display: flex;
     justify-content: center;
-    padding: calc(3em - var(--border-size)) 0 3em;
+    padding: calc(2em - var(--border-size)) 0 2em;
     background-color: var(--background-color);
     border-top: var(--border-size) solid transparent;
   }
