@@ -30,12 +30,14 @@
     margin: 1em 0;
     font-size: 1.8em;
     font-weight: 700;
+    line-height: 1;
   }
 
   h2 {
     margin: 1em 0;
     font-size: 1.4em;
     font-weight: 500;
+    line-height: 1;
   }
 
   hr {
