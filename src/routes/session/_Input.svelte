@@ -26,13 +26,6 @@
     input = "";
   }
 
-  function longestString(list: string[]) {
-    return list
-      .map((s) => s.length)
-      .sort()
-      .slice(-1)[0];
-  }
-
   function handleInput(event: any) {
     if (currentKana === null) {
       return;
@@ -52,8 +45,7 @@
       ($settings.autoCommit !== "disabled" &&
         isCorrectAnswer(input, currentKana)) ||
       ($settings.autoCommit === "strict" &&
-        (!answers.some((answer) => answer.startsWith(input)) ||
-          input.length === longestString(answers)))
+        !answers.some((answer) => answer.startsWith(input)))
     ) {
       handleSubmit();
     }
