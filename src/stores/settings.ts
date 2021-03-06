@@ -17,7 +17,7 @@ export const settings = createPersistentStore<GameSettings>(
   {
     autoCommit: 'disabled',
     theme: 'same-as-system',
-    showErrorMarker: true,
+    showErrorMarker: false,
     showProgressBar: true,
     volume: 50,
     retryIncorrectAnswers: true,
