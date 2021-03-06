@@ -9,13 +9,24 @@
   export let currentKana: string = null;
 
   const dispatch = createEventDispatcher();
+  let blocked = false;
 
   function handleSubmit() {
+    if (blocked) return;
+
+    if (
+      !isCorrectAnswer(input, currentKana) &&
+      $settings.mistakeDelayMs !== 0
+    ) {
+      blocked = true;
+      setTimeout(() => (blocked = false), $settings.mistakeDelayMs);
+    }
+
     dispatch("submit", { input });
     input = "";
   }
 
-  function longestStringLength(list: string[]) {
+  function longestString(list: string[]) {
     return list
       .map((s) => s.length)
       .sort()
@@ -26,15 +37,23 @@
     if (currentKana === null) {
       return;
     }
+    if (event.data === null) {
+      // control key was pressed
+      return;
+    }
     if (event.data === " ") {
+      // space was pressed
       input = input.trim();
       handleSubmit();
     }
+
+    const answers = getAnswers(currentKana);
     if (
       ($settings.autoCommit !== "disabled" &&
         isCorrectAnswer(input, currentKana)) ||
       ($settings.autoCommit === "strict" &&
-        input.length === longestStringLength(getAnswers(currentKana)))
+        (!answers.some((answer) => answer.startsWith(input)) ||
+          input.length === longestString(answers)))
     ) {
       handleSubmit();
     }

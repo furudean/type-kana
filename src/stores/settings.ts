@@ -7,6 +7,7 @@ export interface GameSettings {
   showProgressBar: boolean;
   volume: number;
   retryIncorrectAnswers: boolean;
+  mistakeDelayMs: number;
 }
 
 export const settings = createPersistentStore<GameSettings>(
@@ -21,5 +22,6 @@ export const settings = createPersistentStore<GameSettings>(
     showProgressBar: true,
     volume: 50,
     retryIncorrectAnswers: true,
+    mistakeDelayMs: 500,
   }
 );
