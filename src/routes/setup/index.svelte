@@ -109,7 +109,7 @@
       This gracefully degrades to a slightly worse-looking version on
       unsupported browsers. */
     grid-template-rows: masonry;
-    gap: 3em;
+    column-gap: 3em;
     padding: 0 2em;
     justify-content: center;
     margin-top: 3em;
@@ -146,6 +146,8 @@
       left: 0;
       right: 0;
       transition: 250ms border-color var(--standard-transition);
+      padding: 2em 0;
+      margin-bottom: 0 !important;
     }
     .menu.is-sticky {
       border-color: var(--background-contrast-light);
@@ -197,7 +199,8 @@
 
     display: flex;
     justify-content: center;
-    padding: calc(2em - var(--border-size)) 0 2em;
+    margin-top: calc(-1 * var(--border-size));
+    margin-bottom: 2em;
     background-color: var(--background-color);
     border-top: var(--border-size) solid transparent;
   }

@@ -75,6 +75,7 @@
 <style lang="scss">
   .column {
     display: inline-block;
+    margin-bottom: 3em;
   }
 
   .select-all {
@@ -90,27 +91,22 @@
     align-items: center;
   }
 
-  .select-all label span {
-    margin-left: 10px;
-  }
-
   .row {
     display: flex;
     align-items: center;
 
-    &:not(:first-of-type):not(.select-all) {
-      margin-top: 10px;
+    &:not(:last-child):not(.select-all) {
+      margin-bottom: 10px;
     }
   }
 
   // checkbox
   .row :global(input[type="checkbox"]) {
-    margin-right: 10px;
+    margin-right: 20px;
     font-size: 1.25em;
   }
 
-  // kana
-  .row > :global(*:not(:first-child)) {
-    margin-left: 10px;
+  .row > :global(.checkbox-kana:not(:last-child)) {
+    margin-right: 10px !important;
   }
 </style>

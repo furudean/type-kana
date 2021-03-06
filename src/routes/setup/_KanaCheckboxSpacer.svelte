@@ -1,4 +1,4 @@
-<div class="spacer" aria-hidden="true" />
+<div class="checkbox-kana spacer" aria-hidden="true" />
 
 <style>
   .spacer {
