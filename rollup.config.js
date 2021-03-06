@@ -14,9 +14,9 @@ import htmlnano from 'htmlnano';
 import { execSync, spawn } from 'child_process';
 import replace from '@rollup/plugin-replace';
 import copyAssets from 'rollup-plugin-copy-assets';
-import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import css from 'rollup-plugin-css-only';
 
 const production = !process.env.ROLLUP_WATCH;
 const outputDir = 'build';
@@ -93,19 +93,19 @@ export default {
         dev: !production
       },
       preprocess: sveltePreprocess({
-        scss: true,
+        sourceMap: !production,
+        postcss: {
+          plugins: [
+            autoprefixer(),
+            // production && cssnano()
+          ]
+        }
       }),
     }),
 
-    postcss({
-      plugins: [
-        autoprefixer(),
-        production && cssnano(),
-      ],
-      // we'll extract any component CSS out into
-      // a separate file - better for performance
-      extract: 'bundle.[hash].css',
-    }),
+    // we'll extract any component CSS out into
+    // a separate file - better for performance
+    css({ output: 'bundle.[hash].css' }),
 
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
