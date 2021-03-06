@@ -19,7 +19,7 @@
     return list
       .map((s) => s.length)
       .sort()
-      .reverse()[0];
+      .slice(-1)[0];
   }
 
   function handleInput(event: any) {
