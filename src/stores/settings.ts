@@ -1,7 +1,7 @@
 import { createPersistentStore } from './persistent';
 
 export interface GameSettings {
-  autoCommit: 'lazy' | 'strict' | 'disabled';
+  autoCommit: 'forgiving' | 'strict' | 'disabled';
   theme: 'light' | 'dark' | 'same-as-system';
   showErrorMarker: boolean;
   showProgressBar: boolean;

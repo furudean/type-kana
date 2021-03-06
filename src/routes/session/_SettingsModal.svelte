@@ -132,11 +132,13 @@
       <br />
 
       <Radio
-        id="auto-commit-lazy-choice"
+        id="auto-commit-forgiving-choice"
         name="auto-commit-choice"
         bind:group={$settings.autoCommit}
-        value="lazy"
-      /><label for="auto-commit-lazy-choice">Lazy mode</label>
+        value="forgiving"
+      /><label for="auto-commit-forgiving-choice">
+        Forgiving — Submit if correct
+      </label>
       <br />
 
       <Radio
@@ -144,7 +146,9 @@
         name="auto-commit-choice"
         bind:group={$settings.autoCommit}
         value="strict"
-      /><label for="auto-commit-strict-choice">Strict mode</label>
+      /><label for="auto-commit-strict-choice">
+        Strict — Submit if correct <strong>or wrong</strong>
+      </label>
     </fieldset>
 
     <hr />
