@@ -7,9 +7,6 @@
     "url": "git+https://github.com/c-bandy/type-kana.git"
   },
   "author": "c-bandy (https://github.com/c-bandy)",
-  "engines": {
-    "node": "^14.0.0"
-  },
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
