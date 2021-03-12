@@ -1,15 +1,23 @@
-import { AudioContext } from 'standardized-audio-context';
-import { settings } from "@/stores/settings";
+import { AudioContext, GainNode } from 'standardized-audio-context';
 
-export const audioContext = new AudioContext();
-export const rootGainNode = audioContext.createGain();
+let audioContext: AudioContext;
+let rootGain: GainNode<AudioContext>;
 
-rootGainNode.connect(audioContext.destination);
+export function getAudioContext() {
+  if (!audioContext) {
+    audioContext = new AudioContext();
+  }
+  return audioContext;
+}
 
-// set audio volume depending on settings
-settings.subscribe($settings => {
-  rootGainNode.gain.value = $settings.volume / 100;
-});
+export function getRootGain() {
+  if (!rootGain) {
+    const ctx = getAudioContext();
+    rootGain = ctx.createGain();
+    rootGain.connect(ctx.destination);
+  }
+  return rootGain;
+}
 
 const audioCache = new Map<string, AudioBuffer>();
 
@@ -25,10 +33,13 @@ export async function getAudioBuffer(urls: string | string[]): Promise<AudioBuff
   for (const url of urlsArray) {
     console.debug(`Fetching audio at url ${url}`)
     const buffer = await fetch(url)
-      .then(response => response.arrayBuffer())
+      .then(response => response.arrayBuffer());
+
     try {
-      const audioBuffer = await audioContext.decodeAudioData(buffer);
+      const audioBuffer = await getAudioContext().decodeAudioData(buffer);
+
       audioCache.set(url, audioBuffer);
+
       return audioBuffer;
     } catch (error) {
       console.warn(`Failed to decode "${url}". The format is probably unsupported on this browser.`)
@@ -39,9 +50,9 @@ export async function getAudioBuffer(urls: string | string[]): Promise<AudioBuff
 
 export function createAudioSource(
   buffer: AudioBuffer,
-  gainNode = rootGainNode
+  gainNode = getRootGain()
 ) {
-  const source = audioContext.createBufferSource();
+  const source = getAudioContext().createBufferSource();
   source.buffer = buffer;
 
   source.connect(gainNode);
@@ -51,9 +62,9 @@ export function createAudioSource(
 
 /** Creates a gain node that is relative to root gain */
 export function createGainNode() {
-  const gainNode = audioContext.createGain();
+  const gainNode = getAudioContext().createGain();
 
-  gainNode.connect(rootGainNode);
+  gainNode.connect(getRootGain());
 
   return gainNode;
 }

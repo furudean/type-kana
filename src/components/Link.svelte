@@ -1,27 +1,18 @@
 <script lang="ts">
-  import { link } from "svelte-spa-router";
   import { mdiOpenInNew } from "@mdi/js";
   import { svgToDataUrl } from "@/lib/util";
 
   export let href: string;
   export let target = "_self";
   export let rel = "noopener";
-  export let routeLink = false;
 
   const iconDataUrl = svgToDataUrl(mdiOpenInNew);
   const style = `--icon-url: url("${iconDataUrl}")`;
 </script>
 
-{#if !routeLink}
-  <a {href} {target} {rel} {...$$restProps} {style}>
-    <slot />
-  </a>
-{:else}
-  <!-- route link needs special use:link directive -->
-  <a {href} {target} {rel} {...$$restProps} {style} use:link>
-    <slot />
-  </a>
-{/if}
+<a {href} {target} {rel} {...$$restProps} {style}>
+  <slot />
+</a>
 
 <style lang="scss">
   a,

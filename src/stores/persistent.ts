@@ -1,21 +1,15 @@
 import { Writable, writable } from "svelte/store";
 import { isObject } from "@/lib/util";
 
-function parseJSONSafe(value: string): any {
-  try {
-    return JSON.parse(value);
-  } catch { }
-}
-
 export interface Options {
   /** Key to save as in storage */
   key: string;
   /** 
    * Storage object to use. `localStorage` or `sessionStorage`.
    * 
-   * @default localStorage
+   * @default "localStorage"
    */
-  storage?: Storage;
+  storage?: "localStorage" | "sessionStorage";
   /** 
    * Set `startValue`, then assign JSON in storage. 
    * 
@@ -27,38 +21,37 @@ export interface Options {
   assign?: boolean;
 }
 
-export interface PersistentStore<T> extends Writable<T> {
-  useWebStorage(): void;
+export type PersistentStoreValue = string | Record<string, any>;
+
+const defaultOptions: Partial<Options> = {
+  assign: false,
+  storage: "localStorage"
 }
 
-export function createPersistentStore<T>(key: string, startValue: T): PersistentStore<T>;
-export function createPersistentStore<T>(options: Options, startValue: T): PersistentStore<T>
-export function createPersistentStore<T>(
-  optionsOrKey: string | Options,
-  startValue: T
-): PersistentStore<T> {
-  const normalizedOptionsOrKey = isObject(optionsOrKey) ?
-    optionsOrKey as Options :
-    { key: optionsOrKey as string };
+function parseJSONSafe(value: string): any {
+  try {
+    return JSON.parse(value);
+  } catch { }
+}
 
-  const options: Options = {
-    storage: localStorage,
-    assign: false,
-    ...normalizedOptionsOrKey
-  };
-  const { key, storage, assign } = options;
-
-  const value = storage.getItem(key);
+export function createPersistentStore<T extends PersistentStoreValue>(
+  options: Options,
+  startValue: T,
+): Writable<T> {
+  const { key, storage, assign } = { ...defaultOptions, ...options }
   const { subscribe, set, update } = writable(startValue);
 
-  function useWebStorage() {
-    if (value !== null) {
+  if (process.browser) {
+    const api = window[storage];
+    const value = api.getItem(key);
+
+    if (value !== null && isObject(startValue)) {
       const json = parseJSONSafe(value);
 
       if (json !== undefined) {
         // parse json
         set({
-          ...(assign ? startValue : {}),
+          ...assign && startValue as any,
           ...json
         });
       } else {
@@ -69,7 +62,10 @@ export function createPersistentStore<T>(
 
     // save to storage on any new changes
     subscribe((current) => {
-      storage.setItem(key, isObject(current) ? JSON.stringify(current) : current.toString());
+      api.setItem(
+        options.key,
+        isObject(startValue) ? JSON.stringify(current) : current as string
+      );
     });
   }
 
@@ -77,6 +73,5 @@ export function createPersistentStore<T>(
     subscribe,
     set,
     update,
-    useWebStorage,
   }
 }

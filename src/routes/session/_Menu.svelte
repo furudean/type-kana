@@ -2,7 +2,6 @@
   import { mdiCogOutline, mdiArrowLeft, mdiRestart } from "@mdi/js";
   import Icon from "../../components/Icon.svelte";
   import { createEventDispatcher, onMount } from "svelte";
-  import { link } from "svelte-spa-router";
   import { loadDropSound, playDropSound } from "@/lib/sound";
 
   const dispatch = createEventDispatcher();
@@ -19,7 +18,7 @@
 </script>
 
 <section class="menu">
-  <a href="/" class="button" title="Go back" use:link>
+  <a href="setup" class="button" title="Go back">
     <Icon path={mdiArrowLeft} />
   </a>
 

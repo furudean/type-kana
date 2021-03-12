@@ -149,6 +149,19 @@
       /><label for="auto-commit-strict-choice">
         Strict — Submit if correct <strong>or wrong</strong>
       </label>
+      <br />
+
+      <input
+        id="mistake-delay-setting"
+        type="number"
+        bind:value={$settings.mistakeDelayMs}
+        min="0"
+        step="10"
+        max="5000"
+        disabled={["disabled", "forgiving"].includes($settings.autoCommit)}
+        required
+      />
+      <label for="mistake-delay-setting">Mistake delay (ms)</label>
     </fieldset>
 
     <hr />

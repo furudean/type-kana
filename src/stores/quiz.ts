@@ -27,7 +27,6 @@ function createQuiz(dictionary: string[]): Quiz {
 }
 
 export interface QuizStore extends Readable<Quiz> {
-  useWebStorage(): void;
   insert(index: number, item: QuizItem): void;
   pop(callback: (item: QuizItem) => QuizItem): void;
   reset(): void;
@@ -35,10 +34,10 @@ export interface QuizStore extends Readable<Quiz> {
 
 export function createQuizStore(): QuizStore {
   let dictionary: string[] = [];
-  const { subscribe, set, update, useWebStorage } = createPersistentStore(
+  const { subscribe, set, update } = createPersistentStore(
     {
       key: "quiz-session",
-      storage: sessionStorage,
+      storage: "sessionStorage",
     },
     createQuiz(dictionary),
   );
@@ -52,7 +51,6 @@ export function createQuizStore(): QuizStore {
 
   return {
     subscribe,
-    useWebStorage,
     insert(index, item) {
       update(({ unquizzed, quizzed }) => {
         const before = unquizzed.slice(0, index);

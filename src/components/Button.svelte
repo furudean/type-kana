@@ -1,13 +1,11 @@
 <script lang="ts">
-  import { link } from "svelte-spa-router";
-
   export let title: string = undefined;
   export let disabled = false;
 
   // link props
   export let href: string = undefined;
-  export let target = "_self";
-  export let rel = "noopener";
+  export let target: string = undefined;
+  export let rel: string = undefined;
 </script>
 
 {#if !href}
@@ -31,7 +29,6 @@
     {rel}
     {title}
     on:click
-    use:link
   >
     <slot />
   </a>

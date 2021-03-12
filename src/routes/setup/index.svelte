@@ -7,7 +7,7 @@
   import Icon from "../../components/Icon.svelte";
   import { mdiArrowRight } from "@mdi/js";
   import { dictionary } from "@/stores/dictionary";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import {
     loadCheckboxSelectSound,
     loadDropSound,
@@ -45,11 +45,14 @@
     menuIsSticky = document.documentElement.scrollHeight > bottomOfMenuY;
   }
 
-  onMount(() => {
-    loadCheckboxSelectSound();
-    loadDropSound();
-    updateMenuHeight();
-    requestAnimationFrame(updateMenuSticky); // run after menu height has been painted
+  onMount(async () => {
+    if (process.browser) {
+      loadCheckboxSelectSound();
+      loadDropSound();
+      await tick();
+      updateMenuHeight();
+      window.requestAnimationFrame(updateMenuSticky); // run after menu height has been painted
+    }
   });
 </script>
 
@@ -60,7 +63,7 @@
 <svelte:window
   on:resize|passive={() => {
     updateMenuHeight();
-    requestAnimationFrame(updateMenuSticky);
+    window.requestAnimationFrame(updateMenuSticky);
   }}
   on:scroll|passive={updateMenuSticky}
 />
@@ -86,7 +89,7 @@
 <div class="menu-push" aria-hidden="true" style={`height: ${menuHeight}px`} />
 <section class="menu" class:is-sticky={menuIsSticky} bind:this={menuElement}>
   <Button
-    href="/session"
+    href="session"
     disabled={$dictionary.length === 0}
     on:click={() => {
       playDropSound();

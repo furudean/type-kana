@@ -1,14 +1,20 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "src/node_modules/**/*"
   ],
   "exclude": [
     "node_modules/*",
     "__sapper__/*",
-    "public/*"
+    "static/*"
   ],
   "compilerOptions": {
+    "lib": [
+      "DOM",
+      "es2020",
+      "WebWorker"
+    ],
     "baseUrl": "./",
     "paths": {
       "@/*": [
@@ -18,7 +24,6 @@
     "typeRoots": [
       "node_modules/@types",
       "src/typings/**"
-    ],
-    "target": "ES2020"
+    ]
   }
 }

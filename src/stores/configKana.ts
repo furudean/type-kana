@@ -37,7 +37,9 @@ interface ConfigKana {
 }
 
 export const configKana = createPersistentStore<ConfigKana>(
-  'game-config-kana',
+  {
+    key: 'game-config-kana',
+  },
   {
     monographs: createKanaCheckboxColumn(hiragana.monographs, true),
     monographsDiacritics: createKanaCheckboxColumn(hiragana.monographDiacritics, true),
