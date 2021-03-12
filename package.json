@@ -8,7 +8,7 @@
   },
   "author": "c-bandy (https://github.com/c-bandy)",
   "engines": {
-    "node": "<14"
+    "node": ">=14"
   },
   "scripts": {
     "dev": "sapper dev",
