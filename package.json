@@ -7,7 +7,9 @@
     "url": "git+https://github.com/c-bandy/type-kana.git"
   },
   "author": "c-bandy (https://github.com/c-bandy)",
-  "main": "rollup.config.js",
+  "engines": {
+    "node": "14"
+  },
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
