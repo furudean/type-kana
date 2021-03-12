@@ -12,7 +12,7 @@
   "compilerOptions": {
     "lib": [
       "DOM",
-      "es2020",
+      "ES2017",
       "WebWorker"
     ],
     "baseUrl": "./",
