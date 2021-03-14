@@ -10,7 +10,6 @@
     "static/*"
   ],
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "lib": [
       "DOM",
       "ES2020",

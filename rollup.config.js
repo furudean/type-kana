@@ -17,6 +17,16 @@ const mode = process.env.NODE_ENV;
 const dev = mode === "development";
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
+async function command(cmd) {
+  try {
+    return execSync(cmd).toString().trim()
+  } catch (error) {
+    console.warn(`Could not execute ${cmd}`, error)
+  }
+}
+
+console.log("Node version", process.version)
+
 const onwarn = (warning, onwarn) =>
   (warning.code === "MISSING_EXPORT" && /'preload'/.test(warning.message)) ||
   (warning.code === "CIRCULAR_DEPENDENCY" && /[/\\]@sapper[/\\]/.test(warning.message)) ||
@@ -25,8 +35,8 @@ const onwarn = (warning, onwarn) =>
 
 const replaceDefaults = {
   'process.env.NODE_ENV': JSON.stringify(mode),
-  'COMMIT_HASH_SHORT': execSync("git rev-parse --short HEAD").toString().trim(),
-  'COMMIT_HASH_LONG': execSync("git rev-parse HEAD").toString().trim(),
+  'COMMIT_HASH_SHORT': command("git rev-parse --short HEAD"),
+  'COMMIT_HASH_LONG': command("git rev-parse HEAD"),
 }
 
 const preprocessOptions = {
@@ -122,7 +132,8 @@ export default {
         dedupe: ["svelte"]
       }),
       commonjs(),
-      typescript({ sourceMap: false })
+      typescript({ sourceMap: false }),
+      // !dev && terser(),
     ],
     external: Object.keys(pkg.dependencies).concat(require("module").builtinModules),
     preserveEntrySignatures: "strict",
