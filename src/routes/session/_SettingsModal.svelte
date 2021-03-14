@@ -44,6 +44,7 @@
 
       if (resetOnClose) {
         localStorage.clear();
+        sessionStorage.clear();
         location.reload();
       }
     }
