@@ -10,12 +10,13 @@
     "static/*"
   ],
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "DOM",
-      "ES2019",
+      "ES2020",
       "WebWorker"
     ],
-    "target": "ES2017",
+    "target": "ES2020",
     "baseUrl": "./",
     "paths": {
       "@/*": [
