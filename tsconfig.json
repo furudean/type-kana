@@ -15,6 +15,7 @@
       "ES2019",
       "WebWorker"
     ],
+    "target": "ES2019",
     "baseUrl": "./",
     "paths": {
       "@/*": [
