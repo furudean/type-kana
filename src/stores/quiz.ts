@@ -2,17 +2,12 @@ import { shuffleArray } from "@/lib/random"
 import type { Readable } from "svelte/store";
 import { dictionary as dictionaryStore } from "./dictionary";
 import { createPersistentStore } from "./persistent";
-import { get } from "svelte/store";
 
 export interface QuizItem {
   kana: string;
   answered?: string;
   incorrectTimes?: number;
   isCorrectAnswer?: boolean;
-}
-
-function createQuizItem(kana: string): QuizItem {
-  return { kana }
 }
 
 export interface Quiz {
@@ -22,7 +17,8 @@ export interface Quiz {
 
 function createQuiz(dictionary: string[]): Quiz {
   return {
-    unquizzed: shuffleArray(dictionary).map(createQuizItem),
+    unquizzed: shuffleArray(dictionary)
+      .map((kana) => ({ kana })),
     quizzed: []
   }
 }
