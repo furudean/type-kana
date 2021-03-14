@@ -14,6 +14,9 @@
     "start": "node __sapper__/build",
     "validate": "svelte-check --ignore src/node_modules/@sapper"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "compression": "^1.7.4",
     "polka": "^1.0.0-next.11",
