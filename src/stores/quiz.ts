@@ -37,16 +37,14 @@ export function createQuizStore(): QuizStore {
   const { subscribe, set, update } = createPersistentStore(
     {
       key: "quiz-session",
-      storage: "sessionStorage",
+      storageType: "sessionStorage",
     },
     createQuiz(dictionary),
   );
 
-  const reset = () => { set(createQuiz(dictionary)); }
-
+  // keep dictionary in sync
   dictionaryStore.subscribe(value => {
     dictionary = value;
-    reset();
   });
 
   return {
@@ -74,7 +72,9 @@ export function createQuizStore(): QuizStore {
       }
       ));
     },
-    reset
+    reset() {
+      set(createQuiz(dictionary))
+    }
   };
 }
 

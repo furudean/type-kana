@@ -3,33 +3,59 @@
   export let name: string = undefined;
   export let checked: boolean = undefined;
   export let value: any;
-
+  export let disabled: boolean = undefined;
   export let group: any = undefined;
 </script>
 
-<input type="radio" {id} {name} {value} bind:group {checked} />
+<div class="radio-button">
+  <input type="radio" {id} {name} {value} bind:group {checked} {disabled} />
+  {#if $$slots}
+    <label for={id}>
+      <slot />
+    </label>
+  {/if}
+</div>
 
 <style lang="scss">
+  .radio-button {
+    display: inline-flex;
+    align-items: center;
+    justify-items: start;
+  }
+
   input[type="radio"] {
     --checked-color: var(--form-element-primary-color);
     --checked-highlight-color: var(--form-element-primary-color-contrast);
 
-    appearance: none;
-    position: relative;
+    all: initial;
     display: inline-block;
-    outline: none;
-    margin: 0;
-    vertical-align: middle;
-    line-height: inherit;
-    cursor: pointer;
     font-size: inherit;
+    line-height: inherit;
+    position: relative;
     width: 1em;
     height: 1em;
     background-color: white;
     border-radius: 50%;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.10);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.15);
     transition: 125ms var(--standard-transition) background-color;
+  }
+
+  label {
+    display: block;
+    padding-left: 1em;
+    user-select: none;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+  }
+
+  // Regular state
+  input[type="radio"]:not(:disabled) {
+    cursor: pointer;
+
+    & + label {
+      cursor: pointer;
+    }
   }
 
   // Checked state

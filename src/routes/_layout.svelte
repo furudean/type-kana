@@ -15,8 +15,8 @@
     });
 
     // set audio volume depending on settings
-    settings.subscribe(($settings) => {
-      getRootGain().gain.value = $settings.volume / 100;
+    settings.subscribe(({ volume }) => {
+      getRootGain().gain.value = volume / 100;
     });
   });
 </script>

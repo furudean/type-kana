@@ -1,8 +1,7 @@
 <script lang="ts">
   import Column from "./_Column.svelte";
-  import { configKana } from "@/stores/configKana";
-  import { kanaType } from "@/stores/kanaType";
-  import RadioButtons from "../../components/RadioButtons.svelte";
+  import { gameConfig } from "@/stores/game-config";
+  import Radio from "../../components/Radio.svelte";
   import Button from "../../components/Button.svelte";
   import Icon from "../../components/Icon.svelte";
   import { mdiArrowRight } from "@mdi/js";
@@ -14,21 +13,6 @@
     playDropSound,
   } from "@/lib/sound";
   import { quiz } from "@/stores/quiz";
-
-  const options = [
-    {
-      label: "Hiragana",
-      value: "hiragana",
-    },
-    {
-      label: "Katakana",
-      value: "katakana",
-    },
-    {
-      label: "Both",
-      value: "both",
-    },
-  ];
 
   let menuElement: HTMLElement;
   let menuHeight = 0;
@@ -68,21 +52,38 @@
   on:scroll|passive={updateMenuSticky}
 />
 
-<fieldset>
+<fieldset class="kana-type">
   <legend>I want to practice...</legend>
   <div class="radio-buttons">
-    <RadioButtons name="kana-type-radio" {options} bind={kanaType} />
+    <Radio
+      id="kana-type-hiragana-choice"
+      name="kana-type"
+      bind:group={$gameConfig.kanaType}
+      value="hiragana">Hiragana</Radio
+    >
+    <Radio
+      id="kana-type-katakana-choice"
+      name="kana-type"
+      bind:group={$gameConfig.kanaType}
+      value="katakana">Katakana</Radio
+    >
+    <Radio
+      id="kana-type-both-choice"
+      name="kana-type"
+      bind:group={$gameConfig.kanaType}
+      value="both">Both</Radio
+    >
   </div>
 </fieldset>
 <section class="columns">
-  <Column bind:rows={$configKana.monographs} label="Monographs" />
+  <Column bind:rows={$gameConfig.monographs} label="Monographs" />
   <Column
-    bind:rows={$configKana.monographsDiacritics}
+    bind:rows={$gameConfig.monographsDiacritics}
     label="Monographs with diacritics"
   />
-  <Column bind:rows={$configKana.digraphs} label="Digraphs" />
+  <Column bind:rows={$gameConfig.digraphs} label="Digraphs" />
   <Column
-    bind:rows={$configKana.digraphsDiacritics}
+    bind:rows={$gameConfig.digraphsDiacritics}
     label="Digraphs with diacritics"
   />
 </section>
@@ -102,6 +103,20 @@
 </section>
 
 <style lang="scss">
+  .kana-type legend {
+    margin-bottom: 1em;
+  }
+
+  .radio-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .radio-buttons > :global(:not(:last-child)) {
+    margin-right: 2em;
+  }
+
   .columns {
     display: grid;
     grid-template-areas:
@@ -182,15 +197,6 @@
     font-size: 1.2em;
     text-align: center;
     width: 100%;
-  }
-
-  .radio-buttons {
-    display: flex;
-    margin-top: 1em;
-  }
-
-  .radio-buttons > :global(*) {
-    margin-left: -0.4em; // visual offset
   }
 
   .menu-push {
