@@ -2,6 +2,7 @@ import { shuffleArray } from "@/lib/random"
 import type { Readable } from "svelte/store";
 import { dictionary as dictionaryStore } from "./dictionary";
 import { createPersistentStore } from "./persistent";
+import { get } from "svelte/store";
 
 export interface QuizItem {
   kana: string;
@@ -33,7 +34,14 @@ export interface QuizStore extends Readable<Quiz> {
 }
 
 export function createQuizStore(): QuizStore {
-  let dictionary: string[] = [];
+  let dictionary: string[];
+
+  // keep dictionary in sync
+  // smell: since unsubscribe is never called, this leaks
+  dictionaryStore.subscribe(value => {
+    dictionary = value;
+  });
+
   const { subscribe, set, update } = createPersistentStore(
     {
       key: "quiz-session",
@@ -41,11 +49,6 @@ export function createQuizStore(): QuizStore {
     },
     createQuiz(dictionary),
   );
-
-  // keep dictionary in sync
-  dictionaryStore.subscribe(value => {
-    dictionary = value;
-  });
 
   return {
     subscribe,
