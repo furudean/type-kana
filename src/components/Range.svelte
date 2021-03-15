@@ -59,7 +59,7 @@
 
 <svelte:window on:resize|passive={updateTooltipPosition} />
 
-<div class="range-container" class:inline={inline || width !== "100%"}>
+<div class="range" class:inline={inline || width !== "100%"}>
   {#if hasTooltip && isTooltipVisible}
     <div
       class="tooltip"
@@ -98,7 +98,7 @@
 </div>
 
 <style lang="scss">
-  .range-container {
+  .range {
     position: relative;
     line-height: 0;
 
