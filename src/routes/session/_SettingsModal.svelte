@@ -235,8 +235,7 @@
         bind:value={$settings.volume}
         min={0}
         max={100}
-        tooltip={true}
-        unit="%"
+        tooltip="[value]%"
         width="200px"
         on:input={playTapSoundThrottled}
       />
@@ -347,7 +346,7 @@
     align-items: center;
     margin-bottom: 1em;
 
-    :global(:first-child) {
+    > :global(:first-child) {
       margin-right: 0.5em;
     }
   }

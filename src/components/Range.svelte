@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount } from "svelte";
+  import { createEventDispatcher } from "svelte";
   import { fade } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
 
@@ -12,31 +12,33 @@
 
   export let width = "100%";
   export let inline = false;
-  export let tooltip = false;
-  export let unit = "";
+  export let tooltip: string | boolean = undefined;
 
   const dispatch = createEventDispatcher();
+
+  let hasTooltip = !["false", "no"].includes(tooltip.toString());
+  let hasFocus = false;
 
   let rangeElement: HTMLElement;
 
   let isTooltipVisible = false;
   let tooltipStyle = "";
 
-  let timeoutId: number | undefined;
-
-  function touchTooltip() {
-    if (tooltip) {
+  function enter() {
+    if (hasTooltip) {
+      updateTooltipPosition();
       isTooltipVisible = true;
+    }
+  }
 
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        isTooltipVisible = false;
-      }, 1000);
+  function leave() {
+    if (hasTooltip && !hasFocus) {
+      isTooltipVisible = false;
     }
   }
 
   function updateTooltipPosition() {
-    if (rangeElement && tooltip) {
+    if (hasTooltip) {
       const p = value / Number(max);
       const rangeWidth = rangeElement.clientWidth;
       const thumbWidth = 18; // hardcoded, cannot read shadow DOM width
@@ -52,25 +54,23 @@
 
   function handleInput(event: Event) {
     dispatch("input", (event as any).detail);
-
-    touchTooltip();
     updateTooltipPosition();
   }
-
-  onMount(updateTooltipPosition);
 </script>
 
 <svelte:window on:resize|passive={updateTooltipPosition} />
 
 <div class="range-container" class:inline={inline || width !== "100%"}>
-  {#if tooltip && isTooltipVisible}
+  {#if hasTooltip && isTooltipVisible}
     <div
       class="tooltip"
       aria-hidden="true"
       style={tooltipStyle}
-      out:fade={{ duration: 1000, easing: cubicOut }}
+      transition:fade={{ duration: 125, easing: cubicOut }}
     >
-      {value + unit}
+      {typeof tooltip === "string" && !["yes", "true"].includes(tooltip)
+        ? tooltip.replace("[value]", value.toString())
+        : value}
     </div>
   {/if}
   <input
@@ -84,6 +84,16 @@
     style={`width: ${width};`}
     bind:this={rangeElement}
     on:input={handleInput}
+    on:mouseenter={enter}
+    on:mouseleave={leave}
+    on:focus={() => {
+      hasFocus = true;
+      enter();
+    }}
+    on:focusout={() => {
+      hasFocus = false;
+      leave();
+    }}
     on:change
   />
 </div>
@@ -130,6 +140,7 @@
     background: var(--thumb-color);
     border-radius: 50%;
     outline: none;
+    border: none;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
@@ -163,15 +174,6 @@
     height: var(--track-height);
   }
 
-  input[type="range"]:focus {
-    &::-webkit-slider-thumb {
-      border-color: var(--focus-color);
-    }
-    &::-moz-range-thumb {
-      border-color: var(--focus-color);
-    }
-  }
-
   .tooltip {
     display: inline-block;
     position: absolute;
@@ -188,6 +190,8 @@
     user-select: none;
     min-width: 12px;
     text-align: center;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
 
   // tooltip triangle
