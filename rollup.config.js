@@ -120,12 +120,15 @@ export default {
         publicPath: "/client/",
         emitFiles: false // already emitted by client build
       }),
+
       resolve({
         dedupe: ["svelte"]
       }),
       commonjs(),
+
       typescript({ sourceMap: dev, inlineSources: dev }),
-      babel({
+
+      legacy && babel({
         extensions: [".js", ".ts", ".mjs", ".html", ".svelte"],
         babelHelpers: "runtime",
         exclude: ["node_modules/@babel/**"],
@@ -140,6 +143,7 @@ export default {
           }]
         ]
       }),
+      !dev && terser()
     ],
     external: Object.keys(pkg.dependencies).concat(require("module").builtinModules),
     preserveEntrySignatures: "strict",
