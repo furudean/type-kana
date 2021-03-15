@@ -16,11 +16,10 @@
 
   const dispatch = createEventDispatcher();
 
-  let hasTooltip = !["false", "no"].includes(tooltip.toString());
-  let hasFocus = false;
-
   let rangeElement: HTMLElement;
 
+  let hasTooltip = !["false", "no"].includes(tooltip.toString());
+  let hasFocus = false;
   let isTooltipVisible = false;
   let tooltipStyle = "";
 
