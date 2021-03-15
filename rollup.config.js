@@ -128,7 +128,7 @@ export default {
 
       typescript({ sourceMap: dev, inlineSources: dev }),
 
-      legacy && babel({
+      !dev && babel({
         extensions: [".js", ".ts", ".mjs", ".html", ".svelte"],
         babelHelpers: "runtime",
         exclude: ["node_modules/@babel/**"],
@@ -143,7 +143,7 @@ export default {
           }]
         ]
       }),
-      // !dev && terser()
+      !dev && terser()
     ],
     external: Object.keys(pkg.dependencies).concat(require("module").builtinModules),
     preserveEntrySignatures: "strict",
