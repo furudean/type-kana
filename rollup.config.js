@@ -69,7 +69,7 @@ export default {
       }),
       commonjs(),
 
-      typescript({ sourceMap: dev }),
+      typescript({ sourceMap: dev, inlineSources: dev }),
 
       legacy && babel({
         extensions: [".js", ".mjs", ".html", ".svelte"],
@@ -124,7 +124,7 @@ export default {
         dedupe: ["svelte"]
       }),
       commonjs(),
-      typescript({ sourceMap: dev }),
+      typescript({ sourceMap: dev, inlineSources: dev }),
       babel({
         extensions: [".js", ".ts", ".mjs", ".html", ".svelte"],
         babelHelpers: "runtime",
@@ -159,7 +159,7 @@ export default {
         }
       }),
       commonjs(),
-      typescript({ sourceMap: dev }),
+      typescript({ sourceMap: dev, inlineSources: dev }),
       !dev && terser()
     ],
     preserveEntrySignatures: false,
