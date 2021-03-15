@@ -16,31 +16,41 @@
     `--indeterminate-icon-url: url("${indeterminateIcon}");`;
 </script>
 
-<input
-  type="checkbox"
-  {title}
-  {id}
-  bind:checked
-  {disabled}
-  {indeterminate}
-  aria-label={ariaLabel}
-  {style}
-  on:click
-/>
+<div class="checkbox">
+  <input
+    type="checkbox"
+    {title}
+    {id}
+    bind:checked
+    {disabled}
+    {indeterminate}
+    aria-label={ariaLabel}
+    {style}
+    on:click
+  />
+  {#if $$slots}
+    <label for={id}>
+      <slot />
+    </label>
+  {/if}
+</div>
 
 <style lang="scss">
+  .checkbox {
+    display: inline-flex;
+    align-items: center;
+  }
+
   input[type="checkbox"] {
     --checked-color: var(--form-element-primary-color);
     --checked-highlight-color: var(--form-element-primary-color-contrast);
 
-    appearance: none;
-    position: relative;
+    all: initial;
     display: inline-block;
-    outline: none;
-    vertical-align: middle;
-    line-height: inherit;
-    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
     font-size: inherit;
+    line-height: inherit;
     width: 1em;
     height: 1em;
     background: white;
@@ -49,6 +59,23 @@
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.15);
     transition: 125ms var(--standard-transition) background-color;
+  }
+
+  label {
+    display: block;
+    padding-left: 1em;
+    user-select: none;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+  }
+
+  // Regular state
+  input[type="checkbox"]:not(:disabled) {
+    cursor: pointer;
+
+    & + label {
+      cursor: pointer;
+    }
   }
 
   // Checked + indeterminate states

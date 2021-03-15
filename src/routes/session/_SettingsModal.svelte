@@ -65,17 +65,16 @@
   let volumeIconViewBox: string;
   let volumeIconColor: string;
 
-  const unsubscribe = settings.subscribe(($settings) => {
-    const vol = $settings.volume;
-    if (vol === 0) {
+  const unsubscribe = settings.subscribe(({ volume }) => {
+    if (volume === 0) {
       volumeIconPath = mdiVolumeOff;
       volumeIconViewBox = "0 0 24 24";
       volumeIconColor = "var(--highlight-color)";
-    } else if (vol < 50) {
+    } else if (volume < 50) {
       volumeIconPath = mdiVolumeMedium;
       volumeIconViewBox = "2 0 24 24";
       volumeIconColor = "currentColor";
-    } else if (vol >= 50) {
+    } else if (volume >= 50) {
       volumeIconPath = mdiVolumeHigh;
       volumeIconViewBox = "0 0 24 24";
       volumeIconColor = "currentColor";
@@ -117,9 +116,9 @@
     <Checkbox
       id="retry-incorrect-answers-setting"
       bind:checked={$settings.retryIncorrectAnswers}
-    /><label for="retry-incorrect-answers-setting">
+    >
       Put incorrect answers back in queue
-    </label>
+    </Checkbox>
 
     <fieldset>
       <legend>Auto submit</legend>
@@ -173,17 +172,17 @@
     <Checkbox
       id="error-marker-setting"
       bind:checked={$settings.showErrorMarker}
-    /><label for="error-marker-setting">
+    >
       Display an icon if written answer is wrong
-    </label>
+    </Checkbox>
     <br />
 
     <Checkbox
       id="progress-bar-setting"
       bind:checked={$settings.showProgressBar}
-    /><label for="progress-bar-setting">
+    >
       Show a bar that indicates completion percentage
-    </label>
+    </Checkbox>
 
     <fieldset>
       <legend>Theme</legend>
@@ -246,11 +245,9 @@
     <hr />
 
     <h2>Danger zone</h2>
-    <Checkbox id="reset-on-close-setting" bind:checked={resetOnClose} /><label
-      for="reset-on-close-setting"
-    >
+    <Checkbox id="reset-on-close-setting" bind:checked={resetOnClose}>
       Reset all saved data after closing settings
-    </label>
+    </Checkbox>
 
     <hr />
 
@@ -315,16 +312,11 @@
   }
 
   .settings-menu {
-    :global(input[type="checkbox"]),
+    :global(.checkbox),
     :global(.radio-button) {
-      margin: 1em 0 1em 1em;
-    }
-    :global(input[type="checkbox"] + label) {
-      user-select: none;
-      padding-left: 1em;
-    }
-    :global(input[type="checkbox"]:not(:disabled) + label) {
-      cursor: pointer;
+      margin-left: 1em;
+      margin-right: 1em;
+      margin-bottom: 1.5em;
     }
   }
 
@@ -337,7 +329,7 @@
 
   legend {
     padding: 0;
-    margin: 1em 0 0.5em;
+    margin-bottom: 1em;
     font-size: 1.2em;
     font-weight: normal;
   }
@@ -353,7 +345,7 @@
   .volume-slider {
     display: flex;
     align-items: center;
-    margin-top: 1em;
+    margin-bottom: 1em;
 
     :global(:first-child) {
       margin-right: 0.5em;

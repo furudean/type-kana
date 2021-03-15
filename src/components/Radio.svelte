@@ -20,7 +20,6 @@
   .radio-button {
     display: inline-flex;
     align-items: center;
-    justify-items: start;
   }
 
   input[type="radio"] {
@@ -29,6 +28,7 @@
 
     all: initial;
     display: inline-block;
+    flex-shrink: 0;
     font-size: inherit;
     line-height: inherit;
     position: relative;
