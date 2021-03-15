@@ -24,10 +24,10 @@
 <svelte:window
   on:mousedown|once={() => {
     // https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
-    const { state, resume } = getAudioContext();
+    const audioContext = getAudioContext();
 
-    if (state !== "running") {
-      resume();
+    if (audioContext.state !== "running") {
+      audioContext.resume();
     }
   }}
 />
