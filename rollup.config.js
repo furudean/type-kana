@@ -133,7 +133,21 @@ export default {
       }),
       commonjs(),
       typescript({ sourceMap: false }),
-      // !dev && terser(),
+      babel({
+        extensions: [".js", ".ts", ".mjs", ".html", ".svelte"],
+        babelHelpers: "runtime",
+        exclude: ["node_modules/@babel/**"],
+        presets: [
+          ["@babel/preset-env", {
+            targets: { node: 12 } // target node 12 since vercel runs this version
+          }]
+        ],
+        plugins: [
+          ["@babel/plugin-transform-runtime", {
+            useESModules: true
+          }]
+        ]
+      }),
     ],
     external: Object.keys(pkg.dependencies).concat(require("module").builtinModules),
     preserveEntrySignatures: "strict",
