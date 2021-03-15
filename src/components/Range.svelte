@@ -130,7 +130,9 @@
     background: var(--thumb-color);
     border-radius: 50%;
     outline: none;
-    transform: translateY(-25%);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   // Firefox
