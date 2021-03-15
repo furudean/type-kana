@@ -1,6 +1,10 @@
 {
   "name": "Type Kana",
   "short_name": "Type Kana",
+  "display": "standalone",
+  "start_url": "/",
+  "theme_color": "#d2376b",
+  "background_color": "#fff6e0",
   "icons": [
     {
       "src": "icon.png",
@@ -14,8 +18,5 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ],
-  "theme_color": "#d2376b",
-  "background_color": "#fff6e0",
-  "display": "standalone"
+  ]
 }
