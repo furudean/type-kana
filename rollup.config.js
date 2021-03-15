@@ -143,7 +143,7 @@ export default {
           }]
         ]
       }),
-      !dev && terser()
+      // !dev && terser()
     ],
     external: Object.keys(pkg.dependencies).concat(require("module").builtinModules),
     preserveEntrySignatures: "strict",
