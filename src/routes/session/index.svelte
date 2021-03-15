@@ -70,10 +70,12 @@
   }
 
   onMount(() => {
-    loadProgressSound();
-    loadErrorSound();
-    loadMaximizeSound();
-    loadMinimizeSound();
+    if (process.browser) {
+      loadProgressSound();
+      loadErrorSound();
+      loadMaximizeSound();
+      loadMinimizeSound();
+    }
   });
 </script>
 

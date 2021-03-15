@@ -1,21 +1,14 @@
 import { Writable, writable } from "svelte/store";
-import { isObject } from "@/lib/util";
-
-function parseJSONSafe(value: string): any {
-  try {
-    return JSON.parse(value);
-  } catch { }
-}
 
 export interface Options {
   /** Key to save as in storage */
   key: string;
   /** 
-   * Storage object to use. `localStorage` or `sessionStorage`.
+   * Storage object to use
    * 
-   * @default localStorage
+   * @default "localStorage"
    */
-  storage?: Storage;
+  storageType?: "localStorage" | "sessionStorage";
   /** 
    * Set `startValue`, then assign JSON in storage. 
    * 
@@ -27,56 +20,75 @@ export interface Options {
   assign?: boolean;
 }
 
-export interface PersistentStore<T> extends Writable<T> {
-  useWebStorage(): void;
+const defaultOptions: Partial<Options> = {
+  assign: false,
+  storageType: "localStorage"
 }
 
-export function createPersistentStore<T>(key: string, startValue: T): PersistentStore<T>;
-export function createPersistentStore<T>(options: Options, startValue: T): PersistentStore<T>
-export function createPersistentStore<T>(
-  optionsOrKey: string | Options,
+// Modified code from: https://svelte.dev/repl/7b4d6b448f8c4ed2b3d5a3c31260be2a?version=3.35.0
+
+const client = process.browser;
+
+export function createPersistentStore<T extends Record<string, any>>(
+  options: Options,
   startValue: T
-): PersistentStore<T> {
-  const normalizedOptionsOrKey = isObject(optionsOrKey) ?
-    optionsOrKey as Options :
-    { key: optionsOrKey as string };
+): Writable<T> {
+  const { key, assign, storageType } = { ...defaultOptions, ...options };
+  const storage = client && window[storageType];
 
-  const options: Options = {
-    storage: localStorage,
-    assign: false,
-    ...normalizedOptionsOrKey
-  };
-  const { key, storage, assign } = options;
+  /** Synchronize the Svelte store with web storage */
+  function sync() {
+    const data = storage.getItem(key);
 
-  const value = storage.getItem(key);
-  const { subscribe, set, update } = writable(startValue);
-
-  function useWebStorage() {
-    if (value !== null) {
-      const json = parseJSONSafe(value);
-
-      if (json !== undefined) {
-        // parse json
-        set({
-          ...(assign ? startValue : {}),
-          ...json
-        });
-      } else {
-        // value is not JSON, set value as is
-        set(value as unknown as T); // make compiler not freak out -- we know what we're doing here
-      }
+    if (data === null) {
+      set(startValue);
+    } else {
+      const value = {
+        ...(assign && startValue),
+        ...JSON.parse(data)
+      };
+      store.set(value);
     }
+  };
 
-    // save to storage on any new changes
-    subscribe((current) => {
-      storage.setItem(key, isObject(current) ? JSON.stringify(current) : current.toString());
+  const store = writable(startValue, () => {
+    if (!client) { return; }
+
+    sync();
+
+    function updateFromStorageEvents(event: StorageEvent) {
+      if (event.key === key) sync();
+    };
+
+    window.addEventListener("storage", updateFromStorageEvents);
+
+    return function unsubscribe() {
+      window.removeEventListener("storage", updateFromStorageEvents);
+    }
+  });
+
+  /** Set both web storage and store */
+  function set(value: T) {
+    store.set(value);
+    if (client) {
+      storage.setItem(key, JSON.stringify(value));
+    }
+  };
+
+  /** Set both web storage and store */
+  function update(updater: (value: T) => T) {
+    store.update((current) => {
+      const value = updater(current);
+      if (client) {
+        storage.setItem(key, JSON.stringify(value));
+      }
+      return value;
     });
-  }
+  };
 
   return {
-    subscribe,
     set,
     update,
-    useWebStorage,
-  }
-}
+    subscribe: store.subscribe
+  };
+};

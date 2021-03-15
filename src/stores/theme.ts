@@ -7,15 +7,19 @@ import { settings } from './settings'
  */
 function createOSThemeStore(): Readable<string> {
   const listeners = new Set<(theme: string) => any>();
-  const mediaQuery = matchMedia('(prefers-color-scheme: dark)');
-  let colorScheme = mediaQuery.matches ? 'dark' : 'light'; // assumes that "light" is the default
+  let colorScheme = 'light';
 
   function onChangeMediaQuery(event: MediaQueryListEvent): void {
-    colorScheme = event.matches ? 'dark' : 'light';
+    colorScheme = event.matches ? 'dark' : 'light'; // assume that "light" is the default
     listeners.forEach(listener => { listener(colorScheme) });
   }
 
-  mediaQuery.addEventListener('change', onChangeMediaQuery);
+  // Only call browser APIs if browser
+  if (process.browser) {
+    const mediaQuery = matchMedia('(prefers-color-scheme: dark)');
+    colorScheme = mediaQuery.matches ? 'dark' : 'light';
+    mediaQuery.addEventListener('change', onChangeMediaQuery);
+  }
 
   return {
     subscribe(listener) {

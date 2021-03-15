@@ -10,14 +10,14 @@ function createPreloader(urls: string[]) {
 }
 
 export const loadProgressSound = createPreloader([
-  '/assets/audio/drop_002.ogg',
-  '/assets/audio/drop_002.mp3',
+  'audio/drop_002.ogg',
+  'audio/drop_002.mp3',
 ]);
 
 export async function playProgressSound(mod: number) {
   const audioBuffer = await getAudioBuffer([
-    '/assets/audio/drop_002.ogg',
-    '/assets/audio/drop_002.mp3',
+    'audio/drop_002.ogg',
+    'audio/drop_002.mp3',
   ]);
   const source = createAudioSource(audioBuffer);
   let cents = Math.min(mod, 5) * 100;
@@ -33,14 +33,14 @@ export async function playProgressSound(mod: number) {
 }
 
 export const loadErrorSound = createPreloader([
-  '/assets/audio/error_004.ogg',
-  '/assets/audio/error_004.mp3',
+  'audio/error_004.ogg',
+  'audio/error_004.mp3',
 ]);
 
 export async function playErrorSound() {
   const audioBuffer = await getAudioBuffer([
-    '/assets/audio/error_004.ogg',
-    '/assets/audio/error_004.mp3',
+    'audio/error_004.ogg',
+    'audio/error_004.mp3',
   ]);
   const source = createAudioSource(audioBuffer);
   source.playbackRate.value = detuneWithPlaybackRate(randomInt(-1, 2) * 200);
@@ -49,14 +49,14 @@ export async function playErrorSound() {
 }
 
 export const loadMaximizeSound = createPreloader([
-  '/assets/audio/maximize_008.ogg',
-  '/assets/audio/maximize_008.mp3',
+  'audio/maximize_008.ogg',
+  'audio/maximize_008.mp3',
 ]);
 
 export async function playMaximizeSound() {
   const audioBuffer = await getAudioBuffer([
-    '/assets/audio/maximize_008.ogg',
-    '/assets/audio/maximize_008.mp3',
+    'audio/maximize_008.ogg',
+    'audio/maximize_008.mp3',
   ]);
   const source = createAudioSource(audioBuffer);
 
@@ -64,14 +64,14 @@ export async function playMaximizeSound() {
 }
 
 export const loadMinimizeSound = createPreloader([
-  '/assets/audio/minimize_008.ogg',
-  '/assets/audio/minimize_008.mp3',
+  'audio/minimize_008.ogg',
+  'audio/minimize_008.mp3',
 ]);
 
 export async function playMinimizeSound() {
   const audioBuffer = await getAudioBuffer([
-    '/assets/audio/minimize_008.ogg',
-    '/assets/audio/minimize_008.mp3',
+    'audio/minimize_008.ogg',
+    'audio/minimize_008.mp3',
   ]);
   const source = createAudioSource(audioBuffer);
 
@@ -79,8 +79,8 @@ export async function playMinimizeSound() {
 }
 
 export const loadCheckboxSelectSound = createPreloader([
-  '/assets/audio/click_002.ogg',
-  '/assets/audio/click_002.mp3',
+  'audio/click_002.ogg',
+  'audio/click_002.mp3',
 ]);
 
 export async function playCheckboxSelectSound(
@@ -89,8 +89,8 @@ export async function playCheckboxSelectSound(
   selected: boolean,
 ) {
   const audioBuffer = await getAudioBuffer([
-    '/assets/audio/click_002.ogg',
-    '/assets/audio/click_002.mp3',
+    'audio/click_002.ogg',
+    'audio/click_002.mp3',
   ]);
 
   const source = createAudioSource(audioBuffer);
@@ -112,8 +112,8 @@ export async function playCheckboxSelectSeriesSound(times: number, selected: boo
 
   async function createSource(i: number) {
     const audioBuffer = await getAudioBuffer([
-      '/assets/audio/click_002.ogg',
-      '/assets/audio/click_002.mp3',
+      'audio/click_002.ogg',
+      'audio/click_002.mp3',
     ]);
     const source = createAudioSource(audioBuffer, gainNode);
 
@@ -151,14 +151,14 @@ export async function playCheckboxSelectSeriesSound(times: number, selected: boo
 }
 
 export const loadTapSound = createPreloader([
-  '/assets/audio/bong_001.ogg',
-  '/assets/audio/bong_001.mp3',
+  'audio/bong_001.ogg',
+  'audio/bong_001.mp3',
 ]);
 
 export async function playTapSound() {
   const audioBuffer = await getAudioBuffer([
-    '/assets/audio/bong_001.ogg',
-    '/assets/audio/bong_001.mp3',
+    'audio/bong_001.ogg',
+    'audio/bong_001.mp3',
   ]);
   const source = createAudioSource(audioBuffer);
 
@@ -166,14 +166,14 @@ export async function playTapSound() {
 }
 
 export const loadDropSound = createPreloader([
-  '/assets/audio/drop_004.ogg',
-  '/assets/audio/drop_004.mp3',
+  'audio/drop_004.ogg',
+  'audio/drop_004.mp3',
 ]);
 
 export async function playDropSound() {
   const audioBuffer = await getAudioBuffer([
-    '/assets/audio/drop_004.ogg',
-    '/assets/audio/drop_004.mp3',
+    'audio/drop_004.ogg',
+    'audio/drop_004.mp3',
   ]);
   const source = createAudioSource(audioBuffer);
 

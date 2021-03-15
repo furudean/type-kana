@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	%sapper.base%
+
+	<link rel="manifest" href="manifest.json" crossorigin="use-credentials">
+
+	<!-- Embed -->
+	<meta name="title" content="Type Kana">
+	<meta name="description"
+		content="A quiz app that aims to help you learn hiragana and katakana. Highly configurable to fit your individual needs.">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://type-kana.cass.moe/">
+	<meta property="og:title" content="Type Kana">
+	<meta property="og:description"
+		content="A quiz app that aims to help you learn hiragana and katakana. Highly configurable to fit your individual needs.">
+	<meta property="og:image" content="https://type-kana.cass.moe/social.png">
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="https://type-kana.cass.moe/">
+	<meta property="twitter:title" content="Type Kana">
+	<meta property="twitter:description"
+		content="A quiz app that aims to help you learn hiragana and katakana. Highly configurable to fit your individual needs.">
+	<meta property="twitter:image" content="https://type-kana.cass.moe/social.png">
+
+	<meta name="theme-color" content="#d2376b">
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="256x256" href="maskable-icon.png">
+
+	<!-- Fonts	-->
+	<link rel="stylesheet" href="font/mplus-2p.css" defer>
+	<link rel="stylesheet" href="font/mplus-2c.css" defer>
+
+	<!-- Sapper creates a <script> tag containing `src/client.ts`
+	     and anything else it needs to hydrate the app and
+	     initialise the router -->
+	%sapper.scripts%
+
+	<!-- Sapper generates a <style> tag containing critical CSS
+	     for the current page. CSS for the rest of the app is
+	     lazily loaded when it precaches secondary pages -->
+	%sapper.styles%
+
+	<!-- This contains the contents of the <svelte:head> component, if
+	     the current page has one -->
+	%sapper.head%
+</head>
+
+<body>
+	<!-- The application will be rendered inside this element,
+	     because `src/client.ts` references it -->
+	%sapper.html%
+</body>
+
+</html>

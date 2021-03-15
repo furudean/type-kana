@@ -1,7 +1,6 @@
 import { derived } from "svelte/store";
 import { toKatakana } from "wanakana";
-import { KanaCheckboxColumn, configKana } from "./configKana";
-import { kanaType } from "./kanaType";
+import { gameConfig } from "./game-config";
 
 function toDictionary(column: KanaCheckboxColumn): string[] {
   return column
@@ -10,7 +9,7 @@ function toDictionary(column: KanaCheckboxColumn): string[] {
     .map((item) => item.kana);
 }
 
-export const selectedKana = derived(configKana, ($columns) => {
+export const selectedKana = derived(gameConfig, ($columns) => {
   return [
     ...toDictionary($columns.monographs),
     ...toDictionary($columns.monographsDiacritics),
@@ -20,21 +19,18 @@ export const selectedKana = derived(configKana, ($columns) => {
 });
 
 export const dictionary = derived(
-  [selectedKana, kanaType],
-  ([$selectedKana, $kanaType]): string[] => {
+  [selectedKana, gameConfig],
+  ([$selectedKana, $gameConfig]): string[] => {
+    const { kanaType } = $gameConfig;
     let result: string[] = [];
 
-    if ($kanaType === 'hiragana' || $kanaType === 'both') {
-      result = [
-        ...result,
-        ...$selectedKana,
-      ];
+    if (kanaType === 'hiragana' || kanaType === 'both') {
+      result.push(...$selectedKana);
     }
-    if ($kanaType === 'katakana' || $kanaType === 'both') {
-      result = [
-        ...result,
-        ...$selectedKana.map((kana) => toKatakana(kana)),
-      ];
+    if (kanaType === 'katakana' || kanaType === 'both') {
+      result.push(
+        ...$selectedKana.map((kana) => toKatakana(kana))
+      );
     }
 
     return result;

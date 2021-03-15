@@ -10,10 +10,6 @@ export interface QuizItem {
   isCorrectAnswer?: boolean;
 }
 
-function createQuizItem(kana: string): QuizItem {
-  return { kana }
-}
-
 export interface Quiz {
   unquizzed: QuizItem[];
   quizzed: QuizItem[];
@@ -21,38 +17,37 @@ export interface Quiz {
 
 function createQuiz(dictionary: string[]): Quiz {
   return {
-    unquizzed: shuffleArray(dictionary).map(createQuizItem),
+    unquizzed: shuffleArray(dictionary)
+      .map((kana) => ({ kana })),
     quizzed: []
   }
 }
 
 export interface QuizStore extends Readable<Quiz> {
-  useWebStorage(): void;
   insert(index: number, item: QuizItem): void;
   pop(callback: (item: QuizItem) => QuizItem): void;
   reset(): void;
 }
 
 export function createQuizStore(): QuizStore {
-  let dictionary: string[] = [];
-  const { subscribe, set, update, useWebStorage } = createPersistentStore(
+  let dictionary: string[];
+
+  // keep dictionary in sync
+  // smell: since unsubscribe is never called, this leaks
+  dictionaryStore.subscribe(value => {
+    dictionary = value;
+  });
+
+  const { subscribe, set, update } = createPersistentStore(
     {
       key: "quiz-session",
-      storage: sessionStorage,
+      storageType: "sessionStorage",
     },
     createQuiz(dictionary),
   );
 
-  const reset = () => { set(createQuiz(dictionary)); }
-
-  dictionaryStore.subscribe(value => {
-    dictionary = value;
-    reset();
-  });
-
   return {
     subscribe,
-    useWebStorage,
     insert(index, item) {
       update(({ unquizzed, quizzed }) => {
         const before = unquizzed.slice(0, index);
@@ -76,7 +71,9 @@ export function createQuizStore(): QuizStore {
       }
       ));
     },
-    reset
+    reset() {
+      set(createQuiz(dictionary))
+    }
   };
 }
 

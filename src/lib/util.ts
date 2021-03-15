@@ -39,7 +39,3 @@ export function roundN(num: number, decimalPlaces: number): number {
   const factor = 10 ** (decimalPlaces + 2);
   return Math.round((num + Number.EPSILON) * factor) / factor;
 }
-
-export function isObject(obj: any): boolean {
-  return obj != null && obj.constructor.name === "Object";
-}

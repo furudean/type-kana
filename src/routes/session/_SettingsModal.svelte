@@ -44,6 +44,7 @@
 
       if (resetOnClose) {
         localStorage.clear();
+        sessionStorage.clear();
         location.reload();
       }
     }
@@ -128,7 +129,9 @@
         name="auto-commit-choice"
         bind:group={$settings.autoCommit}
         value="disabled"
-      /><label for="auto-commit-disabled-choice">Disabled</label>
+      >
+        Disabled
+      </Radio>
       <br />
 
       <Radio
@@ -136,9 +139,9 @@
         name="auto-commit-choice"
         bind:group={$settings.autoCommit}
         value="forgiving"
-      /><label for="auto-commit-forgiving-choice">
+      >
         Forgiving — Submit if correct
-      </label>
+      </Radio>
       <br />
 
       <Radio
@@ -146,9 +149,22 @@
         name="auto-commit-choice"
         bind:group={$settings.autoCommit}
         value="strict"
-      /><label for="auto-commit-strict-choice">
+      >
         Strict — Submit if correct <strong>or wrong</strong>
-      </label>
+      </Radio>
+      <br />
+
+      <input
+        id="mistake-delay-setting"
+        type="number"
+        bind:value={$settings.mistakeDelayMs}
+        min="0"
+        step="10"
+        max="5000"
+        disabled={["disabled", "forgiving"].includes($settings.autoCommit)}
+        required
+      />
+      <label for="mistake-delay-setting">Mistake delay (ms)</label>
     </fieldset>
 
     <hr />
@@ -177,9 +193,9 @@
         name="theme-choice"
         bind:group={$settings.theme}
         value="same-as-system"
-      /><label for="same-as-system-theme-choice">
+      >
         Same as system ({$osTheme})
-      </label>
+      </Radio>
       <br />
 
       <Radio
@@ -187,7 +203,9 @@
         name="theme-choice"
         bind:group={$settings.theme}
         value="light"
-      /><label for="light-theme-choice">Light</label>
+      >
+        Light
+      </Radio>
       <br />
 
       <Radio
@@ -195,7 +213,9 @@
         name="theme-choice"
         bind:group={$settings.theme}
         value="dark"
-      /><label for="dark-theme-choice">Dark</label>
+      >
+        Dark
+      </Radio>
     </fieldset>
 
     <hr />
@@ -296,16 +316,14 @@
 
   .settings-menu {
     :global(input[type="checkbox"]),
-    :global(input[type="radio"]) {
+    :global(.radio-button) {
       margin: 1em 0 1em 1em;
     }
-    :global(input[type="checkbox"] + label),
-    :global(input[type="radio"] + label) {
+    :global(input[type="checkbox"] + label) {
       user-select: none;
       padding-left: 1em;
     }
-    :global(input[type="checkbox"]:not(:disabled) + label),
-    :global(input[type="radio"]:not(:disabled) + label) {
+    :global(input[type="checkbox"]:not(:disabled) + label) {
       cursor: pointer;
     }
   }

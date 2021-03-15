@@ -1,11 +1,6 @@
 import { hiragana } from "@/lib/db";
 import { createPersistentStore } from "./persistent";
 
-export interface KanaCheckbox {
-  kana: string;
-  checked: boolean;
-}
-
 function createKanaCheckbox(kana: string, checked: boolean): KanaCheckbox {
   if (kana) {
     return {
@@ -17,28 +12,28 @@ function createKanaCheckbox(kana: string, checked: boolean): KanaCheckbox {
   }
 }
 
-export type KanaCheckboxRow = KanaCheckbox[];
-
 function createKanaCheckboxRow(kana: string[], checked: boolean): KanaCheckboxRow {
   return kana.map(kana => createKanaCheckbox(kana, checked));
 }
-
-export type KanaCheckboxColumn = KanaCheckboxRow[];
 
 function createKanaCheckboxColumn(kanaRows: string[][], checked: boolean): KanaCheckboxColumn {
   return kanaRows.map(row => createKanaCheckboxRow(row, checked));
 }
 
-interface ConfigKana {
+interface GameConfig {
+  kanaType: "hiragana" | "katakana" | "both"
   monographs: KanaCheckboxColumn;
   monographsDiacritics: KanaCheckboxColumn;
   digraphs: KanaCheckboxColumn;
   digraphsDiacritics: KanaCheckboxColumn;
 }
 
-export const configKana = createPersistentStore<ConfigKana>(
-  'game-config-kana',
+export const gameConfig = createPersistentStore<GameConfig>(
   {
+    key: 'game-config',
+  },
+  {
+    kanaType: "hiragana",
     monographs: createKanaCheckboxColumn(hiragana.monographs, true),
     monographsDiacritics: createKanaCheckboxColumn(hiragana.monographDiacritics, true),
     digraphs: createKanaCheckboxColumn(hiragana.digraphs, false),
