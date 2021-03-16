@@ -36,37 +36,6 @@ export function createPersistentStore<T extends Record<string, any>>(
   const { key, assign, storageType } = { ...defaultOptions, ...options };
   const storage = client && window[storageType];
 
-  /** Synchronize the Svelte store with web storage */
-  function sync() {
-    const data = storage.getItem(key);
-
-    if (data === null) {
-      set(startValue);
-    } else {
-      const value = {
-        ...(assign && startValue),
-        ...JSON.parse(data)
-      };
-      store.set(value);
-    }
-  };
-
-  const store = writable(startValue, () => {
-    if (!client) { return; }
-
-    sync();
-
-    function updateFromStorageEvents(event: StorageEvent) {
-      if (event.key === key) sync();
-    };
-
-    window.addEventListener("storage", updateFromStorageEvents);
-
-    return function unsubscribe() {
-      window.removeEventListener("storage", updateFromStorageEvents);
-    }
-  });
-
   /** Set both web storage and store */
   function set(value: T) {
     store.set(value);
@@ -85,6 +54,37 @@ export function createPersistentStore<T extends Record<string, any>>(
       return value;
     });
   };
+
+  /** Synchronize the Svelte store with web storage */
+  function sync() {
+    console.log("sync")
+    const data = storage.getItem(key);
+
+    if (data === null) {
+      set(startValue);
+    } else {
+      store.set({
+        ...(assign && startValue),
+        ...JSON.parse(data)
+      });
+    }
+  };
+
+  const store = writable(startValue, () => {
+    if (!client) { return; }
+
+    sync();
+
+    function updateFromStorageEvents(event: StorageEvent) {
+      if (event.key === key) sync();
+    };
+
+    window.addEventListener("storage", updateFromStorageEvents);
+
+    return function unsubscribe() {
+      window.removeEventListener("storage", updateFromStorageEvents);
+    }
+  });
 
   return {
     set,
