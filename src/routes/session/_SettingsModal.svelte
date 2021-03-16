@@ -173,7 +173,7 @@
       id="error-marker-setting"
       bind:checked={$settings.showErrorMarker}
     >
-      Show an "X" on wrong answer
+      Show an "X" if input does not match answer
     </Checkbox>
     <br />
 
