@@ -16,6 +16,7 @@
 
     if (
       !isCorrectAnswer(input, currentKana) &&
+      $settings.autoCommit === "strict" &&
       $settings.mistakeDelayMs !== 0
     ) {
       blocked = true;
