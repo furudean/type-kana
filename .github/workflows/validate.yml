@@ -4,13 +4,13 @@ on:
   push:
     # all except master
     branches-ignore:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
-  validate-pull-request:
+  Validate:
     runs-on: ubuntu-latest
 
     strategy:
