@@ -17,6 +17,7 @@
   import { settings } from "@/stores/settings";
   import ProgressBar from "./_ProgressBar.svelte";
   import { onMount } from "svelte";
+  import { goto } from "@sapper/app";
 
   let settingsModal: SettingsModal;
   let input: string;
@@ -70,11 +71,13 @@
   }
 
   onMount(() => {
-    if (process.browser) {
-      loadProgressSound();
-      loadErrorSound();
-      loadMaximizeSound();
-      loadMinimizeSound();
+    loadProgressSound();
+    loadErrorSound();
+    loadMaximizeSound();
+    loadMinimizeSound();
+
+    if ($quiz.unquizzed.length === 0) {
+      goto(".", { replaceState: true });
     }
   });
 </script>
