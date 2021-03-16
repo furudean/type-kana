@@ -7,7 +7,7 @@
 
   :root {
     --standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
-    --standard-border-radius: 10px;
+    --standard-border-radius: 0.75rem;
   }
 
   body {
@@ -24,6 +24,7 @@
       "Hiragino Kaku Gothic Pro", Osaka, メイリオ, Meiryo, "ＭＳ Ｐゴシック",
       "MS PGothic", "ＭＳ ゴシック", "MS Gothic", "Noto Sans CJK JP",
       TakaoPGothic, sans-serif;
+    font-size: 16px;
   }
 
   * {
