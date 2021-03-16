@@ -30,7 +30,7 @@ This will install the dependencies needed, then start a live preview of the app 
 
 ## Building for production
 
-The command `npm run build` spits out a production ready build in the `build/` directory.
+The command `npm run build` spits out a production ready build in the `__sapper__/build` directory.
 
 ## Thanks to
 
