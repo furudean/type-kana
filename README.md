@@ -35,7 +35,6 @@ The command `npm run build` spits out a production ready build in the `__sapper_
 ## Thanks to
 
 * [M+ Fonts Project](https://mplus-fonts.osdn.jp/), for the M<sup>+</sup> Type-2 font used in this app
-* [RealFaviconGenerator](https://realfavicongenerator.net/), for making favicons not suck on various devices
 * [Type Kana](https://lab.fleon.org/type-kana/) and [Real Kana](https://realkana.com/), for inspiration.
 * [Material Design Icons](https://github.com/Templarian/MaterialDesign)
 * [Kenney](https://www.kenney.nl/), for free audio that I used
