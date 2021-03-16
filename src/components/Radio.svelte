@@ -9,7 +9,7 @@
 
 <div class="radio-button">
   <input type="radio" {id} {name} {value} bind:group {checked} {disabled} />
-  {#if $$slots}
+  {#if $$slots.default}
     <label for={id}>
       <slot />
     </label>

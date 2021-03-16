@@ -28,7 +28,7 @@
     {style}
     on:click
   />
-  {#if $$slots}
+  {#if $$slots.default}
     <label for={id}>
       <slot />
     </label>
