@@ -258,6 +258,7 @@
       <Link
         href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
         target="_blank"
+        rel="noopener"
         title="Open commit for current build in GitHub"
         aria-label="Open commit for current build in GitHub"
       >

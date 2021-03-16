@@ -3,8 +3,8 @@
   import { svgToDataUrl } from "@/lib/util";
 
   export let href: string;
-  export let target = "_self";
-  export let rel = "noopener";
+  export let target: string = undefined;
+  export let rel: string = undefined;
 
   const iconDataUrl = svgToDataUrl(mdiOpenInNew);
   const style = `--icon-url: url("${iconDataUrl}")`;
