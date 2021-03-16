@@ -53,7 +53,7 @@
 
   function handleInput(event: Event) {
     dispatch("input", (event as any).detail);
-    updateTooltipPosition();
+    enter();
   }
 </script>
 
@@ -85,10 +85,7 @@
     on:input={handleInput}
     on:mouseenter={enter}
     on:mouseleave={leave}
-    on:focus={() => {
-      hasFocus = true;
-      enter();
-    }}
+    on:focus={() => (hasFocus = true)}
     on:focusout={() => {
       hasFocus = false;
       leave();
