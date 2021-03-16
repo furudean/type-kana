@@ -57,7 +57,6 @@ export function createPersistentStore<T extends Record<string, any>>(
 
   /** Synchronize the Svelte store with web storage */
   function sync() {
-    console.log("sync")
     const data = storage.getItem(key);
 
     if (data === null) {
