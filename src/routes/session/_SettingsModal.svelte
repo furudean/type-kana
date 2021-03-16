@@ -160,7 +160,7 @@
         min="0"
         step="10"
         max="5000"
-        disabled={["disabled", "forgiving"].includes($settings.autoCommit)}
+        disabled={$settings.autoCommit !== "strict"}
         required
       />
       <label for="mistake-delay-setting">Mistake delay (ms)</label>
