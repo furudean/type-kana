@@ -100,7 +100,7 @@
   }
 
   // checkbox
-  .row :global(input[type="checkbox"]) {
+  .row :global(.checkbox) {
     margin-right: 20px;
     font-size: 1.25em;
   }
