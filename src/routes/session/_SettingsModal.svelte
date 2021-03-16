@@ -139,7 +139,7 @@
         bind:group={$settings.autoCommit}
         value="forgiving"
       >
-        Forgiving — Submit if correct
+        On correct answer
       </Radio>
       <br />
 
@@ -149,7 +149,7 @@
         bind:group={$settings.autoCommit}
         value="strict"
       >
-        Strict — Submit if correct <strong>or wrong</strong>
+        On correct <strong>or</strong> incorrect answer
       </Radio>
       <br />
 
@@ -173,7 +173,7 @@
       id="error-marker-setting"
       bind:checked={$settings.showErrorMarker}
     >
-      Display an icon if written answer is wrong
+      Show an "X" on wrong answer
     </Checkbox>
     <br />
 
@@ -181,7 +181,7 @@
       id="progress-bar-setting"
       bind:checked={$settings.showProgressBar}
     >
-      Show a bar that indicates completion percentage
+      Show completion progress
     </Checkbox>
 
     <fieldset>
