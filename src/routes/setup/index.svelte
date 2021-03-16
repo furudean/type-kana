@@ -214,7 +214,7 @@
     border-top: var(--border-size) solid transparent;
   }
 
-  .menu > :global(button) {
-    --icon-visual-offset-right: -5px;
+  .menu > :global(.button .svg-icon) {
+    margin-right: -0.5em;
   }
 </style>

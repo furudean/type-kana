@@ -338,10 +338,6 @@
     display: inline-block;
   }
 
-  .settings-menu > :global(button) {
-    --icon-visual-offset-left: -5px;
-  }
-
   .volume-slider {
     display: flex;
     align-items: center;
@@ -357,5 +353,9 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 3em;
+  }
+
+  .menu > :global(.button .svg-icon) {
+    margin-left: -0.5em;
   }
 </style>
