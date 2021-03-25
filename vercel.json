@@ -5,5 +5,8 @@
       "src": "package.json",
       "use": "vercel-sapper"
     }
-  ]
+  ],
+  "github": {
+    "silent": true
+  }
 }
