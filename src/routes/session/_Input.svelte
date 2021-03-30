@@ -53,13 +53,7 @@
   }
 </script>
 
-<form
-  class="answer-input"
-  on:submit={(e) => {
-    e.preventDefault();
-    handleSubmit();
-  }}
->
+<form class="answer-input" on:submit|preventDefault={handleSubmit}>
   <input
     type="text"
     class="text-field"
