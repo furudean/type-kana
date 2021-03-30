@@ -3,6 +3,8 @@ const vercel = require('@sveltejs/adapter-vercel');
 const pkg = require('./package.json');
 const autoprefixer = require('autoprefixer');
 const path = require('path');
+const replace = require('@rollup/plugin-replace');
+const child_process = require('child_process');
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
@@ -26,7 +28,18 @@ module.exports = {
           // svelte-focus-trap relies on modules that are not ESM, we need to pre-compile it
           "svelte-focus-trap"
         ]
-      }
+      },
+      plugins: [
+        replace({
+          preventAssignment: true,
+          values: {
+            'COMMIT_HASH_SHORT': child_process.execSync("git rev-parse --short HEAD")
+              .toString().trim(),
+            'COMMIT_HASH_LONG': child_process.execSync("git rev-parse HEAD")
+              .toString().trim(),
+          }
+        })
+      ],
     }
   },
 

@@ -23,6 +23,7 @@
     "wanakana": "^4.0.2"
   },
   "devDependencies": {
+    "@rollup/plugin-replace": "^2.4.2",
     "@sveltejs/adapter-vercel": "next",
     "@sveltejs/kit": "next",
     "@types/body-scroll-lock": "^2.6.1",
