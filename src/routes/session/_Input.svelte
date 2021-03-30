@@ -28,13 +28,9 @@
   }
 
   function handleInput(event: any) {
-    if (currentKana === null) {
-      return;
-    }
-    if (event.data === null) {
-      // control key was pressed
-      return;
-    }
+    if (currentKana === null) return;
+    if (event.data === null) return; // control key was pressed
+
     if (event.data === " ") {
       // space was pressed
       input = input.trim();
