@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@mdi/js": "^5.7.55",
+    "body-scroll-lock": "^3.1.5",
     "common-tags": "^1.8.0",
     "standardized-audio-context": "^25.1.11",
     "svelte-focus-trap": "^1.2.0",
@@ -29,7 +30,6 @@
     "@types/node": "^14.14.33",
     "@types/wanakana": "^4.0.0",
     "autoprefixer": "^10.0.4",
-    "body-scroll-lock": "^3.1.5",
     "postcss": "^8.2.7",
     "sass": "^1.29.0",
     "svelte": "^3.24.1",
