@@ -18,4 +18,6 @@
   <pre>{error.stack}</pre>
 {/if}
 
-<Link href=".">Go back home</Link>
+{#if status === 404}
+  <Link href=".">Go back home</Link>
+{/if}
