@@ -20,6 +20,12 @@ module.exports = {
         alias: {
           '@': path.resolve(__dirname, '/src'),
         },
+      },
+      optimizeDeps: {
+        include: [
+          // svelte-focus-trap relies on modules that are not ESM, we need to pre-compile it
+          "svelte-focus-trap"
+        ]
       }
     }
   },
