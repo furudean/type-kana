@@ -29,6 +29,7 @@
     {rel}
     {title}
     on:click
+    sapper:prefetch
   >
     <slot />
   </a>

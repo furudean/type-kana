@@ -18,7 +18,7 @@
 </script>
 
 <section class="menu">
-  <a href="setup" class="button" title="Go back">
+  <a href="setup" class="button" title="Go back" sapper:prefetch>
     <Icon path={mdiArrowLeft} />
   </a>
 
