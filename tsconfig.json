@@ -27,9 +27,6 @@
         ".svelte/dev/runtime/app/*",
         ".svelte/build/runtime/app/*"
       ],
-      "$lib/*": [
-        "src/lib/*"
-      ],
       "$service-worker": [
         ".svelte/build/runtime/service-worker"
       ]
