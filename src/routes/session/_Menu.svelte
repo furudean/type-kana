@@ -1,6 +1,6 @@
 <script lang="ts">
   import { mdiCogOutline, mdiArrowLeft, mdiRestart } from "@mdi/js";
-  import Icon from "../../components/Icon.svelte";
+  import Icon from "@/lib/Icon.svelte";
   import { createEventDispatcher, onMount } from "svelte";
   import { loadDropSound, playDropSound } from "@/lib/sound";
 
@@ -18,7 +18,7 @@
 </script>
 
 <section class="menu">
-  <a href="setup" class="button" title="Go back">
+  <a href="setup" class="button" title="Go back" sapper:prefetch>
     <Icon path={mdiArrowLeft} />
   </a>
 

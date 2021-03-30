@@ -17,7 +17,7 @@
   import { settings } from "@/stores/settings";
   import ProgressBar from "./_ProgressBar.svelte";
   import { onMount } from "svelte";
-  import { goto } from "@sapper/app";
+  import { goto } from "$app/navigation";
 
   let settingsModal: SettingsModal;
   let input: string;

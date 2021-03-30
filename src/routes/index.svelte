@@ -1,7 +1,10 @@
 <script lang="ts" context="module">
-  import type { Preload } from "@sapper/common";
+  import type { Load } from "@sveltejs/kit";
 
-  export const preload: Preload = async function (this, page, session) {
-    this.redirect(301, "setup");
+  export const load: Load = async function () {
+    return {
+      status: 302,
+      redirect: "setup",
+    };
   };
 </script>

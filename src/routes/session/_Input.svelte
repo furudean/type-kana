@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { mdiChevronRight } from "@mdi/js";
-  import Icon from "../../components/Icon.svelte";
+  import Icon from "@/lib/Icon.svelte";
   import { settings } from "@/stores/settings";
   import { getAnswers, isCorrectAnswer } from "@/lib/answer";
 
@@ -53,7 +53,13 @@
   }
 </script>
 
-<form class="answer-input" on:submit|preventDefault={handleSubmit}>
+<form
+  class="answer-input"
+  on:submit={(e) => {
+    e.preventDefault();
+    handleSubmit();
+  }}
+>
   <input
     type="text"
     class="text-field"

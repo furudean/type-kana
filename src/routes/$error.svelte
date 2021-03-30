@@ -1,10 +1,9 @@
 <script lang="ts">
-  import Link from "../components/Link.svelte";
+  import Link from "@/lib/Link.svelte";
+  import { dev } from "$app/env";
 
   export let status: number;
   export let error: Error;
-
-  const dev = process.env.NODE_ENV === "development";
 </script>
 
 <svelte:head>
@@ -19,4 +18,6 @@
   <pre>{error.stack}</pre>
 {/if}
 
-<Link href=".">Go back home</Link>
+{#if status === 404}
+  <Link href=".">Go back home</Link>
+{/if}

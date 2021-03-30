@@ -3,7 +3,7 @@
   import type { QuizItem } from "@/stores/quiz";
   import { getAnswers } from "@/lib/answer";
   import { settings } from "@/stores/settings";
-  import Icon from "../../components/Icon.svelte";
+  import Icon from "@/lib/Icon.svelte";
   import { mdiClose as errorMarkerIcon } from "@mdi/js";
 
   export let unquizzed: QuizItem[];
