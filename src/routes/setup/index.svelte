@@ -1,9 +1,9 @@
 <script lang="ts">
   import Column from "./_Column.svelte";
   import { gameConfig } from "@/stores/game-config";
-  import Radio from "../../components/Radio.svelte";
-  import Button from "../../components/Button.svelte";
-  import Icon from "../../components/Icon.svelte";
+  import Radio from "@/lib/Radio.svelte";
+  import Button from "@/lib/Button.svelte";
+  import Icon from "@/lib/Icon.svelte";
   import { mdiArrowRight } from "@mdi/js";
   import { dictionary } from "@/stores/dictionary";
   import { onMount, tick } from "svelte";
@@ -13,6 +13,7 @@
     playDropSound,
   } from "@/lib/sound";
   import { quiz } from "@/stores/quiz";
+  import { browser } from "$app/env";
 
   let menuElement: HTMLElement;
   let menuHeight = 0;
@@ -30,7 +31,7 @@
   }
 
   onMount(async () => {
-    if (process.browser) {
+    if (browser) {
       loadCheckboxSelectSound();
       loadDropSound();
       await tick();

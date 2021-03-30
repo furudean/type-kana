@@ -1,30 +1,44 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
-  "include": [
-    "src/**/*",
-    "src/node_modules/**/*"
-  ],
-  "exclude": [
-    "node_modules/*",
-    "__sapper__/*",
-    "static/*"
-  ],
   "compilerOptions": {
-    "lib": [
-      "DOM",
-      "ES2020",
-      "WebWorker"
-    ],
-    "target": "ES2020",
-    "baseUrl": "./",
+    "moduleResolution": "node",
+    "target": "es2020",
+    /**
+      svelte-preprocess cannot figure out whether you have a value or a type, so tell TypeScript
+      to enforce using \`import type\` instead of \`import\` for Types.
+    */
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true,
+    /**
+      To have warnings/errors of the Svelte compiler at the correct position,
+      enable source maps by default.
+    */
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "allowJs": true,
+    "checkJs": true,
     "paths": {
       "@/*": [
-        "src/*"
+        "src/*",
+      ],
+      "$app/*": [
+        ".svelte/dev/runtime/app/*",
+        ".svelte/build/runtime/app/*"
+      ],
+      "$lib/*": [
+        "src/lib/*"
+      ],
+      "$service-worker": [
+        ".svelte/build/runtime/service-worker"
       ]
-    },
-    "typeRoots": [
-      "node_modules/@types",
-      "src/typings/**"
-    ]
-  }
+    }
+  },
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.js",
+    "src/**/*.ts",
+    "src/**/*.svelte"
+  ]
 }

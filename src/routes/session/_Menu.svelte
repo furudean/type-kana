@@ -1,6 +1,6 @@
 <script lang="ts">
   import { mdiCogOutline, mdiArrowLeft, mdiRestart } from "@mdi/js";
-  import Icon from "../../components/Icon.svelte";
+  import Icon from "@/lib/Icon.svelte";
   import { createEventDispatcher, onMount } from "svelte";
   import { loadDropSound, playDropSound } from "@/lib/sound";
 

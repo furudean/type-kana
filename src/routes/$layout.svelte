@@ -4,7 +4,7 @@
   import { getAudioContext, getRootGain } from "@/lib/audio";
   import Theme from "../styles/Theme.svelte";
   import Global from "../styles/Global.svelte";
-  import { settings } from "../stores/settings";
+  import { settings } from "@/stores/settings";
 
   onMount(() => {
     resolvedTheme.subscribe((theme) => {

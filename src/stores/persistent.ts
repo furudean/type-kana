@@ -1,4 +1,6 @@
-import { Writable, writable } from "svelte/store";
+import { writable } from "svelte/store";
+import type { Writable } from "svelte/store";
+import { browser } from "$app/env";
 
 export interface Options {
   /** Key to save as in storage */
@@ -27,7 +29,7 @@ const defaultOptions: Partial<Options> = {
 
 // Modified code from: https://svelte.dev/repl/7b4d6b448f8c4ed2b3d5a3c31260be2a?version=3.35.0
 
-const client = process.browser;
+const client = browser;
 
 export function createPersistentStore<T extends Record<string, any>>(
   options: Options,

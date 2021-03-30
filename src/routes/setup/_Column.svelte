@@ -3,7 +3,7 @@
   import KanaCheckbox from "./_KanaCheckbox.svelte";
   import KanaCheckboxSpacer from "./_KanaCheckboxSpacer.svelte";
   import { playCheckboxSelectSeriesSound } from "@/lib/sound";
-  import Checkbox from "../../components/Checkbox.svelte";
+  import Checkbox from "@/lib/Checkbox.svelte";
 
   export let rows: KanaCheckboxRow[];
   export let label: string;
