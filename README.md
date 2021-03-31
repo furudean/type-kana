@@ -1,12 +1,12 @@
 # [Type Kana](https://type-kana.cass.moe/)
 
-<img src="assets/logo.png" 
+<img src="static/icon.png" 
   width="128" 
   height="128" 
   align="right" 
   alt="Type Kana logo" />
 
-A quiz app to help you learn 
+A quiz app to help you learn
 <ruby>
 ひらがな<rp>(</rp><rt>hiragana</rt><rp>)</rp>
 </ruby>
@@ -30,12 +30,11 @@ This will install the dependencies needed, then start a live preview of the app 
 
 ## Building for production
 
-The command `npm run build` spits out a production ready build in the `build/` directory.
+The command `npm run build` spits out a production ready build in the `__sapper__/build` directory.
 
 ## Thanks to
 
-* [M+ Fonts Project](https://mplus-fonts.osdn.jp/), for the M<sup>+</sup> Type-2 font used in this app
-* [RealFaviconGenerator](https://realfavicongenerator.net/), for making favicons not suck on various devices
-* [Type Kana](https://lab.fleon.org/type-kana/) and [Real Kana](https://realkana.com/), for inspiration.
-* [Material Design Icons](https://github.com/Templarian/MaterialDesign)
-* [Kenney](https://www.kenney.nl/), for free audio that I used
+- [M+ Fonts Project](https://mplus-fonts.osdn.jp/), for the M<sup>+</sup> Type-2 font used in this app
+- [Type Kana](https://lab.fleon.org/type-kana/) and [Real Kana](https://realkana.com/), for inspiration.
+- [Material Design Icons](https://github.com/Templarian/MaterialDesign)
+- [Kenney](https://www.kenney.nl/), for free audio that I used

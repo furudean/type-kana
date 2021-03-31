@@ -1,0 +1,62 @@
+@font-face {
+	font-family: "M+ 2p";
+	font-style: normal;
+	font-weight: 100;
+	src: local("M+ 2p thin"), local("mplus-2p-thin"),
+		url("mplus-2p-thin.ttf") format("truetype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "M+ 2p";
+	font-style: normal;
+	font-weight: 300;
+	src: local("M+ 2p light"), local("mplus-2p-light"),
+		url("mplus-2p-light.ttf") format("truetype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "M+ 2p";
+	font-style: normal;
+	font-weight: 400;
+	src: local("M+ 2p regular"), local("mplus-2p-regular"),
+		url("mplus-2p-regular.ttf") format("truetype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "M+ 2p";
+	font-style: normal;
+	font-weight: 500;
+	src: local("M+ 2p medium"), local("mplus-2p-medium"),
+		url("mplus-2p-medium.ttf") format("truetype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "M+ 2p";
+	font-style: normal;
+	font-weight: 700;
+	src: local("M+ 2p bold"), local("mplus-2p-bold"),
+		url("mplus-2p-bold.ttf") format("truetype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "M+ 2p";
+	font-style: normal;
+	font-weight: 800;
+	src: local("M+ 2p heavy"), local("mplus-2p-heavy"),
+		url("mplus-2p-heavy.ttf") format("truetype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "M+ 2p";
+	font-style: normal;
+	font-weight: 900;
+	src: local("M+ 2p black"), local("mplus-2p-black"),
+		url("mplus-2p-black.ttf") format("truetype");
+	font-display: swap;
+}

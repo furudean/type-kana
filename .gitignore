@@ -1,8 +1,8 @@
-/node_modules/
-/build/
-
 .DS_Store
-
-.vscode/
-.env
-.secrets
+node_modules
+/.vercel
+/.svelte
+/build
+/functions
+/.vercel_build_output
+.vercel

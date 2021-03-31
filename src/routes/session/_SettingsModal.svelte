@@ -1,347 +1,354 @@
 <script lang="ts">
-  import { focusTrap } from "svelte-focus-trap";
-  import { settings } from "@/stores/settings";
-  import { osTheme } from "@/stores/theme";
-  import {
-    loadTapSound,
-    playMaximizeSound,
-    playMinimizeSound,
-    playTapSound,
-  } from "@/lib/sound";
-  import { fade, fly } from "svelte/transition";
-  import { cubicOut } from "svelte/easing";
-  import { onMount, onDestroy } from "svelte";
-  import { onClickOutside } from "@/lib/clickOutside";
-  import Button from "../../components/Button.svelte";
-  import {
-    mdiArrowLeft,
-    mdiVolumeOff,
-    mdiVolumeMedium,
-    mdiVolumeHigh,
-  } from "@mdi/js";
-  import Icon from "../../components/Icon.svelte";
-  import Range from "../../components/Range.svelte";
-  import { throttle } from "@/lib/util";
-  import Checkbox from "../../components/Checkbox.svelte";
-  import Radio from "../../components/Radio.svelte";
-  import { commitHashShort, commitHashLong } from "@/lib/version";
-  import Link from "../../components/Link.svelte";
-  import { scrollLock } from "@/lib/scollLock";
+	import { focusTrap } from "svelte-focus-trap"
+	import { settings } from "@/stores/settings"
+	import { osTheme } from "@/stores/theme"
+	import {
+		loadTapSound,
+		playMaximizeSound,
+		playMinimizeSound,
+		playTapSound
+	} from "@/lib/sound"
+	import { fade, fly } from "svelte/transition"
+	import { cubicOut } from "svelte/easing"
+	import { onMount, onDestroy } from "svelte"
+	import { onClickOutside } from "@/lib/clickOutside"
+	import Button from "@/lib/Button.svelte"
+	import {
+		mdiArrowLeft,
+		mdiVolumeOff,
+		mdiVolumeMedium,
+		mdiVolumeHigh
+	} from "@mdi/js"
+	import Icon from "@/lib/Icon.svelte"
+	import Range from "@/lib/Range.svelte"
+	import { throttle } from "@/lib/util"
+	import Checkbox from "@/lib/Checkbox.svelte"
+	import Radio from "@/lib/Radio.svelte"
+	import { commitHashShort, commitHashLong } from "@/lib/version"
+	import Link from "@/lib/Link.svelte"
+	import { scrollLock } from "@/lib/scollLock"
 
-  let isOpen = false;
-  let resetOnClose = false;
+	let isOpen = false
+	let resetOnClose = false
 
-  export function open() {
-    if (!isOpen) {
-      isOpen = true;
-      playMaximizeSound();
-    }
-  }
-  export function close() {
-    if (isOpen) {
-      isOpen = false;
-      playMinimizeSound();
+	export function open() {
+		if (!isOpen) {
+			isOpen = true
+			playMaximizeSound()
+		}
+	}
+	export function close() {
+		if (isOpen) {
+			isOpen = false
+			playMinimizeSound()
 
-      if (resetOnClose) {
-        localStorage.clear();
-        location.reload();
-      }
-    }
-  }
+			if (resetOnClose) {
+				localStorage.clear()
+				sessionStorage.clear()
+				location.reload()
+			}
+		}
+	}
 
-  function keyPress(event: KeyboardEvent) {
-    // avoid events during IME composition
-    if (event.isComposing) {
-      return;
-    }
-    // close modal if escape is hit
-    if (isOpen && event.key === "Escape") {
-      close();
-    }
-  }
+	function keyPress(event: KeyboardEvent) {
+		// avoid events during IME composition
+		if (event.isComposing) {
+			return
+		}
+		// close modal if escape is hit
+		if (isOpen && event.key === "Escape") {
+			close()
+		}
+	}
 
-  let volumeIconPath: string;
-  let volumeIconViewBox: string;
-  let volumeIconColor: string;
+	let volumeIconPath: string
+	let volumeIconViewBox: string
+	let volumeIconColor: string
 
-  const unsubscribe = settings.subscribe(($settings) => {
-    const vol = $settings.volume;
-    if (vol === 0) {
-      volumeIconPath = mdiVolumeOff;
-      volumeIconViewBox = "0 0 24 24";
-      volumeIconColor = "var(--highlight-color)";
-    } else if (vol < 50) {
-      volumeIconPath = mdiVolumeMedium;
-      volumeIconViewBox = "2 0 24 24";
-      volumeIconColor = "currentColor";
-    } else if (vol >= 50) {
-      volumeIconPath = mdiVolumeHigh;
-      volumeIconViewBox = "0 0 24 24";
-      volumeIconColor = "currentColor";
-    }
-  });
+	const unsubscribe = settings.subscribe(({ volume }) => {
+		if (volume === 0) {
+			volumeIconPath = mdiVolumeOff
+			volumeIconViewBox = "0 0 24 24"
+			volumeIconColor = "var(--highlight-color)"
+		} else if (volume < 50) {
+			volumeIconPath = mdiVolumeMedium
+			volumeIconViewBox = "2 0 24 24"
+			volumeIconColor = "currentColor"
+		} else if (volume >= 50) {
+			volumeIconPath = mdiVolumeHigh
+			volumeIconViewBox = "0 0 24 24"
+			volumeIconColor = "currentColor"
+		}
+	})
 
-  onDestroy(unsubscribe);
+	onDestroy(unsubscribe)
 
-  const playTapSoundThrottled = throttle(playTapSound, 80);
+	const playTapSoundThrottled = throttle(playTapSound, 80)
 
-  onMount(() => {
-    loadTapSound();
-  });
+	onMount(() => {
+		loadTapSound()
+	})
 </script>
 
 <svelte:window on:keyup={keyPress} />
 
 {#if isOpen}
-  <div
-    class="overlay"
-    aria-hidden="true"
-    transition:fade={{ duration: 500, easing: cubicOut }}
-  />
-  <section
-    class="settings-menu"
-    use:onClickOutside={close}
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="settings-heading"
-    use:focusTrap
-    use:scrollLock
-    transition:fly={{ duration: 400, easing: cubicOut, y: -150 }}
-  >
-    <h1 id="settings-heading">Settings</h1>
+	<div
+		class="overlay"
+		aria-hidden="true"
+		transition:fade={{ duration: 500, easing: cubicOut }}
+	/>
+	<section
+		class="settings-menu"
+		use:onClickOutside={close}
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="settings-heading"
+		use:focusTrap
+		use:scrollLock
+		transition:fly={{ duration: 400, easing: cubicOut, y: -150 }}
+	>
+		<h1 id="settings-heading">Settings</h1>
 
-    <hr />
+		<hr />
 
-    <h2>Quiz</h2>
-    <Checkbox
-      id="retry-incorrect-answers-setting"
-      bind:checked={$settings.retryIncorrectAnswers}
-    /><label for="retry-incorrect-answers-setting">
-      Put incorrect answers back in queue
-    </label>
+		<h2>Quiz</h2>
+		<Checkbox
+			id="retry-incorrect-answers-setting"
+			bind:checked={$settings.retryIncorrectAnswers}
+		>
+			Put incorrect answers back in queue
+		</Checkbox>
 
-    <fieldset>
-      <legend>Auto submit</legend>
+		<fieldset>
+			<legend>Auto submit</legend>
 
-      <Radio
-        id="auto-commit-disabled-choice"
-        name="auto-commit-choice"
-        bind:group={$settings.autoCommit}
-        value="disabled"
-      /><label for="auto-commit-disabled-choice">Disabled</label>
-      <br />
+			<Radio
+				id="auto-commit-disabled-choice"
+				name="auto-commit-choice"
+				bind:group={$settings.autoCommit}
+				value="disabled"
+			>
+				Disabled
+			</Radio>
+			<br />
 
-      <Radio
-        id="auto-commit-lazy-choice"
-        name="auto-commit-choice"
-        bind:group={$settings.autoCommit}
-        value="lazy"
-      /><label for="auto-commit-lazy-choice">Lazy mode</label>
-      <br />
+			<Radio
+				id="auto-commit-forgiving-choice"
+				name="auto-commit-choice"
+				bind:group={$settings.autoCommit}
+				value="forgiving"
+			>
+				On correct answer
+			</Radio>
+			<br />
 
-      <Radio
-        id="auto-commit-strict-choice"
-        name="auto-commit-choice"
-        bind:group={$settings.autoCommit}
-        value="strict"
-      /><label for="auto-commit-strict-choice">Strict mode</label>
-    </fieldset>
+			<Radio
+				id="auto-commit-strict-choice"
+				name="auto-commit-choice"
+				bind:group={$settings.autoCommit}
+				value="strict"
+			>
+				On correct <strong>or</strong> incorrect answer
+			</Radio>
+			<br />
 
-    <hr />
+			<input
+				id="mistake-delay-setting"
+				type="number"
+				bind:value={$settings.mistakeDelayMs}
+				min="0"
+				step="10"
+				max="5000"
+				disabled={$settings.autoCommit !== "strict"}
+				required
+			/>
+			<label for="mistake-delay-setting">Mistake delay (ms)</label>
+		</fieldset>
 
-    <h2>Appearance</h2>
-    <Checkbox
-      id="error-marker-setting"
-      bind:checked={$settings.showErrorMarker}
-    /><label for="error-marker-setting">
-      Display an icon if written answer is wrong
-    </label>
-    <br />
+		<hr />
 
-    <Checkbox
-      id="progress-bar-setting"
-      bind:checked={$settings.showProgressBar}
-    /><label for="progress-bar-setting">
-      Show a bar that indicates completion percentage
-    </label>
+		<h2>Appearance</h2>
+		<Checkbox
+			id="error-marker-setting"
+			bind:checked={$settings.showErrorMarker}
+		>
+			Show an "X" if input does not match answer
+		</Checkbox>
+		<br />
 
-    <fieldset>
-      <legend>Theme</legend>
+		<Checkbox id="progress-bar-setting" bind:checked={$settings.showProgressBar}
+			>Show completion progress</Checkbox
+		>
 
-      <Radio
-        id="same-as-system-theme-choice"
-        name="theme-choice"
-        bind:group={$settings.theme}
-        value="same-as-system"
-      /><label for="same-as-system-theme-choice">
-        Same as system ({$osTheme})
-      </label>
-      <br />
+		<fieldset>
+			<legend>Theme</legend>
 
-      <Radio
-        id="light-theme-choice"
-        name="theme-choice"
-        bind:group={$settings.theme}
-        value="light"
-      /><label for="light-theme-choice">Light</label>
-      <br />
+			<Radio
+				id="same-as-system-theme-choice"
+				name="theme-choice"
+				bind:group={$settings.theme}
+				value="same-as-system"
+			>
+				Same as system ({$osTheme})
+			</Radio>
+			<br />
 
-      <Radio
-        id="dark-theme-choice"
-        name="theme-choice"
-        bind:group={$settings.theme}
-        value="dark"
-      /><label for="dark-theme-choice">Dark</label>
-    </fieldset>
+			<Radio
+				id="light-theme-choice"
+				name="theme-choice"
+				bind:group={$settings.theme}
+				value="light">Light</Radio
+			>
+			<br />
 
-    <hr />
+			<Radio
+				id="dark-theme-choice"
+				name="theme-choice"
+				bind:group={$settings.theme}
+				value="dark">Dark</Radio
+			>
+		</fieldset>
 
-    <h2>Audio</h2>
-    <label for="audio-volume-setting" class="sr-only">Volume (%)</label>
-    <div class="volume-slider">
-      <Icon
-        title="Volume icon"
-        bind:path={volumeIconPath}
-        bind:viewBox={volumeIconViewBox}
-        color={volumeIconColor}
-        size="1.5em"
-        ariaHidden={true}
-      />
-      <Range
-        id="audio-volume-setting"
-        bind:value={$settings.volume}
-        min={0}
-        max={100}
-        tooltip={true}
-        unit="%"
-        width="200px"
-        on:input={playTapSoundThrottled}
-      />
-    </div>
+		<hr />
 
-    <hr />
+		<h2>Audio</h2>
+		<label for="audio-volume-setting" class="sr-only">Volume (%)</label>
+		<div class="volume-slider">
+			<Icon
+				title="Volume icon"
+				bind:path={volumeIconPath}
+				bind:viewBox={volumeIconViewBox}
+				color={volumeIconColor}
+				size="1.5em"
+				ariaHidden={true}
+			/>
+			<Range
+				id="audio-volume-setting"
+				bind:value={$settings.volume}
+				min={0}
+				max={100}
+				tooltip="[value]%"
+				width="200px"
+				on:input={playTapSoundThrottled}
+			/>
+		</div>
 
-    <h2>Danger zone</h2>
-    <Checkbox id="reset-on-close-setting" bind:checked={resetOnClose} /><label
-      for="reset-on-close-setting"
-    >
-      Reset all saved data after closing settings
-    </label>
+		<hr />
 
-    <hr />
+		<h2>Danger zone</h2>
+		<Checkbox id="reset-on-close-setting" bind:checked={resetOnClose}>
+			Reset all saved data after closing settings
+		</Checkbox>
 
-    <section class="menu">
-      <Button on:click={close}>
-        <Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
-        Done
-      </Button>
-      <Link
-        href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
-        target="_blank"
-        title="Open commit for current build in GitHub"
-        aria-label="Open commit for current build in GitHub"
-      >
-        build {commitHashShort}
-      </Link>
-    </section>
-  </section>
+		<hr />
+
+		<section class="menu">
+			<Button on:click={close}>
+				<Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
+				Done
+			</Button>
+			<Link
+				href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
+				target="_blank"
+				rel="noopener"
+				title="Open commit for current build in GitHub"
+				aria-label="Open commit for current build in GitHub"
+			>
+				build {commitHashShort}
+			</Link>
+		</section>
+	</section>
 {/if}
 
 <style lang="scss">
-  .overlay {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--overlay-background-color);
-  }
+	.overlay {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: var(--overlay-background-color);
+	}
 
-  .settings-menu {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--background-color);
-    padding: 0 2em;
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
-    box-sizing: border-box;
-    width: 700px;
-    max-width: 100%;
-    overflow-y: scroll;
-    max-height: 85%;
+	.settings-menu {
+		position: fixed;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		background: var(--background-color);
+		padding: 0 2em;
+		border-bottom-left-radius: 1em;
+		border-bottom-right-radius: 1em;
+		box-sizing: border-box;
+		width: 700px;
+		max-width: 100%;
+		overflow-y: scroll;
+		max-height: 85%;
 
-    // https://github.com/w3c/csswg-drafts/issues/129
-    &:after {
-      content: "";
-      display: block;
-      height: 4em;
-    }
-  }
+		// https://github.com/w3c/csswg-drafts/issues/129
+		&:after {
+			content: "";
+			display: block;
+			height: 4em;
+		}
+	}
 
-  @media screen and (max-width: 700px) {
-    .settings-menu {
-      max-height: 100%;
-      border-radius: 0;
-      left: 0;
-      transform: none;
-    }
-  }
+	@media screen and (max-width: 700px) {
+		.settings-menu {
+			max-height: 100%;
+			border-radius: 0;
+			left: 0;
+			transform: none;
+		}
+	}
 
-  .settings-menu {
-    :global(input[type="checkbox"]),
-    :global(input[type="radio"]) {
-      margin: 1em 0 1em 1em;
-    }
-    :global(input[type="checkbox"] + label),
-    :global(input[type="radio"] + label) {
-      user-select: none;
-      padding-left: 1em;
-    }
-    :global(input[type="checkbox"]:not(:disabled) + label),
-    :global(input[type="radio"]:not(:disabled) + label) {
-      cursor: pointer;
-    }
-  }
+	.settings-menu {
+		:global(.checkbox),
+		:global(.radio-button) {
+			margin-left: 1em;
+			margin-right: 1em;
+			margin-bottom: 1.5em;
+		}
+	}
 
-  fieldset {
-    appearance: none;
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
+	fieldset {
+		appearance: none;
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
 
-  legend {
-    padding: 0;
-    margin: 1em 0 0.5em;
-    font-size: 1.2em;
-    font-weight: normal;
-  }
+	legend {
+		padding: 0;
+		margin-bottom: 1em;
+		font-size: 1.2em;
+		font-weight: normal;
+	}
 
-  label {
-    display: inline-block;
-  }
+	label {
+		display: inline-block;
+	}
 
-  .settings-menu > :global(button) {
-    --icon-visual-offset-left: -5px;
-  }
+	.volume-slider {
+		display: flex;
+		align-items: center;
+		margin-bottom: 1em;
 
-  .volume-slider {
-    display: flex;
-    align-items: center;
-    margin-top: 1em;
+		> :global(:first-child) {
+			margin-right: 0.5em;
+		}
+	}
 
-    :global(:first-child) {
-      margin-right: 0.5em;
-    }
-  }
+	.menu {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 3em;
+	}
 
-  .menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 3em;
-  }
+	.menu > :global(.button .svg-icon) {
+		margin-left: -0.5em;
+	}
 </style>
