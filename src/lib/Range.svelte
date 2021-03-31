@@ -7,7 +7,7 @@
 	export let value: number
 	export let min: string | number = 0
 	export let max: string | number = 100
-	export let step: string | number = undefined
+	export let step: string | number = 1
 	export let list: string | undefined = undefined
 
 	export let width = "100%"
@@ -18,6 +18,7 @@
 
 	let rangeElement: HTMLElement
 
+	let precision = Number(step) < 1 ? step.toString().split(".")[1].length : 0
 	let hasTooltip = !["false", "no"].includes(tooltip.toString())
 	let hasFocus = false
 	let isTooltipVisible = false
@@ -68,7 +69,7 @@
 			transition:fade={{ duration: 125, easing: cubicOut }}
 		>
 			{typeof tooltip === "string" && !["yes", "true"].includes(tooltip)
-				? tooltip.replace("[value]", value.toString())
+				? tooltip.replace("[value]", value.toFixed(precision))
 				: value}
 		</div>
 	{/if}
