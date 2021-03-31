@@ -12,7 +12,7 @@
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
 		"start": "svelte-kit start",
-		"validate": "svelte-check",
+		"check": "svelte-check",
 		"lint": "prettier --check .",
 		"format": "prettier --write ."
 	},
