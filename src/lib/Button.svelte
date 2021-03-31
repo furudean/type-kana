@@ -9,11 +9,28 @@
 </script>
 
 {#if !href}
-	<button type="button" class="button" class:disabled {title} {disabled} on:click>
+	<button
+		type="button"
+		class="button"
+		class:disabled
+		{title}
+		{disabled}
+		on:click
+	>
 		<slot />
 	</button>
 {:else}
-	<a {href} class="button" class:disabled aria-disabled={disabled} {target} {rel} {title} on:click sapper:prefetch>
+	<a
+		{href}
+		class="button"
+		class:disabled
+		aria-disabled={disabled}
+		{target}
+		{rel}
+		{title}
+		on:click
+		sapper:prefetch
+	>
 		<slot />
 	</a>
 {/if}
@@ -35,9 +52,12 @@
 		background: var(--accent-color);
 		border: var(--border-size) solid transparent;
 		border-radius: var(--standard-border-radius);
-		padding: calc(var(--padding-vertical) - var(--border-size)) calc(var(--padding-horizontal) - var(--border-size));
-		transition: transform 50ms var(--standard-transition), color 125ms var(--standard-transition),
-			background-color 125ms var(--standard-transition), border-color 125ms var(--standard-transition);
+		padding: calc(var(--padding-vertical) - var(--border-size))
+			calc(var(--padding-horizontal) - var(--border-size));
+		transition: transform 50ms var(--standard-transition),
+			color 125ms var(--standard-transition),
+			background-color 125ms var(--standard-transition),
+			border-color 125ms var(--standard-transition);
 	}
 
 	.button:not(.disabled) {

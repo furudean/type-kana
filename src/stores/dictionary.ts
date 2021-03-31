@@ -18,16 +18,19 @@ export const selectedKana = derived(gameConfig, ($columns) => {
 	]
 })
 
-export const dictionary = derived([selectedKana, gameConfig], ([$selectedKana, $gameConfig]): string[] => {
-	const { kanaType } = $gameConfig
-	const result: string[] = []
+export const dictionary = derived(
+	[selectedKana, gameConfig],
+	([$selectedKana, $gameConfig]): string[] => {
+		const { kanaType } = $gameConfig
+		const result: string[] = []
 
-	if (kanaType === "hiragana" || kanaType === "both") {
-		result.push(...$selectedKana)
-	}
-	if (kanaType === "katakana" || kanaType === "both") {
-		result.push(...$selectedKana.map((kana) => toKatakana(kana)))
-	}
+		if (kanaType === "hiragana" || kanaType === "both") {
+			result.push(...$selectedKana)
+		}
+		if (kanaType === "katakana" || kanaType === "both") {
+			result.push(...$selectedKana.map((kana) => toKatakana(kana)))
+		}
 
-	return result
-})
+		return result
+	}
+)

@@ -33,12 +33,18 @@
 		{#if currentItem}
 			<QuizItemComponent kana={currentItem.kana} />
 		{/if}
-		<div class="error-marker" class:visible={errorMarkerVisible} aria-hidden={!errorMarkerVisible}>
+		<div
+			class="error-marker"
+			class:visible={errorMarkerVisible}
+			aria-hidden={!errorMarkerVisible}
+		>
 			<Icon path={errorMarkerIcon} />
 		</div>
 	</div>
 	<div class="kana-quizzed">
-		{#each [...quizzed].reverse().slice(0, 15) as { kana, answered, isCorrectAnswer }}
+		{#each [...quizzed]
+			.reverse()
+			.slice(0, 15) as { kana, answered, isCorrectAnswer }}
 			<QuizItemComponent {kana} {answered} {isCorrectAnswer} />
 		{/each}
 	</div>

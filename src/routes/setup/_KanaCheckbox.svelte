@@ -28,7 +28,9 @@
 		class:hiragana={kanaType === "hiragana"}
 		class:katakana={kanaType === "katakana" || kanaType === "both"}
 	>
-		{kanaType === "katakana" || kanaType === "both" ? toKatakana(item.kana) : item.kana}
+		{kanaType === "katakana" || kanaType === "both"
+			? toKatakana(item.kana)
+			: item.kana}
 	</div>
 	{#if kanaType === "both" && item.checked}
 		<div class="block hiragana popover" aria-hidden="true">
@@ -67,7 +69,8 @@
 		background: var(--background-color);
 		border: $border-width solid var(--text-color-lighter);
 		border-radius: var(--standard-border-radius);
-		transition: 150ms var(--standard-transition) color, 150ms var(--standard-transition) background,
+		transition: 150ms var(--standard-transition) color,
+			150ms var(--standard-transition) background,
 			70ms var(--standard-transition) border-color;
 		padding: 0.25em;
 	}

@@ -10,7 +10,8 @@
 	// the total
 	$: quizzedCorrect = quizzed.filter((item) => item.isCorrectAnswer)
 
-	$: progress = quizzedCorrect.length / (quizzedCorrect.length + unquizzed.length)
+	$: progress =
+		quizzedCorrect.length / (quizzedCorrect.length + unquizzed.length)
 
 	$: style = `margin-right: ${(1 - roundN(progress, 2)) * 100}%`
 </script>

@@ -2,13 +2,23 @@
 	import { focusTrap } from "svelte-focus-trap"
 	import { settings } from "@/stores/settings"
 	import { osTheme } from "@/stores/theme"
-	import { loadTapSound, playMaximizeSound, playMinimizeSound, playTapSound } from "@/lib/sound"
+	import {
+		loadTapSound,
+		playMaximizeSound,
+		playMinimizeSound,
+		playTapSound
+	} from "@/lib/sound"
 	import { fade, fly } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
 	import { onMount, onDestroy } from "svelte"
 	import { onClickOutside } from "@/lib/clickOutside"
 	import Button from "@/lib/Button.svelte"
-	import { mdiArrowLeft, mdiVolumeOff, mdiVolumeMedium, mdiVolumeHigh } from "@mdi/js"
+	import {
+		mdiArrowLeft,
+		mdiVolumeOff,
+		mdiVolumeMedium,
+		mdiVolumeHigh
+	} from "@mdi/js"
 	import Icon from "@/lib/Icon.svelte"
 	import Range from "@/lib/Range.svelte"
 	import { throttle } from "@/lib/util"
@@ -83,7 +93,11 @@
 <svelte:window on:keyup={keyPress} />
 
 {#if isOpen}
-	<div class="overlay" aria-hidden="true" transition:fade={{ duration: 500, easing: cubicOut }} />
+	<div
+		class="overlay"
+		aria-hidden="true"
+		transition:fade={{ duration: 500, easing: cubicOut }}
+	/>
 	<section
 		class="settings-menu"
 		use:onClickOutside={close}
@@ -99,7 +113,10 @@
 		<hr />
 
 		<h2>Quiz</h2>
-		<Checkbox id="retry-incorrect-answers-setting" bind:checked={$settings.retryIncorrectAnswers}>
+		<Checkbox
+			id="retry-incorrect-answers-setting"
+			bind:checked={$settings.retryIncorrectAnswers}
+		>
 			Put incorrect answers back in queue
 		</Checkbox>
 
@@ -126,7 +143,12 @@
 			</Radio>
 			<br />
 
-			<Radio id="auto-commit-strict-choice" name="auto-commit-choice" bind:group={$settings.autoCommit} value="strict">
+			<Radio
+				id="auto-commit-strict-choice"
+				name="auto-commit-choice"
+				bind:group={$settings.autoCommit}
+				value="strict"
+			>
 				On correct <strong>or</strong> incorrect answer
 			</Radio>
 			<br />
@@ -147,25 +169,45 @@
 		<hr />
 
 		<h2>Appearance</h2>
-		<Checkbox id="error-marker-setting" bind:checked={$settings.showErrorMarker}>
+		<Checkbox
+			id="error-marker-setting"
+			bind:checked={$settings.showErrorMarker}
+		>
 			Show an "X" if input does not match answer
 		</Checkbox>
 		<br />
 
-		<Checkbox id="progress-bar-setting" bind:checked={$settings.showProgressBar}>Show completion progress</Checkbox>
+		<Checkbox id="progress-bar-setting" bind:checked={$settings.showProgressBar}
+			>Show completion progress</Checkbox
+		>
 
 		<fieldset>
 			<legend>Theme</legend>
 
-			<Radio id="same-as-system-theme-choice" name="theme-choice" bind:group={$settings.theme} value="same-as-system">
+			<Radio
+				id="same-as-system-theme-choice"
+				name="theme-choice"
+				bind:group={$settings.theme}
+				value="same-as-system"
+			>
 				Same as system ({$osTheme})
 			</Radio>
 			<br />
 
-			<Radio id="light-theme-choice" name="theme-choice" bind:group={$settings.theme} value="light">Light</Radio>
+			<Radio
+				id="light-theme-choice"
+				name="theme-choice"
+				bind:group={$settings.theme}
+				value="light">Light</Radio
+			>
 			<br />
 
-			<Radio id="dark-theme-choice" name="theme-choice" bind:group={$settings.theme} value="dark">Dark</Radio>
+			<Radio
+				id="dark-theme-choice"
+				name="theme-choice"
+				bind:group={$settings.theme}
+				value="dark">Dark</Radio
+			>
 		</fieldset>
 
 		<hr />

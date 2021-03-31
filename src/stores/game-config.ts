@@ -12,11 +12,17 @@ function createKanaCheckbox(kana: string, checked: boolean): KanaCheckbox {
 	}
 }
 
-function createKanaCheckboxRow(kana: string[], checked: boolean): KanaCheckboxRow {
+function createKanaCheckboxRow(
+	kana: string[],
+	checked: boolean
+): KanaCheckboxRow {
 	return kana.map((kana) => createKanaCheckbox(kana, checked))
 }
 
-function createKanaCheckboxColumn(kanaRows: string[][], checked: boolean): KanaCheckboxColumn {
+function createKanaCheckboxColumn(
+	kanaRows: string[][],
+	checked: boolean
+): KanaCheckboxColumn {
 	return kanaRows.map((row) => createKanaCheckboxRow(row, checked))
 }
 
@@ -35,8 +41,14 @@ export const gameConfig = createPersistentStore<GameConfig>(
 	{
 		kanaType: "hiragana",
 		monographs: createKanaCheckboxColumn(hiragana.monographs, true),
-		monographsDiacritics: createKanaCheckboxColumn(hiragana.monographDiacritics, true),
+		monographsDiacritics: createKanaCheckboxColumn(
+			hiragana.monographDiacritics,
+			true
+		),
 		digraphs: createKanaCheckboxColumn(hiragana.digraphs, false),
-		digraphsDiacritics: createKanaCheckboxColumn(hiragana.digraphsDiacritics, false)
+		digraphsDiacritics: createKanaCheckboxColumn(
+			hiragana.digraphsDiacritics,
+			false
+		)
 	}
 )

@@ -38,6 +38,9 @@ function createOSThemeStore(): Readable<string> {
 
 export const osTheme = createOSThemeStore()
 
-export const resolvedTheme = derived([osTheme, settings], ([$osTheme, $settings]) => {
-	return $settings.theme === "same-as-system" ? $osTheme : $settings.theme
-})
+export const resolvedTheme = derived(
+	[osTheme, settings],
+	([$osTheme, $settings]) => {
+		return $settings.theme === "same-as-system" ? $osTheme : $settings.theme
+	}
+)

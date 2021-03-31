@@ -11,11 +11,23 @@
 
 	const checkedIcon = svgToDataUrl(mdiCheckBold)
 	const indeterminateIcon = svgToDataUrl(mdiMinusThick)
-	const style = `--checked-icon-url: url("${checkedIcon}");` + `--indeterminate-icon-url: url("${indeterminateIcon}");`
+	const style =
+		`--checked-icon-url: url("${checkedIcon}");` +
+		`--indeterminate-icon-url: url("${indeterminateIcon}");`
 </script>
 
 <div class="checkbox">
-	<input type="checkbox" {title} {id} bind:checked {disabled} {indeterminate} aria-label={ariaLabel} {style} on:click />
+	<input
+		type="checkbox"
+		{title}
+		{id}
+		bind:checked
+		{disabled}
+		{indeterminate}
+		aria-label={ariaLabel}
+		{style}
+		on:click
+	/>
 	{#if $$slots.default}
 		<label for={id}>
 			<slot />

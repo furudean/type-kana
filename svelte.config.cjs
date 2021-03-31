@@ -33,8 +33,14 @@ module.exports = {
 				replace({
 					preventAssignment: true,
 					values: {
-						COMMIT_HASH_SHORT: child_process.execSync("git rev-parse --short HEAD").toString().trim(),
-						COMMIT_HASH_LONG: child_process.execSync("git rev-parse HEAD").toString().trim()
+						COMMIT_HASH_SHORT: child_process
+							.execSync("git rev-parse --short HEAD")
+							.toString()
+							.trim(),
+						COMMIT_HASH_LONG: child_process
+							.execSync("git rev-parse HEAD")
+							.toString()
+							.trim()
 					}
 				})
 			]

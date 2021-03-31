@@ -22,7 +22,9 @@ export function getRootGain() {
 const audioCache = new Map<string, AudioBuffer>()
 
 /** Fetches and caches an audio file */
-export async function getAudioBuffer(urls: string | string[]): Promise<AudioBuffer> {
+export async function getAudioBuffer(
+	urls: string | string[]
+): Promise<AudioBuffer> {
 	const urlsArray = typeof urls === "string" ? [urls] : urls
 	const cachedUrl = urlsArray.find((url) => audioCache.has(url))
 
@@ -41,13 +43,18 @@ export async function getAudioBuffer(urls: string | string[]): Promise<AudioBuff
 
 			return audioBuffer
 		} catch (error) {
-			console.warn(`Failed to decode "${url}". The format is probably unsupported on this browser.`)
+			console.warn(
+				`Failed to decode "${url}". The format is probably unsupported on this browser.`
+			)
 		}
 	}
 	throw new Error(`No more urls to try: ${urlsArray.join(", ")}`)
 }
 
-export function createAudioSource(buffer: AudioBuffer, gainNode = getRootGain()) {
+export function createAudioSource(
+	buffer: AudioBuffer,
+	gainNode = getRootGain()
+) {
 	const source = getAudioContext().createBufferSource()
 	source.buffer = buffer
 

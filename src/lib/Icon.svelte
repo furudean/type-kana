@@ -9,7 +9,14 @@
 	export let ariaHidden = false
 </script>
 
-<svg class="svg-icon" {width} {height} role="img" {viewBox} aria-hidden={ariaHidden || title === undefined}>
+<svg
+	class="svg-icon"
+	{width}
+	{height}
+	role="img"
+	{viewBox}
+	aria-hidden={ariaHidden || title === undefined}
+>
 	{#if title}
 		<title>{title}</title>
 	{/if}

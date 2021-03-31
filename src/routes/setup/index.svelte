@@ -7,7 +7,11 @@
 	import { mdiArrowRight } from "@mdi/js"
 	import { dictionary } from "@/stores/dictionary"
 	import { onMount, tick } from "svelte"
-	import { loadCheckboxSelectSound, loadDropSound, playDropSound } from "@/lib/sound"
+	import {
+		loadCheckboxSelectSound,
+		loadDropSound,
+		playDropSound
+	} from "@/lib/sound"
 	import { quiz } from "@/stores/quiz"
 	import { browser } from "$app/env"
 
@@ -20,7 +24,9 @@
 	}
 
 	function updateMenuSticky() {
-		const bottomOfMenuY = Math.ceil(window.scrollY + menuElement.getBoundingClientRect().top) + menuElement.offsetHeight
+		const bottomOfMenuY =
+			Math.ceil(window.scrollY + menuElement.getBoundingClientRect().top) +
+			menuElement.offsetHeight
 		menuIsSticky = document.documentElement.scrollHeight > bottomOfMenuY
 	}
 
@@ -50,20 +56,37 @@
 <fieldset class="kana-type">
 	<legend>I want to practice...</legend>
 	<div class="radio-buttons">
-		<Radio id="kana-type-hiragana-choice" name="kana-type" bind:group={$gameConfig.kanaType} value="hiragana"
-			>Hiragana</Radio
+		<Radio
+			id="kana-type-hiragana-choice"
+			name="kana-type"
+			bind:group={$gameConfig.kanaType}
+			value="hiragana">Hiragana</Radio
 		>
-		<Radio id="kana-type-katakana-choice" name="kana-type" bind:group={$gameConfig.kanaType} value="katakana"
-			>Katakana</Radio
+		<Radio
+			id="kana-type-katakana-choice"
+			name="kana-type"
+			bind:group={$gameConfig.kanaType}
+			value="katakana">Katakana</Radio
 		>
-		<Radio id="kana-type-both-choice" name="kana-type" bind:group={$gameConfig.kanaType} value="both">Both</Radio>
+		<Radio
+			id="kana-type-both-choice"
+			name="kana-type"
+			bind:group={$gameConfig.kanaType}
+			value="both">Both</Radio
+		>
 	</div>
 </fieldset>
 <section class="columns">
 	<Column bind:rows={$gameConfig.monographs} label="Monographs" />
-	<Column bind:rows={$gameConfig.monographsDiacritics} label="Monographs with diacritics" />
+	<Column
+		bind:rows={$gameConfig.monographsDiacritics}
+		label="Monographs with diacritics"
+	/>
 	<Column bind:rows={$gameConfig.digraphs} label="Digraphs" />
-	<Column bind:rows={$gameConfig.digraphsDiacritics} label="Digraphs with diacritics" />
+	<Column
+		bind:rows={$gameConfig.digraphsDiacritics}
+		label="Digraphs with diacritics"
+	/>
 </section>
 <div class="menu-push" aria-hidden="true" style={`height: ${menuHeight}px`} />
 <section class="menu" class:is-sticky={menuIsSticky} bind:this={menuElement}>

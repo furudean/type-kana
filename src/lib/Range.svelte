@@ -61,7 +61,12 @@
 
 <div class="range" class:inline={inline || width !== "100%"}>
 	{#if hasTooltip && isTooltipVisible}
-		<div class="tooltip" aria-hidden="true" style={tooltipStyle} transition:fade={{ duration: 125, easing: cubicOut }}>
+		<div
+			class="tooltip"
+			aria-hidden="true"
+			style={tooltipStyle}
+			transition:fade={{ duration: 125, easing: cubicOut }}
+		>
 			{typeof tooltip === "string" && !["yes", "true"].includes(tooltip)
 				? tooltip.replace("[value]", value.toString())
 				: value}
@@ -193,7 +198,8 @@
 		left: 50%;
 		border-width: 4px;
 		border-style: solid;
-		border-color: var(--background-color-inverse) transparent transparent transparent;
+		border-color: var(--background-color-inverse) transparent transparent
+			transparent;
 		transform: translateX(-50%);
 	}
 </style>

@@ -14,7 +14,9 @@
 
 	function selectRow(state: boolean) {
 		return function (row: KanaCheckboxRow) {
-			return row.map((item) => (item !== null ? { ...item, checked: state } : null))
+			return row.map((item) =>
+				item !== null ? { ...item, checked: state } : null
+			)
 		}
 	}
 </script>
@@ -36,14 +38,22 @@
 		</label>
 	</div>
 	{#each rows as row}
-		<div class="row" role="row" aria-label={getAnswers(row[0].kana)[0].slice(0, row[0].kana.length) + "- sounds"}>
+		<div
+			class="row"
+			role="row"
+			aria-label={getAnswers(row[0].kana)[0].slice(0, row[0].kana.length) +
+				"- sounds"}
+		>
 			<Checkbox
 				title="Select row"
 				checked={isRowSelected(row)}
-				indeterminate={!isRowSelected(row) && row.filter((item) => item !== null).some((item) => item.checked)}
+				indeterminate={!isRowSelected(row) &&
+					row.filter((item) => item !== null).some((item) => item.checked)}
 				on:click={() => {
 					const newState = !isRowSelected(row)
-					const diffItems = row.filter((item) => item && item.checked !== newState)
+					const diffItems = row.filter(
+						(item) => item && item.checked !== newState
+					)
 					const toPlay = Math.min(diffItems.length, 4)
 
 					playCheckboxSelectSeriesSound(toPlay, newState)

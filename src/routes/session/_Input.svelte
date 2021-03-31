@@ -14,7 +14,11 @@
 	function handleSubmit() {
 		if (blocked) return
 
-		if (!isCorrectAnswer(input, currentKana) && $settings.autoCommit === "strict" && $settings.mistakeDelayMs !== 0) {
+		if (
+			!isCorrectAnswer(input, currentKana) &&
+			$settings.autoCommit === "strict" &&
+			$settings.mistakeDelayMs !== 0
+		) {
 			blocked = true
 			setTimeout(() => (blocked = false), $settings.mistakeDelayMs)
 		}
@@ -35,8 +39,10 @@
 
 		const answers = getAnswers(currentKana)
 		if (
-			($settings.autoCommit !== "disabled" && isCorrectAnswer(input, currentKana)) ||
-			($settings.autoCommit === "strict" && !answers.some((answer) => answer.startsWith(input)))
+			($settings.autoCommit !== "disabled" &&
+				isCorrectAnswer(input, currentKana)) ||
+			($settings.autoCommit === "strict" &&
+				!answers.some((answer) => answer.startsWith(input)))
 		) {
 			handleSubmit()
 		}
