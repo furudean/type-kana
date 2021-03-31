@@ -2,17 +2,17 @@
 
 /** `use:action` directive that calls `callback` when clicked outside of the element */
 export function onClickOutside(node: HTMLElement, callback: (event: MouseEvent) => void) {
-  function handleClick(event: MouseEvent) {
-    if (node && !node.contains(event.target as HTMLElement) && !event.defaultPrevented) {
-      callback(event);
-    }
-  }
+	function handleClick(event: MouseEvent) {
+		if (node && !node.contains(event.target as HTMLElement) && !event.defaultPrevented) {
+			callback(event)
+		}
+	}
 
-  document.addEventListener('click', handleClick, true);
+	document.addEventListener("click", handleClick, true)
 
-  return {
-    destroy() {
-      document.removeEventListener('click', handleClick, true);
-    }
-  }
+	return {
+		destroy() {
+			document.removeEventListener("click", handleClick, true)
+		}
+	}
 }

@@ -1,66 +1,66 @@
 <style lang="scss" global>
-  :root.light-theme,
-  :root {
-    --background-color: hsl(43, 100%, 94%);
+	:root.light-theme,
+	:root {
+		--background-color: hsl(43, 100%, 94%);
 
-    --background-contrast: hsl(43, 100%, 98%);
-    --background-contrast-light: hsl(41, 37%, 80%);
+		--background-contrast: hsl(43, 100%, 98%);
+		--background-contrast-light: hsl(41, 37%, 80%);
 
-    --text-color: hsl(165, 100%, 7%);
-    --text-color-light: hsl(41, 10%, 53%);
-    --text-color-lighter: hsl(41, 37%, 80%);
+		--text-color: hsl(165, 100%, 7%);
+		--text-color-light: hsl(41, 10%, 53%);
+		--text-color-lighter: hsl(41, 37%, 80%);
 
-    --accent-color: hsl(340, 63%, 52%);
-    --text-color-on-accent-color: white;
-    --border-color-on-accent-color: hsl(238, 61%, 8%);
+		--accent-color: hsl(340, 63%, 52%);
+		--text-color-on-accent-color: white;
+		--border-color-on-accent-color: hsl(238, 61%, 8%);
 
-    --secondary-accent-color: hsl(180, 73%, 40%);
+		--secondary-accent-color: hsl(180, 73%, 40%);
 
-    --form-element-primary-color: hsl(220, 100%, 57%);
-    --form-element-primary-color-contrast: hsl(220, 100%, 64%);
+		--form-element-primary-color: hsl(220, 100%, 57%);
+		--form-element-primary-color-contrast: hsl(220, 100%, 64%);
 
-    --form-element-secondary-color: var(--form-element-primary-color);
-    --form-element-secondary-background-color: hsl(220, 100%, 84%);
+		--form-element-secondary-color: var(--form-element-primary-color);
+		--form-element-secondary-background-color: hsl(220, 100%, 84%);
 
-    --background-color-inverse: hsl(296, 25%, 12%);
-    --text-color-inverse: white;
+		--background-color-inverse: hsl(296, 25%, 12%);
+		--text-color-inverse: white;
 
-    --focus-color: hsl(205, 94%, 75%);
+		--focus-color: hsl(205, 94%, 75%);
 
-    --highlight-color: hsl(5, 91%, 67%);
+		--highlight-color: hsl(5, 91%, 67%);
 
-    --overlay-background-color: rgba(0, 0, 0, 0.4);
-  }
+		--overlay-background-color: rgba(0, 0, 0, 0.4);
+	}
 
-  :root.dark-theme {
-    --background-color: hsl(296, 25%, 12%);
+	:root.dark-theme {
+		--background-color: hsl(296, 25%, 12%);
 
-    --background-contrast: hsl(300, 24%, 17%);
-    --background-contrast-light: hsl(300, 24%, 22%);
+		--background-contrast: hsl(300, 24%, 17%);
+		--background-contrast-light: hsl(300, 24%, 22%);
 
-    --text-color: hsl(326, 18%, 75%);
-    --text-color-light: hsl(326, 10%, 46%);
-    --text-color-lighter: hsl(326, 14%, 23%);
+		--text-color: hsl(326, 18%, 75%);
+		--text-color-light: hsl(326, 10%, 46%);
+		--text-color-lighter: hsl(326, 14%, 23%);
 
-    --accent-color: hsl(304, 65%, 40%);
-    --text-color-on-accent-color: white;
-    --border-color-on-accent-color: white;
+		--accent-color: hsl(304, 65%, 40%);
+		--text-color-on-accent-color: white;
+		--border-color-on-accent-color: white;
 
-    --secondary-accent-color: hsl(202, 87%, 40%);
+		--secondary-accent-color: hsl(202, 87%, 40%);
 
-    --form-element-primary-color: hsl(220, 100%, 57%);
-    --form-element-primary-color-contrast: hsl(220, 100%, 64%);
+		--form-element-primary-color: hsl(220, 100%, 57%);
+		--form-element-primary-color-contrast: hsl(220, 100%, 64%);
 
-    --form-element-secondary-color: white;
-    --form-element-secondary-background-color: hsl(326, 10%, 46%);
+		--form-element-secondary-color: white;
+		--form-element-secondary-background-color: hsl(326, 10%, 46%);
 
-    --background-color-inverse: hsl(43, 100%, 94%);
-    --text-color-inverse: hsl(165, 100%, 7%);
+		--background-color-inverse: hsl(43, 100%, 94%);
+		--text-color-inverse: hsl(165, 100%, 7%);
 
-    --focus-color: white;
+		--focus-color: white;
 
-    --highlight-color: hsl(27, 100%, 43%);
+		--highlight-color: hsl(27, 100%, 43%);
 
-    --overlay-background-color: rgba(255, 255, 255, 0.3);
-  }
+		--overlay-background-color: rgba(255, 255, 255, 0.3);
+	}
 </style>

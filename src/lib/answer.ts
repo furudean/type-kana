@@ -1,4 +1,4 @@
-import { toHiragana, toRomaji } from "wanakana";
+import { toHiragana, toRomaji } from "wanakana"
 
 /**
  * Replacements to answers from `wanakana.toHiragana()`, for conversions that
@@ -8,26 +8,26 @@ import { toHiragana, toRomaji } from "wanakana";
  * https://www.tofugu.com/japanese/how-to-type-in-japanese/
  */
 export const exceptionalAnswers = new Map([
-  ["し", ["shi", "si"]],
-  ["ち", ["chi", "ti"]],
-  ["つ", ["tsu", "tu"]],
-  ["ふ", ["fu", "hu"]],
+	["し", ["shi", "si"]],
+	["ち", ["chi", "ti"]],
+	["つ", ["tsu", "tu"]],
+	["ふ", ["fu", "hu"]],
 
-  ["じ", ["ji", "zi"]],
-  ["ぢ", ["di",]],
-  ["づ", ["du"]],
+	["じ", ["ji", "zi"]],
+	["ぢ", ["di"]],
+	["づ", ["du"]],
 
-  ["じゃ", ["ja", "jya"]],
-  ["じゅ", ["ju", "jyu"]],
-  ["じょ", ["jo", "jyo"]],
-]);
+	["じゃ", ["ja", "jya"]],
+	["じゅ", ["ju", "jyu"]],
+	["じょ", ["jo", "jyo"]]
+])
 
 /** Gets acceptable answers for the given kana */
 export function getAnswers(kana: string): string[] {
-  return exceptionalAnswers.get(toHiragana(kana)) ?? [toRomaji(kana)]
+	return exceptionalAnswers.get(toHiragana(kana)) ?? [toRomaji(kana)]
 }
 
 /** Checks if input matches a correct answer */
 export function isCorrectAnswer(input: string, correctAnswer: string): boolean {
-  return getAnswers(correctAnswer).includes(input);
+	return getAnswers(correctAnswer).includes(input)
 }

@@ -3,10 +3,10 @@
 /// <reference types="vite/client" />
 
 declare interface KanaCheckbox {
-  kana: string;
-  checked: boolean;
+	kana: string
+	checked: boolean
 }
 
-declare type KanaCheckboxRow = KanaCheckbox[];
+declare type KanaCheckboxRow = KanaCheckbox[]
 
-declare type KanaCheckboxColumn = KanaCheckboxRow[];
+declare type KanaCheckboxColumn = KanaCheckboxRow[]

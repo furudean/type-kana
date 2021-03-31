@@ -6,7 +6,7 @@
   align="right" 
   alt="Type Kana logo" />
 
-A quiz app to help you learn 
+A quiz app to help you learn
 <ruby>
 ひらがな<rp>(</rp><rt>hiragana</rt><rp>)</rp>
 </ruby>
@@ -34,7 +34,7 @@ The command `npm run build` spits out a production ready build in the `__sapper_
 
 ## Thanks to
 
-* [M+ Fonts Project](https://mplus-fonts.osdn.jp/), for the M<sup>+</sup> Type-2 font used in this app
-* [Type Kana](https://lab.fleon.org/type-kana/) and [Real Kana](https://realkana.com/), for inspiration.
-* [Material Design Icons](https://github.com/Templarian/MaterialDesign)
-* [Kenney](https://www.kenney.nl/), for free audio that I used
+- [M+ Fonts Project](https://mplus-fonts.osdn.jp/), for the M<sup>+</sup> Type-2 font used in this app
+- [Type Kana](https://lab.fleon.org/type-kana/) and [Real Kana](https://realkana.com/), for inspiration.
+- [Material Design Icons](https://github.com/Templarian/MaterialDesign)
+- [Kenney](https://www.kenney.nl/), for free audio that I used
