@@ -7,17 +7,17 @@
 	<title>Summary · Type Kana</title>
 </svelte:head>
 
-<h2>Correct</h2>
-{#if $summary.correct}
+{#if $summary.correct.length > 0}
+	<h2>Correct</h2>
 	<SummaryBox items={$summary.correct} />
 {/if}
 
-<h2>Incorrect</h2>
-{#if $summary.incorrect}
+{#if $summary.incorrect.length > 0}
+	<h2>Incorrect</h2>
 	<SummaryBox items={$summary.incorrect} />
 {/if}
 
-<h2>Unquizzed</h2>
-{#if $summary.unquizzed}
+{#if $summary.unquizzed.length > 0}
+	<h2>Not quizzed</h2>
 	<SummaryBox items={$summary.unquizzed} />
 {/if}
