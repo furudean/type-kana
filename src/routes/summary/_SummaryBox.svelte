@@ -1,28 +1,33 @@
 <script lang="ts">
 	import { isHiragana, isKatakana } from "wanakana"
 	import type { SummaryKana } from "@/stores/summary"
+	import { tooltip } from "renderless-svelte"
 
 	export let items: SummaryKana[]
 </script>
 
 <div class="summary-box">
-	{#each items as { kana }}
+	{#each items as item}
 		<div
 			class="summary-item"
-			class:hiragana={isHiragana(kana)}
-			class:katakana={isKatakana(kana)}
+			class:hiragana={isHiragana(item.kana)}
+			class:katakana={isKatakana(item.kana)}
+			use:tooltip={{
+				type: "summary-item",
+				item
+			}}
 		>
-			{kana}
+			{item.kana}
 		</div>
 	{/each}
 </div>
 
 <style lang="scss">
 	$gap: 1rem;
+
 	.summary-box {
 		margin-top: -$gap;
 		margin-left: -$gap;
-		padding: 0 $gap;
 	}
 
 	.summary-item {
@@ -34,6 +39,7 @@
 		font-family: "M+ 2c";
 		padding: 0.25em;
 		border-radius: var(--standard-border-radius);
+		cursor: default;
 
 		&.hiragana {
 			background: var(--accent-color);
