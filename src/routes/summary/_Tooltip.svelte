@@ -4,42 +4,51 @@
 	import { cubicOut } from "svelte/easing"
 	import { getAnswers } from "@/lib/answer"
 	import type { SummaryKana } from "@/stores/summary"
+	import { throttle } from "@/lib/util"
 
 	// modified from https://github.com/stephane-vanraes/renderless-svelte/blob/master/src/Tooltip.svelte
 
-	const item = writable<SummaryKana>(null)
-	const dimensions = writable<DOMRect>(null)
+	const focused = writable<SummaryKana>(null)
+	const rect = writable<DOMRect>(null)
 
-	export function tooltip(node: HTMLElement, _item: SummaryKana) {
-		function mouseover() {
-			document.addEventListener("scroll", scroll)
+	export function tooltip(node: HTMLElement, item: SummaryKana) {
+		function enter() {
+			document.addEventListener("scroll", updateRect)
+			window.addEventListener("resize", updateRect)
 
-			item.set(_item)
-			dimensions.set(node.getBoundingClientRect().toJSON())
+			focused.set(item)
+			rect.set(node.getBoundingClientRect())
 		}
 
-		function mouseout() {
-			document.addEventListener("scroll", scroll)
-			item.set(null)
+		function leave() {
+			document.removeEventListener("scroll", updateRect)
+			window.removeEventListener("resize", updateRect)
+
+			focused.set(null)
 		}
 
-		function scroll() {
-			dimensions.set(node.getBoundingClientRect().toJSON())
+		function updateRect() {
+			rect.set(node.getBoundingClientRect())
 		}
 
-		node.addEventListener("mouseover", mouseover)
-		node.addEventListener("mouseout", mouseout)
+		node.addEventListener("mouseover", enter)
+		node.addEventListener("mouseout", leave)
+		node.addEventListener("focus", enter)
+		node.addEventListener("blur", leave)
 
 		return {
 			destroy() {
-				node.removeEventListener("mouseover", mouseover)
-				node.removeEventListener("mouseout", mouseout)
-				document.removeEventListener("scroll", scroll)
+				node.removeEventListener("mouseover", enter)
+				node.removeEventListener("mouseout", leave)
+				node.removeEventListener("focus", enter)
+				node.removeEventListener("blur", leave)
+				document.removeEventListener("scroll", updateRect)
+				window.removeEventListener("resize", updateRect)
 
-				item.set(null)
+				focused.set(null)
 			},
 			update(_item: SummaryKana) {
-				item.set(_item)
+				focused.set(_item)
 			}
 		}
 	}
@@ -62,10 +71,10 @@
 		return `left: ${left}px; top: ${top}px;`
 	}
 
-	$: style = $dimensions && calculateStyle($dimensions)
+	$: style = $rect && calculateStyle($rect)
 </script>
 
-{#if $item}
+{#if $focused}
 	<div
 		class="tooltip"
 		{style}
@@ -73,10 +82,10 @@
 		aria-atomic="true"
 		transition:fade={{ duration: 125, easing: cubicOut }}
 	>
-		<strong>{getAnswers($item.kana).join(", ")}</strong>
-		{#if $item.incorrectTimes > 0}
+		<strong>{getAnswers($focused.kana).join(", ")}</strong>
+		{#if $focused.incorrectTimes > 0}
 			<br />
-			you wrote: {listWrongAnswers($item)}
+			you wrote: {listWrongAnswers($focused)}
 		{/if}
 	</div>
 {/if}

@@ -12,6 +12,7 @@
 
 <div class="container">
 	<a href=".">Back to start</a>
+	<a href="session">To session</a>
 
 	{#if $summary.correct.length > 0}
 		<h2>Correct</h2>

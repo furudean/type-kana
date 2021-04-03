@@ -13,6 +13,7 @@
 			class:hiragana={isHiragana(item.kana)}
 			class:katakana={isKatakana(item.kana)}
 			use:tooltip={item}
+			tabindex="0"
 		>
 			{item.kana}
 		</div>
@@ -28,15 +29,19 @@
 	}
 
 	.summary-item {
+		--border-size: 3px;
+
 		display: inline-block;
 		margin-top: $gap;
 		margin-left: $gap;
 		font-size: 1.5em;
 		line-height: 1;
 		font-family: "M+ 2c";
-		padding: 0.25em;
+		padding: calc(0.3em - var(--border-size));
 		border-radius: var(--standard-border-radius);
 		cursor: default;
+		border: var(--border-size) solid transparent;
+		transition: 70ms var(--standard-transition) border-color;
 
 		&.hiragana {
 			background: var(--accent-color);
@@ -45,6 +50,11 @@
 		&.katakana {
 			background: var(--secondary-accent-color);
 			color: var(--text-color-on-accent-color);
+		}
+
+		&:focus {
+			outline: none;
+			border-color: var(--focus-color);
 		}
 	}
 </style>
