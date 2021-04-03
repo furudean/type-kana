@@ -4,19 +4,18 @@
 	import { cubicOut } from "svelte/easing"
 	import { getAnswers } from "@/lib/answer"
 	import type { SummaryKana } from "@/stores/summary"
-	import { uniqArray } from "@/lib/util"
 
 	// modified from https://github.com/stephane-vanraes/renderless-svelte/blob/master/src/Tooltip.svelte
 
-	const item = writable<SummaryKana>(undefined)
-	const dimensions = writable<DOMRect>(undefined)
+	const item = writable<SummaryKana>(null)
+	const dimensions = writable<DOMRect>(null)
 
 	export function tooltip(node: HTMLElement, _item: SummaryKana) {
 		function mouseover() {
 			document.addEventListener("scroll", scroll)
 
 			item.set(_item)
-			dimensions.set(node.getBoundingClientRect())
+			dimensions.set(node.getBoundingClientRect().toJSON())
 		}
 
 		function mouseout() {
@@ -25,7 +24,7 @@
 		}
 
 		function scroll() {
-			dimensions.set(node.getBoundingClientRect())
+			dimensions.set(node.getBoundingClientRect().toJSON())
 		}
 
 		node.addEventListener("mouseover", mouseover)
@@ -35,12 +34,19 @@
 			destroy() {
 				node.removeEventListener("mouseover", mouseover)
 				node.removeEventListener("mouseout", mouseout)
+				document.removeEventListener("scroll", scroll)
+
+				item.set(null)
 			},
 			update(_item: SummaryKana) {
 				item.set(_item)
 			}
 		}
 	}
+</script>
+
+<script lang="ts">
+	import { uniqArray } from "@/lib/util"
 
 	function listWrongAnswers(item: SummaryKana): string {
 		return uniqArray(item.answers)
@@ -49,30 +55,28 @@
 			.join(", ")
 	}
 
-	function calculateStyle(rect: DOMRect) {
-		const left = rect.x + rect.width / 2
-		const top = rect.y + rect.height + 5
+	function calculateStyle(dim: DOMRect) {
+		const left = dim.x + dim.width / 2
+		const top = dim.y + dim.height + 5
 
 		return `left: ${left}px; top: ${top}px;`
 	}
+
+	$: style = $dimensions && calculateStyle($dimensions)
 </script>
 
 {#if $item}
 	<div
 		class="tooltip"
-		transition:fade={{ duration: 125, easing: cubicOut }}
-		style={calculateStyle($dimensions)}
+		{style}
 		aria-live="assertive"
 		aria-atomic="true"
+		transition:fade={{ duration: 125, easing: cubicOut }}
 	>
-		<strong>
-			{getAnswers($item.kana).join(", ")}
-		</strong>
-		<br />
+		<strong>{getAnswers($item.kana).join(", ")}</strong>
 		{#if $item.incorrectTimes > 0}
-			<div>
-				you wrote: {listWrongAnswers($item)}
-			</div>
+			<br />
+			you wrote: {listWrongAnswers($item)}
 		{/if}
 	</div>
 {/if}
