@@ -38,3 +38,17 @@ export function roundN(num: number, decimalPlaces: number): number {
 	const factor = 10 ** (decimalPlaces + 2)
 	return Math.round((num + Number.EPSILON) * factor) / factor
 }
+
+export function uniqBy<T>(array: T[], keyFn: (item: T) => string): T[] {
+	const seen = new Set<string>()
+	return array.filter((item) => {
+		let key = keyFn(item)
+		return seen.has(key) ? false : seen.add(key)
+	})
+}
+
+export function uniqArray<T = boolean | number | string>(array: T[]): T[] {
+	return [...array]
+		.sort()
+		.filter((item, pos, ary) => !pos || item !== ary[pos - 1])
+}

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { isHiragana, isKatakana } from "wanakana"
 	import type { SummaryKana } from "@/stores/summary"
-	import { tooltip } from "renderless-svelte"
+	import { tooltip } from "./_Tooltip.svelte"
 
 	export let items: SummaryKana[]
 </script>
@@ -12,10 +12,7 @@
 			class="summary-item"
 			class:hiragana={isHiragana(item.kana)}
 			class:katakana={isKatakana(item.kana)}
-			use:tooltip={{
-				type: "summary-item",
-				item
-			}}
+			use:tooltip={item}
 		>
 			{item.kana}
 		</div>

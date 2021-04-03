@@ -1,20 +1,7 @@
 import { derived } from "svelte/store"
 import { quiz } from "./quiz"
 import type { QuizItem } from "./quiz"
-
-function uniqBy<T>(array: T[], keyFn: (item: T) => string): T[] {
-	const seen = new Set<string>()
-	return array.filter((item) => {
-		let key = keyFn(item)
-		return seen.has(key) ? false : seen.add(key)
-	})
-}
-
-function uniqArray<T = boolean | number | string>(array: T[]): T[] {
-	return [...array]
-		.sort()
-		.filter((item, pos, ary) => !pos || item !== ary[pos - 1])
-}
+import { uniqArray, uniqBy } from "@/lib/util"
 
 export interface SummaryKana {
 	kana: string

@@ -20,7 +20,6 @@
 		"@mdi/js": "^5.7.55",
 		"body-scroll-lock": "^3.1.5",
 		"common-tags": "^1.8.0",
-		"renderless-svelte": "^1.6.0",
 		"standardized-audio-context": "^25.1.11",
 		"svelte-focus-trap": "^1.2.0",
 		"wanakana": "^4.0.2"
