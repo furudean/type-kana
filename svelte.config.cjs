@@ -26,8 +26,7 @@ module.exports = {
 			optimizeDeps: {
 				include: [
 					// svelte-focus-trap relies on modules that break dynamic imports, we need to pre-compile it
-					"svelte-focus-trap",
-					"renderless-svelte"
+					"svelte-focus-trap"
 				]
 			},
 			plugins: [
