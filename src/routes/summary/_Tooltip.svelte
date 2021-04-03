@@ -44,9 +44,16 @@
 
 	function listWrongAnswers(item: SummaryKana): string {
 		return uniqArray(item.answers)
-			.filter((s) => !getAnswers(item.kana).includes(s)) // filter wrong answers
+			.filter((s) => !getAnswers(item.kana).includes(s)) // only wrong answers
 			.map((s) => `"${s}"`)
 			.join(", ")
+	}
+
+	function calculateStyle(rect: DOMRect) {
+		const left = rect.x + rect.width / 2
+		const top = rect.y + rect.height + 5
+
+		return `left: ${left}px; top: ${top}px;`
 	}
 </script>
 
@@ -54,10 +61,7 @@
 	<div
 		class="tooltip"
 		transition:fade={{ duration: 125, easing: cubicOut }}
-		style="left: {$dimensions.x +
-			$dimensions.width / 2}px; top: {$dimensions.y +
-			$dimensions.height +
-			5}px;"
+		style={calculateStyle($dimensions)}
 		aria-live="assertive"
 		aria-atomic="true"
 	>
