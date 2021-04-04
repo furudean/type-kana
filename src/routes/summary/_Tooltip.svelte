@@ -147,7 +147,7 @@
 		padding: 0.2em 0.6em;
 		border-radius: var(--standard-border-radius);
 		user-select: none;
-		font-size: 90%;
+		font-size: 0.9em;
 		letter-spacing: 1px;
 		line-height: 1.25;
 		text-align: center;
@@ -164,6 +164,7 @@
 		text-decoration-color: var(--highlight-color);
 		text-decoration-style: dotted;
 		text-decoration-line: underline;
+		font-weight: 500;
 	}
 
 	.error:not(:last-of-type)::after {
