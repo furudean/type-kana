@@ -33,7 +33,9 @@
 
 		if (event.data === " ") {
 			// space was pressed
-			input = input.trim()
+			if (input !== " ") {
+				input = input.trim()
+			}
 			handleSubmit()
 		}
 

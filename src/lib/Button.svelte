@@ -42,7 +42,7 @@
 		--padding-horizontal: 1.5em;
 
 		all: initial;
-		display: block;
+		display: inline-block;
 		user-select: none;
 		cursor: pointer;
 		font-family: "M+ 2c";

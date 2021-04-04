@@ -25,6 +25,7 @@
 
 <style>
 	.svg-icon {
+		position: relative;
 		vertical-align: top;
 	}
 </style>
