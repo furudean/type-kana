@@ -62,7 +62,7 @@
 	}
 
 	section {
-		margin-top: 3em;
+		margin-top: calc(1.5 * var(--line-space));
 	}
 
 	section.unquizzed {
