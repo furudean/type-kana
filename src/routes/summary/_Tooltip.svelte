@@ -114,6 +114,11 @@
 {/if}
 
 <style>
+	.tooltip {
+		position: absolute;
+		z-index: 1;
+	}
+
 	.body {
 		position: absolute;
 		background: var(--background-color-inverse);
