@@ -29,7 +29,7 @@
 		{rel}
 		{title}
 		on:click
-		sapper:prefetch
+		sveltekit:prefetch
 	>
 		<slot />
 	</a>
