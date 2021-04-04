@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte"
-	import { mdiChevronRight } from "@mdi/js"
+	import { mdiChevronRight, mdiAutorenew } from "@mdi/js"
 	import Icon from "@/lib/Icon.svelte"
 	import { settings } from "@/stores/settings"
 	import { getAnswers, isCorrectAnswer } from "@/lib/answer"
@@ -51,7 +51,10 @@
 	}
 </script>
 
-<form class="answer-input" on:submit|preventDefault={handleSubmit}>
+<form
+	class="answer-input content-width"
+	on:submit|preventDefault={handleSubmit}
+>
 	<input
 		type="text"
 		class="text-field"
@@ -65,9 +68,25 @@
 		autocorrect="off"
 		spellcheck={false}
 	/>
-	<button type="submit" class="submit-button" title="Submit">
-		<Icon size="1.5em" path={mdiChevronRight} />
-	</button>
+	{#if $settings.autoCommit === "disabled"}
+		<button type="submit" class="button" title="Submit">
+			<Icon size="1em" path={mdiChevronRight} ariaHidden={true} />
+		</button>
+	{:else}
+		<button
+			type="button"
+			class="button"
+			title="Auto submit active. Tap to disable."
+			on:click={() => settings.set({ ...$settings, autoCommit: "disabled" })}
+		>
+			<Icon
+				size="0.75em"
+				path={mdiAutorenew}
+				color="var(--accent-color)"
+				ariaHidden={true}
+			/>
+		</button>
+	{/if}
 </form>
 
 <style lang="scss">
@@ -77,12 +96,12 @@
 		background-color: var(--background-contrast);
 		border-bottom: 2px solid var(--background-contrast-light);
 		border-radius: var(--standard-border-radius);
-		max-width: 40em;
 		margin: 0 auto;
+		font-size: 1.5em;
+		box-sizing: border-box;
 	}
 
 	.text-field {
-		font-size: 1.5em;
 		margin: 0;
 		width: 100%;
 		text-align: center;
@@ -92,6 +111,7 @@
 		background: none;
 		color: inherit;
 		font-family: inherit;
+		font-size: inherit;
 
 		&:focus {
 			outline: none;
@@ -105,14 +125,14 @@
 		}
 	}
 
-	.submit-button {
+	.button {
 		color: inherit;
 		background: none;
 		margin: 0;
 		border: 0;
 		padding: 0;
 		font-size: 2em;
-		width: 2em;
+		width: 1.5em;
 		height: 100%;
 		cursor: pointer;
 
