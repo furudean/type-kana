@@ -3,6 +3,10 @@
 	import SummaryBox from "./_SummaryBox.svelte"
 	import Tooltip from "./_Tooltip.svelte"
 	import Button from "@/lib/Button.svelte"
+
+	const answered = $summary.correct.length + $summary.incorrect.length
+	const accuracy = $summary.correct.length / answered
+	const total = answered + $summary.unquizzed.length
 </script>
 
 <svelte:head>
@@ -13,6 +17,13 @@
 
 <div class="container">
 	<h1>Session complete 🎉</h1>
+
+	<p>
+		{Math.round(accuracy * 100)}% correct, {answered}{answered !== total
+			? "/" + total
+			: ""}
+		answered
+	</p>
 
 	{#if $summary.correct.length > 0}
 		<section>
