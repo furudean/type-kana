@@ -2,6 +2,7 @@
 	import { summary } from "@/stores/summary"
 	import SummaryBox from "./_SummaryBox.svelte"
 	import Tooltip from "./_Tooltip.svelte"
+	import Button from "@/lib/Button.svelte"
 </script>
 
 <svelte:head>
@@ -11,31 +12,54 @@
 <Tooltip />
 
 <div class="container">
-	<a href=".">Back to start</a>
-	<a href="session">To session</a>
+	<h1>Session complete 🎉</h1>
 
 	{#if $summary.correct.length > 0}
-		<h2>Correct</h2>
-		<SummaryBox items={$summary.correct} />
+		<section>
+			<h2>Nice work</h2>
+			<SummaryBox items={$summary.correct} />
+		</section>
 	{/if}
 
 	{#if $summary.incorrect.length > 0}
-		<h2>Incorrect</h2>
-		<SummaryBox
-			items={[...$summary.incorrect]
-				.sort((a, b) => a.incorrectTimes - b.incorrectTimes)
-				.reverse()}
-		/>
+		<section class="incorrect">
+			<h2>Needs more practice</h2>
+			<SummaryBox
+				items={[...$summary.incorrect]
+					.sort((a, b) => a.incorrectTimes - b.incorrectTimes)
+					.reverse()}
+				fill={false}
+			/>
+		</section>
 	{/if}
 
 	{#if $summary.unquizzed.length > 0}
-		<h2>Not quizzed</h2>
-		<SummaryBox items={$summary.unquizzed} />
+		<section class="unquizzed">
+			<h2>Not quizzed</h2>
+			<SummaryBox items={$summary.unquizzed} fill={false} />
+		</section>
 	{/if}
+	<section>
+		<Button href=".">Start over?</Button>
+	</section>
 </div>
 
-<style>
+<style lang="scss">
 	.container {
 		padding: 0 1.5em;
+	}
+
+	section {
+		margin-top: 3em;
+	}
+
+	section.unquizzed {
+		opacity: 0.5;
+		transition: 120ms var(--standard-transition) opacity;
+
+		&:hover,
+		&:focus-within {
+			opacity: 1;
+		}
 	}
 </style>
