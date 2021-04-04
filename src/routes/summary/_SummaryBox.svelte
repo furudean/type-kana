@@ -101,5 +101,6 @@
 		font-weight: 500;
 		font-variant-numeric: tabular-nums;
 		line-height: 1;
+		user-select: none;
 	}
 </style>
