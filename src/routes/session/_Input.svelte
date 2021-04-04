@@ -12,7 +12,7 @@
 	let blocked = false
 
 	function handleSubmit() {
-		if (blocked) return
+		if (blocked && !isCorrectAnswer(input, currentKana)) return
 
 		if (
 			!isCorrectAnswer(input, currentKana) &&
