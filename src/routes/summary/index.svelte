@@ -16,7 +16,7 @@
 
 	{#if $summary.correct.length > 0}
 		<section>
-			<h2>Nice work</h2>
+			<h2>Correctly answered</h2>
 			<SummaryBox items={$summary.correct} />
 		</section>
 	{/if}
