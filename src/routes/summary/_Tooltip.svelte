@@ -72,7 +72,7 @@
 	}
 
 	function calculateBodyStyle(el: DOMRect, self: DOMRect) {
-		const top = window.scrollY + el.y + el.height + 4
+		const top = window.scrollY + el.y + el.height + 6
 		const left = clamp(
 			0,
 			window.scrollX + el.x + el.width / 2 - self.width / 2,
@@ -132,7 +132,7 @@
 		line-height: 1.25;
 		text-align: center;
 		box-sizing: border-box;
-		min-width: 2em;
+		min-width: 32px;
 		max-width: 15em;
 	}
 
@@ -140,7 +140,7 @@
 		position: absolute;
 		width: 0;
 		height: 0;
-		border-width: 0 4px 4px 4px;
+		border-width: 0 6px 6px 6px;
 		border-style: solid;
 		border-color: transparent transparent var(--background-color-inverse)
 			transparent;
