@@ -6,7 +6,7 @@
 	}
 
 	:root {
-		--standard-transition: cubic-bezier(0.4, 0, 0.2, 1);
+		--standard-curve: cubic-bezier(0.4, 0, 0.2, 1);
 		--standard-border-radius: 0.75rem;
 	}
 

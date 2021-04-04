@@ -164,7 +164,7 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
-			transition: 250ms border-color var(--standard-transition);
+			transition: 250ms border-color var(--standard-curve);
 			padding: 2em 0;
 			margin-bottom: 0 !important;
 		}

@@ -54,10 +54,10 @@
 		border-radius: var(--standard-border-radius);
 		padding: calc(var(--padding-vertical) - var(--border-size))
 			calc(var(--padding-horizontal) - var(--border-size));
-		transition: transform 50ms var(--standard-transition),
-			color 125ms var(--standard-transition),
-			background-color 125ms var(--standard-transition),
-			border-color 125ms var(--standard-transition);
+		transition: transform 50ms var(--standard-curve),
+			color 125ms var(--standard-curve),
+			background-color 125ms var(--standard-curve),
+			border-color 125ms var(--standard-curve);
 	}
 
 	.button:not(.disabled) {

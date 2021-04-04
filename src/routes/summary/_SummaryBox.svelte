@@ -50,8 +50,8 @@
 		border-radius: var(--standard-border-radius);
 		cursor: default;
 		border: var(--border-size) solid transparent;
-		transition: 70ms var(--standard-transition) color,
-			70ms var(--standard-transition) border-color;
+		transition: 70ms var(--standard-curve) color,
+			70ms var(--standard-curve) border-color;
 
 		&:focus {
 			outline: none;

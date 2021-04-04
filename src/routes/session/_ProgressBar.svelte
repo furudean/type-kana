@@ -42,6 +42,6 @@
 		bottom: 0;
 		right: 0;
 		background: var(--accent-color);
-		transition: margin-right 150ms var(--standard-transition);
+		transition: margin-right 150ms var(--standard-curve);
 	}
 </style>

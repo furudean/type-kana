@@ -97,7 +97,7 @@
 			outline: none;
 		}
 		&::placeholder {
-			transition: 250ms var(--standard-transition) color;
+			transition: 250ms var(--standard-curve) color;
 			color: var(--text-color-light);
 		}
 		&:focus::placeholder {

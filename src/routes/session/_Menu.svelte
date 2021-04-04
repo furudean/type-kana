@@ -91,10 +91,10 @@
 		cursor: pointer;
 		border-radius: 50%;
 		border: 3px dashed transparent;
-		transition: transform 50ms var(--standard-transition),
-			color 125ms var(--standard-transition),
-			background-color 125ms var(--standard-transition),
-			border-color 125ms var(--standard-transition);
+		transition: transform 50ms var(--standard-curve),
+			color 125ms var(--standard-curve),
+			background-color 125ms var(--standard-curve),
+			border-color 125ms var(--standard-curve);
 		color: var(--accent-color);
 
 		&:focus {
@@ -116,7 +116,7 @@
 
 	.button.tilt {
 		& .tilt-animation-container {
-			transition: transform 150ms var(--standard-transition);
+			transition: transform 150ms var(--standard-curve);
 		}
 		&:hover .tilt-animation-container,
 		&:focus .tilt-animation-container {
@@ -134,6 +134,6 @@
 	}
 
 	.button.reset-animation-playing .reset-animation-container {
-		animation: 500ms counter-clockwise-turn var(--standard-transition);
+		animation: 500ms counter-clockwise-turn var(--standard-curve);
 	}
 </style>

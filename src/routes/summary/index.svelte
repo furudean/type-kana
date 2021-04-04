@@ -66,7 +66,7 @@
 
 	section.unquizzed {
 		opacity: 0.33;
-		transition: 120ms var(--standard-transition) opacity;
+		transition: 120ms var(--standard-curve) opacity;
 
 		&:hover,
 		&:focus-within {

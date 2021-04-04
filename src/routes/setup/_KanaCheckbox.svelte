@@ -56,7 +56,7 @@
 		padding: 0;
 		margin: 0;
 		user-select: none;
-		transition: transform 50ms var(--standard-transition);
+		transition: transform 50ms var(--standard-curve);
 		flex-grow: 1; // grow to fill any remaining space (used for ん/ン)
 	}
 
@@ -69,9 +69,9 @@
 		background: var(--background-color);
 		border: $border-width solid var(--text-color-lighter);
 		border-radius: var(--standard-border-radius);
-		transition: 150ms var(--standard-transition) color,
-			150ms var(--standard-transition) background,
-			70ms var(--standard-transition) border-color;
+		transition: 150ms var(--standard-curve) color,
+			150ms var(--standard-curve) background,
+			70ms var(--standard-curve) border-color;
 		padding: 0.25em;
 	}
 
@@ -108,7 +108,7 @@
 		animation-name: drop;
 		animation-duration: 150ms;
 		animation-delay: 150ms; // wait for main block to finish transition before dropping in
-		animation-timing-function: var(--standard-transition);
+		animation-timing-function: var(--standard-curve);
 		animation-fill-mode: forwards;
 	}
 

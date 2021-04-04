@@ -38,7 +38,7 @@
 		border-radius: 50%;
 		box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 		border: 1px solid rgba(0, 0, 0, 0.15);
-		transition: 125ms var(--standard-transition) background-color;
+		transition: 125ms var(--standard-curve) background-color;
 	}
 
 	label {
@@ -76,7 +76,7 @@
 		background-color: white;
 		border-radius: 50%;
 		transform: scale(0);
-		transition: 125ms var(--standard-transition) transform;
+		transition: 125ms var(--standard-curve) transform;
 	}
 
 	input[type="radio"]:checked:after {
@@ -95,7 +95,7 @@
 		box-shadow: 0 0 0 3px var(--focus-color);
 		border-radius: 50%;
 		opacity: 0;
-		transition: 125ms var(--standard-transition) opacity;
+		transition: 125ms var(--standard-curve) opacity;
 	}
 
 	input[type="radio"]:focus:before {
@@ -106,6 +106,6 @@
 
 	input[type="radio"]:checked:active {
 		background-color: var(--checked-highlight-color);
-		transition: 60ms var(--standard-transition) transform;
+		transition: 60ms var(--standard-curve) transform;
 	}
 </style>

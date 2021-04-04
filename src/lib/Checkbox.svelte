@@ -58,7 +58,7 @@
 		margin: 0;
 		box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 		border: 1px solid rgba(0, 0, 0, 0.15);
-		transition: 125ms var(--standard-transition) background-color;
+		transition: 125ms var(--standard-curve) background-color;
 	}
 
 	label {
@@ -129,7 +129,7 @@
 		box-shadow: 0 0 0 3px var(--focus-color);
 		border-radius: 25%;
 		opacity: 0;
-		transition: 125ms var(--standard-transition) opacity;
+		transition: 125ms var(--standard-curve) opacity;
 	}
 
 	input[type="checkbox"]:focus:before {
@@ -140,6 +140,6 @@
 
 	input[type="checkbox"]:checked:active:not(:disabled) {
 		background-color: var(--checked-highlight-color);
-		transition: 60ms var(--standard-transition) transform;
+		transition: 60ms var(--standard-curve) transform;
 	}
 </style>

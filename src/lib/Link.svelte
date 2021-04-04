@@ -19,7 +19,7 @@
 	a:visited {
 		color: var(--accent-color);
 		text-decoration: none;
-		transition: transform 50ms var(--standard-transition);
+		transition: transform 50ms var(--standard-curve);
 
 		&:hover {
 			text-decoration: underline dotted var(--accent-color);
