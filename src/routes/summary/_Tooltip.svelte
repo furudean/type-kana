@@ -4,7 +4,6 @@
 	import { cubicOut } from "svelte/easing"
 	import { getAnswers } from "@/lib/answer"
 	import type { SummaryKana } from "@/stores/summary"
-	import { throttle } from "@/lib/util"
 
 	// modified from https://github.com/stephane-vanraes/renderless-svelte/blob/master/src/Tooltip.svelte
 
@@ -55,7 +54,8 @@
 </script>
 
 <script lang="ts">
-	import { uniqArray } from "@/lib/util"
+	import { clamp, uniqArray } from "@/lib/util"
+	import { afterUpdate } from "svelte"
 
 	function listWrongAnswers(item: SummaryKana): string {
 		return uniqArray(item.answers)
@@ -64,34 +64,57 @@
 			.join(", ")
 	}
 
-	function calculateStyle(dim: DOMRect) {
-		const left = dim.x + dim.width / 2
-		const top = dim.y + dim.height + 5
+	function calculateArrowStyle(el: DOMRect) {
+		const top = el.y + el.height + 1
+		const left = el.x + el.width / 2
 
-		return `left: ${left}px; top: ${top}px;`
+		return `top: ${top}px; left: ${left}px;`
 	}
 
-	$: style = $rect && calculateStyle($rect)
+	function calculateBodyStyle(el: DOMRect, self: DOMRect) {
+		const top = el.y + el.height + 1 + 4
+		const left = clamp(
+			0,
+			el.x + el.width / 2 - self.width / 2,
+			document.body.offsetWidth - self.width
+		)
+
+		return `top: ${top}px; left: ${left}px;`
+	}
+
+	let tooltipBody: HTMLElement
+	let arrowStyle: string
+	let bodyStyle: string
+
+	afterUpdate(() => {
+		if (tooltipBody) {
+			arrowStyle = calculateArrowStyle($rect)
+			bodyStyle = calculateBodyStyle($rect, tooltipBody.getBoundingClientRect())
+		}
+	})
 </script>
 
 {#if $focused}
-	<div
-		class="tooltip"
-		{style}
-		aria-live="assertive"
-		aria-atomic="true"
-		transition:fade={{ duration: 125, easing: cubicOut }}
-	>
-		<strong>{getAnswers($focused.kana).join(", ")}</strong>
-		{#if $focused.incorrectTimes > 0}
-			<br />
-			you wrote: {listWrongAnswers($focused)}
-		{/if}
+	<div class="tooltip" transition:fade={{ duration: 125, easing: cubicOut }}>
+		<div class="arrow" style={arrowStyle} aria-hidden="true" />
+		<div
+			class="body"
+			style={bodyStyle}
+			aria-live="assertive"
+			aria-atomic="true"
+			bind:this={tooltipBody}
+		>
+			<strong>{getAnswers($focused.kana).join(", ")}</strong>
+			{#if $focused.incorrectTimes > 0}
+				<br />
+				you wrote: {listWrongAnswers($focused)}
+			{/if}
+		</div>
 	</div>
 {/if}
 
 <style>
-	.tooltip {
+	.body {
 		position: absolute;
 		background: var(--background-color-inverse);
 		color: var(--text-color-inverse);
@@ -100,20 +123,18 @@
 		letter-spacing: 1px;
 		line-height: 1.25;
 		text-align: center;
-		font-size: 90%;
-		transform: translateX(-50%);
 		user-select: none;
 		box-sizing: border-box;
+		font-size: 90%;
 		min-width: 2em;
 		max-width: 10em;
 	}
 
-	.tooltip::before {
-		content: "";
+	.arrow {
 		position: absolute;
-		top: -8px;
-		left: 50%;
-		border-width: 4px;
+		width: 0;
+		height: 0;
+		border-width: 0 4px 4px 4px;
 		border-style: solid;
 		border-color: transparent transparent var(--background-color-inverse)
 			transparent;

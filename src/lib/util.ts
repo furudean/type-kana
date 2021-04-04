@@ -52,3 +52,7 @@ export function uniqArray<T = boolean | number | string>(array: T[]): T[] {
 		.sort()
 		.filter((item, pos, ary) => !pos || item !== ary[pos - 1])
 }
+
+export function clamp(min: number, num: number, max: number): number {
+	return num <= min ? min : num >= max ? max : num
+}
