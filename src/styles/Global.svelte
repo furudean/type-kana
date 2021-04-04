@@ -8,8 +8,8 @@
 	:root {
 		--standard-curve: cubic-bezier(0.4, 0, 0.2, 1);
 		--standard-border-radius: 0.75rem;
-		--line-height: 1.75;
-		--line-space: 1.75rem;
+		--line-height: 1.5;
+		--line-space: 1.5rem;
 	}
 
 	body {
