@@ -4,6 +4,8 @@
 	import { cubicOut } from "svelte/easing"
 	import { getAnswers } from "@/lib/answer"
 	import type { SummaryKana } from "@/stores/summary"
+	import Icon from "@/lib/Icon.svelte"
+	import { mdiClose as errorIcon } from "@mdi/js"
 
 	// modified from https://github.com/stephane-vanraes/renderless-svelte/blob/master/src/Tooltip.svelte
 
@@ -58,9 +60,10 @@
 	import { afterUpdate } from "svelte"
 
 	function listWrongAnswers(item: SummaryKana): string {
+		const answers = getAnswers(item.kana)
 		return uniqArray(item.answers)
-			.filter((s) => !getAnswers(item.kana).includes(s)) // only wrong answers
-			.map((s) => `"${s}"`)
+			.filter((s) => !answers.includes(s)) // only wrong answers
+			.map((s) => (s === " " ? "<empty>" : `'${s}'`))
 			.join(", ")
 	}
 
@@ -107,7 +110,13 @@
 			<strong>{getAnswers($focused.kana).join(", ")}</strong>
 			{#if $focused.incorrectTimes > 0}
 				<br />
-				you wrote: {listWrongAnswers($focused)}
+				<Icon
+					title="Incorrect answers"
+					size="1.1em"
+					color="var(--highlight-color)"
+					path={errorIcon}
+				/>
+				<span class="error">{listWrongAnswers($focused)}</span>
 			{/if}
 		</div>
 	</div>
@@ -120,11 +129,22 @@
 		width: 100%;
 	}
 
+	.arrow {
+		position: absolute;
+		width: 0;
+		height: 0;
+		border-width: 0 6px 6px 6px;
+		border-style: solid;
+		border-color: transparent transparent var(--background-color-inverse)
+			transparent;
+		transform: translateX(-50%);
+	}
+
 	.body {
 		position: absolute;
 		background: var(--background-color-inverse);
 		color: var(--text-color-inverse);
-		padding: 0.2em 0.5em;
+		padding: 0.2em 0.6em;
 		border-radius: var(--standard-border-radius);
 		user-select: none;
 		font-size: 90%;
@@ -136,14 +156,17 @@
 		max-width: 15em;
 	}
 
-	.arrow {
-		position: absolute;
-		width: 0;
-		height: 0;
-		border-width: 0 6px 6px 6px;
-		border-style: solid;
-		border-color: transparent transparent var(--background-color-inverse)
-			transparent;
-		transform: translateX(-50%);
+	.body :global(.svg-icon) {
+		top: 2px; /* visual balance */
+	}
+
+	.error {
+		text-decoration-color: var(--highlight-color);
+		text-decoration-style: dotted;
+		text-decoration-line: underline;
+	}
+
+	.error:not(:last-of-type)::after {
+		content: ",";
 	}
 </style>
