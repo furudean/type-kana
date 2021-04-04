@@ -120,14 +120,14 @@
 		color: var(--text-color-inverse);
 		padding: 0.2em 0.5em;
 		border-radius: var(--standard-border-radius);
+		user-select: none;
+		font-size: 90%;
 		letter-spacing: 1px;
 		line-height: 1.25;
 		text-align: center;
-		user-select: none;
 		box-sizing: border-box;
-		font-size: 90%;
 		min-width: 2em;
-		max-width: 10em;
+		max-width: 15em;
 	}
 
 	.arrow {
