@@ -92,7 +92,7 @@
 		position: absolute;
 		bottom: 0;
 		right: 0;
-		padding: 0.25em;
+		padding: 0.15em 0.2em;
 		transform: translate(50%, 50%);
 		border-radius: 9999px;
 		background: var(--background-color);
