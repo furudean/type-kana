@@ -65,7 +65,7 @@
 	}
 
 	section.unquizzed {
-		opacity: 0.5;
+		opacity: 0.33;
 		transition: 120ms var(--standard-transition) opacity;
 
 		&:hover,
