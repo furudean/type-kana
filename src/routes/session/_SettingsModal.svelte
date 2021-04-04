@@ -277,6 +277,7 @@
 		overflow-y: scroll;
 		width: 100%;
 		max-height: 85%;
+		box-sizing: border-box;
 
 		// https://github.com/w3c/csswg-drafts/issues/129
 		&:after {
