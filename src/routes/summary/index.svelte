@@ -19,9 +19,10 @@
 	<h1>Session complete 🎉</h1>
 
 	<p>
-		{Math.round(accuracy * 100)}% correct, {answered}{answered !== total
-			? "/" + total
-			: ""}
+		{#if accuracy}
+			{Math.round(accuracy * 100)}% correct,
+		{/if}
+		{answered}{answered !== total ? "/" + total : ""}
 		answered
 	</p>
 
