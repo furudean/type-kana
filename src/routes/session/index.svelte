@@ -43,11 +43,7 @@
 	}
 
 	function handleSubmit(event: CustomEvent) {
-		if (unquizzed.length === 0) {
-			goto("summary")
-			return
-		}
-
+		if (!currentItem) return
 		const input = event.detail.input
 
 		if (isCorrectAnswer(input, currentItem.kana)) {
@@ -72,15 +68,14 @@
 	}
 
 	onMount(() => {
-		if ($quiz.unquizzed.length !== 0) {
-			loadProgressSound()
-			loadErrorSound()
-			loadMaximizeSound()
-			loadMinimizeSound()
-		} else {
-			goto("summary", { replaceState: true })
-		}
+		loadProgressSound()
+		loadErrorSound()
+		loadMaximizeSound()
+		loadMinimizeSound()
 	})
+
+	// go to results if queue is empty
+	$: unquizzed.length === 0 && goto("summary")
 </script>
 
 <svelte:head>
