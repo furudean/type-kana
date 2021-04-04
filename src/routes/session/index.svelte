@@ -44,6 +44,7 @@
 
 	function handleSubmit(event: CustomEvent) {
 		if (unquizzed.length === 0) {
+			goto("summary")
 			return
 		}
 
@@ -71,13 +72,13 @@
 	}
 
 	onMount(() => {
-		loadProgressSound()
-		loadErrorSound()
-		loadMaximizeSound()
-		loadMinimizeSound()
-
-		if ($quiz.unquizzed.length === 0) {
-			goto(".", { replaceState: true })
+		if ($quiz.unquizzed.length !== 0) {
+			loadProgressSound()
+			loadErrorSound()
+			loadMaximizeSound()
+			loadMinimizeSound()
+		} else {
+			goto("summary", { replaceState: true })
 		}
 	})
 </script>
