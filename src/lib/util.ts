@@ -47,10 +47,8 @@ export function uniqBy<T>(array: T[], keyFn: (item: T) => string): T[] {
 	})
 }
 
-export function uniqArray<T = boolean | number | string>(array: T[]): T[] {
-	return [...array]
-		.sort()
-		.filter((item, pos, ary) => !pos || item !== ary[pos - 1])
+export function uniqArray<T>(array: T[]): T[] {
+	return [...new Set(array)]
 }
 
 export function clamp(min: number, num: number, max: number): number {
