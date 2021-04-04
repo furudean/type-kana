@@ -74,14 +74,14 @@
 	}
 
 	.content-width {
-		max-width: 40em;
+		max-width: 40rem;
 	}
 
 	.content-padding {
-		padding: 2em;
+		padding: 2rem;
 
 		@media screen and (max-width: 40em) {
-			padding: 1.5em;
+			padding: 1.5rem;
 		}
 	}
 
