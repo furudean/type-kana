@@ -65,14 +65,14 @@
 	}
 
 	function calculateArrowStyle(el: DOMRect) {
-		const top = el.y + el.height + 1
+		const top = el.y + el.height
 		const left = el.x + el.width / 2
 
 		return `top: ${top}px; left: ${left}px;`
 	}
 
 	function calculateBodyStyle(el: DOMRect, self: DOMRect) {
-		const top = el.y + el.height + 1 + 4
+		const top = el.y + el.height + 4
 		const left = clamp(
 			0,
 			el.x + el.width / 2 - self.width / 2,
