@@ -21,8 +21,9 @@
 				<span
 					class="badge"
 					aria-label="answered incorrectly {item.incorrectTimes} times"
-					>x{item.incorrectTimes}</span
 				>
+					x{item.incorrectTimes}
+				</span>
 			{/if}
 		</div>
 	{/each}

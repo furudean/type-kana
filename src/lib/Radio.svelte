@@ -18,7 +18,7 @@
 
 <style lang="scss">
 	.radio-button {
-		display: inline-flex;
+		display: flex;
 		align-items: center;
 	}
 

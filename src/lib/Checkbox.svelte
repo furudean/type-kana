@@ -37,7 +37,7 @@
 
 <style lang="scss">
 	.checkbox {
-		display: inline-flex;
+		display: flex;
 		align-items: center;
 	}
 

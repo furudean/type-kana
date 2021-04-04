@@ -99,7 +99,7 @@
 		transition:fade={{ duration: 500, easing: cubicOut }}
 	/>
 	<section
-		class="settings-menu"
+		class="settings-menu content-width content-padding"
 		use:onClickOutside={close}
 		role="dialog"
 		aria-modal="true"
@@ -131,7 +131,6 @@
 			>
 				Disabled
 			</Radio>
-			<br />
 
 			<Radio
 				id="auto-commit-forgiving-choice"
@@ -141,7 +140,6 @@
 			>
 				On correct answer
 			</Radio>
-			<br />
 
 			<Radio
 				id="auto-commit-strict-choice"
@@ -151,7 +149,6 @@
 			>
 				On correct <strong>or</strong> incorrect answer
 			</Radio>
-			<br />
 
 			<input
 				id="mistake-delay-setting"
@@ -175,7 +172,6 @@
 		>
 			Show an "X" if input does not match answer
 		</Checkbox>
-		<br />
 
 		<Checkbox id="progress-bar-setting" bind:checked={$settings.showProgressBar}
 			>Show completion progress</Checkbox
@@ -192,7 +188,6 @@
 			>
 				Same as system ({$osTheme})
 			</Radio>
-			<br />
 
 			<Radio
 				id="light-theme-choice"
@@ -200,7 +195,6 @@
 				bind:group={$settings.theme}
 				value="light">Light</Radio
 			>
-			<br />
 
 			<Radio
 				id="dark-theme-choice"
@@ -278,13 +272,10 @@
 		left: 50%;
 		transform: translateX(-50%);
 		background: var(--background-color);
-		padding: 0 2em;
 		border-bottom-left-radius: 1em;
 		border-bottom-right-radius: 1em;
-		box-sizing: border-box;
-		width: 700px;
-		max-width: 100%;
 		overflow-y: scroll;
+		width: 100%;
 		max-height: 85%;
 
 		// https://github.com/w3c/csswg-drafts/issues/129
@@ -295,10 +286,13 @@
 		}
 	}
 
-	@media screen and (max-width: 700px) {
+	@media screen and (max-width: 40em) {
 		.settings-menu {
 			max-height: 100%;
 			border-radius: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
 			left: 0;
 			transform: none;
 		}
@@ -309,7 +303,10 @@
 		:global(.radio-button) {
 			margin-left: 1em;
 			margin-right: 1em;
-			margin-bottom: 1.5em;
+
+			&:not(:last-child) {
+				margin-bottom: 1.5em;
+			}
 		}
 	}
 

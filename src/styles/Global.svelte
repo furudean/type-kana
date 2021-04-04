@@ -1,4 +1,4 @@
-<style global>
+<style global lang="scss">
 	:root,
 	body {
 		height: 100%;
@@ -8,6 +8,8 @@
 	:root {
 		--standard-curve: cubic-bezier(0.4, 0, 0.2, 1);
 		--standard-border-radius: 0.75rem;
+		--line-height: 1.75;
+		--line-space: 1.75rem;
 	}
 
 	body {
@@ -31,25 +33,56 @@
 		touch-action: pan-y; /* Prevent zooming in mobile Safari. */
 	}
 
+	p {
+		font-size: 1em;
+		font-kerning: normal;
+		font-variant-ligatures: common-ligatures contextual;
+		font-feature-settings: "kern", "liga", "clig", "calt";
+		margin-top: 0;
+		margin-bottom: var(--line-space);
+	}
+
 	h1 {
-		margin: 1em 0;
-		font-size: 1.8em;
-		font-weight: 700;
-		line-height: 1;
+		font-size: 2em;
+		font-weight: 500;
+		margin-top: 0;
+		margin-bottom: var(--line-space);
+		line-height: 1.25;
 	}
 
 	h2 {
-		margin: 1em 0;
-		font-size: 1.4em;
+		font-size: 1.5em;
 		font-weight: 500;
-		line-height: 1;
+		margin-top: 0;
+		margin-bottom: var(--line-space);
+		line-height: 1.25;
+	}
+
+	h3 {
+		font-size: 1.25em;
+		font-weight: 500;
+		margin-top: 0;
+		margin-bottom: var(--line-space);
+		line-height: 1.25;
 	}
 
 	hr {
 		border: none;
 		background: var(--text-color-lighter);
 		height: 1px;
-		margin: 2em 0;
+		margin: calc(1.5 * var(--line-space)) 0;
+	}
+
+	.content-width {
+		max-width: 40em;
+	}
+
+	.content-padding {
+		padding: 2em;
+
+		@media screen and (max-width: 40em) {
+			padding: 1.5em;
+		}
 	}
 
 	.sr-only {

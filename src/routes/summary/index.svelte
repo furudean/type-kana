@@ -15,7 +15,7 @@
 
 <Tooltip />
 
-<div class="container">
+<div class="container content-width content-padding">
 	<h1>Session complete 🎉</h1>
 
 	<p>
@@ -57,7 +57,7 @@
 
 <style lang="scss">
 	.container {
-		padding: 0 1.5em;
+		margin: 0 auto;
 	}
 
 	section {
