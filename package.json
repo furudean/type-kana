@@ -19,6 +19,7 @@
 	"dependencies": {
 		"@mdi/js": "^5.7.55",
 		"body-scroll-lock": "^3.1.5",
+		"canvas-confetti": "^1.4.0",
 		"common-tags": "^1.8.0",
 		"standardized-audio-context": "^25.1.11",
 		"svelte-focus-trap": "^1.2.0",
@@ -29,6 +30,7 @@
 		"@sveltejs/adapter-vercel": "next",
 		"@sveltejs/kit": "next",
 		"@types/body-scroll-lock": "^2.6.1",
+		"@types/canvas-confetti": "^1.4.0",
 		"@types/common-tags": "^1.8.0",
 		"@types/node": "^14.14.33",
 		"@types/wanakana": "^4.0.0",

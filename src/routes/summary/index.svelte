@@ -1,12 +1,50 @@
-<script>
+<script lang="ts">
 	import { summary } from "@/stores/summary"
 	import SummaryBox from "./_SummaryBox.svelte"
 	import Tooltip from "./_Tooltip.svelte"
 	import Button from "@/lib/Button.svelte"
+	import confetti from "canvas-confetti"
+	import type { Options as ConfettiOptions } from "canvas-confetti"
+	import { onMount } from "svelte"
 
 	const answered = $summary.correct.length + $summary.incorrect.length
 	const accuracy = $summary.correct.length / answered
 	const total = answered + $summary.unquizzed.length
+	const particles = 300
+
+	function fire(particleRatio: number, opts: ConfettiOptions) {
+		confetti({
+			disableForReducedMotion: true,
+			origin: { y: 0.4 },
+			...opts,
+			particleCount: Math.floor(particles * particleRatio)
+		})
+	}
+
+	onMount(() => {
+		fire(0.25, {
+			spread: 26,
+			startVelocity: 55
+		})
+		fire(0.35, {
+			spread: 100,
+			decay: 0.91,
+			scalar: 0.8
+		})
+		fire(0.2, {
+			spread: 60
+		})
+		fire(0.1, {
+			spread: 120,
+			startVelocity: 25,
+			decay: 0.92,
+			scalar: 1.2
+		})
+		fire(0.1, {
+			spread: 120,
+			startVelocity: 45
+		})
+	})
 </script>
 
 <svelte:head>
