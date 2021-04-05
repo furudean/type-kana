@@ -10,12 +10,13 @@
 	const answered = $summary.correct.length + $summary.incorrect.length
 	const accuracy = $summary.correct.length / answered
 	const total = answered + $summary.unquizzed.length
-	const particles = 300
+	const particles = 150
 
 	function fire(particleRatio: number, opts: ConfettiOptions) {
 		confetti({
 			disableForReducedMotion: true,
 			origin: { y: 0.4 },
+			ticks: 300,
 			...opts,
 			particleCount: Math.floor(particles * particleRatio)
 		})
