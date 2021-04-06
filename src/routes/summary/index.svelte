@@ -11,7 +11,7 @@
 	const total = answered + $summary.unquizzed.length
 
 	onMount(() => {
-		if (answered > 0) {
+		if ($summary.correct.length > 0) {
 			celebrate()
 		}
 	})
