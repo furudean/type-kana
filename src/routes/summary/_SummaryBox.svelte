@@ -134,6 +134,7 @@
 		font-size: 0.9em;
 		font-weight: 500;
 		line-height: 1;
+		border-radius: var(--standard-border-radius);
 
 		&:hover {
 			text-decoration: underline;
