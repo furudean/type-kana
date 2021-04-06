@@ -19,8 +19,8 @@
 			class="summary-item"
 			class:hiragana={isHiragana(item.kana)}
 			class:katakana={isKatakana(item.kana)}
-			use:tooltip={item}
 			tabindex="0"
+			use:tooltip={item}
 		>
 			{item.kana}
 			{#if item.incorrectTimes > 1}
