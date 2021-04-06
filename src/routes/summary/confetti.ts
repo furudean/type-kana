@@ -17,7 +17,7 @@ function emit(particleRatio: number, opts: Options) {
 export function celebrate() {
 	emit(0.25, {
 		spread: 26,
-		startVelocity: 75
+		startVelocity: 50
 	})
 	emit(0.35, {
 		spread: 100,
