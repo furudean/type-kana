@@ -17,7 +17,7 @@
 	import { settings } from "@/stores/settings"
 	import ProgressBar from "./_ProgressBar.svelte"
 	import { onMount } from "svelte"
-	import { goto } from "$app/navigation"
+	import { goto, prefetch } from "$app/navigation"
 
 	let settingsModal: SettingsModal
 	let input: string
@@ -65,6 +65,10 @@
 			answered: input,
 			isCorrectAnswer: isCorrectAnswer(input, item.kana)
 		}))
+
+		if (unquizzed.length < 5) {
+			prefetch("summary")
+		}
 	}
 
 	onMount(() => {
