@@ -37,7 +37,7 @@
 	{#if $summary.correct.length > 0}
 		<section>
 			<h2>Correctly answered</h2>
-			<SummaryBox items={$summary.correct} />
+			<SummaryBox items={$summary.correct} truncateAt={50} />
 		</section>
 	{/if}
 
@@ -56,7 +56,7 @@
 	{#if $summary.unquizzed.length > 0}
 		<section class="unquizzed">
 			<h2>Not quizzed</h2>
-			<SummaryBox items={$summary.unquizzed} fill={false} />
+			<SummaryBox items={$summary.unquizzed} fill={false} truncateAt={20} />
 		</section>
 	{/if}
 	<section>

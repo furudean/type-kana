@@ -5,10 +5,16 @@
 
 	export let items: SummaryKana[]
 	export let fill = true
+	export let truncateAt = Infinity
+
+	// "- 2" makes sure the amount of items truncated is longer than the button
+	let isTruncated = items.length - 2 > truncateAt
+
+	$: truncatedItems = items.slice(0, isTruncated ? truncateAt : Infinity)
 </script>
 
 <div class="summary-box" class:fill>
-	{#each items as item}
+	{#each truncatedItems as item}
 		<div
 			class="summary-item"
 			class:hiragana={isHiragana(item.kana)}
@@ -27,6 +33,15 @@
 			{/if}
 		</div>
 	{/each}
+	{#if isTruncated}
+		<button
+			class="expand-button"
+			title="Show remaining items"
+			on:click={() => (isTruncated = false)}
+		>
+			...and {items.length - truncatedItems.length} more
+		</button>
+	{/if}
 </div>
 
 <style lang="scss">
@@ -35,6 +50,9 @@
 	.summary-box {
 		margin-top: -$gap;
 		margin-left: -$gap;
+		display: flex;
+		flex-wrap: wrap;
+		align-content: center;
 	}
 
 	.summary-item {
@@ -103,5 +121,25 @@
 		font-variant-numeric: tabular-nums;
 		line-height: 1;
 		user-select: none;
+	}
+
+	.expand-button {
+		all: initial;
+		display: inline;
+		margin-top: $gap;
+		margin-left: $gap;
+		cursor: pointer;
+		height: auto;
+		font-family: inherit;
+		font-size: 0.9em;
+		font-weight: 500;
+		line-height: 1;
+
+		&:hover {
+			text-decoration: underline;
+		}
+		&:focus {
+			box-shadow: 0 0 0 3px var(--focus-color);
+		}
 	}
 </style>
