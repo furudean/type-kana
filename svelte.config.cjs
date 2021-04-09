@@ -14,6 +14,9 @@ module.exports = {
 	kit: {
 		adapter: vercel(),
 		target: "body",
+		prerender: {
+			enabled: false
+		},
 		vite: {
 			ssr: {
 				noExternal: Object.keys(pkg.dependencies || {})
