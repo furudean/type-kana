@@ -130,6 +130,7 @@
 		margin-left: $gap;
 		cursor: pointer;
 		height: auto;
+		color: inherit;
 		font-family: inherit;
 		font-size: 0.9em;
 		font-weight: 500;
