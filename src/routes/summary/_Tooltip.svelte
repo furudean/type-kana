@@ -98,7 +98,11 @@
 </script>
 
 {#if $focused}
-	<div class="tooltip" transition:fade={{ duration: 125, easing: cubicOut }}>
+	<div
+		class="tooltip"
+		in:fade={{ duration: 125, easing: cubicOut }}
+		out:fade={{ duration: 250, delay: 500, easing: cubicOut }}
+	>
 		<div class="arrow" style={arrowStyle} aria-hidden="true" />
 		<div
 			class="body"
@@ -138,6 +142,7 @@
 		border-color: transparent transparent var(--background-color-inverse)
 			transparent;
 		transform: translateX(-50%);
+		transition: 70ms var(--standard-curve) top, 70ms var(--standard-curve) left;
 	}
 
 	.body {
@@ -154,6 +159,7 @@
 		box-sizing: border-box;
 		min-width: 32px;
 		max-width: 15em;
+		transition: 70ms var(--standard-curve) top, 70ms var(--standard-curve) left;
 	}
 
 	.body :global(.svg-icon) {
