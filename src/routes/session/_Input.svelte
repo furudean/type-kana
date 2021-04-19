@@ -55,6 +55,7 @@
 	class="answer-input content-width"
 	on:submit|preventDefault={handleSubmit}
 >
+	<!-- svelte-ignore a11y-autofocus -->
 	<input
 		type="text"
 		class="text-field"
@@ -67,6 +68,7 @@
 		autocomplete="off"
 		autocorrect="off"
 		spellcheck={false}
+		autofocus
 	/>
 	{#if $settings.autoCommit === "disabled"}
 		<button type="submit" class="button" title="Submit">
