@@ -18,9 +18,6 @@ module.exports = {
 			enabled: false
 		},
 		vite: {
-			ssr: {
-				noExternal: Object.keys(pkg.dependencies || {})
-			},
 			resolve: {
 				alias: {
 					"@": path.resolve(__dirname, "/src")
