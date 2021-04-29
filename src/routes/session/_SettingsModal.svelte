@@ -11,7 +11,7 @@
 	import { fade, fly } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
 	import { onMount, onDestroy } from "svelte"
-	import { onClickOutside } from "@/lib/clickOutside"
+	import { onClickOutside } from "@/lib/click-outside"
 	import Button from "@/lib/Button.svelte"
 	import {
 		mdiArrowLeft,
@@ -26,7 +26,7 @@
 	import Radio from "@/lib/Radio.svelte"
 	import { commitHashShort, commitHashLong } from "@/lib/version"
 	import Link from "@/lib/Link.svelte"
-	import { scrollLock } from "@/lib/scollLock"
+	import { scrollLock } from "@/lib/scoll-lock"
 
 	let isOpen = false
 	let resetOnClose = false
