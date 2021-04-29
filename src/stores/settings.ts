@@ -1,4 +1,4 @@
-import { createPersistentStore } from "./persistent"
+import { persistent } from "@/lib/persistent-store"
 
 export interface GameSettings {
 	autoCommit: "forgiving" | "strict" | "disabled"
@@ -10,7 +10,7 @@ export interface GameSettings {
 	mistakeDelayMs: number
 }
 
-export const settings = createPersistentStore<GameSettings>(
+export const settings = persistent<GameSettings>(
 	{
 		key: "game-settings",
 		assign: true

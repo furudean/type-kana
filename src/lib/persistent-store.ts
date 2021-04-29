@@ -31,7 +31,7 @@ const defaultOptions: Partial<Options> = {
 
 const client = browser
 
-export function createPersistentStore<T extends Record<string, any>>(
+export function persistent<T extends Record<string, any>>(
 	options: Options,
 	startValue: T
 ): Writable<T> {

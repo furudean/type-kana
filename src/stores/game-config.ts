@@ -1,5 +1,5 @@
 import { hiragana } from "@/lib/db"
-import { createPersistentStore } from "./persistent"
+import { persistent } from "@/lib/persistent-store"
 
 function createKanaCheckbox(kana: string, checked: boolean): KanaCheckbox {
 	if (kana) {
@@ -34,7 +34,7 @@ interface GameConfig {
 	digraphsDiacritics: KanaCheckboxColumn
 }
 
-export const gameConfig = createPersistentStore<GameConfig>(
+export const gameConfig = persistent<GameConfig>(
 	{
 		key: "game-config"
 	},
