@@ -11,7 +11,7 @@
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
-		"start": "svelte-kit start",
+		"preview": "svelte-kit preview",
 		"check": "svelte-check",
 		"lint": "prettier --check .",
 		"format": "prettier --write ."
