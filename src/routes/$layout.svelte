@@ -4,7 +4,7 @@
 	import { getAudioContext, getRootGain } from "@/lib/audio"
 	import { settings } from "@/stores/settings"
 	import "@/styles/theme.css"
-	import "@/styles/global.scss"
+	import "@/styles/global.postcss"
 
 	onMount(() => {
 		resolvedTheme.subscribe((theme) => {
@@ -36,7 +36,7 @@
 	<slot />
 </main>
 
-<style lang="scss">
+<style lang="postcss">
 	main {
 		min-height: 100%;
 		overflow: hidden;

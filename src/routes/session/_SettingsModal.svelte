@@ -255,7 +255,7 @@
 	</section>
 {/if}
 
-<style lang="scss">
+<style lang="postcss">
 	.overlay {
 		content: "";
 		position: fixed;
@@ -279,7 +279,7 @@
 		max-height: 85%;
 		box-sizing: border-box;
 
-		// https://github.com/w3c/csswg-drafts/issues/129
+		/* https://github.com/w3c/csswg-drafts/issues/129 */
 		&:after {
 			content: "";
 			display: block;

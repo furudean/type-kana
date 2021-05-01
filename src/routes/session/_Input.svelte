@@ -91,7 +91,7 @@
 	{/if}
 </form>
 
-<style lang="scss">
+<style lang="postcss">
 	.answer-input {
 		display: flex;
 		position: relative;
@@ -141,7 +141,7 @@
 		position: absolute;
 		right: 0;
 
-		// center content
+		/* center content */
 		display: flex;
 		align-items: center;
 		justify-content: center;

@@ -35,7 +35,7 @@
 	{/if}
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.checkbox {
 		display: flex;
 		align-items: center;
@@ -69,7 +69,7 @@
 		overflow-wrap: break-word;
 	}
 
-	// Regular state
+	/* Regular state */
 	input[type="checkbox"]:not(:disabled) {
 		cursor: pointer;
 
@@ -78,7 +78,7 @@
 		}
 	}
 
-	// Checked + indeterminate states
+	/* Checked + indeterminate states */
 
 	input[type="checkbox"]::after {
 		content: "";
@@ -109,7 +109,7 @@
 		background-color: hsl(0, 0%, 60%);
 	}
 
-	// Disabled state
+	/* Disabled state */
 
 	input[type="checkbox"]:disabled {
 		background-color: hsl(0, 0%, 50%);
@@ -117,7 +117,7 @@
 		cursor: auto;
 	}
 
-	// Focus state
+	/* Focus state */
 
 	input[type="checkbox"]:before {
 		content: "";
@@ -136,7 +136,7 @@
 		opacity: 1;
 	}
 
-	// Active state
+	/* Active state */
 
 	input[type="checkbox"]:checked:active:not(:disabled) {
 		background-color: var(--checked-highlight-color);

@@ -64,7 +64,7 @@
 	</section>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.container {
 		margin: 0 auto;
 	}

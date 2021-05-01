@@ -95,7 +95,7 @@
 	/>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.range {
 		position: relative;
 		line-height: 0;
@@ -122,7 +122,7 @@
 		cursor: pointer;
 	}
 
-	// Chrome
+	/* Chrome */
 
 	input::-webkit-slider-runnable-track {
 		background: var(--track-color);
@@ -143,7 +143,7 @@
 		transform: translateY(-50%);
 	}
 
-	// Firefox
+	/* Firefox */
 
 	input[type="range"]::-moz-range-thumb {
 		appearance: none;
@@ -191,7 +191,7 @@
 		white-space: nowrap;
 	}
 
-	// tooltip triangle
+	/* tooltip triangle */
 	.tooltip::after {
 		content: "";
 		position: absolute;

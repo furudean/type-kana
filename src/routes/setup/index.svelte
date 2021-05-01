@@ -103,7 +103,7 @@
 	</Button>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	.kana-type legend {
 		margin-bottom: 1em;
 	}

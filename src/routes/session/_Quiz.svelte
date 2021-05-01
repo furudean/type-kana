@@ -50,8 +50,10 @@
 	</div>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	.quiz {
+		--margin: 0.25em;
+
 		display: flex;
 		overflow-x: hidden;
 		flex-direction: row-reverse;
@@ -84,10 +86,8 @@
 		}
 	}
 
-	$margin: 0.25em;
-
 	.kana-queue :global(.quiz-item) {
-		margin-left: $margin;
+		margin-left: var(--margin);
 
 		&:first {
 			margin-left: 0;
@@ -95,6 +95,6 @@
 	}
 
 	.kana-quizzed :global(.quiz-item) {
-		margin-right: $margin;
+		margin-right: var(--margin);
 	}
 </style>

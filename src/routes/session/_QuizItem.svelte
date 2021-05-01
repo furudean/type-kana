@@ -22,7 +22,7 @@
 	{/if}
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.quiz-item {
 		font-size: 5em;
 		white-space: nowrap;
