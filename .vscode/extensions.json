@@ -2,7 +2,6 @@
 	"recommendations": [
 		"svelte.svelte-vscode",
 		"esbenp.prettier-vscode",
-		"octref.vetur",
-		"stylelint.vscode-stylelint"
+		"octref.vetur"
 	]
 }
