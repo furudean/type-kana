@@ -63,7 +63,7 @@
 	</a>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	.menu {
 		margin: 0 auto;
 		display: flex;

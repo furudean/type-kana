@@ -35,7 +35,7 @@
 	</a>
 {/if}
 
-<style lang="scss">
+<style lang="postcss">
 	.button {
 		--border-size: 3px;
 		--padding-vertical: 0.75em;

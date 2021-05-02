@@ -39,10 +39,10 @@
 	{/if}
 </button>
 
-<style lang="scss">
-	$border-width: 3px;
-
+<style lang="postcss">
 	.checkbox-kana {
+		--border-width: 3px;
+
 		font-family: "M+ 2c";
 		appearance: none;
 		font-size: 1.5em;
@@ -57,7 +57,7 @@
 		margin: 0;
 		user-select: none;
 		transition: transform 50ms var(--standard-curve);
-		flex-grow: 1; // grow to fill any remaining space (used for ん/ン)
+		flex-grow: 1; /* grow to fill any remaining space (used for ん/ン) */
 	}
 
 	.checkbox-kana:active {
@@ -67,7 +67,7 @@
 	.block {
 		color: var(--text-color-light);
 		background: var(--background-color);
-		border: $border-width solid var(--text-color-lighter);
+		border: var(--border-width) solid var(--text-color-lighter);
 		border-radius: var(--standard-border-radius);
 		transition: 150ms var(--standard-curve) color,
 			150ms var(--standard-curve) background,
@@ -104,10 +104,10 @@
 		left: -4px;
 		right: 4px;
 		bottom: 4px;
-		opacity: 0; // overwritten by animation
+		opacity: 0; /* overwritten by animation */
 		animation-name: drop;
 		animation-duration: 150ms;
-		animation-delay: 150ms; // wait for main block to finish transition before dropping in
+		animation-delay: 150ms; /* wait for main block to finish transition before dropping in */
 		animation-timing-function: var(--standard-curve);
 		animation-fill-mode: forwards;
 	}

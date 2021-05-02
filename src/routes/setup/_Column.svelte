@@ -71,7 +71,7 @@
 	{/each}
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	.column {
 		display: inline-block;
 		margin-bottom: 3em;
@@ -99,7 +99,7 @@
 		}
 	}
 
-	// checkbox
+	/* checkbox */
 	.row :global(.checkbox) {
 		margin-right: 20px;
 		font-size: 1.25em;

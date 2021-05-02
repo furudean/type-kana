@@ -44,12 +44,12 @@
 	{/if}
 </div>
 
-<style lang="scss">
-	$gap: 1rem;
-
+<style lang="postcss">
 	.summary-box {
-		margin-top: -$gap;
-		margin-left: -$gap;
+		--gap: 1rem;
+
+		margin-top: calc(-1 * var(--gap));
+		margin-left: calc(-1 * var(--gap));
 		display: flex;
 		flex-wrap: wrap;
 		align-content: center;
@@ -60,8 +60,8 @@
 
 		display: inline-block;
 		position: relative;
-		margin-top: $gap;
-		margin-left: $gap;
+		margin-top: var(--gap);
+		margin-left: var(--gap);
 		font-size: 1.5em;
 		line-height: 1;
 		font-family: "M+ 2c";
@@ -126,8 +126,8 @@
 	.expand-button {
 		all: initial;
 		display: inline;
-		margin-top: $gap;
-		margin-left: $gap;
+		margin-top: var(--gap);
+		margin-left: var(--gap);
 		cursor: pointer;
 		height: auto;
 		color: inherit;

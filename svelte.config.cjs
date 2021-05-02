@@ -1,7 +1,5 @@
 const sveltePreprocess = require("svelte-preprocess")
 const vercel = require("@sveltejs/adapter-vercel")
-const pkg = require("./package.json")
-const autoprefixer = require("autoprefixer")
 const path = require("path")
 const replace = require("@rollup/plugin-replace")
 const child_process = require("child_process")
@@ -48,9 +46,5 @@ module.exports = {
 	},
 
 	// options passed to svelte.preprocess (https://svelte.dev/docs#svelte_preprocess)
-	preprocess: sveltePreprocess({
-		postcss: {
-			plugins: [autoprefixer()]
-		}
-	})
+	preprocess: sveltePreprocess({ postcss: true, typescript: true })
 }

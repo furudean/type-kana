@@ -14,7 +14,7 @@
 	<slot />
 </a>
 
-<style lang="scss">
+<style lang="postcss">
 	a,
 	a:visited {
 		color: var(--accent-color);
@@ -41,7 +41,7 @@
 			display: inline-block;
 			vertical-align: baseline;
 			position: relative;
-			top: 2px; // visual balance
+			top: 2px; /* visual balance */
 			width: 1em;
 			height: 1em;
 			background-color: var(--accent-color);

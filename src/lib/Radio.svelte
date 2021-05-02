@@ -16,7 +16,7 @@
 	{/if}
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.radio-button {
 		display: flex;
 		align-items: center;
@@ -49,7 +49,7 @@
 		overflow-wrap: break-word;
 	}
 
-	// Regular state
+	/* Regular state */
 	input[type="radio"]:not(:disabled) {
 		cursor: pointer;
 
@@ -58,7 +58,7 @@
 		}
 	}
 
-	// Checked state
+	/* Checked state */
 
 	input[type="radio"]:checked {
 		background-color: var(--checked-color);
@@ -83,7 +83,7 @@
 		transform: scale(0.4);
 	}
 
-	// Focus state
+	/* Focus state */
 
 	input[type="radio"]:before {
 		content: "";
@@ -102,7 +102,7 @@
 		opacity: 1;
 	}
 
-	// Active state
+	/* Active state */
 
 	input[type="radio"]:checked:active {
 		background-color: var(--checked-highlight-color);

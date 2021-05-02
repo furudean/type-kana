@@ -29,7 +29,7 @@
 	</section>
 {/if}
 
-<style lang="scss">
+<style lang="postcss">
 	.progress-bg {
 		height: 4px;
 		position: relative;
