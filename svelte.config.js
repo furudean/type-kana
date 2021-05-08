@@ -1,11 +1,14 @@
-const sveltePreprocess = require("svelte-preprocess")
-const vercel = require("@sveltejs/adapter-vercel")
-const path = require("path")
-const replace = require("@rollup/plugin-replace")
-const child_process = require("child_process")
+import sveltePreprocess from "svelte-preprocess"
+import vercel from "@sveltejs/adapter-vercel"
+import path from "path"
+import replace from "@rollup/plugin-replace"
+import { execSync } from "child_process"
+import { fileURLToPath } from "url"
+
+const dirname = path.resolve(fileURLToPath(import.meta.url), "../")
 
 /** @type {import('@sveltejs/kit').Config} */
-module.exports = {
+export default {
 	// an array of file extensions that should be treated as Svelte components
 	extensions: [".svelte"],
 
@@ -18,7 +21,7 @@ module.exports = {
 		vite: {
 			resolve: {
 				alias: {
-					"@": path.resolve(__dirname, "/src")
+					"@": path.resolve(dirname, "./src")
 				}
 			},
 			optimizeDeps: {
@@ -31,14 +34,10 @@ module.exports = {
 				replace({
 					preventAssignment: true,
 					values: {
-						COMMIT_HASH_SHORT: child_process
-							.execSync("git rev-parse --short HEAD")
+						COMMIT_HASH_SHORT: execSync("git rev-parse --short HEAD")
 							.toString()
 							.trim(),
-						COMMIT_HASH_LONG: child_process
-							.execSync("git rev-parse HEAD")
-							.toString()
-							.trim()
+						COMMIT_HASH_LONG: execSync("git rev-parse HEAD").toString().trim()
 					}
 				})
 			]
