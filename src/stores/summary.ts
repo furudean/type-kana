@@ -15,34 +15,28 @@ interface Summary {
 	unquizzed: SummaryKana[]
 }
 
-export const summary = derived(
-	quiz,
-	($quiz): Summary => {
-		const uniqQuizzed = uniqBy($quiz.quizzed, (item) => item.kana)
+export const summary = derived(quiz, ($quiz): Summary => {
+	const uniqQuizzed = uniqBy($quiz.quizzed, (item) => item.kana)
 
-		function createSummaryKana({
-			kana,
-			isCorrectAnswer
-		}: QuizItem): SummaryKana {
-			const dupes = $quiz.quizzed.filter((item) => item.kana === kana)
-			return {
-				kana,
-				answers: uniqArray(dupes.map((item) => item.answered)),
-				incorrectTimes: isCorrectAnswer
-					? 0
-					: dupes.filter((item) => item.isCorrectAnswer === isCorrectAnswer)
-							.length
-			}
-		}
-
+	function createSummaryKana({ kana, isCorrectAnswer }: QuizItem): SummaryKana {
+		const dupes = $quiz.quizzed.filter((item) => item.kana === kana)
 		return {
-			incorrect: uniqQuizzed
-				.filter((item) => !item.isCorrectAnswer)
-				.map(createSummaryKana),
-			correct: uniqQuizzed
-				.filter((item) => item.isCorrectAnswer)
-				.map(createSummaryKana),
-			unquizzed: $quiz.unquizzed.map(createSummaryKana)
+			kana,
+			answers: uniqArray(dupes.map((item) => item.answered)),
+			incorrectTimes: isCorrectAnswer
+				? 0
+				: dupes.filter((item) => item.isCorrectAnswer === isCorrectAnswer)
+						.length
 		}
 	}
-)
+
+	return {
+		incorrect: uniqQuizzed
+			.filter((item) => !item.isCorrectAnswer)
+			.map(createSummaryKana),
+		correct: uniqQuizzed
+			.filter((item) => item.isCorrectAnswer)
+			.map(createSummaryKana),
+		unquizzed: $quiz.unquizzed.map(createSummaryKana)
+	}
+})

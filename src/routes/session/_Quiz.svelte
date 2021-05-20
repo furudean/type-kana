@@ -21,6 +21,7 @@
 			return false
 		}
 	}
+
 </script>
 
 <section class="quiz">
@@ -97,4 +98,5 @@
 	.kana-quizzed :global(.quiz-item) {
 		margin-right: var(--margin);
 	}
+
 </style>

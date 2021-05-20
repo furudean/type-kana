@@ -7,4 +7,5 @@
 			redirect: "setup"
 		}
 	}
+
 </script>

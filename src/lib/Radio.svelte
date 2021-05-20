@@ -5,6 +5,7 @@
 	export let value: any
 	export let disabled: boolean = undefined
 	export let group: any = undefined
+
 </script>
 
 <div class="radio-button">
@@ -108,4 +109,5 @@
 		background-color: var(--checked-highlight-color);
 		transition: 60ms var(--standard-curve) transform;
 	}
+
 </style>

@@ -53,6 +53,7 @@
 			}
 		}
 	}
+
 </script>
 
 <script lang="ts">
@@ -95,6 +96,7 @@
 			bodyStyle = calculateBodyStyle($rect, tooltipBody.getBoundingClientRect())
 		}
 	})
+
 </script>
 
 {#if $focused}
@@ -176,4 +178,5 @@
 	.error:not(:last-of-type)::after {
 		content: ",";
 	}
+
 </style>

@@ -14,6 +14,7 @@
 	const style =
 		`--checked-icon-url: url("${checkedIcon}");` +
 		`--indeterminate-icon-url: url("${indeterminateIcon}");`
+
 </script>
 
 <div class="checkbox">
@@ -142,4 +143,5 @@
 		background-color: var(--checked-highlight-color);
 		transition: 60ms var(--standard-curve) transform;
 	}
+
 </style>
