@@ -88,6 +88,7 @@
 	onMount(() => {
 		loadTapSound()
 	})
+
 </script>
 
 <svelte:window on:keyup={keyPress} />
@@ -349,4 +350,5 @@
 	.menu > :global(.button .svg-icon) {
 		margin-left: -0.5em;
 	}
+
 </style>

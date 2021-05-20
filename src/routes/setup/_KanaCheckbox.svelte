@@ -9,6 +9,7 @@
 	export let item: KanaCheckbox
 	export let rowIndex: number
 	export let rowLength: number
+
 </script>
 
 <button
@@ -116,4 +117,5 @@
 	.checkbox-kana:focus > .block {
 		border-color: var(--focus-color);
 	}
+
 </style>

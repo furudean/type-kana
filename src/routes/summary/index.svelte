@@ -15,6 +15,7 @@
 			celebrate()
 		}
 	})
+
 </script>
 
 <svelte:head>
@@ -82,4 +83,5 @@
 			opacity: 1;
 		}
 	}
+
 </style>

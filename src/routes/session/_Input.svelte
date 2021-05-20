@@ -49,6 +49,7 @@
 			handleSubmit()
 		}
 	}
+
 </script>
 
 <form
@@ -150,4 +151,5 @@
 			outline: var(--focus-color) solid 3px;
 		}
 	}
+
 </style>

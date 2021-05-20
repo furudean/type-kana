@@ -14,6 +14,7 @@
 		quizzedCorrect.length / (quizzedCorrect.length + unquizzed.length)
 
 	$: style = `margin-right: ${(1 - roundN(progress, 2)) * 100}%`
+
 </script>
 
 {#if $settings.showProgressBar}
@@ -44,4 +45,5 @@
 		background: var(--accent-color);
 		transition: margin-right 150ms var(--standard-curve);
 	}
+
 </style>

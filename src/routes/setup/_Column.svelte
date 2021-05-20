@@ -19,6 +19,7 @@
 			)
 		}
 	}
+
 </script>
 
 <section class="column" aria-label={label}>
@@ -108,4 +109,5 @@
 	.row > :global(.checkbox-kana:not(:last-child)) {
 		margin-right: 10px !important;
 	}
+
 </style>
