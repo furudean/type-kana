@@ -3,9 +3,6 @@ import vercel from "@sveltejs/adapter-vercel"
 import path from "path"
 import replace from "@rollup/plugin-replace"
 import { execSync } from "child_process"
-import { fileURLToPath } from "url"
-
-const dirname = path.resolve(fileURLToPath(import.meta.url), "../")
 
 /** @type {import('@sveltejs/kit').Config} */
 export default {
@@ -21,7 +18,7 @@ export default {
 		vite: {
 			resolve: {
 				alias: {
-					"@": path.resolve(dirname, "./src")
+					"@": path.resolve("./src")
 				}
 			},
 			optimizeDeps: {
