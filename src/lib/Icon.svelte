@@ -7,7 +7,6 @@
 	export let path: string
 	export let title = undefined
 	export let ariaHidden = false
-
 </script>
 
 <svg
@@ -29,5 +28,4 @@
 		position: relative;
 		vertical-align: top;
 	}
-
 </style>

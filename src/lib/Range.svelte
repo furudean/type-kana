@@ -56,7 +56,6 @@
 		dispatch("input", (event as any).detail)
 		enter()
 	}
-
 </script>
 
 <svelte:window on:resize|passive={updateTooltipPosition} />
@@ -204,5 +203,4 @@
 			transparent;
 		transform: translateX(-50%);
 	}
-
 </style>

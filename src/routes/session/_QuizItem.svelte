@@ -8,7 +8,6 @@
 	$: hasAnswer = answered !== undefined
 	$: hasCorrectAnswer = hasAnswer ? isCorrectAnswer : false
 	$: hasIncorrectAnswer = hasAnswer ? !isCorrectAnswer : false
-
 </script>
 
 <div
@@ -53,5 +52,4 @@
 		text-decoration-style: dotted;
 		text-decoration-line: underline;
 	}
-
 </style>

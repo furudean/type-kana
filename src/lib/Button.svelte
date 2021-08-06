@@ -6,7 +6,6 @@
 	export let href: string = undefined
 	export let target: string = undefined
 	export let rel: string = undefined
-
 </script>
 
 {#if !href}
@@ -77,5 +76,4 @@
 		cursor: default;
 		pointer-events: none;
 	}
-
 </style>

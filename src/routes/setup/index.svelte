@@ -39,7 +39,6 @@
 			window.requestAnimationFrame(updateMenuSticky) // run after menu height has been painted
 		}
 	})
-
 </script>
 
 <svelte:head>
@@ -219,5 +218,4 @@
 	.menu > :global(.button .svg-icon) {
 		margin-right: -0.5em;
 	}
-
 </style>

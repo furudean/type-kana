@@ -4,7 +4,6 @@
 
 	export let status: number
 	export let error: Error
-
 </script>
 
 <svelte:head>

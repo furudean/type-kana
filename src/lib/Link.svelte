@@ -8,7 +8,6 @@
 
 	const iconDataUrl = svgToDataUrl(mdiOpenInNew)
 	const style = `--icon-url: url("${iconDataUrl}")`
-
 </script>
 
 <a {href} {target} {rel} {...$$restProps} {style}>
@@ -54,5 +53,4 @@
 			background-color: var(--background-color);
 		}
 	}
-
 </style>

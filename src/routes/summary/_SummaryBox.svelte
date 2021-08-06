@@ -11,7 +11,6 @@
 	let isTruncated = items.length - 2 > truncateAt
 
 	$: truncatedItems = items.slice(0, isTruncated ? truncateAt : Infinity)
-
 </script>
 
 <div class="summary-box" class:fill>
@@ -145,5 +144,4 @@
 			box-shadow: 0 0 0 3px var(--focus-color);
 		}
 	}
-
 </style>

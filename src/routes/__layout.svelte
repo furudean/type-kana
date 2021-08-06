@@ -19,7 +19,6 @@
 			getRootGain().gain.value = volume / 100
 		})
 	})
-
 </script>
 
 <svelte:window
@@ -42,5 +41,4 @@
 		min-height: 100%;
 		overflow: hidden;
 	}
-
 </style>

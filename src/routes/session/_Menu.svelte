@@ -15,7 +15,6 @@
 	onMount(() => {
 		loadDropSound()
 	})
-
 </script>
 
 <section class="menu">
@@ -137,5 +136,4 @@
 	.button.reset-animation-playing .reset-animation-container {
 		animation: 500ms counter-clockwise-turn var(--standard-curve);
 	}
-
 </style>

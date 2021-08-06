@@ -80,7 +80,6 @@
 
 	// go to results if queue is empty
 	$: unquizzed.length === 0 && goto("summary")
-
 </script>
 
 <svelte:head>

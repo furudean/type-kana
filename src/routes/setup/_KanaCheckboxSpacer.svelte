@@ -12,5 +12,4 @@
 		height: 1em;
 		opacity: 0.4;
 	}
-
 </style>
