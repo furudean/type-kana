@@ -1,5 +1,5 @@
 import sveltePreprocess from "svelte-preprocess"
-import vercel from "@sveltejs/adapter-vercel"
+import adapterStatic from "@sveltejs/adapter-static"
 import path from "path"
 import replace from "@rollup/plugin-replace"
 import { execSync } from "child_process"
@@ -10,11 +10,8 @@ export default {
 	extensions: [".svelte"],
 
 	kit: {
-		adapter: vercel(),
+		adapter: adapterStatic(),
 		target: "body",
-		prerender: {
-			enabled: false
-		},
 		vite: {
 			resolve: {
 				alias: {

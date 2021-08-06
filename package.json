@@ -27,7 +27,7 @@
 	},
 	"devDependencies": {
 		"@rollup/plugin-replace": "^2.4.2",
-		"@sveltejs/adapter-vercel": "next",
+		"@sveltejs/adapter-static": "next",
 		"@sveltejs/kit": "next",
 		"@types/body-scroll-lock": "^2.6.2",
 		"@types/canvas-confetti": "^1.4.2",
