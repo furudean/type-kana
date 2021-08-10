@@ -22,8 +22,8 @@
 		class="progress-bg"
 		role="progressbar"
 		aria-valuenow={Math.floor(progress * 100)}
-		aria-valuemin="0"
-		aria-valuemax="100"
+		aria-valuemin={0}
+		aria-valuemax={100}
 	>
 		<div class="progress-fill" {style} aria-hidden="true" />
 	</section>
