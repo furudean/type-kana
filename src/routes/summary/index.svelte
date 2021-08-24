@@ -75,12 +75,12 @@
 		margin-top: calc(2 * var(--line-space));
 	}
 
-	section.unquizzed {
-		opacity: 0.33;
-		transition: 120ms var(--standard-curve) opacity;
+	section.unquizzed :global(.summary-item) {
+		opacity: 0.5;
+		transition: 60ms var(--standard-curve) opacity;
 
 		&:hover,
-		&:focus-within {
+		&:focus {
 			opacity: 1;
 		}
 	}
