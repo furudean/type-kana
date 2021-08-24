@@ -99,7 +99,7 @@
 		transition:fade={{ duration: 500, easing: cubicOut }}
 	/>
 	<section
-		class="settings-menu content-width content-padding"
+		class="settings-menu content-width"
 		use:onClickOutside={close}
 		role="dialog"
 		aria-modal="true"
@@ -108,136 +108,138 @@
 		use:scrollLock
 		transition:fly={{ duration: 400, easing: cubicOut, y: -150 }}
 	>
-		<h1 id="settings-heading">Settings</h1>
+		<div class="content-padding">
+			<h1 id="settings-heading">Settings</h1>
 
-		<hr />
+			<hr />
 
-		<h2>Quiz</h2>
-		<Checkbox
-			id="retry-incorrect-answers-setting"
-			bind:checked={$settings.retryIncorrectAnswers}
-		>
-			Put incorrect answers back in queue
-		</Checkbox>
-
-		<fieldset>
-			<legend>Auto submit</legend>
-
-			<Radio
-				id="auto-commit-disabled-choice"
-				name="auto-commit-choice"
-				bind:group={$settings.autoCommit}
-				value="disabled"
+			<h2>Quiz</h2>
+			<Checkbox
+				id="retry-incorrect-answers-setting"
+				bind:checked={$settings.retryIncorrectAnswers}
 			>
-				Disabled
-			</Radio>
+				Put incorrect answers back in queue
+			</Checkbox>
 
-			<Radio
-				id="auto-commit-forgiving-choice"
-				name="auto-commit-choice"
-				bind:group={$settings.autoCommit}
-				value="forgiving"
+			<fieldset>
+				<legend>Auto submit</legend>
+
+				<Radio
+					id="auto-commit-disabled-choice"
+					name="auto-commit-choice"
+					bind:group={$settings.autoCommit}
+					value="disabled"
+				>
+					Disabled
+				</Radio>
+
+				<Radio
+					id="auto-commit-forgiving-choice"
+					name="auto-commit-choice"
+					bind:group={$settings.autoCommit}
+					value="forgiving"
+				>
+					On correct answer
+				</Radio>
+
+				<Radio
+					id="auto-commit-strict-choice"
+					name="auto-commit-choice"
+					bind:group={$settings.autoCommit}
+					value="strict"
+				>
+					On correct <strong>or</strong> incorrect answer
+				</Radio>
+
+				<input
+					id="mistake-delay-setting"
+					type="number"
+					bind:value={$settings.mistakeDelayMs}
+					min="0"
+					step="10"
+					max="5000"
+					disabled={$settings.autoCommit !== "strict"}
+					required
+				/>
+				<label for="mistake-delay-setting">Mistake delay (ms)</label>
+			</fieldset>
+
+			<hr />
+
+			<h2>Appearance</h2>
+			<Checkbox
+				id="error-marker-setting"
+				bind:checked={$settings.showErrorMarker}
 			>
-				On correct answer
-			</Radio>
+				Show an "X" if input does not match answer
+			</Checkbox>
 
-			<Radio
-				id="auto-commit-strict-choice"
-				name="auto-commit-choice"
-				bind:group={$settings.autoCommit}
-				value="strict"
-			>
-				On correct <strong>or</strong> incorrect answer
-			</Radio>
-
-			<input
-				id="mistake-delay-setting"
-				type="number"
-				bind:value={$settings.mistakeDelayMs}
-				min="0"
-				step="10"
-				max="5000"
-				disabled={$settings.autoCommit !== "strict"}
-				required
-			/>
-			<label for="mistake-delay-setting">Mistake delay (ms)</label>
-		</fieldset>
-
-		<hr />
-
-		<h2>Appearance</h2>
-		<Checkbox
-			id="error-marker-setting"
-			bind:checked={$settings.showErrorMarker}
-		>
-			Show an "X" if input does not match answer
-		</Checkbox>
-
-		<Checkbox id="progress-bar-setting" bind:checked={$settings.showProgressBar}
-			>Show completion progress</Checkbox
-		>
-
-		<fieldset>
-			<legend>Theme</legend>
-
-			<Radio
-				id="same-as-system-theme-choice"
-				name="theme-choice"
-				bind:group={$settings.theme}
-				value="same-as-system"
-			>
-				Same as system ({$osTheme})
-			</Radio>
-
-			<Radio
-				id="light-theme-choice"
-				name="theme-choice"
-				bind:group={$settings.theme}
-				value="light">Light</Radio
+			<Checkbox
+				id="progress-bar-setting"
+				bind:checked={$settings.showProgressBar}
+				>Show completion progress</Checkbox
 			>
 
-			<Radio
-				id="dark-theme-choice"
-				name="theme-choice"
-				bind:group={$settings.theme}
-				value="dark">Dark</Radio
-			>
-		</fieldset>
+			<fieldset>
+				<legend>Theme</legend>
 
-		<hr />
+				<Radio
+					id="same-as-system-theme-choice"
+					name="theme-choice"
+					bind:group={$settings.theme}
+					value="same-as-system"
+				>
+					Same as system ({$osTheme})
+				</Radio>
 
-		<h2>Audio</h2>
-		<label for="audio-volume-setting" class="sr-only">Volume (%)</label>
-		<div class="volume-slider">
-			<Icon
-				title="Volume icon"
-				bind:path={volumeIconPath}
-				bind:viewBox={volumeIconViewBox}
-				color={volumeIconColor}
-				size="1.5em"
-				ariaHidden={true}
-			/>
-			<Range
-				id="audio-volume-setting"
-				bind:value={$settings.volume}
-				min={0}
-				max={100}
-				tooltip="[value]%"
-				width="200px"
-				on:input={playTapSoundThrottled}
-			/>
+				<Radio
+					id="light-theme-choice"
+					name="theme-choice"
+					bind:group={$settings.theme}
+					value="light">Light</Radio
+				>
+
+				<Radio
+					id="dark-theme-choice"
+					name="theme-choice"
+					bind:group={$settings.theme}
+					value="dark">Dark</Radio
+				>
+			</fieldset>
+
+			<hr />
+
+			<h2>Audio</h2>
+			<label for="audio-volume-setting" class="sr-only">Volume (%)</label>
+			<div class="volume-slider">
+				<Icon
+					title="Volume icon"
+					bind:path={volumeIconPath}
+					bind:viewBox={volumeIconViewBox}
+					color={volumeIconColor}
+					size="1.5em"
+					ariaHidden={true}
+				/>
+				<Range
+					id="audio-volume-setting"
+					bind:value={$settings.volume}
+					min={0}
+					max={100}
+					tooltip="[value]%"
+					width="200px"
+					on:input={playTapSoundThrottled}
+				/>
+			</div>
+
+			<hr />
+
+			<h2>Danger zone</h2>
+			<Checkbox id="reset-on-close-setting" bind:checked={resetOnClose}>
+				Reset all saved data after closing settings
+			</Checkbox>
 		</div>
 
-		<hr />
-
-		<h2>Danger zone</h2>
-		<Checkbox id="reset-on-close-setting" bind:checked={resetOnClose}>
-			Reset all saved data after closing settings
-		</Checkbox>
-
-		<hr />
-
-		<section class="menu">
+		<section class="menu content-padding">
 			<Button on:click={close}>
 				<Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
 				Done
@@ -278,13 +280,7 @@
 		width: 100%;
 		max-height: 85%;
 		box-sizing: border-box;
-
-		/* https://github.com/w3c/csswg-drafts/issues/129 */
-		&:after {
-			content: "";
-			display: block;
-			height: 4em;
-		}
+		padding-bottom: 0;
 	}
 
 	@media screen and (max-width: 40em) {
@@ -343,7 +339,22 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-top: 3em;
+		position: sticky;
+		bottom: 0;
+		border-top: 1px solid var(--background-contrast-light);
+		backdrop-filter: blur(16px);
+	}
+
+	/* Fallback for crap browsers like Firefox */
+	@supports (not (backdrop-filter: none)) {
+		.menu:before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+			background-color: var(--background-color);
+			opacity: 0.95;
+		}
 	}
 
 	.menu > :global(.button .svg-icon) {
