@@ -186,3 +186,12 @@ export async function playDropSound() {
 
 	source.start()
 }
+
+export const loadVictorySound = createPreloader(["audio/win.mp3"])
+
+export async function playVictorySound() {
+	const audioBuffer = await getAudioBuffer(["audio/win.mp3"])
+	const source = createAudioSource(audioBuffer)
+
+	source.start()
+}

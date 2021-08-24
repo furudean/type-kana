@@ -5,6 +5,7 @@
 	import Button from "@/lib/Button.svelte"
 	import { onMount } from "svelte"
 	import { celebrate } from "./confetti"
+	import { playVictorySound } from "@/lib/sound"
 
 	const answered = $summary.correct.length + $summary.incorrect.length
 	const accuracy = $summary.correct.length / answered
@@ -12,6 +13,7 @@
 
 	onMount(() => {
 		if ($summary.correct.length > 0) {
+			playVictorySound()
 			celebrate()
 		}
 	})

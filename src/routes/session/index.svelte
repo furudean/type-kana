@@ -11,7 +11,8 @@
 		loadErrorSound,
 		playErrorSound,
 		loadMaximizeSound,
-		loadMinimizeSound
+		loadMinimizeSound,
+		loadVictorySound
 	} from "@/lib/sound"
 	import { randomInt } from "@/lib/random"
 	import { settings } from "@/stores/settings"
@@ -68,6 +69,7 @@
 
 		if (unquizzed.length < 5) {
 			prefetch("summary")
+			loadVictorySound()
 		}
 	}
 

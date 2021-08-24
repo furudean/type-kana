@@ -2,7 +2,7 @@
 	import { mdiCogOutline, mdiArrowLeft, mdiRestart, mdiCheck } from "@mdi/js"
 	import Icon from "@/lib/Icon.svelte"
 	import { createEventDispatcher, onMount } from "svelte"
-	import { loadDropSound, playDropSound } from "@/lib/sound"
+	import { loadDropSound, loadVictorySound, playDropSound } from "@/lib/sound"
 
 	const dispatch = createEventDispatcher()
 
@@ -58,7 +58,14 @@
 		</span>
 	</button>
 
-	<a href="/summary" class="button" title="Finish session">
+	<a
+		href="/summary"
+		class="button"
+		title="Finish session"
+		on:mouseenter={() => {
+			loadVictorySound()
+		}}
+	>
 		<Icon path={mdiCheck} />
 	</a>
 </section>
