@@ -63,7 +63,7 @@
 		const answers = getAnswers(item.kana)
 		return uniqArray(item.answers)
 			.filter((s) => !answers.includes(s)) // only wrong answers
-			.map((s) => (s === " " ? "<empty>" : `'${s}'`))
+			.map((s) => (s.trim() === "" ? "<empty>" : `'${s}'`))
 			.join(", ")
 	}
 
@@ -100,7 +100,7 @@
 {#if $focused}
 	<div
 		class="tooltip"
-		out:fade={{ duration: 250, delay: 500, easing: cubicOut }}
+		out:fade={{ duration: 200, delay: 250, easing: cubicOut }}
 	>
 		<div class="arrow" style={arrowStyle} aria-hidden="true" />
 		<div
