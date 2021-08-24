@@ -33,13 +33,6 @@
 		{#if currentItem}
 			<QuizItemComponent kana={currentItem.kana} />
 		{/if}
-		<div
-			class="error-marker"
-			class:visible={errorMarkerVisible}
-			aria-hidden={!errorMarkerVisible}
-		>
-			<Icon path={errorMarkerIcon} />
-		</div>
 	</div>
 	<div class="kana-quizzed">
 		{#each [...quizzed]
@@ -47,6 +40,13 @@
 			.slice(0, 15) as { kana, answered, isCorrectAnswer }}
 			<QuizItemComponent {kana} {answered} {isCorrectAnswer} />
 		{/each}
+	</div>
+	<div
+		class="error-marker"
+		class:visible={errorMarkerVisible}
+		aria-hidden={!errorMarkerVisible}
+	>
+		<Icon path={errorMarkerIcon} />
 	</div>
 </section>
 
@@ -57,6 +57,8 @@
 		display: flex;
 		overflow-x: hidden;
 		flex-direction: row-reverse;
+		padding: 2em 0 3em;
+		position: relative;
 	}
 	.kana-quizzed,
 	.kana-queue {
@@ -76,8 +78,8 @@
 		display: flex;
 		position: absolute;
 		left: 50%;
-		bottom: -1em;
-		transform: translateX(-50%);
+		bottom: 0.5em;
+		transform: translate(-50%, 0);
 		color: var(--highlight-color);
 		font-size: 1.75em;
 		opacity: 0;

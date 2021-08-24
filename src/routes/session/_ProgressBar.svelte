@@ -31,14 +31,9 @@
 
 <style lang="postcss">
 	.progress-bg {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 3px;
+		height: 4px;
+		position: relative;
 		overflow: hidden;
-		background: var(--background-contrast-light);
-		border-radius: 10000px;
 	}
 	.progress-fill {
 		position: absolute;

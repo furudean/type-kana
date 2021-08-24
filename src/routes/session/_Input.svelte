@@ -99,7 +99,7 @@
 		background-color: var(--background-contrast);
 		border-bottom: 1px solid var(--background-contrast-light);
 		border-radius: var(--standard-border-radius);
-		margin: 3em auto 0;
+		margin: 0 auto;
 		font-size: 1.4em;
 		box-sizing: border-box;
 	}
