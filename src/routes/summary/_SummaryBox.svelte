@@ -14,7 +14,7 @@
 </script>
 
 <div class="summary-box" class:fill>
-	{#each truncatedItems as item}
+	{#each truncatedItems as item (item.kana)}
 		<div
 			class="summary-item"
 			class:hiragana={isHiragana(item.kana)}
@@ -46,7 +46,7 @@
 
 <style lang="postcss">
 	.summary-box {
-		--gap: 1rem;
+		--gap: 0.75rem;
 
 		margin-top: calc(-1 * var(--gap));
 		margin-left: calc(-1 * var(--gap));
@@ -69,8 +69,8 @@
 		border-radius: var(--standard-border-radius);
 		cursor: default;
 		border: var(--border-size) solid transparent;
-		transition: 70ms var(--standard-curve) color,
-			70ms var(--standard-curve) border-color;
+		transition: 60ms var(--standard-curve) color,
+			60ms var(--standard-curve) border-color;
 
 		&:focus {
 			outline: none;

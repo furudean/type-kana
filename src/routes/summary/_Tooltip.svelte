@@ -90,7 +90,7 @@
 	let bodyStyle: string
 
 	afterUpdate(() => {
-		if (tooltipBody) {
+		if (tooltipBody && $rect) {
 			arrowStyle = calculateArrowStyle($rect)
 			bodyStyle = calculateBodyStyle($rect, tooltipBody.getBoundingClientRect())
 		}
@@ -100,7 +100,6 @@
 {#if $focused}
 	<div
 		class="tooltip"
-		in:fade={{ duration: 125, easing: cubicOut }}
 		out:fade={{ duration: 250, delay: 500, easing: cubicOut }}
 	>
 		<div class="arrow" style={arrowStyle} aria-hidden="true" />
@@ -142,7 +141,7 @@
 		border-color: transparent transparent var(--background-color-inverse)
 			transparent;
 		transform: translateX(-50%);
-		transition: 70ms var(--standard-curve) top, 70ms var(--standard-curve) left;
+		transition: 60ms var(--standard-curve) top, 60ms var(--standard-curve) left;
 	}
 
 	.body {
@@ -159,7 +158,7 @@
 		box-sizing: border-box;
 		min-width: 32px;
 		max-width: 15em;
-		transition: 70ms var(--standard-curve) top, 70ms var(--standard-curve) left;
+		transition: 60ms var(--standard-curve) top, 60ms var(--standard-curve) left;
 	}
 
 	.body :global(.svg-icon) {
