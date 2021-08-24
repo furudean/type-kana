@@ -353,7 +353,7 @@
 			inset: 0;
 			z-index: -1;
 			background-color: var(--background-color);
-			opacity: 0.95;
+			opacity: 0.9;
 		}
 	}
 
