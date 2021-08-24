@@ -1,3 +1,11 @@
+<script context="module">
+	export function load({ error, status }) {
+		return {
+			props: { error, status }
+		}
+	}
+</script>
+
 <script lang="ts">
 	import Link from "@/lib/Link.svelte"
 	import { dev } from "$app/env"
