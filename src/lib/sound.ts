@@ -1,4 +1,4 @@
-import { randomInt } from "./random"
+import { randomArrayItem, randomInt } from "./random"
 import {
 	createAudioSource,
 	getAudioBuffer,
@@ -9,7 +9,7 @@ import { sleep } from "@/lib/util"
 
 function createPreloader(urls: string[]) {
 	return async () => {
-		await getAudioBuffer(urls)
+		await Promise.all(urls.map(getAudioBuffer))
 	}
 }
 
@@ -187,10 +187,20 @@ export async function playDropSound() {
 	source.start()
 }
 
-export const loadVictorySound = createPreloader(["audio/win.mp3"])
+export const loadVictorySound = createPreloader([
+	"audio/win_1.mp3",
+	"audio/win_2.mp3",
+	"audio/win_3.mp3"
+])
 
 export async function playVictorySound() {
-	const audioBuffer = await getAudioBuffer(["audio/win.mp3"])
+	const url = randomArrayItem([
+		"audio/win_1.mp3",
+		"audio/win_2.mp3",
+		"audio/win_3.mp3"
+	])
+
+	const audioBuffer = await getAudioBuffer(url)
 	const source = createAudioSource(audioBuffer)
 
 	source.start()
