@@ -88,8 +88,19 @@
 	<title>Session · Type Kana</title>
 </svelte:head>
 
-<ProgressBar {unquizzed} {quizzed} />
-<Quiz {unquizzed} {quizzed} {input} />
-<Input bind:input on:submit={handleSubmit} currentKana={currentItem?.kana} />
-<Menu on:menuEvent={handleMenuEvent} />
+<div class="game">
+	<ProgressBar {unquizzed} {quizzed} />
+	<Quiz {unquizzed} {quizzed} {input} />
+	<Input bind:input on:submit={handleSubmit} currentKana={currentItem?.kana} />
+	<Menu on:menuEvent={handleMenuEvent} />
+</div>
 <SettingsModal bind:this={settingsModal} />
+
+<style lang="postcss">
+	.game {
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+</style>

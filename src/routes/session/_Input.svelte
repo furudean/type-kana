@@ -94,12 +94,13 @@
 <style lang="postcss">
 	.answer-input {
 		display: flex;
+		width: 100%;
 		position: relative;
 		background-color: var(--background-contrast);
-		border-bottom: 2px solid var(--background-contrast-light);
+		border-bottom: 1px solid var(--background-contrast-light);
 		border-radius: var(--standard-border-radius);
-		margin: 0 auto;
-		font-size: 1.5em;
+		margin: 3em auto 0;
+		font-size: 1.4em;
 		box-sizing: border-box;
 	}
 
@@ -107,7 +108,7 @@
 		margin: 0;
 		width: 100%;
 		text-align: center;
-		height: 3em;
+		height: 2.5em;
 		padding: 0;
 		border: 0;
 		background: none;
@@ -133,7 +134,7 @@
 		margin: 0;
 		border: 0;
 		padding: 0;
-		font-size: 2em;
+		font-size: 1.75em;
 		width: 1.5em;
 		height: 100%;
 		cursor: pointer;

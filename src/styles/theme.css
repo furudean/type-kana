@@ -2,7 +2,7 @@
 :root {
 	--background-color: hsl(43, 100%, 94%);
 
-	--background-contrast: hsl(43, 100%, 98%);
+	--background-contrast: hsl(0, 100%, 100%);
 	--background-contrast-light: hsl(41, 37%, 80%);
 
 	--text-color: hsl(165, 100%, 7%);

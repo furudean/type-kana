@@ -57,7 +57,6 @@
 		display: flex;
 		overflow-x: hidden;
 		flex-direction: row-reverse;
-		padding: 4em 0 2em;
 	}
 	.kana-quizzed,
 	.kana-queue {
@@ -74,10 +73,13 @@
 	}
 
 	.error-marker {
-		color: var(--highlight-color);
-		font-size: 2em;
 		display: flex;
-		justify-content: center;
+		position: absolute;
+		left: 50%;
+		bottom: -1em;
+		transform: translateX(-50%);
+		color: var(--highlight-color);
+		font-size: 1.75em;
 		opacity: 0;
 		transition: 150ms var(--standard-curve) opacity;
 

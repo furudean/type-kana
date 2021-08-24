@@ -1,13 +1,25 @@
+import { randomInt } from "@/lib/random"
+import { sleep } from "@/lib/util"
 import confetti from "canvas-confetti"
 
-export function celebrate() {
+function fire() {
 	confetti({
-		disableForReducedMotion: true,
-		origin: { y: 0.6 },
-		gravity: 1.4,
+		gravity: 3.5,
 		spread: 50,
-		ticks: 400,
-		particleCount: 90,
-		startVelocity: 80
+		particleCount: 30,
+		startVelocity: 60,
+		ticks: 100,
+		origin: {
+			x: randomInt(20, 80) / 100,
+			y: randomInt(25, 40) / 100
+		},
+		disableForReducedMotion: true
 	})
+}
+
+export async function celebrate() {
+	for (let index = 0; index < 3; index++) {
+		fire()
+		await sleep(500)
+	}
 }

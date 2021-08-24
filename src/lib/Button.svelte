@@ -38,7 +38,7 @@
 <style lang="postcss">
 	.button {
 		--border-size: 3px;
-		--padding-vertical: 0.75em;
+		--padding-vertical: 0.6em;
 		--padding-horizontal: 1.5em;
 
 		all: initial;

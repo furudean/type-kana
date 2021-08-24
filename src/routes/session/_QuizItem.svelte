@@ -24,27 +24,29 @@
 
 <style lang="postcss">
 	.quiz-item {
-		font-size: 5em;
-		white-space: nowrap;
+		font-size: 4em;
+		line-height: 1.2;
 		position: relative;
+		margin-top: 0.5em;
 	}
 
 	.furigana {
-		font-size: 0.5em;
-		font-weight: 500;
 		position: absolute;
 		top: -1em;
 		left: 0;
 		right: 0;
+		font-size: 0.5em;
+		font-weight: 400;
+		line-height: 1;
 		text-align: center;
 	}
 
 	.is-correct {
-		color: var(--text-color-lighter);
+		color: var(--text-color-light);
 	}
 
 	.is-incorrect {
-		color: var(--text-color-light);
+		color: var(--highlight-color);
 	}
 
 	.is-incorrect > .kana {
