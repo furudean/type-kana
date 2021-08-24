@@ -65,7 +65,7 @@
 		font-size: 1.5em;
 		line-height: 1;
 		font-family: "M+ 2c";
-		padding: calc(0.3em - var(--border-size));
+		padding: 0.2em;
 		border-radius: var(--standard-border-radius);
 		cursor: default;
 		border: var(--border-size) solid transparent;
