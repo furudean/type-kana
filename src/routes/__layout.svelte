@@ -39,6 +39,5 @@
 <style lang="postcss">
 	main {
 		min-height: 100%;
-		overflow: hidden;
 	}
 </style>

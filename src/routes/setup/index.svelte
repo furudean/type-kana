@@ -15,28 +15,10 @@
 	import { quiz } from "@/stores/quiz"
 	import { browser } from "$app/env"
 
-	let menuElement: HTMLElement
-	let menuHeight = 0
-	let menuIsSticky = false
-
-	function updateMenuHeight() {
-		menuHeight = menuElement.offsetHeight
-	}
-
-	function updateMenuSticky() {
-		const bottomOfMenuY =
-			Math.ceil(window.scrollY + menuElement.getBoundingClientRect().top) +
-			menuElement.offsetHeight
-		menuIsSticky = document.documentElement.scrollHeight > bottomOfMenuY
-	}
-
-	onMount(async () => {
+	onMount(() => {
 		if (browser) {
 			loadCheckboxSelectSound()
 			loadDropSound()
-			await tick()
-			updateMenuHeight()
-			window.requestAnimationFrame(updateMenuSticky) // run after menu height has been painted
 		}
 	})
 </script>
@@ -44,14 +26,6 @@
 <svelte:head>
 	<title>Setup · Type Kana</title>
 </svelte:head>
-
-<svelte:window
-	on:resize|passive={() => {
-		updateMenuHeight()
-		window.requestAnimationFrame(updateMenuSticky)
-	}}
-	on:scroll|passive={updateMenuSticky}
-/>
 
 <fieldset class="kana-type">
 	<legend>I want to practice...</legend>
@@ -88,8 +62,7 @@
 		label="Digraphs with diacritics"
 	/>
 </section>
-<div class="menu-push" aria-hidden="true" style={`height: ${menuHeight}px`} />
-<section class="menu" class:is-sticky={menuIsSticky} bind:this={menuElement}>
+<section class="menu content-padding">
 	<Button
 		href="session"
 		disabled={$dictionary.length === 0}
@@ -132,49 +105,30 @@
 		padding: 0 2em;
 		justify-content: center;
 		margin-top: 3em;
-	}
-	.columns > :global(*) {
-		&:nth-child(1) {
-			grid-area: a;
-		}
-		&:nth-child(2) {
-			grid-area: b;
-		}
-		&:nth-child(3) {
-			grid-area: c;
-		}
-		&:nth-child(4) {
-			grid-area: d;
-		}
-	}
 
-	@media screen and (max-width: 978px) {
-		.columns {
+		> :global(*) {
+			&:nth-child(1) {
+				grid-area: a;
+			}
+			&:nth-child(2) {
+				grid-area: b;
+			}
+			&:nth-child(3) {
+				grid-area: c;
+			}
+			&:nth-child(4) {
+				grid-area: d;
+			}
+		}
+
+		@media screen and (max-width: 978px) {
 			grid-template-areas:
 				"a c"
 				"a d"
 				"b .";
 		}
 
-		.menu-push {
-			display: block !important;
-		}
-		.menu {
-			position: fixed;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			transition: 250ms border-color var(--standard-curve);
-			padding: 2em 0;
-			margin-bottom: 0 !important;
-		}
-		.menu.is-sticky {
-			border-color: var(--background-contrast-light);
-		}
-	}
-
-	@media screen and (max-width: 638px) {
-		.columns {
+		@media screen and (max-width: 638px) {
 			grid-template-areas:
 				"a"
 				"b"
@@ -200,22 +154,28 @@
 		width: 100%;
 	}
 
-	.menu-push {
-		display: none;
-	}
-
 	.menu {
-		--border-size: 3px;
-
 		display: flex;
 		justify-content: center;
-		margin-top: calc(-1 * var(--border-size));
-		margin-bottom: 2em;
-		background-color: var(--background-color);
-		border-top: var(--border-size) solid transparent;
+		position: sticky;
+		bottom: 0;
+		border-top: 1px solid var(--background-contrast-light);
+		backdrop-filter: blur(16px);
+
+		> :global(.button .svg-icon) {
+			margin-right: -0.5em;
+		}
 	}
 
-	.menu > :global(.button .svg-icon) {
-		margin-right: -0.5em;
+	/* Fallback for crap browsers like Firefox */
+	@supports (not (backdrop-filter: none)) {
+		.menu:before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+			background-color: var(--background-color);
+			opacity: 0.9;
+		}
 	}
 </style>
