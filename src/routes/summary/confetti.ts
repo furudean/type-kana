@@ -5,13 +5,13 @@ import confetti from "canvas-confetti"
 function fire() {
 	confetti({
 		gravity: 3.5,
-		spread: 50,
+		spread: 60,
 		particleCount: 30,
 		startVelocity: 60,
-		ticks: 100,
+		ticks: 120,
 		origin: {
-			x: randomInt(20, 80) / 100,
-			y: randomInt(25, 40) / 100
+			x: randomInt(30, 70) / 100,
+			y: randomInt(20, 30) / 100
 		},
 		disableForReducedMotion: true
 	})
@@ -20,6 +20,6 @@ function fire() {
 export async function celebrate() {
 	for (let index = 0; index < 3; index++) {
 		fire()
-		await sleep(500)
+		await sleep(400)
 	}
 }
