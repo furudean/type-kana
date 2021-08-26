@@ -39,8 +39,7 @@
 
 		return {
 			destroy() {
-				document.removeEventListener("scroll", updateRect)
-				window.removeEventListener("resize", updateRect)
+				leave()
 			},
 			update(_item: SummaryKana) {
 				focused.set(_item)
@@ -97,7 +96,7 @@
 {#if $focused}
 	<div
 		class="tooltip"
-		out:fade={{ duration: 200, delay: 250, easing: cubicOut }}
+		out:fade={{ duration: 200, delay: 400, easing: cubicOut }}
 	>
 		<div class="arrow" style={arrowStyle} aria-hidden="true" />
 		<div
