@@ -111,8 +111,7 @@
 		animation-fill-mode: forwards;
 	}
 
-	.checkbox-kana:hover > .block,
-	.checkbox-kana:focus > .block {
+	.checkbox-kana:focus-visible > .block {
 		border-color: var(--focus-color);
 	}
 </style>

@@ -61,7 +61,7 @@
 		&:hover {
 			text-decoration: underline;
 		}
-		&:focus:not(:active) {
+		&:focus-visible {
 			text-decoration: underline;
 			background: var(--focus-color);
 			color: var(--text-color-on-focus-color);

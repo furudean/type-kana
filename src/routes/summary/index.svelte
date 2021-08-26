@@ -80,7 +80,7 @@
 		transition: 60ms var(--standard-curve) opacity;
 
 		&:hover,
-		&:focus {
+		&:focus-visible {
 			opacity: 1;
 		}
 	}

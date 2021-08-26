@@ -123,7 +123,7 @@
 		transition: 125ms var(--standard-curve) opacity;
 	}
 
-	input[type="checkbox"]:focus:before {
+	input[type="checkbox"]:focus-visible:before {
 		opacity: 1;
 	}
 

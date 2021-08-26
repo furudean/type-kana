@@ -24,7 +24,7 @@
 		&:hover {
 			text-decoration: underline dotted var(--accent-color);
 		}
-		&:focus {
+		&:focus-visible {
 			outline: none;
 			color: var(--background-color);
 			background-color: var(--accent-color);
@@ -49,7 +49,7 @@
 			mask-repeat: no-repeat;
 			mask-position: 50% 50%;
 		}
-		&:focus:after {
+		&:focus-visible:after {
 			background-color: var(--background-color);
 		}
 	}

@@ -42,15 +42,20 @@
 		all: initial;
 		display: inline-block;
 		user-select: none;
+		color: var(--text-color-on-accent-color);
 		font-family: "M+ 2c";
 		font-weight: 500;
 		letter-spacing: 1px;
 	}
 
+	a.button:hover,
+	a.button:focus {
+		text-decoration: underline;
+	}
+
 	/* Wrap the <button> content in a containing <div> to that the :active 
 		transition doesn't stop any button clicks */
 	.effect {
-		color: var(--text-color-on-accent-color);
 		background: var(--accent-color);
 		border: var(--border-size) solid transparent;
 		border-radius: var(--standard-border-radius);
@@ -63,7 +68,7 @@
 	}
 
 	.button:not(.disabled) {
-		&:focus:not(:active) > .effect {
+		&:focus-visible > .effect {
 			border-color: var(--focus-color);
 		}
 		&:active > .effect {

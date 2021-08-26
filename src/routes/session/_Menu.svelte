@@ -89,27 +89,22 @@
 	}
 
 	.button {
+		all: initial;
 		display: flex;
-		appearance: none;
-		background: none;
 		font-size: 2.5em;
 		margin-left: 0.25em;
-		padding: 0.1em;
+		padding: 0.175em;
 		border-radius: 50%;
-		border: 3px dashed transparent;
 		transition: transform 50ms var(--standard-curve),
 			color 125ms var(--standard-curve),
 			background-color 125ms var(--standard-curve),
 			border-color 125ms var(--standard-curve);
 		color: var(--accent-color);
 
-		&:focus {
+		&:focus-visible {
 			outline: none;
 			color: var(--background-color);
 			background-color: var(--accent-color);
-		}
-		&:hover {
-			border-color: var(--accent-color);
 		}
 		&:active {
 			transform: translateY(8%);

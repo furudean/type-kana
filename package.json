@@ -21,6 +21,7 @@
 		"body-scroll-lock": "^3.1.5",
 		"canvas-confetti": "^1.4.0",
 		"common-tags": "^1.8.0",
+		"focus-visible": "^5.2.0",
 		"standardized-audio-context": "^25.1.11",
 		"svelte-focus-trap": "^1.2.0",
 		"wanakana": "^4.0.2"
@@ -35,6 +36,7 @@
 		"@types/node": "^16.4.13",
 		"@types/wanakana": "^4.0.3",
 		"autoprefixer": "^10.3.1",
+		"postcss-focus-visible": "^5.0.0",
 		"postcss-load-config": "^3.1.0",
 		"postcss-nested": "^5.0.6",
 		"postcss-pseudo-is": "^0.2.0",

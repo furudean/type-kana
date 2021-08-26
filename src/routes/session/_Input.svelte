@@ -146,7 +146,7 @@
 		align-items: center;
 		justify-content: center;
 
-		&:focus {
+		&:focus-visible {
 			outline: var(--focus-color) solid 3px;
 		}
 	}

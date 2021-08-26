@@ -5,6 +5,7 @@
 	import { settings } from "@/stores/settings"
 	import "@/styles/theme.css"
 	import "@/styles/global.postcss"
+	import "focus-visible/dist/focus-visible.js"
 
 	onMount(() => {
 		resolvedTheme.subscribe((theme) => {

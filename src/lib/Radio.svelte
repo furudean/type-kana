@@ -89,7 +89,7 @@
 		transition: 125ms var(--standard-curve) opacity;
 	}
 
-	input[type="radio"]:focus:before {
+	input[type="radio"]:focus-visible:before {
 		opacity: 1;
 	}
 

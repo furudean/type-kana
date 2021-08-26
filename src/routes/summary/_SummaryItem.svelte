@@ -30,6 +30,7 @@
 	.summary-item {
 		--border-size: 3px;
 
+		all: initial;
 		display: inline-block;
 		position: relative;
 		margin-top: var(--gap);
@@ -40,12 +41,12 @@
 		padding: 0.2em;
 		border-radius: var(--standard-border-radius);
 		cursor: default;
+		user-select: none;
 		border: var(--border-size) solid transparent;
 		transition: 60ms var(--standard-curve) color,
 			60ms var(--standard-curve) border-color;
 
-		&:focus {
-			outline: none;
+		&:focus-visible {
 			border-color: var(--focus-color);
 		}
 	}
@@ -88,7 +89,7 @@
 		}
 		&.hiragana,
 		&.katakana {
-			&:focus {
+			&:focus-visible {
 				color: var(--focus-color);
 				border-color: var(--focus-color);
 			}
