@@ -3,64 +3,83 @@
 	import { gameConfig } from "@/stores/game-config"
 	import { toKatakana } from "wanakana"
 	import { playCheckboxSelectSound } from "@/lib/sound"
-
-	$: kanaType = $gameConfig.kanaType
+	import { longHover } from "@/lib/long-hover"
 
 	export let item: KanaCheckbox
 	export let rowIndex: number
 	export let rowLength: number
+
+	let isLongHover = false
+	$: kanaType = $gameConfig.kanaType
 </script>
 
 <button
 	class="checkbox-kana"
 	role="checkbox"
 	class:selected={item.checked}
+	class:long-hover={isLongHover && kanaType === "both"}
+	class:extended-click-area={kanaType === "both"}
 	aria-pressed={item.checked}
 	title={`Select '${getAnswers(item.kana)[0]}'`}
 	on:click={() => {
 		item.checked = !item.checked
 		playCheckboxSelectSound(rowIndex, rowLength, item.checked)
 	}}
+	use:longHover={{
+		duration: 175,
+		start: () => (isLongHover = true),
+		end: () => (isLongHover = false)
+	}}
 >
-	<div
-		class="block"
-		aria-hidden="true"
-		class:hiragana={kanaType === "hiragana"}
-		class:katakana={kanaType === "katakana" || kanaType === "both"}
-	>
-		{kanaType === "katakana" || kanaType === "both"
-			? toKatakana(item.kana)
-			: item.kana}
-	</div>
-	{#if kanaType === "both" && item.checked}
-		<div class="block hiragana popover" aria-hidden="true">
-			{item.kana}
+	<div class="effect" aria-hidden="true">
+		<div
+			class="block"
+			class:hiragana={kanaType === "hiragana"}
+			class:katakana={kanaType === "katakana" || kanaType === "both"}
+		>
+			{kanaType === "katakana" || kanaType === "both"
+				? toKatakana(item.kana)
+				: item.kana}
 		</div>
-	{/if}
+		{#if kanaType === "both" && item.checked}
+			<div class="block hiragana popover">
+				{item.kana}
+			</div>
+		{/if}
+	</div>
 </button>
 
 <style lang="postcss">
 	.checkbox-kana {
 		--border-width: 3px;
 
+		all: initial;
 		font-family: "M+ 2c";
-		appearance: none;
 		font-size: 1.5em;
-		outline: none;
 		line-height: 1;
 		white-space: nowrap;
 		position: relative;
-		background: none;
-		border: none;
-		padding: 0;
-		margin: 0;
 		user-select: none;
-		transition: transform 50ms var(--standard-curve);
-		flex-grow: 1; /* grow to fill any remaining space (used for ん/ン) */
+		flex-grow: 1; /* grow to fill any remaining space. used for ん/ン. */
 	}
 
-	.checkbox-kana:active {
-		transform: translateY(10%);
+	.checkbox-kana.extended-click-area::before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: -4px;
+		left: -4px;
+		right: 4px;
+		bottom: 4px;
+		z-index: 1;
+	}
+
+	.effect {
+		transition: transform 50ms var(--standard-curve);
+	}
+
+	.checkbox-kana:active .effect {
+		transform: translateY(12%);
 	}
 
 	.block {
@@ -68,13 +87,14 @@
 		background: var(--background-color);
 		border: var(--border-width) solid var(--text-color-lighter);
 		border-radius: var(--standard-border-radius);
-		transition: 150ms var(--standard-curve) color,
-			150ms var(--standard-curve) background,
-			70ms var(--standard-curve) border-color;
+		transition: 90ms var(--standard-curve) color,
+			90ms var(--standard-curve) background,
+			75ms var(--standard-curve) border-color;
 		padding: 0.25em;
+		text-align: center;
 	}
 
-	.checkbox-kana.selected > .block {
+	.checkbox-kana.selected .block {
 		color: var(--text-color-on-accent-color);
 		border-color: transparent;
 
@@ -88,8 +108,8 @@
 
 	@keyframes drop {
 		from {
-			transform: translateY(-100%);
-			opacity: 0;
+			transform: translateY(-40%);
+			opacity: 1;
 		}
 		to {
 			transform: translateY(0);
@@ -98,20 +118,40 @@
 	}
 
 	.block.popover {
+		pointer-events: none;
 		position: absolute;
 		top: -4px;
 		left: -4px;
 		right: 4px;
 		bottom: 4px;
-		opacity: 0; /* overwritten by animation */
 		animation-name: drop;
-		animation-duration: 150ms;
-		animation-delay: 150ms; /* wait for main block to finish transition before dropping in */
-		animation-timing-function: var(--standard-curve);
+		animation-duration: 90ms;
+		animation-timing-function: var(--deceleration-curve);
 		animation-fill-mode: forwards;
 	}
 
-	.checkbox-kana:focus-visible > .block {
+	@keyframes flip {
+		0% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-40%);
+		}
+		100% {
+			transform: translateY(0);
+			z-index: -1;
+		}
+	}
+
+	.checkbox-kana.long-hover .block.popover {
+		animation: none;
+		animation-name: flip;
+		animation-duration: 90ms;
+		animation-timing-function: var(--deceleration-curve);
+		animation-fill-mode: forwards;
+	}
+
+	.checkbox-kana:focus-visible .block {
 		border-color: var(--focus-color);
 	}
 </style>
