@@ -18,7 +18,7 @@
 			window.addEventListener("resize", updateRect)
 
 			focused.set(item)
-			rect.set(node.getBoundingClientRect())
+			updateRect()
 		}
 
 		function leave() {
@@ -39,14 +39,8 @@
 
 		return {
 			destroy() {
-				node.removeEventListener("mouseover", enter)
-				node.removeEventListener("mouseout", leave)
-				node.removeEventListener("focus", enter)
-				node.removeEventListener("blur", leave)
 				document.removeEventListener("scroll", updateRect)
 				window.removeEventListener("resize", updateRect)
-
-				focused.set(null)
 			},
 			update(_item: SummaryKana) {
 				focused.set(_item)
@@ -88,6 +82,9 @@
 	let tooltipBody: HTMLElement
 	let arrowStyle: string
 	let bodyStyle: string
+
+	// $: console.log("focused", $focused)
+	// $: console.log("rect", $rect)
 
 	afterUpdate(() => {
 		if (tooltipBody && $rect) {
