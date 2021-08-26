@@ -32,8 +32,8 @@
 			rect.set(node.getBoundingClientRect())
 		}
 
-		node.addEventListener("mouseover", enter)
-		node.addEventListener("mouseout", leave)
+		node.addEventListener("mouseenter", enter)
+		node.addEventListener("mouseleave", leave)
 		node.addEventListener("focus", enter)
 		node.addEventListener("blur", leave)
 
