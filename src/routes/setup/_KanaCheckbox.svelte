@@ -26,7 +26,7 @@
 		playCheckboxSelectSound(rowIndex, rowLength, item.checked)
 	}}
 	use:longHover={{
-		duration: 175,
+		delay: 175,
 		start: () => (isLongHover = true),
 		end: () => (isLongHover = false)
 	}}

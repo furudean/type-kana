@@ -1,12 +1,12 @@
 export interface LongHoverSettings {
-	duration: number
+	delay: number
 	start: () => void
 	end?: () => void
 }
 
 export function longHover(
 	node: HTMLElement,
-	{ duration, start, end }: LongHoverSettings
+	{ delay, start, end }: LongHoverSettings
 ) {
 	end = end ?? (() => {})
 
@@ -17,7 +17,7 @@ export function longHover(
 		timeout = setTimeout(() => {
 			active = true
 			start()
-		}, duration)
+		}, delay)
 	}
 
 	function leave() {
