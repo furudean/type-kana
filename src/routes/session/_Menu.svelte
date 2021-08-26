@@ -28,6 +28,9 @@
 		title="Open game settings"
 		on:click={() => {
 			menuEvent("openSettings")
+			if (document.activeElement instanceof HTMLElement) {
+				document.activeElement.blur()
+			}
 		}}
 	>
 		<span class="tilt-animation-container">
