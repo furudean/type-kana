@@ -9,29 +9,27 @@
 </script>
 
 {#if !href}
-	<button
-		type="button"
-		class="button"
-		class:disabled
-		{title}
-		{disabled}
-		on:click
-	>
-		<slot />
+	<button type="button" class="button" {title} {disabled} on:click>
+		<div class="effect">
+			<slot />
+		</div>
 	</button>
 {:else}
 	<a
 		{href}
 		class="button"
 		class:disabled
-		aria-disabled={disabled}
+		aria-disabled={disabled ? true : undefined}
+		tabindex={disabled ? -1 : undefined}
 		{target}
 		{rel}
 		{title}
 		on:click
 		sveltekit:prefetch
 	>
-		<slot />
+		<div class="effect">
+			<slot />
+		</div>
 	</a>
 {/if}
 
@@ -47,6 +45,11 @@
 		font-family: "M+ 2c";
 		font-weight: 500;
 		letter-spacing: 1px;
+	}
+
+	/* Wrap the <button> content in a containing <div> to that the :active 
+		transition doesn't stop any button clicks */
+	.effect {
 		color: var(--text-color-on-accent-color);
 		background: var(--accent-color);
 		border: var(--border-size) solid transparent;
@@ -60,20 +63,21 @@
 	}
 
 	.button:not(.disabled) {
-		&:focus,
-		&:hover {
+		&:focus:not(:active) > .effect {
 			border-color: var(--focus-color);
 		}
-		&:active {
-			transform: translateY(10%);
+		&:active > .effect {
+			transform: translateY(15%);
 		}
 	}
 
 	.button.disabled {
-		background: var(--text-color-light);
-		color: var(--text-color-lighter);
 		cursor: default;
 		pointer-events: none;
+		> .effect {
+			color: var(--text-color-lighter);
+			background: var(--text-color-light);
+		}
 	}
 
 	.button[href] {
