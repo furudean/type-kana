@@ -6,23 +6,30 @@
 	export let fill = true
 	export let truncateAt = Infinity
 
-	// "- 2" makes sure the amount of items truncated is longer than the button
-	let isTruncated = items.length - 2 > truncateAt
+	let expanded = false
 
-	$: truncatedItems = items.slice(0, isTruncated ? truncateAt : Infinity)
+	// "- 3" makes sure the amount of items truncated is longer than the button
+	$: shouldTruncate = truncateAt <= items.length - 3
+	$: truncateIndex = shouldTruncate && expanded ? Infinity : truncateAt
+	$: truncatedItems = items.slice(0, truncateIndex)
 </script>
 
 <div class="summary-box">
 	{#each truncatedItems as item (item.kana)}
 		<SummaryItem {item} {fill} />
 	{/each}
-	{#if isTruncated}
+	{#if shouldTruncate}
 		<button
-			class="expand-button"
-			title="Show remaining items"
-			on:click={() => (isTruncated = false)}
+			class="action-button"
+			aria-pressed={expanded}
+			title={expanded
+				? "Hide expanded items"
+				: `Display ${items.length - truncatedItems.length} hidden items`}
+			on:click={() => (expanded = !expanded)}
 		>
-			...and {items.length - truncatedItems.length} more
+			{expanded
+				? "show less"
+				: `show ${items.length - truncatedItems.length} more`}
 		</button>
 	{/if}
 </div>
@@ -36,27 +43,28 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-content: center;
+		align-items: center;
 	}
 
-	.expand-button {
+	.action-button {
 		all: initial;
 		display: inline;
 		margin-top: var(--gap);
 		margin-left: var(--gap);
 		cursor: default;
-		height: auto;
 		color: inherit;
 		font-family: inherit;
 		font-size: 0.9em;
 		font-weight: 500;
-		line-height: 1;
-		border-radius: var(--standard-border-radius);
+		/* border-radius: var(--standard-border-radius); */
 
 		&:hover {
 			text-decoration: underline;
 		}
-		&:focus {
-			box-shadow: 0 0 0 3px var(--focus-color);
+		&:focus:not(:active) {
+			text-decoration: underline;
+			background: var(--focus-color);
+			color: var(--text-color-on-focus-color);
 		}
 	}
 </style>
