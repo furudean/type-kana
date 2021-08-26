@@ -137,7 +137,6 @@
 		font-size: 1.75em;
 		width: 1.5em;
 		height: 100%;
-		cursor: pointer;
 
 		position: absolute;
 		right: 0;

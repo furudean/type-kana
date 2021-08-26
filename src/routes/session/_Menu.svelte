@@ -95,7 +95,6 @@
 		font-size: 2.5em;
 		margin-left: 0.25em;
 		padding: 0.1em;
-		cursor: pointer;
 		border-radius: 50%;
 		border: 3px dashed transparent;
 		transition: transform 50ms var(--standard-curve),
@@ -115,6 +114,10 @@
 		&:active {
 			transform: translateY(8%);
 		}
+	}
+
+	.button[href] {
+		cursor: pointer;
 	}
 
 	.button span {

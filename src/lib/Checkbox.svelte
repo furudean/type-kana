@@ -69,15 +69,6 @@
 		overflow-wrap: break-word;
 	}
 
-	/* Regular state */
-	input[type="checkbox"]:not(:disabled) {
-		cursor: pointer;
-
-		& + label {
-			cursor: pointer;
-		}
-	}
-
 	/* Checked + indeterminate states */
 
 	input[type="checkbox"]::after {

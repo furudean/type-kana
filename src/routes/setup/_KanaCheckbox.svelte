@@ -47,7 +47,6 @@
 		appearance: none;
 		font-size: 1.5em;
 		outline: none;
-		cursor: pointer;
 		line-height: 1;
 		white-space: nowrap;
 		position: relative;

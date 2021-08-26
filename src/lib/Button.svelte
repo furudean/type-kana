@@ -44,7 +44,6 @@
 		all: initial;
 		display: inline-block;
 		user-select: none;
-		cursor: pointer;
 		font-family: "M+ 2c";
 		font-weight: 500;
 		letter-spacing: 1px;
@@ -75,5 +74,9 @@
 		color: var(--text-color-lighter);
 		cursor: default;
 		pointer-events: none;
+	}
+
+	.button[href] {
+		cursor: pointer;
 	}
 </style>

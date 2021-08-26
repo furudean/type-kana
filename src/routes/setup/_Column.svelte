@@ -86,7 +86,6 @@
 	.select-all label {
 		display: flex;
 		flex-direction: row;
-		cursor: pointer;
 		align-items: center;
 	}
 

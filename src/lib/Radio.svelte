@@ -49,15 +49,6 @@
 		overflow-wrap: break-word;
 	}
 
-	/* Regular state */
-	input[type="radio"]:not(:disabled) {
-		cursor: pointer;
-
-		& + label {
-			cursor: pointer;
-		}
-	}
-
 	/* Checked state */
 
 	input[type="radio"]:checked {

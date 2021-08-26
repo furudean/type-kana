@@ -43,7 +43,7 @@
 		display: inline;
 		margin-top: var(--gap);
 		margin-left: var(--gap);
-		cursor: pointer;
+		cursor: default;
 		height: auto;
 		color: inherit;
 		font-family: inherit;

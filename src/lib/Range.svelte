@@ -119,7 +119,6 @@
 		height: var(--thumb-size);
 		outline: none;
 		margin: 0;
-		cursor: pointer;
 	}
 
 	/* Chrome */
