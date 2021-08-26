@@ -343,17 +343,10 @@
 		bottom: 0;
 		border-top: 1px solid var(--background-contrast-light);
 		backdrop-filter: blur(16px);
-	}
 
-	/* Fallback for crap browsers like Firefox */
-	@supports (not (backdrop-filter: none)) {
-		.menu:before {
-			content: "";
-			position: absolute;
-			inset: 0;
-			z-index: -1;
+		/* Fallback for crap browsers like Firefox */
+		@supports (not (backdrop-filter: none)) {
 			background-color: var(--background-color);
-			opacity: 0.9;
 		}
 	}
 

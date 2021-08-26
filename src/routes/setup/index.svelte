@@ -165,17 +165,10 @@
 		> :global(.button .svg-icon) {
 			margin-right: -0.5em;
 		}
-	}
 
-	/* Fallback for crap browsers like Firefox */
-	@supports (not (backdrop-filter: none)) {
-		.menu:before {
-			content: "";
-			position: absolute;
-			inset: 0;
-			z-index: -1;
+		/* Fallback for crap browsers like Firefox */
+		@supports (not (backdrop-filter: none)) {
 			background-color: var(--background-color);
-			opacity: 0.9;
 		}
 	}
 </style>
