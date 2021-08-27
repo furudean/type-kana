@@ -25,6 +25,7 @@
 <style lang="postcss">
 	.quiz-item {
 		font-size: 4em;
+		white-space: nowrap;
 		line-height: 1.2;
 		position: relative;
 		margin-top: 0.5em;
