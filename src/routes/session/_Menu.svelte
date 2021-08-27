@@ -110,7 +110,7 @@
 			background-color: var(--accent-color);
 		}
 		&:active {
-			transform: translateY(8%);
+			transform: translateY(8%) scale(110%, 90%);
 		}
 	}
 

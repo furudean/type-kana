@@ -72,7 +72,7 @@
 			border-color: var(--focus-color);
 		}
 		&:active > .effect {
-			transform: translateY(15%);
+			transform: translateY(8%) scale(105%, 90%);
 		}
 	}
 

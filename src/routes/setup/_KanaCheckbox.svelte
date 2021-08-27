@@ -10,6 +10,10 @@
 	export let rowLength: number
 
 	let isLongHover = false
+	let enableHover = () => (isLongHover = true)
+	let disableHover = () => (isLongHover = false)
+
+	$: longHoverEnabled = kanaType === "both" && item.checked
 	$: kanaType = $gameConfig.kanaType
 </script>
 
@@ -19,6 +23,7 @@
 	class:selected={item.checked}
 	class:long-hover={isLongHover && kanaType === "both"}
 	class:extended-click-area={kanaType === "both"}
+	class:wide={item.kana === "ん"}
 	aria-pressed={item.checked}
 	title={`Select '${getAnswers(item.kana)[0]}'`}
 	on:click={() => {
@@ -26,14 +31,15 @@
 		playCheckboxSelectSound(rowIndex, rowLength, item.checked)
 	}}
 	use:longHover={{
-		delay: 175,
-		start: () => (isLongHover = true),
-		end: () => (isLongHover = false)
+		delay: 500,
+		start: enableHover,
+		end: disableHover,
+		enabled: longHoverEnabled
 	}}
 >
 	<div class="effect" aria-hidden="true">
 		<div
-			class="block"
+			class="block base"
 			class:hiragana={kanaType === "hiragana"}
 			class:katakana={kanaType === "katakana" || kanaType === "both"}
 		>
@@ -75,11 +81,15 @@
 	}
 
 	.effect {
-		transition: transform 50ms var(--standard-curve);
+		transition: transform 35ms var(--standard-curve);
 	}
 
 	.checkbox-kana:active .effect {
-		transform: translateY(12%);
+		transform: translateY(10%) scale(115%, 80%);
+	}
+
+	.checkbox-kana.wide:active .effect {
+		transform: translateY(10%) scale(105%, 80%);
 	}
 
 	.block {
@@ -107,13 +117,15 @@
 	}
 
 	@keyframes drop {
-		from {
-			transform: translateY(-40%);
-			opacity: 1;
+		0% {
+			transform: translateY(-75%) scale(90%, 80%);
+			z-index: 1;
 		}
-		to {
-			transform: translateY(0);
-			opacity: 1;
+		50% {
+			transform: translateY(20%) scale(110%, 75%);
+		}
+		100% {
+			transform: none;
 		}
 	}
 
@@ -125,20 +137,25 @@
 		right: 4px;
 		bottom: 4px;
 		animation-name: drop;
-		animation-duration: 90ms;
+		animation-duration: 125ms;
 		animation-timing-function: var(--deceleration-curve);
-		animation-fill-mode: forwards;
 	}
 
 	@keyframes flip {
 		0% {
 			transform: translateY(0);
+			z-index: 1;
 		}
-		50% {
-			transform: translateY(-40%);
+		33% {
+			transform: translateY(-50%) scale(90%, 80%);
+			z-index: 1;
+		}
+		66% {
+			transform: translateY(20%) scale(110%, 75%);
+			z-index: -1;
 		}
 		100% {
-			transform: translateY(0);
+			transform: none;
 			z-index: -1;
 		}
 	}
@@ -146,7 +163,8 @@
 	.checkbox-kana.long-hover .block.popover {
 		animation: none;
 		animation-name: flip;
-		animation-duration: 90ms;
+		animation-duration: 125ms;
+		/* animation-duration: 0.5s; */
 		animation-timing-function: var(--deceleration-curve);
 		animation-fill-mode: forwards;
 	}
