@@ -106,7 +106,7 @@
 
 		&:focus-visible {
 			outline: none;
-			color: var(--background-color);
+			color: var(--text-color-on-accent-color);
 			background-color: var(--accent-color);
 		}
 		&:active {
