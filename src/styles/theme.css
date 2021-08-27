@@ -2,8 +2,8 @@
 :root {
 	--background-color: hsl(43, 100%, 94%);
 
-	--background-contrast: hsl(0, 100%, 100%);
-	--background-contrast-light: hsl(41, 37%, 80%);
+	--background-contrast: #ffe9be;
+	--background-contrast-light: #ffdfaa;
 
 	--text-color: hsl(165, 100%, 7%);
 	--text-color-light: hsl(41, 10%, 53%);
@@ -15,6 +15,7 @@
 
 	--secondary-accent-color: hsl(180, 73%, 40%);
 
+	--form-element-background: white;
 	--form-element-primary-color: hsl(220, 100%, 57%);
 	--form-element-primary-color-contrast: hsl(220, 100%, 64%);
 
@@ -48,6 +49,7 @@
 
 	--secondary-accent-color: hsl(202, 87%, 40%);
 
+	--form-element-background: hsl(300, 24%, 17%);
 	--form-element-primary-color: hsl(220, 100%, 57%);
 	--form-element-primary-color-contrast: hsl(220, 100%, 64%);
 
@@ -62,5 +64,5 @@
 
 	--highlight-color: hsl(27, 100%, 43%);
 
-	--overlay-background-color: rgba(255, 255, 255, 0.3);
+	--overlay-background-color: rgba(255, 255, 255, 0.1);
 }

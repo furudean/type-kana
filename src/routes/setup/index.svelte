@@ -27,56 +27,64 @@
 	<title>Setup · Type Kana</title>
 </svelte:head>
 
-<fieldset class="kana-type">
-	<legend>I want to practice...</legend>
-	<div class="radio-buttons">
-		<Radio
-			id="kana-type-hiragana-choice"
-			name="kana-type"
-			bind:group={$gameConfig.kanaType}
-			value="hiragana">Hiragana</Radio
+<div class="wrapper">
+	<fieldset class="kana-type">
+		<legend>I want to practice...</legend>
+		<div class="radio-buttons">
+			<Radio
+				id="kana-type-hiragana-choice"
+				name="kana-type"
+				bind:group={$gameConfig.kanaType}
+				value="hiragana">Hiragana</Radio
+			>
+			<Radio
+				id="kana-type-katakana-choice"
+				name="kana-type"
+				bind:group={$gameConfig.kanaType}
+				value="katakana">Katakana</Radio
+			>
+			<Radio
+				id="kana-type-both-choice"
+				name="kana-type"
+				bind:group={$gameConfig.kanaType}
+				value="both">Both</Radio
+			>
+		</div>
+	</fieldset>
+	<section class="columns">
+		<Column bind:rows={$gameConfig.monographs} label="Monographs" />
+		<Column
+			bind:rows={$gameConfig.monographsDiacritics}
+			label="Monographs with diacritics"
+		/>
+		<Column bind:rows={$gameConfig.digraphs} label="Digraphs" />
+		<Column
+			bind:rows={$gameConfig.digraphsDiacritics}
+			label="Digraphs with diacritics"
+		/>
+	</section>
+	<section class="menu content-padding glass-morphism">
+		<Button
+			href="session"
+			disabled={$dictionary.length === 0}
+			on:click={() => {
+				playDropSound()
+				quiz.reset()
+			}}
 		>
-		<Radio
-			id="kana-type-katakana-choice"
-			name="kana-type"
-			bind:group={$gameConfig.kanaType}
-			value="katakana">Katakana</Radio
-		>
-		<Radio
-			id="kana-type-both-choice"
-			name="kana-type"
-			bind:group={$gameConfig.kanaType}
-			value="both">Both</Radio
-		>
-	</div>
-</fieldset>
-<section class="columns">
-	<Column bind:rows={$gameConfig.monographs} label="Monographs" />
-	<Column
-		bind:rows={$gameConfig.monographsDiacritics}
-		label="Monographs with diacritics"
-	/>
-	<Column bind:rows={$gameConfig.digraphs} label="Digraphs" />
-	<Column
-		bind:rows={$gameConfig.digraphsDiacritics}
-		label="Digraphs with diacritics"
-	/>
-</section>
-<section class="menu content-padding">
-	<Button
-		href="session"
-		disabled={$dictionary.length === 0}
-		on:click={() => {
-			playDropSound()
-			quiz.reset()
-		}}
-	>
-		Start quiz
-		<Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
-	</Button>
-</section>
+			Start quiz
+			<Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
+		</Button>
+	</section>
+</div>
 
 <style lang="postcss">
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+
 	.kana-type legend {
 		margin-bottom: 1em;
 	}
@@ -155,20 +163,15 @@
 	}
 
 	.menu {
+		flex-grow: 1;
 		display: flex;
 		justify-content: center;
 		position: sticky;
 		bottom: 0;
 		border-top: 1px solid var(--background-contrast-light);
-		backdrop-filter: blur(16px);
 
 		> :global(.button .svg-icon) {
 			margin-right: -0.5em;
-		}
-
-		/* Fallback for crap browsers like Firefox */
-		@supports (not (backdrop-filter: none)) {
-			background-color: var(--background-color);
 		}
 	}
 </style>

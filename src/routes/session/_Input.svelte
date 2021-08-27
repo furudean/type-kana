@@ -96,7 +96,7 @@
 		display: flex;
 		width: 100%;
 		position: relative;
-		background-color: var(--background-contrast);
+		background-color: var(--form-element-background);
 		border-bottom: 1px solid var(--background-contrast-light);
 		border-radius: 9999px;
 		margin: 0 auto;

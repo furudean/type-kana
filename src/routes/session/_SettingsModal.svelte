@@ -239,7 +239,7 @@
 			</Checkbox>
 		</div>
 
-		<section class="menu content-padding">
+		<section class="menu content-padding glass-morphism">
 			<Button on:click={close}>
 				<Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
 				Done
@@ -342,12 +342,6 @@
 		position: sticky;
 		bottom: 0;
 		border-top: 1px solid var(--background-contrast-light);
-		backdrop-filter: blur(16px);
-
-		/* Fallback for crap browsers like Firefox */
-		@supports (not (backdrop-filter: none)) {
-			background-color: var(--background-color);
-		}
 	}
 
 	.menu > :global(.button .svg-icon) {

@@ -89,3 +89,21 @@ hr {
 	padding: 0;
 	position: absolute;
 }
+
+.glass-morphism {
+	backdrop-filter: blur(8px);
+
+	/* Fallback for crap browsers like Firefox */
+	@supports (not (backdrop-filter: none)) {
+		background: var(--background-contrast);
+	}
+
+	&:before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: var(--background-contrast);
+		opacity: 0.5;
+	}
+}
