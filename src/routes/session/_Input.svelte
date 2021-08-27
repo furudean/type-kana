@@ -98,7 +98,7 @@
 		position: relative;
 		background-color: var(--background-contrast);
 		border-bottom: 1px solid var(--background-contrast-light);
-		border-radius: var(--standard-border-radius);
+		border-radius: 9999px;
 		margin: 0 auto;
 		font-size: 1.4em;
 		box-sizing: border-box;
