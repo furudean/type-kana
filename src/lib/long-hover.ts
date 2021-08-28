@@ -1,14 +1,16 @@
-export interface LongHoverSettings {
+export interface LongHoverOptions {
 	delay: number
 	start: () => void
 	end?: () => void
 	enabled?: boolean
 }
 
-export function longHover(node: HTMLElement, settings: LongHoverSettings) {
-	let { delay, start, end, enabled } = settings
-	enabled = enabled ?? false
+export function longHover(
+	node: HTMLElement,
+	{ delay, start, end, enabled }: LongHoverOptions
+) {
 	end = end ?? (() => {})
+	enabled = enabled ?? false
 
 	let timeout: NodeJS.Timeout
 	let active = false
@@ -50,15 +52,13 @@ export function longHover(node: HTMLElement, settings: LongHoverSettings) {
 		destroy() {
 			leave()
 		},
-		update(settings: LongHoverSettings) {
-			delay = settings.delay
-			start = settings.start
-			end = settings.end
-			enabled = settings.enabled
+		update(options: LongHoverOptions) {
+			delay = options.delay
+			start = options.start
+			end = options.end
+			enabled = options.enabled
 
-			if (active) {
-				leave()
-			}
+			leave()
 
 			if (hasAttention) {
 				enter()
