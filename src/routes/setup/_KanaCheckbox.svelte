@@ -10,10 +10,9 @@
 	export let rowLength: number
 
 	let isLongHover = false
-	let enableHover = () => (isLongHover = true)
-	let disableHover = () => (isLongHover = false)
+	const enableHover = () => (isLongHover = true)
+	const disableHover = () => (isLongHover = false)
 
-	$: longHoverEnabled = kanaType === "both" && item.checked
 	$: kanaType = $gameConfig.kanaType
 </script>
 
@@ -34,7 +33,7 @@
 		delay: 500,
 		start: enableHover,
 		end: disableHover,
-		enabled: longHoverEnabled
+		enabled: kanaType === "both" && item.checked
 	}}
 >
 	<div class="effect" aria-hidden="true">
@@ -81,15 +80,15 @@
 	}
 
 	.effect {
-		transition: transform 35ms var(--standard-curve);
+		transition: transform 30ms var(--standard-curve);
 	}
 
 	.checkbox-kana:active .effect {
-		transform: translateY(10%) scale(115%, 80%);
+		transform: translateY(8%) scale(110%, 90%);
 	}
 
 	.checkbox-kana.wide:active .effect {
-		transform: translateY(10%) scale(105%, 80%);
+		transform: translateY(8%) scale(104%, 90%);
 	}
 
 	.block {
@@ -122,7 +121,7 @@
 			z-index: 1;
 		}
 		50% {
-			transform: translateY(20%) scale(110%, 75%);
+			transform: translateY(20%) scale(105%, 85%);
 		}
 		100% {
 			transform: none;
@@ -151,7 +150,7 @@
 			z-index: 1;
 		}
 		66% {
-			transform: translateY(20%) scale(110%, 75%);
+			transform: translateY(20%) scale(105%, 85%);
 			z-index: -1;
 		}
 		100% {
