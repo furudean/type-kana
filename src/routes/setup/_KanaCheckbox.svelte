@@ -4,16 +4,40 @@
 	import { toKatakana } from "wanakana"
 	import { playCheckboxSelectSound } from "@/lib/sound"
 	import { longHover } from "@/lib/long-hover"
+	import { createEventDispatcher } from "svelte"
+	import { fade } from "svelte/transition"
+	import { cubicOut } from "svelte/easing"
 
 	export let item: KanaCheckbox
 	export let rowIndex: number
 	export let rowLength: number
+	export let animationDelay = 0
+
+	const dispatch = createEventDispatcher()
 
 	let isLongHover = false
+
 	const enableHover = () => (isLongHover = true)
 	const disableHover = () => (isLongHover = false)
 
 	$: kanaType = $gameConfig.kanaType
+	$: showPopover = kanaType === "both" && item.checked
+	$: style = animationDelay
+		? `animation-delay: ${animationDelay}ms; transition-delay: ${animationDelay}ms`
+		: null
+
+	function onAnimationFinished(event: TransitionEvent | AnimationEvent) {
+		event.stopPropagation()
+
+		if (event instanceof AnimationEvent && kanaType !== "both") {
+			dispatch("animationFinished")
+		} else if (
+			event instanceof TransitionEvent &&
+			event.propertyName === "background-color"
+		) {
+			dispatch("animationFinished")
+		}
+	}
 </script>
 
 <button
@@ -23,6 +47,7 @@
 	class:long-hover={isLongHover && kanaType === "both"}
 	class:extended-click-area={kanaType === "both"}
 	class:wide={item.kana === "ん"}
+	{style}
 	aria-pressed={item.checked}
 	title={`Select '${getAnswers(item.kana)[0]}'`}
 	on:click={() => {
@@ -33,21 +58,27 @@
 		delay: 500,
 		start: enableHover,
 		end: disableHover,
-		enabled: kanaType === "both" && item.checked
+		enabled: showPopover
 	}}
 >
 	<div class="effect" aria-hidden="true">
 		<div
 			class="block base"
 			class:hiragana={kanaType === "hiragana"}
-			class:katakana={kanaType === "katakana" || kanaType === "both"}
+			class:katakana={["katakana", "both"].includes(kanaType)}
+			on:transitionend={onAnimationFinished}
+			on:transitioncancel={onAnimationFinished}
 		>
-			{kanaType === "katakana" || kanaType === "both"
+			{["katakana", "both"].includes(kanaType)
 				? toKatakana(item.kana)
 				: item.kana}
 		</div>
-		{#if kanaType === "both" && item.checked}
-			<div class="block hiragana popover">
+		{#if showPopover}
+			<div
+				class="block hiragana popover"
+				on:animationend={onAnimationFinished}
+				out:fade={{ duration: 125, delay: animationDelay, easing: cubicOut }}
+			>
 				{item.kana}
 			</div>
 		{/if}
@@ -81,6 +112,8 @@
 
 	.effect {
 		transition: transform 30ms var(--standard-curve);
+		animation-delay: inherit;
+		transition-delay: inherit;
 	}
 
 	.checkbox-kana:active .effect {
@@ -96,11 +129,12 @@
 		background: var(--background-color);
 		border: var(--border-width) solid var(--text-color-lighter);
 		border-radius: var(--standard-border-radius);
-		transition: 90ms var(--standard-curve) color,
-			90ms var(--standard-curve) background,
+		transition: 125ms var(--standard-curve) color,
+			125ms var(--standard-curve) background,
 			75ms var(--standard-curve) border-color;
 		padding: 0.25em;
 		text-align: center;
+		transition-delay: inherit;
 	}
 
 	.checkbox-kana.selected .block {
@@ -119,12 +153,14 @@
 		0% {
 			transform: translateY(-75%) scale(90%, 80%);
 			z-index: 1;
+			opacity: 1;
 		}
 		50% {
 			transform: translateY(20%) scale(105%, 85%);
 		}
 		100% {
 			transform: none;
+			opacity: 1;
 		}
 	}
 
@@ -135,9 +171,15 @@
 		left: -4px;
 		right: 4px;
 		bottom: 4px;
+
+		/* opacity is overwritten by animation */
+		opacity: 0;
+
 		animation-name: drop;
 		animation-duration: 125ms;
 		animation-timing-function: var(--deceleration-curve);
+		animation-fill-mode: forwards;
+		animation-delay: inherit;
 	}
 
 	@keyframes flip {
@@ -160,10 +202,10 @@
 	}
 
 	.checkbox-kana.long-hover .block.popover {
+		opacity: 1;
 		animation: none;
 		animation-name: flip;
 		animation-duration: 125ms;
-		/* animation-duration: 0.5s; */
 		animation-timing-function: var(--deceleration-curve);
 		animation-fill-mode: forwards;
 	}

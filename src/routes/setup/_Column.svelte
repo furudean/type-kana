@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { getAnswers } from "@/lib/answer"
-	import KanaCheckbox from "./_KanaCheckbox.svelte"
-	import KanaCheckboxSpacer from "./_KanaCheckboxSpacer.svelte"
 	import { playCheckboxSelectSeriesSound } from "@/lib/sound"
 	import Checkbox from "@/lib/Checkbox.svelte"
+	import Row from "./_Row.svelte"
 
 	export let rows: KanaCheckboxRow[]
 	export let label: string
+
+	let animationDelay = 0
 
 	function isRowSelected(row: KanaCheckboxRow): boolean {
 		return row.filter((item) => item !== null).every((item) => item.checked)
@@ -14,10 +14,16 @@
 
 	function selectRow(state: boolean) {
 		return function (row: KanaCheckboxRow) {
-			return row.map((item) =>
-				item !== null ? { ...item, checked: state } : null
-			)
+			animationDelay = 15
+			return row.map((item) => {
+				if (item === null) return null
+				return { ...item, checked: state }
+			})
 		}
+	}
+
+	function onAnimationFinished() {
+		animationDelay = 0
 	}
 </script>
 
@@ -37,37 +43,12 @@
 			<span>Select all</span>
 		</label>
 	</div>
-	{#each rows as row}
-		<div
-			class="row"
-			role="row"
-			aria-label={getAnswers(row[0].kana)[0].slice(0, row[0].kana.length) +
-				"- sounds"}
-		>
-			<Checkbox
-				title="Select row"
-				checked={isRowSelected(row)}
-				indeterminate={!isRowSelected(row) &&
-					row.filter((item) => item !== null).some((item) => item.checked)}
-				on:click={() => {
-					const newState = !isRowSelected(row)
-					const diffItems = row.filter(
-						(item) => item && item.checked !== newState
-					)
-					const toPlay = Math.min(diffItems.length, 4)
-
-					playCheckboxSelectSeriesSound(toPlay, newState)
-					row = selectRow(newState)(row)
-				}}
-			/>
-			{#each row as item, index}
-				{#if item}
-					<KanaCheckbox bind:item rowIndex={index} rowLength={row.length} />
-				{:else}
-					<KanaCheckboxSpacer />
-				{/if}
-			{/each}
-		</div>
+	{#each rows as row, index}
+		<Row
+			bind:row
+			animationDelay={animationDelay * index}
+			on:animationFinished={index === rows.length - 1 && onAnimationFinished}
+		/>
 	{/each}
 </section>
 
@@ -89,7 +70,7 @@
 		align-items: center;
 	}
 
-	.row {
+	.column :global(.row) {
 		display: flex;
 		align-items: center;
 
@@ -99,12 +80,12 @@
 	}
 
 	/* checkbox */
-	.row :global(.checkbox) {
+	.column :global(.row .checkbox) {
 		margin-right: 20px;
 		font-size: 1.25em;
 	}
 
-	.row > :global(.checkbox-kana:not(:last-child)) {
+	.column :global(.row > .checkbox-kana:not(:last-child)) {
 		margin-right: 10px !important;
 	}
 </style>
