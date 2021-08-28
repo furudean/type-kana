@@ -28,6 +28,6 @@ export function getAnswers(kana: string): string[] {
 }
 
 /** Checks if input matches a correct answer */
-export function isCorrectAnswer(input: string, correctAnswer: string): boolean {
-	return getAnswers(correctAnswer).includes(input)
+export function isCorrectAnswer(input: string, actual: string): boolean {
+	return getAnswers(actual).includes(input)
 }
