@@ -3,22 +3,15 @@ import {
 	createAudioSource,
 	getAudioBuffer,
 	detuneWithPlaybackRate,
-	createGainNode
+	createGainNode,
+	createPreloader
 } from "./audio"
 import { sleep } from "@/lib/util"
 
-function createPreloader(urls: string[]) {
-	return async () => {
-		await Promise.all(urls.map(getAudioBuffer))
-	}
-}
-
-export const loadProgressSound = createPreloader([
-	"audio/drop_002.ogg",
-	"audio/drop_002.mp3",
-	"audio/drop_003.ogg",
-	"audio/drop_003.mp3"
-])
+export const loadProgressSound = createPreloader(
+	["audio/drop_002.ogg", "audio/drop_002.mp3"],
+	["audio/drop_003.ogg", "audio/drop_003.mp3"]
+)
 
 export async function playProgressSound(mod: number) {
 	const urls = randomArrayItem([
@@ -191,11 +184,11 @@ export async function playDropSound() {
 	source.start()
 }
 
-export const loadVictorySound = createPreloader([
+export const loadVictorySound = createPreloader(
 	"audio/win_1.mp3",
 	"audio/win_2.mp3",
 	"audio/win_3.mp3"
-])
+)
 
 export async function playVictorySound() {
 	const url = randomArrayItem([

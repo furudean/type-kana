@@ -76,3 +76,16 @@ export function detuneWithPlaybackRate(cents: number): number {
 	const semitones = cents / 100
 	return 2 ** (semitones / 12)
 }
+
+/**
+ * Returns a function that can be called to preload the audio from the
+ * parameters.
+ *
+ * If parameter is an array, it will attempt to preload urls in series until an
+ * audio is successfully decoded.
+ */
+export function createPreloader(...urls: string[] | string[][]) {
+	return async () => {
+		await Promise.all(urls.map(getAudioBuffer))
+	}
+}
