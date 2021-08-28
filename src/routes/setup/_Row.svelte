@@ -19,7 +19,7 @@
 
 	function selectRow(state: boolean) {
 		return function (row: KanaCheckboxRow) {
-			animationDelay = 40
+			animationDelay = 30
 			return row.map((item) => {
 				if (item === null) return null
 				return { ...item, checked: state }
@@ -61,7 +61,7 @@
 				bind:item
 				rowIndex={index}
 				rowLength={row.length}
-				animationDelay={animationDelay * index + columnAnimationDelay}
+				animationDelay={columnAnimationDelay || animationDelay * index}
 				on:animationFinished={index === row.length - 1 && onAnimationFinished}
 			/>
 		{:else}
