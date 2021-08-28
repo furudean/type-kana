@@ -15,14 +15,18 @@ function createPreloader(urls: string[]) {
 
 export const loadProgressSound = createPreloader([
 	"audio/drop_002.ogg",
-	"audio/drop_002.mp3"
+	"audio/drop_002.mp3",
+	"audio/drop_003.ogg",
+	"audio/drop_003.mp3"
 ])
 
 export async function playProgressSound(mod: number) {
-	const audioBuffer = await getAudioBuffer([
-		"audio/drop_002.ogg",
-		"audio/drop_002.mp3"
+	const urls = randomArrayItem([
+		["audio/drop_002.ogg", "audio/drop_002.mp3"],
+		["audio/drop_003.ogg", "audio/drop_003.mp3"]
 	])
+
+	const audioBuffer = await getAudioBuffer(urls)
 	const source = createAudioSource(audioBuffer)
 	let cents = Math.min(mod, 5) * 100
 
