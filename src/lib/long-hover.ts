@@ -17,12 +17,12 @@ export function longHover(
 	let hasAttention = false
 
 	function enter() {
-		if (enabled) {
-			timeout = setTimeout(() => {
-				active = true
-				start()
-			}, delay)
-		}
+		if (!enabled) return
+		timeout = setTimeout(() => {
+			if (!hasAttention) return
+			active = true
+			start()
+		}, delay)
 	}
 
 	function leave() {
