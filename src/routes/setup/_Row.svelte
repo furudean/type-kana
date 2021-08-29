@@ -19,7 +19,7 @@
 
 	function selectRow(state: boolean) {
 		return function (row: KanaCheckboxRow) {
-			animationDelay = 30
+			animationDelay = 20
 			return row.map((item) => {
 				if (item === null) return null
 				return { ...item, checked: state }
@@ -48,14 +48,16 @@
 			row.filter((item) => item !== null).some((item) => item.checked)}
 		on:click={() => {
 			const newState = !isRowSelected(row)
-			const diffItems = row.filter((item) => item && item.checked !== newState)
+			const diffItems = row
+				.filter((item) => item !== null)
+				.filter((item) => item.checked !== newState)
 			const toPlay = Math.min(diffItems.length, 4)
 
 			playCheckboxSelectSeriesSound(toPlay, newState)
 			row = selectRow(newState)(row)
 		}}
 	/>
-	{#each row as item, index}
+	{#each row as item, index (item?.kana ?? index)}
 		{#if item}
 			<KanaCheckbox
 				bind:item

@@ -33,6 +33,8 @@
 			dispatch("animationFinished")
 		} else if (
 			event instanceof TransitionEvent &&
+			// One transition event is fired per modified property. We want to make
+			// sure to only catch one of these per animation cycle
 			event.propertyName === "background-color"
 		) {
 			dispatch("animationFinished")
