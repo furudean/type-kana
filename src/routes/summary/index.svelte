@@ -77,7 +77,7 @@
 
 	section.unquizzed :global(.summary-item) {
 		opacity: 0.5;
-		transition: 60ms var(--standard-curve) opacity;
+		transition: 75ms var(--standard-curve) opacity;
 
 		&:hover,
 		&:focus-visible {

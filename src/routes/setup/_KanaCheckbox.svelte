@@ -125,13 +125,15 @@
 	}
 
 	.block {
+		--transition: 125ms var(--standard-curve) color,
+			125ms var(--standard-curve) background,
+			125ms var(--standard-curve) border-color;
+
 		color: var(--text-color-light);
 		background: var(--background-color);
 		border: var(--border-width) solid var(--text-color-lighter);
 		border-radius: var(--standard-border-radius);
-		transition: 125ms var(--standard-curve) color,
-			125ms var(--standard-curve) background,
-			75ms var(--standard-curve) border-color;
+		transition: var(--transition);
 		padding: 0.25em;
 		text-align: center;
 		transition-delay: inherit;
@@ -212,5 +214,6 @@
 
 	.checkbox-kana:focus-visible .block {
 		border-color: var(--focus-color);
+		transition: var(--transition), 75ms var(--standard-curve) border-color;
 	}
 </style>

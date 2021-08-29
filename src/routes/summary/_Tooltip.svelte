@@ -137,7 +137,7 @@
 		border-color: transparent transparent var(--background-color-inverse)
 			transparent;
 		transform: translateX(-50%);
-		transition: 60ms var(--standard-curve) top, 60ms var(--standard-curve) left;
+		transition: 75ms var(--standard-curve) top, 75ms var(--standard-curve) left;
 	}
 
 	.body {
@@ -154,7 +154,7 @@
 		box-sizing: border-box;
 		min-width: 32px;
 		max-width: 15em;
-		transition: 60ms var(--standard-curve) top, 60ms var(--standard-curve) left;
+		transition: 75ms var(--standard-curve) top, 75ms var(--standard-curve) left;
 	}
 
 	.body :global(.svg-icon) {

@@ -131,6 +131,6 @@
 
 	input[type="checkbox"]:checked:active:not(:disabled) {
 		background-color: var(--checked-highlight-color);
-		transition: 60ms var(--standard-curve) transform;
+		transition: 75ms var(--standard-curve) transform;
 	}
 </style>

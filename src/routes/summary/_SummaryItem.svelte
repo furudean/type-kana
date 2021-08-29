@@ -43,8 +43,8 @@
 		cursor: default;
 		user-select: none;
 		border: var(--border-size) solid transparent;
-		transition: 60ms var(--standard-curve) color,
-			60ms var(--standard-curve) border-color;
+		transition: 75ms var(--standard-curve) color,
+			75ms var(--standard-curve) border-color;
 
 		&:focus-visible {
 			border-color: var(--focus-color);

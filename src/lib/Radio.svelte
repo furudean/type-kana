@@ -97,6 +97,6 @@
 
 	input[type="radio"]:checked:active {
 		background-color: var(--checked-highlight-color);
-		transition: 60ms var(--standard-curve) transform;
+		transition: 75ms var(--standard-curve) transform;
 	}
 </style>
