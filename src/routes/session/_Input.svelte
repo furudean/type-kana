@@ -38,6 +38,7 @@
 				input = input.trim()
 			}
 			handleSubmit()
+			return
 		}
 
 		const answers = getAnswers(currentKana)
