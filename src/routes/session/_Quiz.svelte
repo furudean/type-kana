@@ -15,7 +15,12 @@
 	$: errorMarkerVisible = showErrorMarker(currentItem?.kana, input)
 
 	function showErrorMarker(kana?: string, input?: string): boolean {
-		if ($settings.showErrorMarker && kana && input && input.length > 0) {
+		if (
+			$settings.showErrorMarker &&
+			kana &&
+			input?.length > 0 &&
+			$settings.autoCommit !== "strict"
+		) {
 			return !getAnswers(kana).some((answer) => answer.startsWith(input))
 		} else {
 			return false
