@@ -32,11 +32,11 @@
 		if (currentKana === null) return
 		if (event.data === null) return // control key was pressed
 
+		// remove any excess spaces from string
+		input = input.trim()
+
 		if (event.data === " ") {
 			// space was pressed
-			if (input.trim() === "") {
-				input = input.trim()
-			}
 			handleSubmit()
 			return
 		}
