@@ -13,6 +13,7 @@
 
 	function handleSubmit() {
 		if (blocked && !isCorrectAnswer(input, currentKana)) return
+		if (input === "") return
 
 		if (
 			!isCorrectAnswer(input, currentKana) &&
@@ -33,7 +34,7 @@
 
 		if (event.data === " ") {
 			// space was pressed
-			if (input !== " ") {
+			if (input.trim() === "") {
 				input = input.trim()
 			}
 			handleSubmit()
@@ -55,7 +56,6 @@
 	class="answer-input content-width"
 	on:submit|preventDefault={handleSubmit}
 >
-	<!-- svelte-ignore a11y-autofocus -->
 	<input
 		type="text"
 		class="text-field"
@@ -68,7 +68,6 @@
 		autocomplete="off"
 		autocorrect="off"
 		spellcheck={false}
-		autofocus
 	/>
 	{#if $settings.autoCommit === "disabled"}
 		<button type="submit" class="button" title="Submit">
