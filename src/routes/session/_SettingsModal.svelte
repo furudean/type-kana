@@ -341,6 +341,7 @@
 		align-items: center;
 		position: sticky;
 		bottom: 0;
+		z-index: 1;
 		border-top: 1px solid var(--background-contrast-light);
 	}
 
