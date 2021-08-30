@@ -47,7 +47,7 @@
 	role="checkbox"
 	class:selected={item.checked}
 	class:long-hover={isLongHover && kanaType === "both"}
-	class:extended-click-area={kanaType === "both"}
+	class:extended-click-area={kanaType === "both" && item.checked}
 	class:wide={item.kana === "ん"}
 	{style}
 	aria-pressed={item.checked}
