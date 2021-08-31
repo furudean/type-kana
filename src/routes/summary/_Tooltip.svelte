@@ -40,9 +40,6 @@
 		return {
 			destroy() {
 				leave()
-			},
-			update(_item: SummaryKana) {
-				focused.set(_item)
 			}
 		}
 	}
