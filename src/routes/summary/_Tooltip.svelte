@@ -47,7 +47,7 @@
 
 <script lang="ts">
 	import { clamp, uniqArray } from "@/lib/util"
-	import { afterUpdate } from "svelte"
+	import { afterUpdate, tick } from "svelte"
 
 	function listWrongAnswers(item: SummaryKana): string {
 		const answers = getAnswers(item.kana)
@@ -79,11 +79,10 @@
 	let arrowStyle: string
 	let bodyStyle: string
 
-	// $: console.log("focused", $focused)
-	// $: console.log("rect", $rect)
-
-	afterUpdate(() => {
+	afterUpdate(async () => {
 		if (tooltipBody && $rect) {
+			// wait for the DOM to update...
+			await tick()
 			arrowStyle = calculateArrowStyle($rect)
 			bodyStyle = calculateBodyStyle($rect, tooltipBody.getBoundingClientRect())
 		}
