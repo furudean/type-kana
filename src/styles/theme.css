@@ -25,8 +25,8 @@
 	--background-color-inverse: hsl(296, 25%, 12%);
 	--text-color-inverse: white;
 
-	--focus-color: hsl(205, 100%, 60%);
-	--text-color-on-focus-color: white;
+	--focus-color: #00c9fe;
+	--text-color-on-focus-color: var(--text-color);
 
 	--highlight-color: hsl(5, 91%, 67%);
 

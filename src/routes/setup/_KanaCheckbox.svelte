@@ -218,7 +218,14 @@
 		animation-fill-mode: forwards;
 	}
 
-	.checkbox-kana:focus-visible .block {
+	.checkbox-kana:not(.selected):focus-visible .block {
+		color: var(--focus-color);
+		border-color: var(--focus-color);
+		transition: var(--transition), 75ms var(--standard-curve) color,
+			75ms var(--standard-curve) border-color;
+	}
+
+	.checkbox-kana.selected:focus-visible .block {
 		border-color: var(--focus-color);
 		transition: var(--transition), 75ms var(--standard-curve) border-color;
 	}
