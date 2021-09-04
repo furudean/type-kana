@@ -62,8 +62,7 @@
 		class="text-field"
 		bind:value={input}
 		on:input={handleInput}
-		placeholder="ローマ字入力"
-		aria-label="Input rōmaji"
+		placeholder="your answer"
 		lang="ja"
 		autocapitalize="none"
 		autocomplete="off"
