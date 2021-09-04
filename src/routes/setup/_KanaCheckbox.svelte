@@ -26,17 +26,20 @@
 		? `animation-delay: ${animationDelay}ms; transition-delay: ${animationDelay}ms`
 		: null
 
-	function onAnimationFinished(event: TransitionEvent | AnimationEvent) {
+	function transitionEnd(event: TransitionEvent) {
 		event.stopPropagation()
 
-		if (event instanceof AnimationEvent && kanaType !== "both") {
+		// One transition event is fired per modified property. We want to make
+		// sure to only catch one of these per animation cycle
+		if (event.propertyName === "background-color") {
 			dispatch("animationFinished")
-		} else if (
-			event instanceof TransitionEvent &&
-			// One transition event is fired per modified property. We want to make
-			// sure to only catch one of these per animation cycle
-			event.propertyName === "background-color"
-		) {
+		}
+	}
+
+	function animationEnd(event: AnimationEvent) {
+		event.stopPropagation()
+
+		if (kanaType !== "both") {
 			dispatch("animationFinished")
 		}
 	}
@@ -68,8 +71,8 @@
 			class="block base"
 			class:hiragana={kanaType === "hiragana"}
 			class:katakana={["katakana", "both"].includes(kanaType)}
-			on:transitionend={onAnimationFinished}
-			on:transitioncancel={onAnimationFinished}
+			on:transitionend={transitionEnd}
+			on:transitioncancel={transitionEnd}
 		>
 			{["katakana", "both"].includes(kanaType)
 				? toKatakana(item.kana)
@@ -78,7 +81,7 @@
 		{#if showPopover}
 			<div
 				class="block hiragana popover"
-				on:animationend={onAnimationFinished}
+				on:animationend={animationEnd}
 				out:fade|local={{
 					duration: 125,
 					delay: animationDelay,
