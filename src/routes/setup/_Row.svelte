@@ -5,6 +5,7 @@
 	import KanaCheckbox from "./_KanaCheckbox.svelte"
 	import KanaCheckboxSpacer from "./_KanaCheckboxSpacer.svelte"
 	import { createEventDispatcher } from "svelte"
+	import { browser } from "$app/env"
 
 	const dispatch = createEventDispatcher()
 
@@ -58,7 +59,7 @@
 		}}
 	/>
 	{#each row as item, index (item?.kana ?? index)}
-		{#if item}
+		{#if item && browser}
 			<KanaCheckbox
 				bind:item
 				rowIndex={index}
@@ -67,7 +68,7 @@
 				on:animationFinished={index === row.length - 1 && onAnimationFinished}
 			/>
 		{:else}
-			<KanaCheckboxSpacer />
+			<KanaCheckboxSpacer {item} fill={!browser} />
 		{/if}
 	{/each}
 </div>

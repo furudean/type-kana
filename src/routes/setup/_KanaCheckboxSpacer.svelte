@@ -1,4 +1,11 @@
-<div class="checkbox-kana spacer" aria-hidden="true" />
+<script lang="ts">
+	export let item: KanaCheckbox | null
+	export let fill = false
+</script>
+
+<div class="checkbox-kana spacer" class:fill aria-hidden="true">
+	<span>{item?.kana ?? "あ"}</span>
+</div>
 
 <style>
 	.spacer {
@@ -8,8 +15,16 @@
 		border-radius: var(--standard-border-radius);
 		padding: 0.25em;
 		line-height: 1;
-		width: 1em;
 		height: 1em;
 		opacity: 0.4;
+		flex-grow: 1;
+	}
+
+	.spacer.fill {
+		background: var(--text-color-lighter);
+	}
+
+	span {
+		visibility: hidden;
 	}
 </style>
