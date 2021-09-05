@@ -1,5 +1,4 @@
-:root.light-theme,
-:root {
+@define-mixin light-theme {
 	--background-color: hsl(43, 100%, 94%);
 
 	--background-contrast: #ffe9be;
@@ -33,7 +32,7 @@
 	--overlay-background-color: rgba(0, 0, 0, 0.4);
 }
 
-:root.dark-theme {
+@define-mixin dark-theme {
 	--background-color: hsl(296, 25%, 12%);
 
 	--background-contrast: hsl(300, 24%, 17%);
@@ -65,4 +64,25 @@
 	--highlight-color: hsl(27, 100%, 43%);
 
 	--overlay-background-color: rgba(255, 255, 255, 0.1);
+}
+
+:root.light-theme {
+	@mixin light-theme;
+}
+
+:root.dark-theme {
+	@mixin dark-theme;
+}
+
+:root:not(.light-theme),
+:root:not(.dark-theme) {
+	@mixin light-theme;
+
+	@media (prefers-color-scheme: light) {
+		@mixin light-theme;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		@mixin dark-theme;
+	}
 }

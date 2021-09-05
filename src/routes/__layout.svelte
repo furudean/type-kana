@@ -3,14 +3,14 @@
 	import { resolvedTheme } from "@/stores/theme"
 	import { getAudioContext, getRootGain } from "@/lib/audio"
 	import { settings } from "@/stores/settings"
-	import "@/styles/theme.css"
+	import "@/styles/theme.postcss"
 	import "@/styles/global.postcss"
 	import "focus-visible"
 
 	onMount(() => {
-		resolvedTheme.subscribe((theme) => {
-			const root = document.querySelector(":root")
+		const root = document.querySelector(":root")
 
+		resolvedTheme.subscribe((theme) => {
 			root.classList.remove("light-theme", "dark-theme")
 			root.classList.add(theme + "-theme")
 		})
