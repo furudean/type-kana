@@ -10,6 +10,8 @@
 	onMount(() => {
 		const root = document.querySelector(":root")
 
+		root.classList.add("theme-set-by-js")
+
 		resolvedTheme.subscribe((theme) => {
 			root.classList.remove("light-theme", "dark-theme")
 			root.classList.add(theme + "-theme")

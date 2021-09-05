@@ -74,8 +74,7 @@
 	@mixin dark-theme;
 }
 
-:root:not(.light-theme),
-:root:not(.dark-theme) {
+:root:not(.theme-set-by-js) {
 	@mixin light-theme;
 
 	@media (prefers-color-scheme: light) {
