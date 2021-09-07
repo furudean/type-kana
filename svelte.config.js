@@ -4,6 +4,14 @@ import path from "path"
 import replace from "@rollup/plugin-replace"
 import { execSync } from "child_process"
 
+function execSyncSafe(command) {
+	try {
+		return execSync(command).toString().trim()
+	} catch (error) {
+		return `'${command}' failed`
+	}
+}
+
 /** @type {import('@sveltejs/kit').Config} */
 export default {
 	// an array of file extensions that should be treated as Svelte components
@@ -28,10 +36,8 @@ export default {
 				replace({
 					preventAssignment: true,
 					values: {
-						COMMIT_HASH_SHORT: execSync("git rev-parse --short HEAD")
-							.toString()
-							.trim(),
-						COMMIT_HASH_LONG: execSync("git rev-parse HEAD").toString().trim()
+						COMMIT_HASH_SHORT: execSyncSafe("git rev-parse --short HEAD"),
+						COMMIT_HASH_LONG: execSyncSafe("git rev-parse HEAD")
 					}
 				})
 			]
