@@ -15,42 +15,39 @@
 </a>
 
 <style lang="postcss">
-	a,
-	a:visited {
-		color: var(--accent-color);
+	:any-link {
+		color: var(--secondary-accent-color);
 		text-decoration: none;
-		transition: transform 50ms var(--standard-curve);
+		border-bottom: 1px solid var(--secondary-accent-color);
 
-		&:hover {
-			text-decoration: underline dotted var(--accent-color);
-		}
 		&:focus-visible {
 			outline: none;
-			color: var(--background-color);
-			background-color: var(--accent-color);
-			text-decoration: underline dotted var(--background-color);
+			color: var(--text-color-on-focus-color);
+			background: var(--focus-color);
+			border-bottom: none;
 		}
 		&:active {
 			transform: translateY(10%);
 		}
 	}
 
-	a[target="_blank"] {
-		&:after {
+	:any-link[target="_blank"] {
+		&:before {
 			content: "";
 			display: inline-block;
-			vertical-align: baseline;
+			vertical-align: top;
 			position: relative;
-			top: 2px; /* visual balance */
+			top: 4px; /* visual balance */
 			width: 1em;
 			height: 1em;
-			background-color: var(--accent-color);
+			background-color: var(--secondary-accent-color);
 			mask-image: var(--icon-url);
 			mask-repeat: no-repeat;
 			mask-position: 50% 50%;
+			margin-right: 0.1em;
 		}
-		&:focus-visible:after {
-			background-color: var(--background-color);
+		&:focus-visible:before {
+			background-color: var(--text-color-on-focus-color);
 		}
 	}
 </style>
