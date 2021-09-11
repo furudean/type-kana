@@ -13,13 +13,18 @@ function execSyncSafe(command) {
 }
 
 /** @type {import('@sveltejs/kit').Config} */
-export default {
+const config = {
 	// an array of file extensions that should be treated as Svelte components
 	extensions: [".svelte"],
 
 	kit: {
 		adapter: adapterStatic(),
 		target: "body",
+		prerender: {
+			enabled: true,
+			crawl: true,
+			pages: ["*"]
+		},
 		vite: {
 			resolve: {
 				alias: {
@@ -47,3 +52,5 @@ export default {
 	// options passed to svelte.preprocess (https://svelte.dev/docs#svelte_preprocess)
 	preprocess: sveltePreprocess({ postcss: true, typescript: true })
 }
+
+export default config
