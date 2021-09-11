@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Link from "$lib/Link.svelte"
 	import Logo from "$lib/Logo.svelte"
 	import Button from "$lib/Button.svelte"
 	import Icon from "@/lib/Icon.svelte"
@@ -37,8 +36,11 @@
 		</p>
 		<p>
 			This was made by
-			<Link href="https://cass.moe" target="_blank" rel="nofollow"
-				>Cassidy Bandy</Link
+			<a
+				href="https://cass.moe"
+				target="_blank"
+				rel="nofollow"
+				class="text-link">Cassidy Bandy</a
 			>.
 		</p>
 		<Button href="/setup">

@@ -7,7 +7,6 @@
 </script>
 
 <script lang="ts">
-	import Link from "@/lib/Link.svelte"
 	import { dev } from "$app/env"
 
 	export let status: number
@@ -27,5 +26,5 @@
 {/if}
 
 {#if status === 404}
-	<Link href=".">Go back home</Link>
+	<a class="text-link" href="/">Go back home</a>
 {/if}

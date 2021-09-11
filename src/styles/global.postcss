@@ -67,6 +67,42 @@ hr {
 	margin: calc(1.5 * var(--line-space)) 0;
 }
 
+.text-link {
+	color: var(--secondary-accent-color);
+	text-decoration: none;
+	border-bottom: 1px solid var(--secondary-accent-color);
+
+	&:active,
+	&:focus-visible {
+		outline: none;
+		color: var(--text-color-on-focus-color);
+		background: var(--focus-color);
+		border-bottom: none;
+	}
+
+	&[target="_blank"] {
+		&:before {
+			content: "";
+			display: inline-block;
+			vertical-align: baseline;
+			position: relative;
+			top: 2px; /* visual balance */
+			width: 1em;
+			height: 1em;
+			background-color: var(--secondary-accent-color);
+			mask-image: url("/icons/open-in-new.svg");
+			mask-repeat: no-repeat;
+			mask-position: 50% 50%;
+			margin-right: 0.1em;
+		}
+
+		&:active:before,
+		&:focus-visible:before {
+			background-color: var(--text-color-on-focus-color);
+		}
+	}
+}
+
 .content-width {
 	max-width: 40rem;
 }
