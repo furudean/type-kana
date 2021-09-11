@@ -1,19 +1,10 @@
 <script lang="ts">
-	import { mdiCheckBold, mdiMinusThick } from "@mdi/js"
-	import { svgToDataUrl } from "@/lib/util"
-
 	export let title: string = undefined
 	export let id: string = undefined
 	export let checked: boolean
 	export let indeterminate: boolean = undefined
 	export let disabled: boolean = undefined
 	export let ariaLabel: string = undefined
-
-	const checkedIcon = svgToDataUrl(mdiCheckBold)
-	const indeterminateIcon = svgToDataUrl(mdiMinusThick)
-	const style =
-		`--checked-icon-url: url("${checkedIcon}");` +
-		`--indeterminate-icon-url: url("${indeterminateIcon}");`
 </script>
 
 <div class="checkbox">
@@ -25,7 +16,6 @@
 		{disabled}
 		{indeterminate}
 		aria-label={ariaLabel}
-		{style}
 		on:click
 	/>
 	{#if $$slots.default}
@@ -88,14 +78,14 @@
 		border: 1px solid var(--checked-highlight-color);
 
 		&:after {
-			mask-image: var(--checked-icon-url);
+			mask-image: url("/icon/checked.svg");
 			mask-size: 90%;
 			background-color: white;
 		}
 	}
 
 	input[type="checkbox"]:indeterminate:after {
-		mask-image: var(--indeterminate-icon-url);
+		mask-image: url("/icon/indeterminate.svg");
 		mask-size: 78%;
 		background-color: hsl(0, 0%, 60%);
 	}
