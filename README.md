@@ -1,6 +1,6 @@
 # [Type Kana](https://type-kana.cass.moe/)
 
-<img src="static/icon.png" 
+<img src="assets/logo.svg" 
   width="128" 
   height="128" 
   align="right" 
