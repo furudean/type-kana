@@ -19,7 +19,7 @@
 		mdiVolumeMedium,
 		mdiVolumeHigh
 	} from "@mdi/js"
-	import Icon from "@/lib/Icon.svelte"
+	import Icon from "@/lib/MaterialIcon.svelte"
 	import Range from "@/lib/Range.svelte"
 	import { throttle } from "@/lib/util"
 	import Checkbox from "@/lib/Checkbox.svelte"

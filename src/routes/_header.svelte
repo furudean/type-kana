@@ -1,34 +1,42 @@
 <script lang="ts">
 	import Logo from "$lib/Logo.svelte"
-	import Icon from "@/lib/Icon.svelte"
-	import { mdiGithub, mdiOpenInNew } from "@mdi/js"
+	import MaterialIcon from "@/lib/MaterialIcon.svelte"
+	import { mdiGithub } from "@mdi/js"
+	import { Star } from "svelte-hero-icons"
+	import HeroIcon from "@/lib/HeroIcon.svelte"
+
+	export let stargazers: number
 </script>
 
 <section class="header content-padding">
 	<div class="content-width center">
-		<h1><Logo size="2em" /> Type Kana</h1>
+		<h1><Logo size="2em" />Type Kana</h1>
 		<ul>
-			<li>
-				<a
-					href="https://github.com/c-bandy/type-kana"
-					target="_blank"
-					rel="nofollow"
-					class="menu-link"
-				>
-					<Icon size="1.25em" path={mdiGithub} />
-					source
-					<Icon size="1em" path={mdiOpenInNew} />
-				</a>
-			</li>
 			<li>
 				<a
 					href="https://cass.moe"
 					target="_blank"
 					rel="nofollow"
 					class="menu-link"
+					aria-label="Author"
 				>
-					about
-					<Icon size="1em" path={mdiOpenInNew} />
+					by c-bandy
+				</a>
+			</li>
+			<li>
+				<a
+					href="https://github.com/c-bandy/type-kana"
+					target="_blank"
+					rel="nofollow"
+					class="menu-link"
+					title="Source code"
+					aria-label="Source code"
+				>
+					<MaterialIcon title="GitHub logo" size="1.25em" path={mdiGithub} />
+					<span aria-label="{stargazers} stargazers on GitHub" class="stars">
+						{stargazers.toLocaleString("en")}
+						<HeroIcon size="1em" src={Star} solid={true} ariaLabel="stars" />
+					</span>
 				</a>
 			</li>
 		</ul>
@@ -38,44 +46,36 @@
 <style lang="postcss">
 	.header {
 		background: var(--background-contrast);
+	}
 
-		> div {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-		}
-
-		> div > :last-child {
-			margin-bottom: 0;
-		}
+	.stars {
+		display: flex;
+		align-items: center;
 	}
 
 	h1 {
-		margin: 0;
 		display: flex;
 		align-items: center;
 		gap: 0.5em;
 	}
 
 	ul {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-end;
 		padding: 0;
-		margin-top: 0;
-		gap: calc(0.5 * var(--line-space));
+		margin: 0;
+		display: flex;
+		align-items: center;
+		gap: var(--line-space);
 	}
 
 	li {
 		list-style: none;
 
 		a {
-			text-decoration: none;
 			display: flex;
-			gap: 0.5em;
-			border-bottom: 1px solid transparent;
 			align-items: center;
+			gap: 0.3em;
+			text-decoration: none;
+			border-bottom: 1px solid transparent;
 			line-height: 1;
 
 			&:hover {

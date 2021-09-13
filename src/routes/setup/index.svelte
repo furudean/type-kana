@@ -3,7 +3,7 @@
 	import { gameConfig } from "@/stores/game-config"
 	import Radio from "@/lib/Radio.svelte"
 	import Button from "@/lib/Button.svelte"
-	import Icon from "@/lib/Icon.svelte"
+	import Icon from "@/lib/MaterialIcon.svelte"
 	import { mdiArrowRight } from "@mdi/js"
 	import { dictionary } from "@/stores/dictionary"
 	import { onMount, tick } from "svelte"
