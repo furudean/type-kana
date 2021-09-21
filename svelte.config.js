@@ -31,7 +31,7 @@ function listRoutesIn(path) {
 
 	const filenames = dir
 		.filter(({ isFile, name }) => isFile && !name.startsWith("_"))
-		.map((module) => module.name)
+		.map((dirent) => dirent.name)
 
 	if (filenames.length === 0) {
 		throw new Error(`listRoutesIn: No static routes found in '${path}'`)
