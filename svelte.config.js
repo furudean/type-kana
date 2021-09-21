@@ -64,12 +64,6 @@ const config = {
 					"@": resolvePath("./src")
 				}
 			},
-			optimizeDeps: {
-				include: [
-					// svelte-focus-trap relies on modules that break dynamic imports, we need to pre-compile it
-					"svelte-focus-trap"
-				]
-			},
 			plugins: [
 				replace({
 					preventAssignment: true,
