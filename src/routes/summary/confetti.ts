@@ -1,5 +1,5 @@
-import { randomInt } from "@/lib/random"
-import { sleep } from "@/lib/util"
+import { randomInt } from "$/lib/random"
+import { sleep } from "$/lib/util"
 import confetti from "canvas-confetti"
 
 function fire() {

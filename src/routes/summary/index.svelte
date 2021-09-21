@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { summary } from "@/stores/summary"
+	import { summary } from "$/stores/summary"
 	import SummaryBox from "./_SummaryBox.svelte"
 	import Tooltip from "./_Tooltip.svelte"
-	import Button from "@/lib/Button.svelte"
+	import Button from "$/lib/Button.svelte"
 	import { onMount } from "svelte"
 	import { celebrate } from "./confetti"
-	import { playVictorySound } from "@/lib/sound"
+	import { playVictorySound } from "$/lib/sound"
 
 	const answered = $summary.correct.length + $summary.incorrect.length
 	const accuracy = $summary.correct.length / answered

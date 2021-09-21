@@ -1,5 +1,5 @@
-import { hiragana } from "@/lib/db"
-import { persistent } from "@/lib/persistent-store"
+import { hiragana } from "$/lib/db"
+import { persistent } from "$/lib/persistent-store"
 
 function createKanaCheckbox(kana: string, checked: boolean): KanaCheckbox {
 	if (kana) {

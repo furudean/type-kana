@@ -61,7 +61,7 @@ const config = {
 		vite: {
 			resolve: {
 				alias: {
-					"@": resolvePath("./src")
+					$: resolvePath("./src")
 				}
 			},
 			plugins: [

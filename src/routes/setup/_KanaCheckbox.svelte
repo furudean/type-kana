@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { getAnswers } from "@/lib/answer"
-	import { gameConfig } from "@/stores/game-config"
+	import { getAnswers } from "$/lib/answer"
+	import { gameConfig } from "$/stores/game-config"
 	import { toKatakana } from "wanakana"
-	import { playCheckboxSelectSound } from "@/lib/sound"
-	import { longHover } from "@/lib/long-hover"
+	import { playCheckboxSelectSound } from "$/lib/sound"
+	import { longHover } from "$/lib/long-hover"
 	import { createEventDispatcher } from "svelte"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"

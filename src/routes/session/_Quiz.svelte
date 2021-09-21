@@ -1,9 +1,9 @@
 <script lang="ts">
 	import QuizItemComponent from "./_QuizItem.svelte"
-	import type { QuizItem } from "@/stores/quiz"
-	import { getAnswers } from "@/lib/answer"
-	import { settings } from "@/stores/settings"
-	import Icon from "@/lib/MaterialIcon.svelte"
+	import type { QuizItem } from "$/stores/quiz"
+	import { getAnswers } from "$/lib/answer"
+	import { settings } from "$/stores/settings"
+	import Icon from "$/lib/MaterialIcon.svelte"
 	import { mdiClose as errorMarkerIcon } from "@mdi/js"
 
 	export let unquizzed: QuizItem[]

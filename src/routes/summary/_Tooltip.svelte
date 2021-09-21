@@ -2,9 +2,9 @@
 	import { writable } from "svelte/store"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
-	import { getAnswers } from "@/lib/answer"
-	import type { SummaryKana } from "@/stores/summary"
-	import Icon from "@/lib/MaterialIcon.svelte"
+	import { getAnswers } from "$/lib/answer"
+	import type { SummaryKana } from "$/stores/summary"
+	import Icon from "$/lib/MaterialIcon.svelte"
 	import { mdiClose as errorIcon } from "@mdi/js"
 
 	// modified from https://github.com/stephane-vanraes/renderless-svelte/blob/master/src/Tooltip.svelte
@@ -46,7 +46,7 @@
 </script>
 
 <script lang="ts">
-	import { clamp, uniqArray } from "@/lib/util"
+	import { clamp, uniqArray } from "$/lib/util"
 	import { afterUpdate, tick } from "svelte"
 
 	function listWrongAnswers(item: SummaryKana): string {

@@ -1,7 +1,7 @@
 import { derived } from "svelte/store"
 import { quiz } from "./quiz"
 import type { QuizItem } from "./quiz"
-import { uniqArray, uniqBy } from "@/lib/util"
+import { uniqArray, uniqBy } from "$/lib/util"
 
 export interface SummaryKana {
 	kana: string

@@ -1,31 +1,31 @@
 <script lang="ts">
 	import { focusTrap } from "svelte-focus-trap"
-	import { settings } from "@/stores/settings"
-	import { osTheme } from "@/stores/theme"
+	import { settings } from "$/stores/settings"
+	import { osTheme } from "$/stores/theme"
 	import {
 		loadTapSound,
 		playMaximizeSound,
 		playMinimizeSound,
 		playTapSound
-	} from "@/lib/sound"
+	} from "$/lib/sound"
 	import { fade, fly } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
 	import { onMount, onDestroy } from "svelte"
-	import { onClickOutside } from "@/lib/click-outside"
-	import Button from "@/lib/Button.svelte"
+	import { onClickOutside } from "$/lib/click-outside"
+	import Button from "$/lib/Button.svelte"
 	import {
 		mdiArrowLeft,
 		mdiVolumeOff,
 		mdiVolumeMedium,
 		mdiVolumeHigh
 	} from "@mdi/js"
-	import Icon from "@/lib/MaterialIcon.svelte"
-	import Range from "@/lib/Range.svelte"
-	import { throttle } from "@/lib/util"
-	import Checkbox from "@/lib/Checkbox.svelte"
-	import Radio from "@/lib/Radio.svelte"
-	import { commitHashShort, commitHashLong } from "@/lib/version"
-	import { scrollLock } from "@/lib/scoll-lock"
+	import Icon from "$/lib/MaterialIcon.svelte"
+	import Range from "$/lib/Range.svelte"
+	import { throttle } from "$/lib/util"
+	import Checkbox from "$/lib/Checkbox.svelte"
+	import Radio from "$/lib/Radio.svelte"
+	import { commitHashShort, commitHashLong } from "$/lib/version"
+	import { scrollLock } from "$/lib/scoll-lock"
 
 	let isOpen = false
 	let resetOnClose = false

@@ -1,18 +1,18 @@
 <script lang="ts">
 	import Column from "./_Column.svelte"
-	import { gameConfig } from "@/stores/game-config"
-	import Radio from "@/lib/Radio.svelte"
-	import Button from "@/lib/Button.svelte"
-	import Icon from "@/lib/MaterialIcon.svelte"
+	import { gameConfig } from "$/stores/game-config"
+	import Radio from "$/lib/Radio.svelte"
+	import Button from "$/lib/Button.svelte"
+	import Icon from "$/lib/MaterialIcon.svelte"
 	import { mdiArrowRight } from "@mdi/js"
-	import { dictionary } from "@/stores/dictionary"
+	import { dictionary } from "$/stores/dictionary"
 	import { onMount, tick } from "svelte"
 	import {
 		loadCheckboxSelectSound,
 		loadDropSound,
 		playDropSound
-	} from "@/lib/sound"
-	import { quiz } from "@/stores/quiz"
+	} from "$/lib/sound"
+	import { quiz } from "$/stores/quiz"
 	import { browser } from "$app/env"
 
 	onMount(() => {

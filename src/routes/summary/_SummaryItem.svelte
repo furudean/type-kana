@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SummaryKana } from "@/stores/summary"
+	import type { SummaryKana } from "$/stores/summary"
 	import { isHiragana, isKatakana } from "wanakana"
 	import { tooltip } from "./_Tooltip.svelte"
 

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { mdiCogOutline, mdiArrowLeft, mdiRestart, mdiCheck } from "@mdi/js"
-	import Icon from "@/lib/MaterialIcon.svelte"
+	import Icon from "$/lib/MaterialIcon.svelte"
 	import { createEventDispatcher, onMount } from "svelte"
-	import { loadDropSound, loadVictorySound, playDropSound } from "@/lib/sound"
+	import { loadDropSound, loadVictorySound, playDropSound } from "$/lib/sound"
 
 	const dispatch = createEventDispatcher()
 

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte"
 	import { mdiChevronRight, mdiAutorenew } from "@mdi/js"
-	import Icon from "@/lib/MaterialIcon.svelte"
-	import { settings } from "@/stores/settings"
-	import { getAnswers, isCorrectAnswer } from "@/lib/answer"
+	import Icon from "$/lib/MaterialIcon.svelte"
+	import { settings } from "$/stores/settings"
+	import { getAnswers, isCorrectAnswer } from "$/lib/answer"
 
 	export let input = ""
 	export let currentKana: string = null

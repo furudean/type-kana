@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getAnswers } from "@/lib/answer"
+	import { getAnswers } from "$/lib/answer"
 
 	export let kana: string
 	export let answered: string = undefined

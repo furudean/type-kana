@@ -3,8 +3,8 @@
 	import Input from "./_Input.svelte"
 	import Menu from "./_Menu.svelte"
 	import SettingsModal from "./_SettingsModal.svelte"
-	import { quiz } from "@/stores/quiz"
-	import { isCorrectAnswer } from "@/lib/answer"
+	import { quiz } from "$/stores/quiz"
+	import { isCorrectAnswer } from "$/lib/answer"
 	import {
 		loadProgressSound,
 		playProgressSound,
@@ -13,9 +13,9 @@
 		loadMaximizeSound,
 		loadMinimizeSound,
 		loadVictorySound
-	} from "@/lib/sound"
-	import { randomInt } from "@/lib/random"
-	import { settings } from "@/stores/settings"
+	} from "$/lib/sound"
+	import { randomInt } from "$/lib/random"
+	import { settings } from "$/stores/settings"
 	import ProgressBar from "./_ProgressBar.svelte"
 	import { onMount } from "svelte"
 	import { goto, prefetch } from "$app/navigation"

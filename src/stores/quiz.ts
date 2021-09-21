@@ -1,7 +1,7 @@
-import { shuffleArray } from "@/lib/random"
+import { shuffleArray } from "$/lib/random"
 import type { Readable } from "svelte/store"
 import { dictionary as dictionaryStore } from "./dictionary"
-import { persistent } from "@/lib/persistent-store"
+import { persistent } from "$/lib/persistent-store"
 
 export interface QuizItem {
 	kana: string

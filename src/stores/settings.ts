@@ -1,4 +1,4 @@
-import { persistent } from "@/lib/persistent-store"
+import { persistent } from "$/lib/persistent-store"
 
 export interface GameSettings {
 	autoCommit: "forgiving" | "strict" | "disabled"

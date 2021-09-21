@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { getAnswers } from "@/lib/answer"
-	import { playCheckboxSelectSeriesSound } from "@/lib/sound"
-	import Checkbox from "@/lib/Checkbox.svelte"
+	import { getAnswers } from "$/lib/answer"
+	import { playCheckboxSelectSeriesSound } from "$/lib/sound"
+	import Checkbox from "$/lib/Checkbox.svelte"
 	import KanaCheckbox from "./_KanaCheckbox.svelte"
 	import KanaCheckboxSpacer from "./_KanaCheckboxSpacer.svelte"
 	import { createEventDispatcher } from "svelte"

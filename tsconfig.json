@@ -20,7 +20,7 @@
 		"allowJs": true,
 		"checkJs": true,
 		"paths": {
-			"@/*": ["src/*"],
+			"$/*": ["src/*"],
 			"$app/*": [".svelte/dev/runtime/app/*", ".svelte/build/runtime/app/*"],
 			"$service-worker": [".svelte/build/runtime/service-worker"]
 		}

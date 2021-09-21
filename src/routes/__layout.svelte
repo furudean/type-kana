@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount } from "svelte"
-	import { resolvedTheme } from "@/stores/theme"
-	import { getAudioContext, getRootGain } from "@/lib/audio"
-	import { settings } from "@/stores/settings"
-	import "@/styles/theme.postcss"
-	import "@/styles/global.postcss"
+	import { resolvedTheme } from "$/stores/theme"
+	import { getAudioContext, getRootGain } from "$/lib/audio"
+	import { settings } from "$/stores/settings"
+	import "$/styles/theme.postcss"
+	import "$/styles/global.postcss"
 	import "focus-visible"
 
 	onMount(() => {

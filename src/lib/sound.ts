@@ -6,7 +6,7 @@ import {
 	createGainNode,
 	createPreloader
 } from "./audio"
-import { sleep } from "@/lib/util"
+import { sleep } from "$/lib/util"
 
 export const loadProgressSound = createPreloader(
 	["audio/drop_002.ogg", "audio/drop_002.mp3"],

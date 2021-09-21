@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { QuizItem } from "@/stores/quiz"
-	import { roundN } from "@/lib/util"
-	import { settings } from "@/stores/settings"
+	import type { QuizItem } from "$/stores/quiz"
+	import { roundN } from "$/lib/util"
+	import { settings } from "$/stores/settings"
 
 	export let unquizzed: QuizItem[]
 	export let quizzed: QuizItem[]
