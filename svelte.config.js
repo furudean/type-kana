@@ -56,7 +56,7 @@ const config = {
 		prerender: {
 			enabled: true,
 			crawl: true,
-			pages: ["*", ...listRoutesIn("/icon/")]
+			entries: ["*", ...listRoutesIn("/icon/")]
 		},
 		vite: {
 			resolve: {
