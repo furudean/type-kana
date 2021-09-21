@@ -15,11 +15,9 @@
 	{height}
 	role="img"
 	{viewBox}
+	aria-label={title}
 	aria-hidden={ariaHidden || title === undefined}
 >
-	{#if title}
-		<title>{title}</title>
-	{/if}
 	<path d={path} fill={color} />
 </svg>
 

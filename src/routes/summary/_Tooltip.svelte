@@ -4,7 +4,7 @@
 	import { cubicOut } from "svelte/easing"
 	import { getAnswers } from "@/lib/answer"
 	import type { SummaryKana } from "@/stores/summary"
-	import Icon from "@/lib/Icon.svelte"
+	import Icon from "@/lib/MaterialIcon.svelte"
 	import { mdiClose as errorIcon } from "@mdi/js"
 
 	// modified from https://github.com/stephane-vanraes/renderless-svelte/blob/master/src/Tooltip.svelte

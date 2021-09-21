@@ -62,9 +62,44 @@ h3 {
 
 hr {
 	border: none;
-	background: var(--text-color-lighter);
+	background: var(--text-color-light);
 	height: 1px;
 	margin: calc(1.5 * var(--line-space)) 0;
+}
+
+.text-link {
+	color: var(--secondary-accent-color);
+	text-decoration: none;
+	border-bottom: 1px solid var(--secondary-accent-color);
+
+	&:active,
+	&:focus-visible {
+		outline: none;
+		color: var(--text-color-on-focus-color);
+		background: var(--focus-color);
+		border-color: var(--focus-color);
+	}
+
+	&[target="_blank"] {
+		&:before {
+			content: "";
+			display: inline-block;
+			vertical-align: baseline;
+			position: relative;
+			top: 0.15em; /* visual balance */
+			width: 1em;
+			height: 1em;
+			background-color: var(--secondary-accent-color);
+			mask-image: url("/icon/open-in-new.svg");
+			mask-repeat: no-repeat;
+			mask-position: 50% 50%;
+		}
+
+		&:active:before,
+		&:focus-visible:before {
+			background-color: var(--text-color-on-focus-color);
+		}
+	}
 }
 
 .content-width {
@@ -77,6 +112,11 @@ hr {
 	@media screen and (max-width: 40em) {
 		padding: 1.5rem;
 	}
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .sr-only {

@@ -19,13 +19,12 @@
 		mdiVolumeMedium,
 		mdiVolumeHigh
 	} from "@mdi/js"
-	import Icon from "@/lib/Icon.svelte"
+	import Icon from "@/lib/MaterialIcon.svelte"
 	import Range from "@/lib/Range.svelte"
 	import { throttle } from "@/lib/util"
 	import Checkbox from "@/lib/Checkbox.svelte"
 	import Radio from "@/lib/Radio.svelte"
 	import { commitHashShort, commitHashLong } from "@/lib/version"
-	import Link from "@/lib/Link.svelte"
 	import { scrollLock } from "@/lib/scoll-lock"
 
 	let isOpen = false
@@ -244,15 +243,15 @@
 				<Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
 				Done
 			</Button>
-			<Link
+			<a
 				href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
 				target="_blank"
 				rel="noopener"
 				title="Open commit for current build in GitHub"
-				aria-label="Open commit for current build in GitHub"
+				class="text-link"
 			>
 				build {commitHashShort}
-			</Link>
+			</a>
 		</section>
 	</section>
 {/if}
