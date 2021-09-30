@@ -24,11 +24,10 @@
 	import { throttle } from "$/lib/util"
 	import Checkbox from "$/lib/Checkbox.svelte"
 	import Radio from "$/lib/Radio.svelte"
-	import { commitHashShort, commitHashLong } from "$/lib/version"
 	import { scrollLock } from "$/lib/scoll-lock"
 	import MenuBar from "$lib/MenuBar.svelte"
 
-	let isOpen = false
+	export let isOpen = false
 	let resetOnClose = false
 
 	export function open() {

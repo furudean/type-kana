@@ -20,9 +20,13 @@
 	import { onMount } from "svelte"
 	import { goto, prefetch } from "$app/navigation"
 
+	const ALPHANUMERIC = /^[a-z0-9]+$/i
+
 	let settingsModal: SettingsModal
 	let input: string
 	let streakLength = 0
+	let inputElement: HTMLElement
+	let modalIsOpen: boolean
 
 	$: unquizzed = $quiz.unquizzed
 	$: quizzed = $quiz.quizzed
@@ -73,6 +77,22 @@
 		}
 	}
 
+	function handleKeydown(event: KeyboardEvent) {
+		if (modalIsOpen) return
+		if (event.isComposing) return
+
+		console.log(event.key)
+
+		if (
+			document.activeElement !== inputElement &&
+			event.key !== " " && // skip if space
+			event.key.length === 1 && // skip if control character
+			ALPHANUMERIC.test(event.key)
+		) {
+			inputElement.focus()
+		}
+	}
+
 	onMount(() => {
 		loadProgressSound()
 		loadErrorSound()
@@ -88,8 +108,15 @@
 	<title>Session · Type Kana</title>
 </svelte:head>
 
+<svelte:window on:keydown={handleKeydown} />
+
 <ProgressBar {unquizzed} {quizzed} />
 <Quiz {unquizzed} {quizzed} {input} />
-<Input bind:input on:submit={handleSubmit} currentKana={currentItem?.kana} />
+<Input
+	bind:input
+	on:submit={handleSubmit}
+	currentKana={currentItem?.kana}
+	bind:inputElement
+/>
 <Menu on:menuEvent={handleMenuEvent} />
-<SettingsModal bind:this={settingsModal} />
+<SettingsModal bind:this={settingsModal} bind:isOpen={modalIsOpen} />

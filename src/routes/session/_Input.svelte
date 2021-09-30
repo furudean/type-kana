@@ -7,6 +7,7 @@
 
 	export let input = ""
 	export let currentKana: string = null
+	export let inputElement: HTMLElement
 
 	const dispatch = createEventDispatcher()
 	let blocked = false
@@ -68,6 +69,7 @@
 		autocomplete="off"
 		autocorrect="off"
 		spellcheck={false}
+		bind:this={inputElement}
 	/>
 	{#if $settings.autoCommit === "disabled"}
 		<button type="submit" class="button" title="Submit">
