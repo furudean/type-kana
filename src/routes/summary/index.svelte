@@ -6,6 +6,7 @@
 	import { onMount } from "svelte"
 	import { celebrate } from "./confetti"
 	import { playVictorySound } from "$/lib/sound"
+	import MenuBar from "$lib/MenuBar.svelte"
 
 	const answered = $summary.correct.length + $summary.incorrect.length
 	const accuracy = $summary.correct.length / answered
@@ -25,7 +26,7 @@
 
 <Tooltip />
 
-<div class="container content-width content-padding">
+<div class="container content-width content-padding center">
 	<h1>Session complete 🎉</h1>
 
 	<p>
@@ -61,14 +62,16 @@
 			<SummaryBox items={$summary.unquizzed} fill={false} truncateAt={20} />
 		</section>
 	{/if}
-	<section>
-		<Button href=".">Start over?</Button>
-	</section>
 </div>
+<MenuBar class="glass-morphism">
+	<div class="menu content-width content-padding center">
+		<Button href=".">Start over?</Button>
+	</div>
+</MenuBar>
 
 <style lang="postcss">
 	.container {
-		margin: 0 auto;
+		padding-bottom: 0;
 	}
 
 	section {
@@ -83,5 +86,12 @@
 		&:focus-visible {
 			opacity: 1;
 		}
+	}
+
+	.menu {
+		margin-top: var(--line-space);
+		padding-top: var(--line-space);
+		padding-bottom: var(--line-space);
+		justify-content: center;
 	}
 </style>

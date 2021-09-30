@@ -26,6 +26,7 @@
 	import Radio from "$/lib/Radio.svelte"
 	import { commitHashShort, commitHashLong } from "$/lib/version"
 	import { scrollLock } from "$/lib/scoll-lock"
+	import MenuBar from "$lib/MenuBar.svelte"
 
 	let isOpen = false
 	let resetOnClose = false
@@ -238,21 +239,14 @@
 			</Checkbox>
 		</div>
 
-		<section class="menu content-padding glass-morphism">
-			<Button on:click={close}>
-				<Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
-				Done
-			</Button>
-			<a
-				href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
-				target="_blank"
-				rel="noopener"
-				title="Open commit for current build in GitHub"
-				class="text-link"
-			>
-				build {commitHashShort}
-			</a>
-		</section>
+		<MenuBar class="content-padding glass-morphism contrast">
+			<div class="menu">
+				<Button on:click={close}>
+					<Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
+					Done
+				</Button>
+			</div>
+		</MenuBar>
 	</section>
 {/if}
 
@@ -332,16 +326,6 @@
 		> :global(:first-child) {
 			margin-right: 0.5em;
 		}
-	}
-
-	.menu {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		position: sticky;
-		bottom: 0;
-		z-index: 1;
-		border-top: 1px solid var(--background-contrast-light);
 	}
 
 	.menu > :global(.button .svg-icon) {

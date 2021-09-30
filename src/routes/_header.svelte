@@ -4,6 +4,7 @@
 	import { mdiGithub } from "@mdi/js"
 	import { Star } from "svelte-hero-icons"
 	import HeroIcon from "$/lib/HeroIcon.svelte"
+	import { commitHashLong, commitHashShort } from "$/lib/version"
 
 	export let stargazers: number
 </script>
@@ -37,6 +38,17 @@
 						{stargazers.toLocaleString("en")}
 						<HeroIcon size="1em" src={Star} solid={true} ariaLabel="stars" />
 					</span>
+				</a>
+			</li>
+			<li>
+				<a
+					href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
+					target="_blank"
+					rel="noopener"
+					title="Current build commit (GitHub)"
+					class="menu-link"
+				>
+					commit #{commitHashShort}
 				</a>
 			</li>
 		</ul>
@@ -76,7 +88,6 @@
 			gap: 0.3em;
 			text-decoration: none;
 			border-bottom: 1px solid transparent;
-			line-height: 1;
 
 			&:hover {
 				border-color: currentColor;
@@ -86,6 +97,14 @@
 
 	.menu-link {
 		color: var(--text-color);
+
+		&:active,
+		&:focus-visible {
+			outline: none;
+			color: var(--text-color-on-focus-color);
+			background: var(--focus-color);
+			border-color: var(--focus-color);
+		}
 	}
 
 	.text-link:before {

@@ -28,7 +28,6 @@
 </svelte:head>
 
 <Header {stargazers} />
-<!-- <Header stargazers={1000} /> -->
 <section class="content-padding">
 	<div class="content-width center">
 		<p>

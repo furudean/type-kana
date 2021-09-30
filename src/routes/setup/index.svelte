@@ -6,7 +6,7 @@
 	import Icon from "$/lib/MaterialIcon.svelte"
 	import { mdiArrowRight } from "@mdi/js"
 	import { dictionary } from "$/stores/dictionary"
-	import { onMount, tick } from "svelte"
+	import { onMount } from "svelte"
 	import {
 		loadCheckboxSelectSound,
 		loadDropSound,
@@ -14,6 +14,7 @@
 	} from "$/lib/sound"
 	import { quiz } from "$/stores/quiz"
 	import { browser } from "$app/env"
+	import MenuBar from "$lib/MenuBar.svelte"
 
 	onMount(() => {
 		if (browser) {
@@ -63,19 +64,21 @@
 			label="Digraphs with diacritics"
 		/>
 	</section>
-	<section class="menu content-padding glass-morphism">
-		<Button
-			href="session"
-			disabled={$dictionary.length === 0}
-			on:click={() => {
-				playDropSound()
-				quiz.reset()
-			}}
-		>
-			Start quiz
-			<Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
-		</Button>
-	</section>
+	<MenuBar class="glass-morphism contrast">
+		<div class="menu">
+			<Button
+				href="session"
+				disabled={$dictionary.length === 0}
+				on:click={() => {
+					playDropSound()
+					quiz.reset()
+				}}
+			>
+				Start quiz
+				<Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
+			</Button>
+		</div>
+	</MenuBar>
 </div>
 
 <style lang="postcss">
@@ -163,16 +166,12 @@
 	}
 
 	.menu {
-		flex-grow: 1;
 		display: flex;
 		justify-content: center;
-		position: sticky;
-		bottom: 0;
-		z-index: 1;
-		border-top: 1px solid var(--background-contrast-light);
+		padding: var(--line-space) 0;
+	}
 
-		> :global(.button .svg-icon) {
-			margin-right: -0.5em;
-		}
+	.menu > :global(.button .svg-icon) {
+		margin-right: -0.5em;
 	}
 </style>
