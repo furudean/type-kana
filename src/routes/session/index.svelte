@@ -81,8 +81,6 @@
 		if (modalIsOpen) return
 		if (event.isComposing) return
 
-		console.log(event.key)
-
 		if (
 			document.activeElement !== inputElement &&
 			event.key !== " " && // skip if space
