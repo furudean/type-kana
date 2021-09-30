@@ -90,8 +90,8 @@
 
 	.menu {
 		margin-top: var(--line-space);
-		padding-top: var(--line-space);
-		padding-bottom: var(--line-space);
+		/* padding-top: var(--line-space);
+		padding-bottom: var(--line-space); */
 		justify-content: center;
 	}
 </style>

@@ -65,7 +65,7 @@
 		/>
 	</section>
 	<MenuBar class="glass-morphism contrast">
-		<div class="menu">
+		<div class="menu content-padding">
 			<Button
 				href="session"
 				disabled={$dictionary.length === 0}
@@ -168,7 +168,6 @@
 	.menu {
 		display: flex;
 		justify-content: center;
-		padding: var(--line-space) 0;
 	}
 
 	.menu > :global(.button .svg-icon) {
