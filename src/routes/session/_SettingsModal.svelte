@@ -324,18 +324,15 @@
 	fieldset {
 		margin: 0;
 		padding: 0 1em var(--line-space);
-		border: 1px solid var(--text-color-light);
+		border: 1px solid var(--text-color-lighter);
 		margin-bottom: var(--line-space);
 		border-radius: var(--standard-border-radius);
 	}
 
 	legend {
-		background: var(--background-contrast);
-		padding: 0 0.75em;
+		font-size: 1.25em;
+		padding: 0 0.5em;
 		margin-bottom: 1em;
-		font-size: 1.2em;
-		font-weight: normal;
-		border-radius: var(--standard-border-radius);
 	}
 
 	label {
