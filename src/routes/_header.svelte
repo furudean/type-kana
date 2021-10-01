@@ -81,6 +81,7 @@
 
 	li {
 		list-style: none;
+		white-space: nowrap;
 
 		a {
 			display: flex;
