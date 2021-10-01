@@ -7,6 +7,7 @@
 	import { celebrate } from "./confetti"
 	import { playVictorySound } from "$/lib/sound"
 	import MenuBar from "$lib/MenuBar.svelte"
+	import Counters from "./_Counters.svelte"
 
 	const answered = $summary.correct.length + $summary.incorrect.length
 	const accuracy = $summary.correct.length / answered
@@ -39,14 +40,20 @@
 
 	{#if $summary.correct.length > 0}
 		<section>
-			<h2>Correctly answered</h2>
-			<SummaryBox items={$summary.correct} truncateAt={50} />
+			<h2>
+				Correctly answered
+				<Counters items={$summary.correct} />
+			</h2>
+			<SummaryBox items={$summary.correct} truncateAt={48} />
 		</section>
 	{/if}
 
 	{#if $summary.incorrect.length > 0}
 		<section class="incorrect">
-			<h2>Needs more practice</h2>
+			<h2>
+				Needs more practice
+				<Counters items={$summary.incorrect} />
+			</h2>
 			<SummaryBox
 				items={[...$summary.incorrect]
 					.sort((a, b) => a.incorrectTimes - b.incorrectTimes)
@@ -58,8 +65,11 @@
 
 	{#if $summary.unquizzed.length > 0}
 		<section class="unquizzed">
-			<h2>Not quizzed</h2>
-			<SummaryBox items={$summary.unquizzed} fill={false} truncateAt={20} />
+			<h2>
+				Not quizzed
+				<Counters items={$summary.unquizzed} />
+			</h2>
+			<SummaryBox items={$summary.unquizzed} fill={false} truncateAt={15} />
 		</section>
 	{/if}
 </div>

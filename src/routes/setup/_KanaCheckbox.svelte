@@ -149,13 +149,14 @@
 	}
 
 	.checkbox-kana.selected .block {
-		color: var(--text-color-on-accent-color);
 		border-color: transparent;
 
 		&.hiragana {
+			color: var(--text-color-on-accent-color);
 			background: var(--accent-color);
 		}
 		&.katakana {
+			color: var(--text-color-on-secondary-accent-color);
 			background: var(--secondary-accent-color);
 		}
 	}

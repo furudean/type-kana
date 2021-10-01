@@ -74,7 +74,7 @@
 		}
 		&.katakana {
 			background: var(--secondary-accent-color);
-			color: var(--text-color-on-accent-color);
+			color: var(--text-color-on-secondary-accent-color);
 		}
 	}
 
