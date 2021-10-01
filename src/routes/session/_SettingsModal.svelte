@@ -225,7 +225,7 @@
 					min={0}
 					max={100}
 					tooltip="[value]%"
-					width="200px"
+					width="12rem"
 					on:input={playTapSoundThrottled}
 				/>
 			</div>

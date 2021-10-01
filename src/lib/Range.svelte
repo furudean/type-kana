@@ -5,9 +5,9 @@
 
 	export let id: string = undefined
 	export let value: number
-	export let min: string | number = 0
-	export let max: string | number = 100
-	export let step: string | number = 1
+	export let min: number = 0
+	export let max: number = 100
+	export let step: number = 1
 	export let list: string | undefined = undefined
 
 	export let width = "100%"
@@ -86,7 +86,10 @@
 		on:input={handleInput}
 		on:mouseenter={enter}
 		on:mouseleave={leave}
-		on:focus={() => (hasFocus = true)}
+		on:focus={() => {
+			hasFocus = true
+			enter()
+		}}
 		on:focusout={() => {
 			hasFocus = false
 			leave()
@@ -121,15 +124,24 @@
 		margin: 0;
 	}
 
+	input[type="range"]:focus-visible {
+		&::-webkit-slider-thumb {
+			box-shadow: 0 0 0 3px var(--focus-color);
+		}
+		&::-moz-range-thumb {
+			box-shadow: 0 0 0 3px var(--focus-color);
+		}
+	}
+
 	/* Chrome */
 
-	input::-webkit-slider-runnable-track {
+	input[type="range"]::-webkit-slider-runnable-track {
 		background: var(--track-color);
 		height: var(--track-height);
 		border-radius: var(--track-border-radius);
 	}
 
-	input::-webkit-slider-thumb {
+	input[type="range"]::-webkit-slider-thumb {
 		appearance: none;
 		width: var(--thumb-size);
 		height: var(--thumb-size);
@@ -153,6 +165,7 @@
 		outline: none;
 		border: none;
 		margin: 0;
+		isolation: isolate;
 	}
 
 	input[type="range"]::-moz-range-progress {
@@ -160,7 +173,7 @@
 		border-radius: var(--track-border-radius);
 		border: none;
 		height: var(--track-height);
-		opacity: 0.66;
+		opacity: 0.75;
 	}
 
 	input[type="range"]::-moz-range-track {
