@@ -109,11 +109,12 @@
 	}
 
 	input[type="range"] {
-		--thumb-size: 18px;
-		--thumb-color: var(--form-element-secondary-color);
-		--track-height: 6px;
-		--track-border-radius: calc(var(--track-height) / 2);
-		--track-color: var(--form-element-secondary-background-color);
+		--thumb-size: 1.25em;
+		--thumb-color: var(--form-element-primary-color);
+		--thumb-contrast-color: var(--form-element-primary-color-contrast);
+		--track-height: 0.5em;
+		--track-border-radius: 999px;
+		--track-color: var(--form-element-background);
 
 		display: inline-block;
 		appearance: none;
@@ -122,6 +123,8 @@
 		height: var(--thumb-size);
 		outline: none;
 		margin: 0;
+		font-size: 1em;
+		position: relative;
 	}
 
 	input[type="range"]:focus-visible {
@@ -137,8 +140,10 @@
 
 	input[type="range"]::-webkit-slider-runnable-track {
 		background: var(--track-color);
-		height: var(--track-height);
+		height: calc(var(--track-height) + 2px); /* border makes box smaller */
 		border-radius: var(--track-border-radius);
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 	}
 
 	input[type="range"]::-webkit-slider-thumb {
@@ -152,6 +157,13 @@
 		position: relative;
 		top: 50%;
 		transform: translateY(-50%);
+		box-shadow: inset 0 1px 3px var(--thumb-contrast-color);
+		border: 1px solid var(--thumb-contrast-color);
+		transition: 75ms var(--standard-curve) background-color;
+
+		&:active {
+			background: var(--thumb-contrast-color);
+		}
 	}
 
 	/* Firefox */
@@ -166,6 +178,12 @@
 		border: none;
 		margin: 0;
 		isolation: isolate;
+		box-shadow: inset 0 1px 3px var(--thumb-contrast-color);
+		transition: 75ms var(--standard-curve) background-color;
+
+		&:active {
+			background: var(--thumb-contrast-color);
+		}
 	}
 
 	input[type="range"]::-moz-range-progress {
@@ -173,14 +191,14 @@
 		border-radius: var(--track-border-radius);
 		border: none;
 		height: var(--track-height);
-		opacity: 0.75;
 	}
 
 	input[type="range"]::-moz-range-track {
 		background: var(--track-color);
 		border-radius: var(--track-border-radius);
-		border: none;
 		height: var(--track-height);
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 	}
 
 	.tooltip {
