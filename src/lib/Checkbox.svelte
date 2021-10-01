@@ -53,6 +53,7 @@
 
 	label {
 		display: block;
+		flex-grow: 1;
 		padding-left: 1em;
 		user-select: none;
 		white-space: pre-line;
