@@ -37,7 +37,7 @@
 
 		<Button href="/setup">
 			Start
-			<Icon size="1.5em" path={mdiArrowRight} />
+			<Icon size="1.25em" path={mdiArrowRight} />
 		</Button>
 	</div>
 </section>

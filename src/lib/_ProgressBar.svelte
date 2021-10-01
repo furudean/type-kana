@@ -2,16 +2,14 @@
 	import type { QuizItem } from "$/stores/quiz"
 	import { roundN } from "$/lib/util"
 	import { settings } from "$/stores/settings"
-
-	export let unquizzed: QuizItem[]
-	export let quizzed: QuizItem[]
+	import { quiz } from "$/stores/quiz"
 
 	// filter quizzed items that had a correct answer, only these count toward
 	// the total
-	$: quizzedCorrect = quizzed.filter((item) => item.isCorrectAnswer)
+	$: quizzedCorrect = $quiz.quizzed.filter((item) => item.isCorrectAnswer)
 
 	$: progress =
-		quizzedCorrect.length / (quizzedCorrect.length + unquizzed.length)
+		quizzedCorrect.length / (quizzedCorrect.length + $quiz.unquizzed.length)
 
 	$: style = `margin-right: ${(1 - roundN(progress, 2)) * 100}%`
 </script>

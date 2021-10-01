@@ -67,7 +67,7 @@
 	<MenuBar class="glass-morphism contrast">
 		<div class="menu content-padding">
 			<Button href="/" style="outline">
-				<Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
+				<Icon path={mdiArrowLeft} size="1.25em" />
 				Back
 			</Button>
 			<Button
@@ -79,7 +79,7 @@
 				}}
 			>
 				Start quiz
-				<Icon title="Right arrow" path={mdiArrowRight} size="1.5em" />
+				<Icon path={mdiArrowRight} size="1.25em" />
 			</Button>
 		</div>
 	</MenuBar>

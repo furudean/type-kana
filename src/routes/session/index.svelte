@@ -16,7 +16,7 @@
 	} from "$/lib/sound"
 	import { randomInt } from "$/lib/random"
 	import { settings } from "$/stores/settings"
-	import ProgressBar from "./_ProgressBar.svelte"
+	import ProgressBar from "$lib/_ProgressBar.svelte"
 	import { onMount } from "svelte"
 	import { goto, prefetch } from "$app/navigation"
 
@@ -108,7 +108,7 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<ProgressBar {unquizzed} {quizzed} />
+<ProgressBar />
 <Quiz {unquizzed} {quizzed} {input} />
 <Input
 	bind:input

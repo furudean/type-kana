@@ -264,7 +264,7 @@
 		<MenuBar class="content-padding glass-morphism contrast">
 			<div class="menu">
 				<Button on:click={close}>
-					<Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
+					<Icon path={mdiArrowLeft} size="1.25em" />
 					Done
 				</Button>
 			</div>

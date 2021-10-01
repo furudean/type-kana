@@ -8,13 +8,20 @@
 	import { playVictorySound } from "$/lib/sound"
 	import MenuBar from "$lib/MenuBar.svelte"
 	import Counters from "./_Counters.svelte"
+	import Icon from "$/lib/MaterialIcon.svelte"
+	import { mdiArrowLeft, mdiRestart } from "@mdi/js"
+	import ProgressBar from "$lib/_ProgressBar.svelte"
 
-	const answered = $summary.correct.length + $summary.incorrect.length
-	const accuracy = $summary.correct.length / answered
-	const total = answered + $summary.unquizzed.length
+	$: correct = $summary.correct
+	$: incorrect = $summary.incorrect
+	$: unquizzed = $summary.unquizzed
+
+	$: answered = correct.length + incorrect.length
+	$: accuracy = correct.length / answered
+	$: total = correct.length + incorrect.length + unquizzed.length
 
 	onMount(() => {
-		if ($summary.correct.length > 0) {
+		if (correct.length > 0) {
 			playVictorySound()
 			celebrate()
 		}
@@ -26,8 +33,9 @@
 </svelte:head>
 
 <Tooltip />
+<ProgressBar />
 
-<div class="container content-width content-padding center">
+<div class="main content-width content-padding center">
 	<h1>Session complete 🎉</h1>
 
 	<p>
@@ -38,24 +46,24 @@
 		answered
 	</p>
 
-	{#if $summary.correct.length > 0}
+	{#if correct.length > 0}
 		<section>
 			<h2>
-				Correctly answered
-				<Counters items={$summary.correct} />
+				Correct answer
+				<Counters items={correct} />
 			</h2>
-			<SummaryBox items={$summary.correct} truncateAt={48} />
+			<SummaryBox items={correct} truncateAt={48} />
 		</section>
 	{/if}
 
-	{#if $summary.incorrect.length > 0}
+	{#if incorrect.length > 0}
 		<section class="incorrect">
 			<h2>
-				Needs more practice
-				<Counters items={$summary.incorrect} />
+				Wrong answer
+				<Counters items={incorrect} />
 			</h2>
 			<SummaryBox
-				items={[...$summary.incorrect]
+				items={[...incorrect]
 					.sort((a, b) => a.incorrectTimes - b.incorrectTimes)
 					.reverse()}
 				fill={false}
@@ -63,25 +71,41 @@
 		</section>
 	{/if}
 
-	{#if $summary.unquizzed.length > 0}
+	{#if unquizzed.length > 0}
 		<section class="unquizzed">
 			<h2>
-				Not quizzed
-				<Counters items={$summary.unquizzed} />
+				Unfinished
+				<Counters items={unquizzed} />
 			</h2>
-			<SummaryBox items={$summary.unquizzed} fill={false} truncateAt={15} />
+			<SummaryBox items={unquizzed} fill={false} truncateAt={15} />
 		</section>
 	{/if}
 </div>
+
 <MenuBar class="glass-morphism">
 	<div class="menu content-width content-padding center">
-		<Button href="/setup">Start over?</Button>
+		{#if unquizzed.length > 0}
+			<p>There are {unquizzed.length} left to quiz. Finish up?</p>
+		{/if}
+		<div class="menu-items">
+			{#if unquizzed.length > 0}
+				<Button href="/session">
+					<Icon path={mdiArrowLeft} size="1.25em" />
+					Keep going
+				</Button>
+			{/if}
+			<Button href="/setup" style={unquizzed.length === 0 ? "fill" : "outline"}>
+				<Icon path={mdiRestart} size="1.5em" />
+				Start over
+			</Button>
+		</div>
 	</div>
 </MenuBar>
 
 <style lang="postcss">
-	.container {
+	.main {
 		padding-bottom: 0;
+		margin-bottom: var(--line-space);
 	}
 
 	section {
@@ -98,10 +122,18 @@
 		}
 	}
 
-	.menu {
-		margin-top: var(--line-space);
-		/* padding-top: var(--line-space);
-		padding-bottom: var(--line-space); */
-		justify-content: center;
+	.menu p {
+		line-height: 1;
+		margin: 0;
+		margin-bottom: calc(0.75 * var(--line-space));
+	}
+
+	.menu-items {
+		display: flex;
+		gap: 1em;
+
+		> :global(.button .svg-icon) {
+			margin-left: -0.5em;
+		}
 	}
 </style>

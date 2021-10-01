@@ -71,6 +71,9 @@
 			color 75ms var(--standard-curve),
 			background-color 75ms var(--standard-curve),
 			border-color 75ms var(--standard-curve);
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
 	}
 
 	.button.fill {
