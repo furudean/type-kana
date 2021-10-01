@@ -57,8 +57,6 @@
 
 <style lang="postcss">
 	.quiz {
-		--margin: 0.25em;
-
 		display: flex;
 		overflow-x: hidden;
 		flex-direction: row-reverse;
@@ -95,15 +93,9 @@
 		}
 	}
 
-	.kana-queue :global(.quiz-item) {
-		margin-left: var(--margin);
-
-		&:first {
-			margin-left: 0;
-		}
-	}
-
-	.kana-quizzed :global(.quiz-item) {
-		margin-right: var(--margin);
+	.quiz,
+	.kana-queue,
+	.kana-quizzed {
+		gap: 1em;
 	}
 </style>
