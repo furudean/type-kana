@@ -75,7 +75,7 @@
 </div>
 <MenuBar class="glass-morphism">
 	<div class="menu content-width content-padding center">
-		<Button href=".">Start over?</Button>
+		<Button href="/setup">Start over?</Button>
 	</div>
 </MenuBar>
 

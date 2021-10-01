@@ -4,7 +4,7 @@
 	import Radio from "$/lib/Radio.svelte"
 	import Button from "$/lib/Button.svelte"
 	import Icon from "$/lib/MaterialIcon.svelte"
-	import { mdiArrowRight } from "@mdi/js"
+	import { mdiArrowRight, mdiArrowLeft } from "@mdi/js"
 	import { dictionary } from "$/stores/dictionary"
 	import { onMount } from "svelte"
 	import {
@@ -66,6 +66,10 @@
 	</section>
 	<MenuBar class="glass-morphism contrast">
 		<div class="menu content-padding">
+			<Button href="/" style="outline">
+				<Icon title="Left arrow" path={mdiArrowLeft} size="1.5em" />
+				Back
+			</Button>
 			<Button
 				href="session"
 				disabled={$dictionary.length === 0}
@@ -168,9 +172,14 @@
 	.menu {
 		display: flex;
 		justify-content: center;
+		gap: 1em;
 	}
 
-	.menu > :global(.button .svg-icon) {
+	.menu > :global(:nth-child(1) .svg-icon) {
+		margin-left: -0.5em;
+	}
+
+	.menu > :global(:nth-child(2) .svg-icon) {
 		margin-right: -0.5em;
 	}
 </style>
