@@ -10,7 +10,7 @@
 	} from "$/lib/sound"
 	import { fade, fly } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
-	import { onMount, onDestroy } from "svelte"
+	import { onMount } from "svelte"
 	import { onClickOutside } from "$/lib/click-outside"
 	import Button from "$/lib/Button.svelte"
 	import {
@@ -26,86 +26,103 @@
 	import Radio from "$/lib/Radio.svelte"
 	import { scrollLock } from "$/lib/scoll-lock"
 	import MenuBar from "$lib/MenuBar.svelte"
+	import { page } from "$app/stores"
+	import { goto } from "$app/navigation"
+	import { browser } from "$app/env"
 
 	export let isOpen = false
+
+	let volumeIconPath: string
+	let volumeIconViewBox: string
+	let volumeIconColor: string
+
 	let resetOnClose = false
 
-	export function open() {
-		if (!isOpen) {
-			isOpen = true
-			playMaximizeSound()
-		}
+	const playTapSoundThrottled = throttle(playTapSound, 80)
+
+	export function open(init = false) {
+		if (isOpen) return
+		isOpen = true
+
+		!init && playMaximizeSound()
+		location.hash !== "#settings" && goto($page.path + "#settings")
 	}
+
 	export function close() {
-		if (isOpen) {
-			isOpen = false
-			playMinimizeSound()
+		if (!isOpen) return
+		isOpen = false
 
-			if (resetOnClose) {
-				localStorage.clear()
-				sessionStorage.clear()
-				location.reload()
-			}
+		playMinimizeSound()
+		location.hash === "#settings" && goto($page.path)
+
+		if (resetOnClose) {
+			localStorage.clear()
+			sessionStorage.clear()
+			location.href = "/"
 		}
 	}
 
-	function keyPress(event: KeyboardEvent) {
-		// avoid events during IME composition
-		if (event.isComposing) {
-			return
+	function handlePopState() {
+		if (!browser) return
+
+		if (location.hash === "#settings") {
+			open()
+		} else {
+			close()
 		}
+	}
+
+	function handleKeyUp(event: KeyboardEvent) {
+		// avoid events during IME composition
+		if (event.isComposing) return
+
 		// close modal if escape is hit
 		if (isOpen && event.key === "Escape") {
 			close()
 		}
 	}
 
-	let volumeIconPath: string
-	let volumeIconViewBox: string
-	let volumeIconColor: string
+	$: {
+		const vol = $settings.volume
 
-	const unsubscribe = settings.subscribe(({ volume }) => {
-		if (volume === 0) {
+		if (vol === 0) {
 			volumeIconPath = mdiVolumeOff
 			volumeIconViewBox = "0 0 24 24"
 			volumeIconColor = "var(--highlight-color)"
-		} else if (volume < 50) {
+		} else if (vol < 50) {
 			volumeIconPath = mdiVolumeMedium
 			volumeIconViewBox = "2 0 24 24"
 			volumeIconColor = "currentColor"
-		} else if (volume >= 50) {
+		} else if (vol >= 50) {
 			volumeIconPath = mdiVolumeHigh
 			volumeIconViewBox = "0 0 24 24"
 			volumeIconColor = "currentColor"
 		}
-	})
-
-	onDestroy(unsubscribe)
-
-	const playTapSoundThrottled = throttle(playTapSound, 80)
+	}
 
 	onMount(() => {
 		loadTapSound()
+		if (location.hash === "#settings") open(true)
 	})
 </script>
 
-<svelte:window on:keyup={keyPress} />
+<svelte:window on:keyup={handleKeyUp} on:popstate={handlePopState} />
 
 {#if isOpen}
 	<div
 		class="overlay"
 		aria-hidden="true"
-		transition:fade={{ duration: 500, easing: cubicOut }}
+		transition:fade={{ duration: 200, easing: cubicOut }}
 	/>
 	<section
 		class="settings-menu content-width"
-		use:onClickOutside={close}
 		role="dialog"
 		aria-modal="true"
 		aria-labelledby="settings-heading"
 		use:focusTrap
 		use:scrollLock
-		transition:fly={{ duration: 400, easing: cubicOut, y: -150 }}
+		use:onClickOutside={close}
+		transition:fly={{ duration: 200, easing: cubicOut, y: -75 }}
 	>
 		<div class="content-padding">
 			<h1 id="settings-heading">Settings</h1>
@@ -113,12 +130,6 @@
 			<hr />
 
 			<h2>Quiz</h2>
-			<Checkbox
-				id="retry-incorrect-answers-setting"
-				bind:checked={$settings.retryIncorrectAnswers}
-			>
-				Put incorrect answers back in queue
-			</Checkbox>
 
 			<fieldset>
 				<legend>Auto submit</legend>
@@ -129,7 +140,7 @@
 					bind:group={$settings.autoCommit}
 					value="disabled"
 				>
-					Disabled
+					Never
 				</Radio>
 
 				<Radio
@@ -138,7 +149,7 @@
 					bind:group={$settings.autoCommit}
 					value="forgiving"
 				>
-					On correct answer
+					If correct answer
 				</Radio>
 
 				<Radio
@@ -147,25 +158,32 @@
 					bind:group={$settings.autoCommit}
 					value="strict"
 				>
-					On correct <strong>or</strong> incorrect answer
+					Always
 				</Radio>
 
-				<input
-					id="mistake-delay-setting"
-					type="number"
-					bind:value={$settings.mistakeDelayMs}
-					min="0"
-					step="10"
-					max="5000"
-					disabled={$settings.autoCommit !== "strict"}
-					required
-				/>
-				<label for="mistake-delay-setting">Mistake delay (ms)</label>
+				{#if $settings.autoCommit === "strict"}
+					<div transition:fade={{ duration: 150, easing: cubicOut }}>
+						<input
+							id="mistake-delay-setting"
+							type="number"
+							bind:value={$settings.mistakeDelayMs}
+							min="0"
+							step="10"
+							max="2000"
+							required
+						/>
+						<label for="mistake-delay-setting">Mistake delay (ms)</label>
+					</div>
+				{/if}
 			</fieldset>
 
-			<hr />
+			<Checkbox
+				id="retry-incorrect-answers-setting"
+				bind:checked={$settings.retryIncorrectAnswers}
+			>
+				Put incorrect answers back in queue
+			</Checkbox>
 
-			<h2>Appearance</h2>
 			<Checkbox
 				id="error-marker-setting"
 				bind:checked={$settings.showErrorMarker}
@@ -176,8 +194,13 @@
 			<Checkbox
 				id="progress-bar-setting"
 				bind:checked={$settings.showProgressBar}
-				>Show completion progress</Checkbox
 			>
+				Show progress bar
+			</Checkbox>
+
+			<hr />
+
+			<h2>Appearance</h2>
 
 			<fieldset>
 				<legend>Theme</legend>
@@ -188,7 +211,7 @@
 					bind:group={$settings.theme}
 					value="same-as-system"
 				>
-					Same as system ({$osTheme})
+					System ({$osTheme[0].toUpperCase() + $osTheme.slice(1)})
 				</Radio>
 
 				<Radio
@@ -257,7 +280,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background-color: var(--overlay-background-color);
+		background: var(--overlay-background-color);
 	}
 
 	.settings-menu {
@@ -266,13 +289,12 @@
 		left: 50%;
 		transform: translateX(-50%);
 		background: var(--background-color);
-		border-bottom-left-radius: 1em;
-		border-bottom-right-radius: 1em;
+		border-bottom-left-radius: 2em;
+		border-bottom-right-radius: 2em;
 		overflow-y: scroll;
 		width: 100%;
-		max-height: 85%;
+		max-height: 90%;
 		box-sizing: border-box;
-		padding-bottom: 0;
 	}
 
 	@media screen and (max-width: 40em) {
@@ -300,17 +322,20 @@
 	}
 
 	fieldset {
-		appearance: none;
 		margin: 0;
-		padding: 0;
-		border: 0;
+		padding: 0 1em var(--line-space);
+		border: 1px solid var(--text-color-light);
+		margin-bottom: var(--line-space);
+		border-radius: var(--standard-border-radius);
 	}
 
 	legend {
-		padding: 0;
+		background: var(--background-contrast);
+		padding: 0 0.75em;
 		margin-bottom: 1em;
 		font-size: 1.2em;
 		font-weight: normal;
+		border-radius: var(--standard-border-radius);
 	}
 
 	label {
