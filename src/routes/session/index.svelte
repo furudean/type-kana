@@ -99,7 +99,7 @@
 	})
 
 	// go to results if queue is empty
-	$: unquizzed.length === 0 && setTimeout(() => goto("summary"), 1000)
+	$: unquizzed.length === 0 && setTimeout(() => goto("summary"), 500)
 </script>
 
 <svelte:head>
