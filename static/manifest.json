@@ -3,7 +3,6 @@
 	"description": "A quiz app to help you learn hiragana and katakana, the Japanese syllabaries",
 	"display": "standalone",
 	"start_url": "setup",
-	"theme_color": "#d2376b",
 	"background_color": "#fff6e0",
 	"icons": [
 		{
