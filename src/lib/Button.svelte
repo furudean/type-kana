@@ -10,7 +10,14 @@
 </script>
 
 {#if !href}
-	<button type="button" class="button {style}" {title} {disabled} on:click>
+	<button
+		type="button"
+		class="button {style}"
+		class:disabled
+		{title}
+		{disabled}
+		on:click
+	>
 		<div class="effect">
 			<slot />
 		</div>
