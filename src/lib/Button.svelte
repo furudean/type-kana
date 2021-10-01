@@ -53,6 +53,7 @@
 		font-family: "M+ 2c";
 		font-weight: 500;
 		letter-spacing: 1px;
+		white-space: nowrap;
 	}
 
 	a.button:hover,
