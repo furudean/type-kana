@@ -4,6 +4,7 @@
 	export let kana: string
 	export let answered: string = undefined
 	export let isCorrectAnswer: boolean = undefined
+	export let isCurrent = false
 
 	$: hasAnswer = answered !== undefined
 	$: hasCorrectAnswer = hasAnswer ? isCorrectAnswer : false
@@ -15,6 +16,7 @@
 	class:has-answer={hasAnswer}
 	class:is-correct={hasCorrectAnswer}
 	class:is-incorrect={hasIncorrectAnswer}
+	class:is-current={isCurrent}
 >
 	<div class="kana">{kana}</div>
 	{#if hasIncorrectAnswer}
@@ -40,6 +42,12 @@
 		font-weight: 400;
 		line-height: 1;
 		text-align: center;
+	}
+
+	.is-current {
+		text-decoration-color: var(--text-color-lighter);
+		text-decoration-style: dashed;
+		text-decoration-line: underline;
 	}
 
 	.is-correct {

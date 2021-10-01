@@ -36,7 +36,7 @@
 	</div>
 	<div class="current-kana">
 		{#if currentItem}
-			<QuizItemComponent kana={currentItem.kana} />
+			<QuizItemComponent kana={currentItem.kana} isCurrent={true} />
 		{/if}
 	</div>
 	<div class="kana-quizzed">
