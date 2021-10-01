@@ -1,12 +1,12 @@
 <script lang="ts">
-	export let src: Record<string, unknown>[][] = []
+	export let src: Record<string, unknown>[][] = undefined
 	export let size = "1em"
 	export let solid = false
-	export let ariaHidden = false
+	export let ariaHidden: boolean = undefined
 	export let ariaLabel: string = undefined
 </script>
 
-{#if src && src != []}
+{#if src}
 	{#if solid}
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
