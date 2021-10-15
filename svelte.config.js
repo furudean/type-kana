@@ -23,7 +23,7 @@ function execSyncSafe(command) {
  *
  * @param {string} path - The path to search
  *
- * @returns {string[]} Le path
+ * @returns {string[]}
  */
 function listRoutesIn(path) {
 	const routesPath = joinPath("./src/routes/", path)
