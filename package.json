@@ -34,7 +34,7 @@
 		"@types/body-scroll-lock": "^3.1.0",
 		"@types/canvas-confetti": "^1.4.2",
 		"@types/common-tags": "^1.8.1",
-		"@types/node": "^16.4.13",
+		"@types/node": "^17.0.5",
 		"@types/wanakana": "^4.0.3",
 		"autoprefixer": "^10.3.1",
 		"postcss": "^8.3.6",
