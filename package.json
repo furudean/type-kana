@@ -24,7 +24,7 @@
 		"focus-visible": "^5.2.0",
 		"standardized-audio-context": "^25.1.11",
 		"svelte-focus-trap": "^1.2.0",
-		"svelte-hero-icons": "^3.0.0",
+		"svelte-hero-icons": "^4.0.1",
 		"wanakana": "^4.0.2"
 	},
 	"devDependencies": {
