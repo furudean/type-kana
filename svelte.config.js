@@ -51,7 +51,7 @@ const config = {
 	extensions: [".svelte"],
 
 	kit: {
-		adapter: adapterStatic({ precompress: true }),
+		adapter: adapterStatic(),
 		target: "body",
 		prerender: {
 			enabled: true,
