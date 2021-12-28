@@ -59,6 +59,9 @@ const config = {
 			entries: ["*", ...listRoutesIn("/icon/")]
 		},
 		vite: {
+			ssr: {
+				noExternal: ["svelte-hero-icons"]
+			},
 			resolve: {
 				alias: {
 					$: resolvePath("./src")
