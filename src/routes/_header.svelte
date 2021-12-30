@@ -21,12 +21,12 @@
 					class="menu-link"
 					aria-label="Author"
 				>
-					by c-bandy
+					by furudean
 				</a>
 			</li>
 			<li>
 				<a
-					href="https://github.com/c-bandy/type-kana"
+					href="https://github.com/furudean/type-kana"
 					target="_blank"
 					rel="nofollow"
 					class="menu-link"
@@ -42,7 +42,7 @@
 			</li>
 			<li>
 				<a
-					href="https://github.com/c-bandy/type-kana/commit/{commitHashLong}"
+					href="https://github.com/furudean/type-kana/commit/{commitHashLong}"
 					target="_blank"
 					rel="noopener"
 					title="Current build commit (GitHub)"

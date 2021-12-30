@@ -1,12 +1,12 @@
 {
 	"name": "type-kana",
 	"version": "1.0.0",
-	"homepage": "https://github.com/c-bandy/type-kana#readme",
+	"homepage": "https://github.com/furudean/type-kana#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/c-bandy/type-kana.git"
+		"url": "git+https://github.com/furudean/type-kana.git"
 	},
-	"author": "c-bandy (https://github.com/c-bandy)",
+	"author": "furudean (https://github.com/furudean)",
 	"type": "module",
 	"scripts": {
 		"dev": "svelte-kit dev",
