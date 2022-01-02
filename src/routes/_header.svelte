@@ -21,7 +21,7 @@
 					class="menu-link"
 					aria-label="Author"
 				>
-					by furudean
+					by Merilynn
 				</a>
 			</li>
 			<li>
