@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from "svelte"
+	import { browser } from "$app/env"
 	import { resolvedTheme } from "$/stores/theme"
 	import { getAudioContext, getRootGain } from "$/lib/audio"
 	import { settings } from "$/stores/settings"
@@ -7,28 +7,32 @@
 	import "$/styles/global.postcss"
 	import "focus-visible"
 
-	onMount(() => {
+	function setTheme(theme: string) {
 		const root = document.querySelector(":root")
 
+		// adds if it doesn't already exist
 		root.classList.add("theme-set-by-js")
 
-		resolvedTheme.subscribe((theme) => {
-			root.classList.remove("light-theme", "dark-theme")
-			root.classList.add(theme + "-theme")
-		})
+		root.classList.remove("light-theme", "dark-theme")
+		root.classList.add(theme + "-theme")
+	}
 
-		// set audio volume depending on settings
-		settings.subscribe(({ volume }) => {
-			getRootGain().gain.value = volume / 100
-		})
-	})
+	function setVolume(volume: number) {
+		getRootGain().gain.value = volume
+	}
+
+	// set active theme from settings if it changes
+	$: browser && setTheme($resolvedTheme)
+
+	// set audio volume from settings
+	$: browser && setVolume($settings.volume / 100)
 </script>
 
 <svelte:window
 	on:mousedown|once={() => {
-		// https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
 		const audioContext = getAudioContext()
 
+		// https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
 		if (audioContext.state !== "running") {
 			audioContext.resume()
 		}
