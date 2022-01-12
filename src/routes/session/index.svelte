@@ -16,7 +16,7 @@
 	} from "$/lib/sound"
 	import { randomInt } from "$/lib/random"
 	import { settings } from "$/stores/settings"
-	import ProgressBar from "$lib/_ProgressBar.svelte"
+	import ProgressBar from "$/components/ProgressBar.svelte"
 	import { onMount } from "svelte"
 	import { goto, prefetch } from "$app/navigation"
 

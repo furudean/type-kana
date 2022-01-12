@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte"
 	import { mdiChevronRight, mdiAutorenew } from "@mdi/js"
-	import Icon from "$/lib/MaterialIcon.svelte"
+	import Icon from "$/components/MaterialIcon.svelte"
 	import { settings } from "$/stores/settings"
 	import { getAnswers, isCorrectAnswer } from "$/lib/answer"
 

@@ -2,15 +2,15 @@
 	import { summary } from "$/stores/summary"
 	import SummaryBox from "./_SummaryBox.svelte"
 	import Tooltip from "./_Tooltip.svelte"
-	import Button from "$/lib/Button.svelte"
+	import Button from "$/components/Button.svelte"
 	import { onMount } from "svelte"
 	import { celebrate } from "./confetti"
 	import { playVictorySound } from "$/lib/sound"
-	import MenuBar from "$lib/MenuBar.svelte"
+	import MenuBar from "$/components/MenuBar.svelte"
 	import Counters from "./_Counters.svelte"
-	import Icon from "$/lib/MaterialIcon.svelte"
+	import Icon from "$/components/MaterialIcon.svelte"
 	import { mdiArrowLeft, mdiRestart } from "@mdi/js"
-	import ProgressBar from "$lib/_ProgressBar.svelte"
+	import ProgressBar from "$/components/ProgressBar.svelte"
 
 	$: correct = $summary.correct
 	$: incorrect = $summary.incorrect

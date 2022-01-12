@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Logo from "$lib/Logo.svelte"
-	import MaterialIcon from "$/lib/MaterialIcon.svelte"
+	import Logo from "$/components/logo.svelte"
+	import MaterialIcon from "$/components/MaterialIcon.svelte"
 	import { mdiGithub } from "@mdi/js"
 	import { Star } from "svelte-hero-icons"
-	import HeroIcon from "$/lib/HeroIcon.svelte"
+	import HeroIcon from "$/components/HeroIcon.svelte"
 	import { commitHashLong, commitHashShort } from "$/lib/version"
 
 	export let stargazers: number

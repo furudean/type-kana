@@ -16,8 +16,8 @@
 
 <script lang="ts">
 	import Header from "./_header.svelte"
-	import Button from "$lib/Button.svelte"
-	import Icon from "$/lib/MaterialIcon.svelte"
+	import Button from "$/components/Button.svelte"
+	import Icon from "$/components/MaterialIcon.svelte"
 	import { mdiArrowRight } from "@mdi/js"
 
 	export let stargazers: number

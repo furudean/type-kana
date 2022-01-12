@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Column from "./_Column.svelte"
 	import { gameConfig } from "$/stores/game-config"
-	import Radio from "$/lib/Radio.svelte"
-	import Button from "$/lib/Button.svelte"
-	import Icon from "$/lib/MaterialIcon.svelte"
+	import Radio from "$/components/Radio.svelte"
+	import Button from "$/components/Button.svelte"
+	import Icon from "$/components/MaterialIcon.svelte"
 	import { mdiArrowRight, mdiArrowLeft } from "@mdi/js"
 	import { dictionary } from "$/stores/dictionary"
 	import { onMount } from "svelte"
@@ -14,7 +14,7 @@
 	} from "$/lib/sound"
 	import { quiz } from "$/stores/quiz"
 	import { browser } from "$app/env"
-	import MenuBar from "$lib/MenuBar.svelte"
+	import MenuBar from "$/components/MenuBar.svelte"
 
 	onMount(() => {
 		if (browser) {

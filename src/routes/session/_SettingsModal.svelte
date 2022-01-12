@@ -12,20 +12,20 @@
 	import { cubicOut } from "svelte/easing"
 	import { onMount } from "svelte"
 	import { onClickOutside } from "$/lib/click-outside"
-	import Button from "$/lib/Button.svelte"
+	import Button from "$/components/Button.svelte"
 	import {
 		mdiArrowLeft,
 		mdiVolumeOff,
 		mdiVolumeMedium,
 		mdiVolumeHigh
 	} from "@mdi/js"
-	import Icon from "$/lib/MaterialIcon.svelte"
-	import Range from "$/lib/Range.svelte"
+	import Icon from "$/components/MaterialIcon.svelte"
+	import Range from "$/components/Range.svelte"
 	import { throttle } from "$/lib/util"
-	import Checkbox from "$/lib/Checkbox.svelte"
-	import Radio from "$/lib/Radio.svelte"
+	import Checkbox from "$/components/Checkbox.svelte"
+	import Radio from "$/components/Radio.svelte"
 	import { scrollLock } from "$/lib/scoll-lock"
-	import MenuBar from "$lib/MenuBar.svelte"
+	import MenuBar from "$/components/MenuBar.svelte"
 	import { page } from "$app/stores"
 	import { goto } from "$app/navigation"
 	import { browser } from "$app/env"
