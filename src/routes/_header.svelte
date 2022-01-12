@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Logo from "$/components/logo.svelte"
+	import Logo from "$/components/Logo.svelte"
 	import MaterialIcon from "$/components/MaterialIcon.svelte"
 	import { mdiGithub } from "@mdi/js"
 	import { Star } from "svelte-hero-icons"
