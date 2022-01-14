@@ -22,10 +22,10 @@
 		getRootGain().gain.value = volume
 	}
 
-	// set active theme from settings if it changes
+	// keep active theme in sync with the store
 	$: browser && setTheme($resolvedTheme)
 
-	// set audio volume from settings
+	// keep volume in sync with settings
 	$: browser && setVolume($settings.volume / 100)
 </script>
 
