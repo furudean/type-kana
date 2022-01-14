@@ -6,6 +6,7 @@
 	import "$/styles/theme.postcss"
 	import "$/styles/global.postcss"
 	import "focus-visible"
+	import { page } from "$app/stores"
 
 	function setTheme(theme: string) {
 		const root = document.querySelector(":root")
@@ -38,6 +39,13 @@
 		}
 	}}
 />
+
+<svelte:head>
+	{#if $page.path !== "/"}
+		<!-- prevent sub-pages from being indexed by search engines -->
+		<meta name="robots" content="noindex" />
+	{/if}
+</svelte:head>
 
 <main>
 	<slot />
