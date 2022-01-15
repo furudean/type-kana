@@ -246,7 +246,7 @@
 					id="audio-volume-setting"
 					bind:value={$settings.volume}
 					min={0}
-					max={100}
+					max={150}
 					tooltip="[value]%"
 					width="12rem"
 					on:input={playTapSoundThrottled}
