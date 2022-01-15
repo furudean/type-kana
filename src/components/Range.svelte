@@ -81,7 +81,7 @@
 		{step}
 		{list}
 		bind:value
-		style={`width: ${width};`}
+		style:width={width}
 		bind:this={rangeElement}
 		on:input={handleInput}
 		on:mouseenter={enter}
