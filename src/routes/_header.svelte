@@ -15,7 +15,7 @@
 		<ul>
 			<li>
 				<a
-					href="https://cass.moe"
+					href="https://furudean.com"
 					target="_blank"
 					rel="nofollow"
 					class="menu-link"

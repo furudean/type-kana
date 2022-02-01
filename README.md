@@ -1,4 +1,4 @@
-# [Type Kana](https://type-kana.cass.moe/)
+# [Type Kana](https://type-kana.furudean.com/)
 
 <img src="assets/logo.svg" 
   width="128" 
@@ -15,7 +15,7 @@ and
 カタカナ<rp>(</rp><rt>katakana</rt><rp>)</rp>
 </ruby>, the Japanese syllabaries.
 
-If you are just looking to play, a hosted version of whatever is currently on the `main` branch should be available [here](https://type-kana.cass.moe/). No promises of uptime though!
+If you are just looking to play, a hosted version of whatever is currently on the `main` branch should be available [here](https://type-kana.furudean.com/). No promises of uptime though!
 
 ## Quick start
 
