@@ -1,4 +1,4 @@
-import { toHiragana, toRomaji } from "wanakana"
+import { isKana, toHiragana, toRomaji } from "wanakana"
 
 /**
  * Replacements to answers from `wanakana.toHiragana()`, for conversions that
@@ -29,5 +29,7 @@ export function getAnswers(kana: string): string[] {
 
 /** Checks if input matches a correct answer */
 export function isCorrectAnswer(guess: string, actual: string): boolean {
-	return getAnswers(actual).includes(guess.toLowerCase())
+	// convert to romaji to handle kana as well
+	const romaji = toRomaji(guess.toLowerCase())
+	return getAnswers(actual).includes(romaji)
 }

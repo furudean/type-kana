@@ -9,7 +9,9 @@
 	export let currentKana: string = null
 	export let inputElement: HTMLElement
 
+	const WHITESPACE = /^\s+$/
 	const dispatch = createEventDispatcher()
+
 	let blocked = false
 
 	function handleSubmit() {
@@ -36,7 +38,7 @@
 		// remove any excess spaces from string
 		input = input.trim()
 
-		if (event.data === " ") {
+		if (WHITESPACE.test(event.data)) {
 			// space was pressed
 			handleSubmit()
 			return
