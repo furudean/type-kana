@@ -60,7 +60,6 @@ const config = {
 
 	kit: {
 		adapter: adapterStatic(),
-		target: "body",
 		prerender: {
 			enabled: true,
 			crawl: true,

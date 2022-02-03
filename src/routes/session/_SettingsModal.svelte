@@ -53,7 +53,7 @@
 		isOpen = false
 
 		playMinimizeSound()
-		location.hash === "#settings" && goto($page.path)
+		location.hash === "#settings" && goto($page.url.pathname)
 
 		if (resetOnClose) {
 			localStorage.clear()

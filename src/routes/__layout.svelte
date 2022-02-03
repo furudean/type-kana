@@ -41,7 +41,7 @@
 />
 
 <svelte:head>
-	{#if $page.path !== "/"}
+	{#if $page.url.pathname !== "/"}
 		<!-- prevent sub-pages from being indexed by search engines -->
 		<meta name="robots" content="noindex" />
 	{/if}
