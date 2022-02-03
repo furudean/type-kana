@@ -46,8 +46,9 @@
 		return event.isComposing || composingInputTypes.includes(event.inputType)
 	}
 
-	function handleInput(e: Event) {
-		const event = e as InputEvent
+	function handleInput(
+		event: InputEvent & { currentTarget: EventTarget & HTMLInputElement }
+	) {
 		if (isCompositionEvent(event)) return
 		if (currentKana === null) return
 		if (event.data === null) return // control key was pressed
