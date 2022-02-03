@@ -7,7 +7,7 @@
 
 	export let input = ""
 	export let currentKana: string = null
-	export let inputElement: HTMLElement
+	export let inputElement: HTMLInputElement
 
 	const WHITESPACE = /^\s+$/
 	const dispatch = createEventDispatcher()
@@ -31,7 +31,21 @@
 		input = ""
 	}
 
-	function handleInput(event: any) {
+	function isCompositionEvent(event: InputEvent) {
+		// `event.isComposing` is missing when using a Japanese IME on iOS Safari
+		// so we instead check for `event.inputType`
+		// https://rawgit.com/w3c/input-events/v1/index.html#interface-InputEvent-Attributes
+		const composingInputTypes = [
+			"insertCompositionText",
+			"deleteCompositionText"
+		]
+
+		return event.isComposing || composingInputTypes.includes(event.inputType)
+	}
+
+	function handleInput(e: Event) {
+		const event = e as InputEvent
+		if (isCompositionEvent(event)) return
 		if (currentKana === null) return
 		if (event.data === null) return // control key was pressed
 
