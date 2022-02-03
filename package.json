@@ -12,7 +12,7 @@
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
-		"check": "svelte-check",
+		"check": "svelte-check --compiler-warnings css-unused-selector:ignore",
 		"lint": "prettier --check .",
 		"format": "prettier --write ."
 	},
