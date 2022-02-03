@@ -13,18 +13,21 @@
 	const dispatch = createEventDispatcher()
 
 	let blocked = false
+	let shakeAnimationPlaying = false
 
 	function handleSubmit() {
-		if (blocked && !isCorrectAnswer(input, currentKana)) return
 		if (input === "") return
 
-		if (
-			!isCorrectAnswer(input, currentKana) &&
-			$settings.autoCommit === "strict" &&
-			$settings.mistakeDelayMs !== 0
-		) {
-			blocked = true
-			setTimeout(() => (blocked = false), $settings.mistakeDelayMs)
+		const isCorrect = isCorrectAnswer(input, currentKana)
+
+		if (!isCorrect) {
+			if (blocked) return
+			shakeAnimationPlaying = true
+
+			if ($settings.autoCommit === "strict" && $settings.mistakeDelayMs !== 0) {
+				blocked = true
+				setTimeout(() => (blocked = false), $settings.mistakeDelayMs)
+			}
 		}
 
 		dispatch("submit", { input })
@@ -72,7 +75,9 @@
 
 <form
 	class="answer-input content-width"
+	class:shake-animation-playing={shakeAnimationPlaying}
 	on:submit|preventDefault={handleSubmit}
+	on:animationend={() => (shakeAnimationPlaying = false)}
 >
 	<input
 		type="text"
@@ -162,5 +167,25 @@
 		&:focus-visible {
 			outline: var(--focus-color) solid 3px;
 		}
+	}
+
+	@keyframes shake {
+		0%,
+		100% {
+			transform: translateX(0);
+		}
+		20%,
+		60% {
+			transform: translateX(-10px);
+		}
+		40%,
+		80% {
+			transform: translateX(10px);
+		}
+	}
+
+	.shake-animation-playing {
+		animation-name: shake;
+		animation-duration: 300ms;
 	}
 </style>
