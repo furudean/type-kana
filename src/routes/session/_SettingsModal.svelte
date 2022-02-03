@@ -45,7 +45,7 @@
 		isOpen = true
 
 		!init && playMaximizeSound()
-		location.hash !== "#settings" && goto($page.path + "#settings")
+		location.hash !== "#settings" && goto($page.url.pathname + "#settings")
 	}
 
 	export function close() {
@@ -53,7 +53,7 @@
 		isOpen = false
 
 		playMinimizeSound()
-		location.hash === "#settings" && goto($page.path)
+		location.hash === "#settings" && goto($page.url.pathname)
 
 		if (resetOnClose) {
 			localStorage.clear()
