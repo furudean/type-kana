@@ -50,6 +50,14 @@ const config = {
 	// an array of file extensions that should be treated as Svelte components
 	extensions: [".svelte"],
 
+	onwarn: (warning, handler) => {
+		const { code, message } = warning
+		if (code === "css-unused-selector" && message.includes(".focus-visible"))
+			return
+
+		handler(warning)
+	},
+
 	kit: {
 		adapter: adapterStatic(),
 		target: "body",
