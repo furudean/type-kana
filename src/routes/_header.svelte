@@ -107,8 +107,4 @@
 			border-color: var(--focus-color);
 		}
 	}
-
-	.text-link:before {
-		background-color: currentColor !important;
-	}
 </style>
