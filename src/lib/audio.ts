@@ -1,4 +1,5 @@
-import { AudioContext, GainNode } from "standardized-audio-context"
+import { AudioContext } from "standardized-audio-context"
+import type { GainNode } from "standardized-audio-context"
 
 let audioContext: AudioContext
 let rootGain: GainNode<AudioContext>

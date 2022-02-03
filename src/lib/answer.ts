@@ -1,4 +1,4 @@
-import { isKana, toHiragana, toRomaji } from "wanakana"
+import { toHiragana, toRomaji } from "wanakana"
 
 /**
  * Replacements to answers from `wanakana.toHiragana()`, for conversions that
