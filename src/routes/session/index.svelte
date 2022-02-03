@@ -25,7 +25,7 @@
 	let settingsModal: SettingsModal
 	let input: string
 	let streakLength = 0
-	let inputElement: HTMLElement
+	let inputElement: HTMLInputElement
 	let modalIsOpen: boolean
 
 	$: unquizzed = $quiz.unquizzed
