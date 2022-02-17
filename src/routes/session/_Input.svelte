@@ -185,8 +185,10 @@
 		}
 	}
 
-	.shake-animation-playing {
-		animation-name: shake;
-		animation-duration: 300ms;
+	@media (prefers-reduced-motion: no-preference) {
+		.shake-animation-playing {
+			animation-name: shake;
+			animation-duration: 300ms;
+		}
 	}
 </style>
