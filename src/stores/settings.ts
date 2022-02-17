@@ -8,6 +8,7 @@ export interface GameSettings {
 	volume: number
 	retryIncorrectAnswers: boolean
 	mistakeDelayMs: number
+	confetti: boolean
 }
 
 export const settings = persistent<GameSettings>(
@@ -22,6 +23,7 @@ export const settings = persistent<GameSettings>(
 		showProgressBar: true,
 		volume: 50,
 		retryIncorrectAnswers: true,
-		mistakeDelayMs: 500
+		mistakeDelayMs: 500,
+		confetti: true
 	}
 )

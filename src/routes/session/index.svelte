@@ -19,6 +19,7 @@
 	import ProgressBar from "$/components/ProgressBar.svelte"
 	import { onMount } from "svelte"
 	import { goto, prefetch } from "$app/navigation"
+	import { confettiAtCoordinates } from "$/lib/confetti"
 
 	const ALPHANUMERIC = /^[a-z0-9]+$/i
 
@@ -27,6 +28,7 @@
 	let streakLength = 0
 	let inputElement: HTMLInputElement
 	let modalIsOpen: boolean
+	let currentKanaElement: HTMLDivElement
 
 	$: unquizzed = $quiz.unquizzed
 	$: quizzed = $quiz.quizzed
@@ -47,12 +49,31 @@
 		}
 	}
 
+	function confettiAtCurrent() {
+		if (!$settings.confetti) return
+
+		const { y, x, height, width } = currentKanaElement.getBoundingClientRect()
+
+		confettiAtCoordinates(
+			{ y: y + height / 2 + 17, x: x + width / 2 },
+			{
+				gravity: 1,
+				spread: 80,
+				particleCount: 8,
+				startVelocity: 12,
+				ticks: 30,
+				decay: 0.91
+			}
+		)
+	}
+
 	function handleSubmit(event: CustomEvent) {
 		if (!currentItem) return
 		const input = event.detail.input
 
 		if (isCorrectAnswer(input, currentItem.kana)) {
 			playProgressSound(streakLength)
+			confettiAtCurrent()
 			streakLength += 1
 		} else {
 			playErrorSound()
@@ -109,7 +130,7 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <ProgressBar />
-<Quiz {unquizzed} {quizzed} {input} />
+<Quiz {unquizzed} {quizzed} {input} bind:currentKanaElement />
 <Input
 	bind:input
 	on:submit={handleSubmit}

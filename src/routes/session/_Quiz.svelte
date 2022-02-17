@@ -9,6 +9,7 @@
 	export let unquizzed: QuizItem[]
 	export let quizzed: QuizItem[]
 	export let input = ""
+	export let currentKanaElement: HTMLDivElement
 
 	$: queue = unquizzed.slice(1)
 	$: currentItem = unquizzed[0]
@@ -36,7 +37,11 @@
 	</div>
 	<div class="current-kana">
 		{#if currentItem}
-			<QuizItemComponent kana={currentItem.kana} isCurrent={true} />
+			<QuizItemComponent
+				kana={currentItem.kana}
+				isCurrent={true}
+				bind:element={currentKanaElement}
+			/>
 		{/if}
 	</div>
 	<div class="kana-quizzed">

@@ -4,7 +4,7 @@
 	import Tooltip from "./_Tooltip.svelte"
 	import Button from "$/components/Button.svelte"
 	import { onMount } from "svelte"
-	import { celebrate } from "./confetti"
+	import { confettiScreen } from "$/lib/confetti"
 	import { playVictorySound } from "$/lib/sound"
 	import MenuBar from "$/components/MenuBar.svelte"
 	import Counters from "./_Counters.svelte"
@@ -23,7 +23,7 @@
 	onMount(() => {
 		if (correct.length > 0) {
 			playVictorySound()
-			celebrate()
+			confettiScreen()
 		}
 	})
 </script>

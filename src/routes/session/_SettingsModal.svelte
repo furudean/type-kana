@@ -198,6 +198,10 @@
 				Show progress bar
 			</Checkbox>
 
+			<Checkbox id="confetti-setting" bind:checked={$settings.confetti}>
+				Confetti on correct answer
+			</Checkbox>
+
 			<hr />
 
 			<h2>Appearance</h2>

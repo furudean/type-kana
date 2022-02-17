@@ -5,6 +5,7 @@
 	export let answered: string = undefined
 	export let isCorrectAnswer: boolean = undefined
 	export let isCurrent = false
+	export let element: HTMLDivElement = undefined
 
 	$: hasAnswer = answered !== undefined
 	$: hasCorrectAnswer = hasAnswer ? isCorrectAnswer : false
@@ -17,6 +18,7 @@
 	class:is-correct={hasCorrectAnswer}
 	class:is-incorrect={hasIncorrectAnswer}
 	class:is-current={isCurrent}
+	bind:this={element}
 >
 	<div class="kana">{kana}</div>
 	{#if hasIncorrectAnswer}
