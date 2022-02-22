@@ -17,7 +17,7 @@
 	import { randomInt } from "$/lib/random"
 	import { settings } from "$/stores/settings"
 	import ProgressBar from "$/components/ProgressBar.svelte"
-	import { onMount } from "svelte"
+	import { onMount, tick } from "svelte"
 	import { goto, prefetch } from "$app/navigation"
 	import { confettiAtCoordinates } from "$/lib/confetti"
 
@@ -28,7 +28,7 @@
 	let streakLength = 0
 	let inputElement: HTMLInputElement
 	let modalIsOpen: boolean
-	let currentKanaElement: HTMLDivElement
+	let lastQuizzedElement: HTMLDivElement
 
 	$: unquizzed = $quiz.unquizzed
 	$: quizzed = $quiz.quizzed
@@ -52,28 +52,31 @@
 	function confettiAtCurrent() {
 		if (!$settings.confetti) return
 
-		const { y, x, height, width } = currentKanaElement.getBoundingClientRect()
+		const { y, x, height, width } = lastQuizzedElement.getBoundingClientRect()
+
+		const confettiY = y + height / 2 + 20 * window.devicePixelRatio
+		const confettiX = x + width / 2
 
 		confettiAtCoordinates(
-			{ y: y + height / 2 + 17, x: x + width / 2 },
+			{ y: confettiY, x: confettiX },
 			{
 				gravity: 1,
-				spread: 80,
-				particleCount: 8,
-				startVelocity: 12,
-				ticks: 30,
-				decay: 0.91
+				spread: 70,
+				particleCount: 6,
+				startVelocity: 10,
+				ticks: 25,
+				decay: 0.9
 			}
 		)
 	}
 
-	function handleSubmit(event: CustomEvent) {
+	async function handleSubmit(event: CustomEvent) {
 		if (!currentItem) return
 		const input = event.detail.input
+		const isCorrect = isCorrectAnswer(input, currentItem.kana)
 
-		if (isCorrectAnswer(input, currentItem.kana)) {
+		if (isCorrect) {
 			playProgressSound(streakLength)
-			confettiAtCurrent()
 			streakLength += 1
 		} else {
 			playErrorSound()
@@ -96,6 +99,9 @@
 			prefetch("summary")
 			loadVictorySound()
 		}
+
+		await tick()
+		isCorrect && confettiAtCurrent()
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -130,7 +136,7 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <ProgressBar />
-<Quiz {unquizzed} {quizzed} {input} bind:currentKanaElement />
+<Quiz {unquizzed} {quizzed} {input} bind:lastQuizzedElement />
 <Input
 	bind:input
 	on:submit={handleSubmit}

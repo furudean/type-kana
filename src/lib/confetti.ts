@@ -18,9 +18,9 @@ export function confetti(options: Options): Promise<undefined> {
 export async function confettiScreen() {
 	function fire() {
 		confetti({
-			gravity: 2.5,
+			gravity: 3,
 			spread: 60,
-			particleCount: 30,
+			particleCount: 25,
 			startVelocity: 40,
 			ticks: 300,
 			origin: {

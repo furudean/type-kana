@@ -9,9 +9,10 @@
 	export let unquizzed: QuizItem[]
 	export let quizzed: QuizItem[]
 	export let input = ""
-	export let currentKanaElement: HTMLDivElement
+	export let lastQuizzedElement: HTMLDivElement
 
 	$: queue = unquizzed.slice(1)
+	$: quizzedSlice = [...quizzed].reverse().slice(0, 15)
 	$: currentItem = unquizzed[0]
 	$: errorMarkerVisible = showErrorMarker(currentItem?.kana, input)
 
@@ -37,18 +38,21 @@
 	</div>
 	<div class="current-kana">
 		{#if currentItem}
-			<QuizItemComponent
-				kana={currentItem.kana}
-				isCurrent={true}
-				bind:element={currentKanaElement}
-			/>
+			<QuizItemComponent kana={currentItem.kana} isCurrent={true} />
 		{/if}
 	</div>
 	<div class="kana-quizzed">
-		{#each [...quizzed]
-			.reverse()
-			.slice(0, 15) as { kana, answered, isCorrectAnswer }}
-			<QuizItemComponent {kana} {answered} {isCorrectAnswer} />
+		{#each quizzedSlice as { kana, answered, isCorrectAnswer }, i}
+			{#if i !== 0}
+				<QuizItemComponent {kana} {answered} {isCorrectAnswer} />
+			{:else}
+				<QuizItemComponent
+					{kana}
+					{answered}
+					{isCorrectAnswer}
+					bind:element={lastQuizzedElement}
+				/>
+			{/if}
 		{/each}
 	</div>
 	<div
