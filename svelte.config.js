@@ -18,33 +18,6 @@ function execSyncSafe(command) {
 	}
 }
 
-/**
- * Lists urls of all static routes in `path`.
- *
- * @param {string} path - The path to search
- *
- * @returns {string[]}
- */
-function listRoutesIn(path) {
-	const routesPath = joinPath("./src/routes/", path)
-	const dir = readdirSync(routesPath, { withFileTypes: true })
-
-	const filenames = dir
-		.filter(({ isFile, name }) => isFile && !name.startsWith("_"))
-		.map((dirent) => dirent.name)
-
-	if (filenames.length === 0) {
-		throw new Error(`listRoutesIn: No static routes found in '${path}'`)
-	}
-
-	const routes = filenames.map((filename) => {
-		const name = parsePath(filename).name
-		return joinPath("/", path, name)
-	})
-
-	return routes
-}
-
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// an array of file extensions that should be treated as Svelte components
@@ -61,9 +34,7 @@ const config = {
 	kit: {
 		adapter: adapterStatic(),
 		prerender: {
-			enabled: true,
-			crawl: true,
-			entries: ["*", ...listRoutesIn("/icon/")]
+			default: true
 		},
 		vite: {
 			ssr: {
