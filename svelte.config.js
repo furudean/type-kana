@@ -1,10 +1,6 @@
 import sveltePreprocess from "svelte-preprocess"
 import adapterStatic from "@sveltejs/adapter-static"
-import {
-	join as joinPath,
-	parse as parsePath,
-	resolve as resolvePath
-} from "path"
+import path from "path"
 import replace from "@rollup/plugin-replace"
 import { execSync } from "child_process"
 import { readdirSync } from "fs"
@@ -16,6 +12,33 @@ function execSyncSafe(command) {
 		console.warn(`execSyncSafe: command ${command} failed!`)
 		return `'${command}' failed`
 	}
+}
+
+/**
+ * Lists urls of all static routes in `path`.
+ *
+ * @param {string} p - The path to search
+ *
+ * @returns {string[]}
+ */
+function listRoutesIn(p) {
+	const routesPath = path.join("./src/routes/", p)
+	const dir = readdirSync(routesPath, { withFileTypes: true })
+
+	const filenames = dir
+		.filter(({ isFile, name }) => isFile && !name.startsWith("_"))
+		.map((dirent) => dirent.name)
+
+	if (filenames.length === 0) {
+		throw new Error(`listRoutesIn: No static routes found in '${p}'`)
+	}
+
+	const routes = filenames.map((filename) => {
+		const name = path.parse(filename).name
+		return path.join("/", p, name)
+	})
+
+	return routes
 }
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -34,7 +57,10 @@ const config = {
 	kit: {
 		adapter: adapterStatic(),
 		prerender: {
-			default: true
+			enabled: true,
+			default: true,
+			crawl: true,
+			entries: ["*", ...listRoutesIn("/icon/")]
 		},
 		vite: {
 			ssr: {
@@ -42,7 +68,7 @@ const config = {
 			},
 			resolve: {
 				alias: {
-					$: resolvePath("./src")
+					$: path.resolve("./src")
 				}
 			},
 			plugins: [
