@@ -44,7 +44,7 @@
 		width: 1em;
 		height: 1em;
 		background: white;
-		border-radius: 25%;
+		border-radius: 33%;
 		margin: 0;
 		box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 		border: 1px solid rgba(0, 0, 0, 0.15);
