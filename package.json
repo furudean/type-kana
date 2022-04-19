@@ -25,7 +25,7 @@
 		"standardized-audio-context": "^25.1.11",
 		"svelte-focus-trap": "^1.2.0",
 		"svelte-hero-icons": "^4.0.1",
-		"wanakana": "^4.0.2"
+		"wanakana": "^5.0.0"
 	},
 	"devDependencies": {
 		"@rollup/plugin-replace": "^4.0.0",
