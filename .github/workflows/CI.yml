@@ -1,5 +1,8 @@
 name: CI
 
+env:
+  ENABLE_VC_BUILD: 1
+
 on:
   push:
     branches:
@@ -26,4 +29,5 @@ jobs:
 
       - run: npm ci
       - run: npm run lint
+      - run: npm run build
       - run: npm run check
