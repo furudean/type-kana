@@ -1,5 +1,5 @@
 import sveltePreprocess from "svelte-preprocess"
-import adapterStatic from "@sveltejs/adapter-static"
+import adapterVercel from "@sveltejs/adapter-vercel"
 import path from "path"
 import replace from "@rollup/plugin-replace"
 import { execSync } from "child_process"
@@ -55,7 +55,7 @@ const config = {
 	},
 
 	kit: {
-		adapter: adapterStatic(),
+		adapter: adapterVercel({ edge: true }),
 		prerender: {
 			enabled: true,
 			default: true,
