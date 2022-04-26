@@ -5,6 +5,7 @@
 			"$/*": ["src/*"],
 			"$lib": ["src/lib"],
 			"$lib/*": ["src/lib/*"]
-		}
+		},
+		"lib": ["webworker"]
 	}
 }
