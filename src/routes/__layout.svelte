@@ -9,13 +9,16 @@
 	import { page } from "$app/stores"
 
 	function setTheme(theme: string) {
-		const root = document.querySelector(":root")
+		const root = document.querySelector<HTMLHtmlElement>(":root")
 
 		// adds if it doesn't already exist
 		root.classList.add("theme-set-by-js")
 
 		root.classList.remove("light-theme", "dark-theme")
 		root.classList.add(theme + "-theme")
+
+		// https://web.dev/color-scheme/
+		root.style.colorScheme = theme
 	}
 
 	function setVolume(volume: number) {
