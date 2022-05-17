@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { focusTrap } from "svelte-focus-trap"
+	import { createFocusTrap } from "focus-trap"
+	import type { FocusTrap } from "focus-trap"
 	import { settings } from "$/stores/settings"
 	import { osTheme } from "$/stores/theme"
 	import {
@@ -8,7 +9,7 @@
 		playMinimizeSound,
 		playTapSound
 	} from "$/lib/sound"
-	import { fade, fly } from "svelte/transition"
+	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
 	import { onMount } from "svelte"
 	import { onClickOutside } from "$/lib/click-outside"
@@ -30,27 +31,27 @@
 	import { goto } from "$app/navigation"
 	import { browser } from "$app/env"
 
-	export let isOpen = false
-
 	let volumeIconPath: string
 	let volumeIconViewBox: string
 	let volumeIconColor: string
 
+	let focusTrap: FocusTrap
+	let dialog: HTMLDialogElement
 	let resetOnClose = false
 
 	const playTapSoundThrottled = throttle(playTapSound, 80)
 
-	export function open(init = false) {
-		if (isOpen) return
-		isOpen = true
+	export function show(init = false) {
+		dialog.showModal()
+		focusTrap.activate()
 
 		!init && playMaximizeSound()
 		location.hash !== "#settings" && goto($page.url.pathname + "#settings")
 	}
 
 	export function close() {
-		if (!isOpen) return
-		isOpen = false
+		dialog.close()
+		focusTrap.pause()
 
 		playMinimizeSound()
 		location.hash === "#settings" && goto($page.url.pathname)
@@ -66,18 +67,8 @@
 		if (!browser) return
 
 		if (location.hash === "#settings") {
-			open()
+			show()
 		} else {
-			close()
-		}
-	}
-
-	function handleKeyUp(event: KeyboardEvent) {
-		// avoid events during IME composition
-		if (event.isComposing) return
-
-		// close modal if escape is hit
-		if (isOpen && event.key === "Escape") {
 			close()
 		}
 	}
@@ -100,30 +91,30 @@
 		}
 	}
 
-	onMount(() => {
+	onMount(async () => {
+		const dialogPolyfill = (await import("dialog-polyfill")).default
+
+		dialogPolyfill.registerDialog(dialog)
+		focusTrap = createFocusTrap(dialog)
+
 		loadTapSound()
-		if (location.hash === "#settings") open(true)
+
+		if (location.hash === "#settings") show(true)
 	})
 </script>
 
-<svelte:window on:keyup={handleKeyUp} on:popstate={handlePopState} />
+<svelte:window on:popstate={handlePopState} />
 
-{#if isOpen}
-	<div
-		class="overlay"
-		aria-hidden="true"
-		transition:fade={{ duration: 200, easing: cubicOut }}
-	/>
-	<section
-		class="settings-menu content-width"
-		role="dialog"
-		aria-modal="true"
-		aria-labelledby="settings-heading"
-		use:focusTrap
-		use:scrollLock
-		use:onClickOutside={close}
-		transition:fly={{ duration: 200, easing: cubicOut, y: -75 }}
-	>
+<dialog
+	class="settings-menu content-width"
+	aria-modal="true"
+	aria-labelledby="settings-heading"
+	bind:this={dialog}
+	use:onClickOutside={close}
+	use:scrollLock
+	on:close={() => goto($page.url.pathname, { replaceState: true })}
+>
+	<form method="dialog" on:submit|preventDefault={close}>
 		<div class="content-padding">
 			<h1 id="settings-heading">Settings</h1>
 
@@ -264,46 +255,58 @@
 				Reset all saved data after closing settings
 			</Checkbox>
 		</div>
-
 		<MenuBar class="content-padding glass-morphism contrast">
 			<div class="menu">
-				<Button on:click={close}>
+				<Button type="submit">
 					<Icon path={mdiArrowLeft} size="1.25em" />
 					Done
 				</Button>
 			</div>
 		</MenuBar>
-	</section>
-{/if}
+	</form>
+</dialog>
 
 <style lang="postcss">
-	.overlay {
-		content: "";
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: var(--overlay-background-color);
+	@keyframes fade-in {
+		from {
+			opacity: 0
+		}
+		to {
+			opacity: 1;
+		}
 	}
 
-	.settings-menu {
-		position: fixed;
-		top: 0;
-		left: 50%;
-		transform: translateX(-50%);
+	dialog {
+		box-sizing: border-box;
+		padding: 0;
+		border: 0;
+		margin: 0 auto;
 		background: var(--background-color);
+		color: inherit;
 		border-bottom-left-radius: 2em;
 		border-bottom-right-radius: 2em;
 		overflow-y: scroll;
 		width: 100%;
 		max-height: 90%;
-		box-sizing: border-box;
+		animation: 200ms fade-in forwards;
+	}
+
+	dialog::backdrop {
+		background-color: var(--overlay-background-color);
+	}
+
+	dialog + :global(.backdrop) {
+		background-color: var(--overlay-background-color);
+	}
+
+	form {
+		all: unset;
 	}
 
 	@media screen and (max-width: 40em) {
-		.settings-menu {
+		dialog {
 			max-height: 100%;
+			border: none;
 			border-radius: 0;
 			top: 0;
 			right: 0;

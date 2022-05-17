@@ -37,7 +37,7 @@
 	function handleMenuEvent(event: CustomEvent) {
 		switch (event.detail.type) {
 			case "openSettings":
-				settingsModal.open()
+				settingsModal.show()
 				break
 
 			case "restart":
