@@ -27,7 +27,6 @@
 	let input: string
 	let streakLength = 0
 	let inputElement: HTMLInputElement
-	let modalIsOpen: boolean
 	let lastQuizzedElement: HTMLDivElement
 
 	$: unquizzed = $quiz.unquizzed
@@ -105,7 +104,6 @@
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
-		if (modalIsOpen) return
 		if (event.isComposing) return
 
 		if (
@@ -144,4 +142,4 @@
 	bind:inputElement
 />
 <Menu on:menuEvent={handleMenuEvent} />
-<SettingsModal bind:this={settingsModal} bind:isOpen={modalIsOpen} />
+<SettingsModal bind:this={settingsModal} />

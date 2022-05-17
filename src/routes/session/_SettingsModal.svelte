@@ -31,8 +31,8 @@
 	let volumeIconPath: string
 	let volumeIconViewBox: string
 	let volumeIconColor: string
-
 	let dialog: Dialog
+
 	let open: boolean
 
 	let resetOnClose = false
