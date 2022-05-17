@@ -105,7 +105,7 @@
 	use:scrollLock
 	on:close={onClose}
 >
-	<form method="dialog" on:submit|preventDefault={close}>
+	<form method="dialog">
 		<div class="content-padding">
 			<h1 id="settings-heading">Settings</h1>
 
@@ -258,15 +258,6 @@
 </dialog>
 
 <style lang="postcss">
-	@keyframes fade-in {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-
 	dialog {
 		padding: 0;
 		border: 0;
