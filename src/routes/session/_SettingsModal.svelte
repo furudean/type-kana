@@ -10,7 +10,6 @@
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
 	import { onMount } from "svelte"
-	import { clickOutsideDialog } from "$/lib/click-outside"
 	import Button from "$/components/Button.svelte"
 	import {
 		mdiArrowLeft,
@@ -23,16 +22,19 @@
 	import { throttle } from "$/lib/util"
 	import Checkbox from "$/components/Checkbox.svelte"
 	import Radio from "$/components/Radio.svelte"
-	import { scrollLock } from "$/lib/scoll-lock"
 	import MenuBar from "$/components/MenuBar.svelte"
 	import { page } from "$app/stores"
 	import { goto } from "$app/navigation"
+
+	import Dialog from "$/components/Dialog.svelte"
 
 	let volumeIconPath: string
 	let volumeIconViewBox: string
 	let volumeIconColor: string
 
-	let dialog: HTMLDialogElement
+	let dialog: Dialog
+	let open: boolean
+
 	let resetOnClose = false
 
 	const playTapSoundThrottled = throttle(playTapSound, 80)
@@ -62,7 +64,7 @@
 	function onPopState() {
 		if (location.hash === "#settings") {
 			show()
-		} else if (dialog.open) {
+		} else if (open) {
 			close()
 		}
 	}
@@ -86,26 +88,15 @@
 	}
 
 	onMount(async () => {
-		const dialogPolyfill = (await import("dialog-polyfill")).default
-
-		dialogPolyfill.registerDialog(dialog)
 		loadTapSound()
-
 		if (location.hash === "#settings") show(true)
 	})
 </script>
 
 <svelte:window on:popstate={onPopState} />
 
-<dialog
-	class="content-width"
-	aria-labelledby="settings-heading"
-	bind:this={dialog}
-	use:clickOutsideDialog={close}
-	use:scrollLock
-	on:close={onClose}
->
-	<form method="dialog">
+<Dialog bind:this={dialog} bind:open on:clickoutside={close} on:close={onClose}>
+	<form method="dialog" class="content-width">
 		<div class="content-padding">
 			<h1 id="settings-heading">Settings</h1>
 
@@ -255,15 +246,13 @@
 			</div>
 		</MenuBar>
 	</form>
-</dialog>
+</Dialog>
 
 <style lang="postcss">
-	dialog {
-		padding: 0;
-		border: 0;
+	form {
+		display: block;
 		margin: 0 auto;
 		background: var(--background-color);
-		color: inherit;
 		border-bottom-left-radius: 2em;
 		border-bottom-right-radius: 2em;
 		overflow-y: scroll;
@@ -272,34 +261,15 @@
 		animation: 200ms fade-in forwards;
 	}
 
-	dialog::backdrop {
-		animation: 200ms fade-in forwards;
-		background-color: var(--backdrop-color);
-	}
-
-	dialog + :global(.backdrop) {
-		animation: 200ms fade-in forwards;
-		background-color: var(--backdrop-color);
-	}
-
-	form {
-		all: unset;
-	}
-
 	@media screen and (max-width: 40em) {
-		dialog {
+		form {
 			max-height: 100%;
-			border: none;
 			border-radius: 0;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
 			transform: none;
 		}
 	}
 
-	dialog {
+	* {
 		:global(.checkbox),
 		:global(.radio-button) {
 			margin-left: 1em;
