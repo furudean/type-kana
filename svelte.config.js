@@ -55,7 +55,7 @@ const config = {
 	},
 
 	kit: {
-		adapter: adapterVercel({ edge: true }),
+		adapter: adapterVercel(),
 		prerender: {
 			enabled: true,
 			default: true,
