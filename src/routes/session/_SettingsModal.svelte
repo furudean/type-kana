@@ -48,17 +48,18 @@
 
 	export function close() {
 		dialog.close()
-
-		if (resetOnClose) {
-			localStorage.clear()
-			sessionStorage.clear()
-			location.href = "/"
-		}
 	}
 
 	function onClose() {
 		playMinimizeSound()
-		location.hash === "#settings" && goto($page.url.pathname) // remove fragment
+
+		if (!resetOnClose) {
+			location.hash === "#settings" && goto($page.url.pathname) // remove fragment
+		} else {
+			localStorage.clear()
+			sessionStorage.clear()
+			location.href = "/"
+		}
 	}
 
 	function onPopState() {
