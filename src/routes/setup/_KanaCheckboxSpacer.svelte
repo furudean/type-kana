@@ -18,6 +18,7 @@
 		height: 1em;
 		opacity: 0.4;
 		flex-grow: 1;
+		box-sizing: content-box;
 	}
 
 	.spacer.fill {
