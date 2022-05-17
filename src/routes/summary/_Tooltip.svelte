@@ -147,7 +147,6 @@
 		letter-spacing: 1px;
 		line-height: 1.25;
 		text-align: center;
-		box-sizing: border-box;
 		min-width: 32px;
 		max-width: 15em;
 		transition: 75ms var(--standard-curve) top, 75ms var(--standard-curve) left;

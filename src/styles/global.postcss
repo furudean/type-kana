@@ -1,3 +1,12 @@
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
 :root {
 	--standard-curve: cubic-bezier(0.4, 0, 0.2, 1);
 	--deceleration-curve: cubic-bezier(0, 0, 0.2, 1);
@@ -25,6 +34,16 @@ body {
 
 * {
 	touch-action: pan-y; /* Prevent zooming in mobile Safari. */
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+:focus {
+	outline-color: var(--focus-color);
 }
 
 p {

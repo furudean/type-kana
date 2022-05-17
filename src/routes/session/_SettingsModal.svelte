@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { focusTrap } from "svelte-focus-trap"
 	import { settings } from "$/stores/settings"
 	import { osTheme } from "$/stores/theme"
 	import {
@@ -8,10 +7,9 @@
 		playMinimizeSound,
 		playTapSound
 	} from "$/lib/sound"
-	import { fade, fly } from "svelte/transition"
+	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
 	import { onMount } from "svelte"
-	import { onClickOutside } from "$/lib/click-outside"
 	import Button from "$/components/Button.svelte"
 	import {
 		mdiArrowLeft,
@@ -24,36 +22,32 @@
 	import { throttle } from "$/lib/util"
 	import Checkbox from "$/components/Checkbox.svelte"
 	import Radio from "$/components/Radio.svelte"
-	import { scrollLock } from "$/lib/scoll-lock"
 	import MenuBar from "$/components/MenuBar.svelte"
 	import { page } from "$app/stores"
 	import { goto } from "$app/navigation"
-	import { browser } from "$app/env"
 
-	export let isOpen = false
+	import Dialog from "$/components/Dialog.svelte"
 
 	let volumeIconPath: string
 	let volumeIconViewBox: string
 	let volumeIconColor: string
+	let dialog: Dialog
+
+	let open: boolean
 
 	let resetOnClose = false
 
 	const playTapSoundThrottled = throttle(playTapSound, 80)
 
-	export function open(init = false) {
-		if (isOpen) return
-		isOpen = true
+	export function show(init = false) {
+		dialog.showModal()
 
 		!init && playMaximizeSound()
 		location.hash !== "#settings" && goto($page.url.pathname + "#settings")
 	}
 
 	export function close() {
-		if (!isOpen) return
-		isOpen = false
-
-		playMinimizeSound()
-		location.hash === "#settings" && goto($page.url.pathname)
+		dialog.close()
 
 		if (resetOnClose) {
 			localStorage.clear()
@@ -62,22 +56,15 @@
 		}
 	}
 
-	function handlePopState() {
-		if (!browser) return
-
-		if (location.hash === "#settings") {
-			open()
-		} else {
-			close()
-		}
+	function onClose() {
+		playMinimizeSound()
+		location.hash === "#settings" && goto($page.url.pathname) // remove fragment
 	}
 
-	function handleKeyUp(event: KeyboardEvent) {
-		// avoid events during IME composition
-		if (event.isComposing) return
-
-		// close modal if escape is hit
-		if (isOpen && event.key === "Escape") {
+	function onPopState() {
+		if (location.hash === "#settings") {
+			show()
+		} else if (open) {
 			close()
 		}
 	}
@@ -100,30 +87,16 @@
 		}
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		loadTapSound()
-		if (location.hash === "#settings") open(true)
+		if (location.hash === "#settings") show(true)
 	})
 </script>
 
-<svelte:window on:keyup={handleKeyUp} on:popstate={handlePopState} />
+<svelte:window on:popstate={onPopState} />
 
-{#if isOpen}
-	<div
-		class="overlay"
-		aria-hidden="true"
-		transition:fade={{ duration: 200, easing: cubicOut }}
-	/>
-	<section
-		class="settings-menu content-width"
-		role="dialog"
-		aria-modal="true"
-		aria-labelledby="settings-heading"
-		use:focusTrap
-		use:scrollLock
-		use:onClickOutside={close}
-		transition:fly={{ duration: 200, easing: cubicOut, y: -75 }}
-	>
+<Dialog bind:this={dialog} bind:open on:clickoutside={close} on:close={onClose}>
+	<form method="dialog" class="content-width">
 		<div class="content-padding">
 			<h1 id="settings-heading">Settings</h1>
 
@@ -264,56 +237,39 @@
 				Reset all saved data after closing settings
 			</Checkbox>
 		</div>
-
 		<MenuBar class="content-padding glass-morphism contrast">
 			<div class="menu">
-				<Button on:click={close}>
+				<Button type="submit">
 					<Icon path={mdiArrowLeft} size="1.25em" />
 					Done
 				</Button>
 			</div>
 		</MenuBar>
-	</section>
-{/if}
+	</form>
+</Dialog>
 
 <style lang="postcss">
-	.overlay {
-		content: "";
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: var(--overlay-background-color);
-	}
-
-	.settings-menu {
-		position: fixed;
-		top: 0;
-		left: 50%;
-		transform: translateX(-50%);
+	form {
+		display: block;
+		margin: 0 auto;
 		background: var(--background-color);
 		border-bottom-left-radius: 2em;
 		border-bottom-right-radius: 2em;
 		overflow-y: scroll;
 		width: 100%;
 		max-height: 90%;
-		box-sizing: border-box;
+		animation: 200ms fade-in forwards;
 	}
 
 	@media screen and (max-width: 40em) {
-		.settings-menu {
+		form {
 			max-height: 100%;
 			border-radius: 0;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
 			transform: none;
 		}
 	}
 
-	.settings-menu {
+	* {
 		:global(.checkbox),
 		:global(.radio-button) {
 			margin-left: 1em;

@@ -1,11 +1,11 @@
 import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock"
 
-export function scrollLock(element: HTMLElement) {
-	disableBodyScroll(element)
+export function scrollLock(node: HTMLElement) {
+	disableBodyScroll(node)
 
 	return {
 		destroy() {
-			enableBodyScroll(element)
+			enableBodyScroll(node)
 		}
 	}
 }

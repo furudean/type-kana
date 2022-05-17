@@ -27,7 +27,7 @@
 
 	--highlight-color: #f76b5e;
 
-	--overlay-background-color: rgba(0, 0, 0, 0.4);
+	--backdrop-color: rgba(0, 0, 0, 0.4);
 }
 
 @define-mixin dark-theme {
@@ -58,21 +58,43 @@
 
 	--highlight-color: hsl(27, 100%, 43%);
 
-	--overlay-background-color: rgba(255, 255, 255, 0.1);
+	--backdrop-color: rgba(0, 0, 0, 0.4);
 }
 
 :root.light-theme {
 	@mixin light-theme;
+
+	/*
+		::backdrop pseudo-elements do not inherit anything, and that includes
+		variables :(
+
+		https://fullscreen.spec.whatwg.org/#::backdrop-pseudo-element
+	*/
+	::backdrop {
+		@mixin light-theme;
+	}
 }
 
 :root.dark-theme {
 	@mixin dark-theme;
+
+	::backdrop {
+		@mixin dark-theme;
+	}
 }
 
 :root:not(.theme-set-by-js) {
 	@mixin light-theme;
 
+	::backdrop {
+		@mixin light-theme;
+	}
+
 	@media (prefers-color-scheme: dark) {
 		@mixin dark-theme;
+
+		::backdrop {
+			@mixin dark-theme;
+		}
 	}
 }

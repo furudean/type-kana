@@ -2,6 +2,7 @@
 	export let title: string = undefined
 	export let disabled = false
 	export let style: "fill" | "outline" = "fill"
+	export let type: "submit" | "button" = "button"
 
 	// link props
 	export let href: string = undefined
@@ -11,7 +12,7 @@
 
 {#if !href}
 	<button
-		type="button"
+		{type}
 		class="button {style}"
 		class:disabled
 		{title}

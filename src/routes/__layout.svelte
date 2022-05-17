@@ -7,6 +7,7 @@
 	import "$/styles/global.postcss"
 	import "focus-visible"
 	import { page } from "$app/stores"
+	import "dialog-polyfill/dist/dialog-polyfill.css"
 
 	function setTheme(theme: string) {
 		const root = document.querySelector<HTMLHtmlElement>(":root")
