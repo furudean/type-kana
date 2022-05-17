@@ -22,7 +22,6 @@
 		"canvas-confetti": "^1.4.0",
 		"common-tags": "^1.8.0",
 		"dialog-polyfill": "^0.5.6",
-		"focus-trap": "^6.9.2",
 		"focus-visible": "^5.2.0",
 		"standardized-audio-context": "^25.1.11",
 		"svelte-hero-icons": "^4.0.1",

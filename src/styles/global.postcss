@@ -27,6 +27,16 @@ body {
 	touch-action: pan-y; /* Prevent zooming in mobile Safari. */
 }
 
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+:focus {
+	outline-color: var(--highlight-color);
+}
+
 p {
 	font-size: 1em;
 	font-kerning: normal;

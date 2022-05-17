@@ -124,7 +124,6 @@
 		border-radius: 9999px;
 		margin: 0 auto;
 		font-size: 1.4em;
-		box-sizing: border-box;
 	}
 
 	.text-field {

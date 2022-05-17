@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { createFocusTrap } from "focus-trap"
-	import type { FocusTrap } from "focus-trap"
 	import { settings } from "$/stores/settings"
 	import { osTheme } from "$/stores/theme"
 	import {
@@ -12,7 +10,7 @@
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
 	import { onMount } from "svelte"
-	import { onClickOutside } from "$/lib/click-outside"
+	import { clickOutsideDialog } from "$/lib/click-outside"
 	import Button from "$/components/Button.svelte"
 	import {
 		mdiArrowLeft,
@@ -29,13 +27,11 @@
 	import MenuBar from "$/components/MenuBar.svelte"
 	import { page } from "$app/stores"
 	import { goto } from "$app/navigation"
-	import { browser } from "$app/env"
 
 	let volumeIconPath: string
 	let volumeIconViewBox: string
 	let volumeIconColor: string
 
-	let focusTrap: FocusTrap
 	let dialog: HTMLDialogElement
 	let resetOnClose = false
 
@@ -43,7 +39,6 @@
 
 	export function show(init = false) {
 		dialog.showModal()
-		focusTrap.activate()
 
 		!init && playMaximizeSound()
 		location.hash !== "#settings" && goto($page.url.pathname + "#settings")
@@ -51,10 +46,6 @@
 
 	export function close() {
 		dialog.close()
-		focusTrap.pause()
-
-		playMinimizeSound()
-		location.hash === "#settings" && goto($page.url.pathname)
 
 		if (resetOnClose) {
 			localStorage.clear()
@@ -63,12 +54,15 @@
 		}
 	}
 
-	function handlePopState() {
-		if (!browser) return
+	function onClose() {
+		playMinimizeSound()
+		location.hash === "#settings" && goto($page.url.pathname) // remove fragment
+	}
 
+	function onPopState() {
 		if (location.hash === "#settings") {
 			show()
-		} else {
+		} else if (dialog.open) {
 			close()
 		}
 	}
@@ -95,24 +89,21 @@
 		const dialogPolyfill = (await import("dialog-polyfill")).default
 
 		dialogPolyfill.registerDialog(dialog)
-		focusTrap = createFocusTrap(dialog)
-
 		loadTapSound()
 
 		if (location.hash === "#settings") show(true)
 	})
 </script>
 
-<svelte:window on:popstate={handlePopState} />
+<svelte:window on:popstate={onPopState} />
 
 <dialog
-	class="settings-menu content-width"
-	aria-modal="true"
+	class="content-width"
 	aria-labelledby="settings-heading"
 	bind:this={dialog}
-	use:onClickOutside={close}
+	use:clickOutsideDialog={close}
 	use:scrollLock
-	on:close={() => goto($page.url.pathname, { replaceState: true })}
+	on:close={onClose}
 >
 	<form method="dialog" on:submit|preventDefault={close}>
 		<div class="content-padding">
@@ -269,7 +260,7 @@
 <style lang="postcss">
 	@keyframes fade-in {
 		from {
-			opacity: 0
+			opacity: 0;
 		}
 		to {
 			opacity: 1;
@@ -277,7 +268,6 @@
 	}
 
 	dialog {
-		box-sizing: border-box;
 		padding: 0;
 		border: 0;
 		margin: 0 auto;
@@ -292,11 +282,13 @@
 	}
 
 	dialog::backdrop {
-		background-color: var(--overlay-background-color);
+		animation: 200ms fade-in forwards;
+		background-color: var(--backdrop-color);
 	}
 
 	dialog + :global(.backdrop) {
-		background-color: var(--overlay-background-color);
+		animation: 200ms fade-in forwards;
+		background-color: var(--backdrop-color);
 	}
 
 	form {
@@ -316,7 +308,7 @@
 		}
 	}
 
-	.settings-menu {
+	dialog {
 		:global(.checkbox),
 		:global(.radio-button) {
 			margin-left: 1em;
