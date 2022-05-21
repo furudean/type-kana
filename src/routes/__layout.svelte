@@ -5,7 +5,6 @@
 	import { settings } from "$/stores/settings"
 	import "$/styles/theme.postcss"
 	import "$/styles/global.postcss"
-	import "focus-visible"
 	import { page } from "$app/stores"
 	import "dialog-polyfill/dist/dialog-polyfill.css"
 
