@@ -196,15 +196,19 @@
 					id="light-theme-choice"
 					name="theme-choice"
 					bind:group={$settings.theme}
-					value="light">Light</Radio
+					value="light"
 				>
+					Light
+				</Radio>
 
 				<Radio
 					id="dark-theme-choice"
 					name="theme-choice"
 					bind:group={$settings.theme}
-					value="dark">Dark</Radio
+					value="dark"
 				>
+					Dark
+				</Radio>
 			</fieldset>
 
 			<hr />

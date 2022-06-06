@@ -36,20 +36,26 @@
 				id="kana-type-hiragana-choice"
 				name="kana-type"
 				bind:group={$gameConfig.kanaType}
-				value="hiragana">Hiragana</Radio
+				value="hiragana"
 			>
+				Hiragana
+			</Radio>
 			<Radio
 				id="kana-type-katakana-choice"
 				name="kana-type"
 				bind:group={$gameConfig.kanaType}
-				value="katakana">Katakana</Radio
+				value="katakana"
 			>
+				Katakana
+			</Radio>
 			<Radio
 				id="kana-type-both-choice"
 				name="kana-type"
 				bind:group={$gameConfig.kanaType}
-				value="both">Both</Radio
+				value="both"
 			>
+				Both
+			</Radio>
 		</div>
 	</fieldset>
 	<section class="columns">
