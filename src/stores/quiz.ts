@@ -1,7 +1,7 @@
 import { shuffleArray } from "$/lib/random"
 import type { Readable } from "svelte/store"
 import { dictionary as dictionaryStore } from "./dictionary"
-import { persistent } from "$/lib/persistent-store"
+import { persistent } from "@furudean/svelte-persistent-store"
 
 export interface QuizItem {
 	kana: string
@@ -37,13 +37,11 @@ export function createQuizStore(): QuizStore {
 		dictionary = value
 	})
 
-	const { subscribe, set, update } = persistent(
-		{
-			key: "quiz-session",
-			storageType: "sessionStorage"
-		},
-		createQuiz(dictionary)
-	)
+	const { subscribe, set, update } = persistent({
+		key: "quiz-session",
+		storage_type: "sessionStorage",
+		start_value: createQuiz(dictionary)
+	})
 
 	return {
 		subscribe,

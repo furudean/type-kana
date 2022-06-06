@@ -1,5 +1,5 @@
 import { hiragana } from "$/lib/db"
-import { persistent } from "$/lib/persistent-store"
+import { persistent } from "@furudean/svelte-persistent-store"
 
 function createKanaCheckbox(kana: string, checked: boolean): KanaCheckbox {
 	if (kana) {
@@ -34,11 +34,10 @@ interface GameConfig {
 	digraphsDiacritics: KanaCheckboxColumn
 }
 
-export const gameConfig = persistent<GameConfig>(
-	{
-		key: "game-config"
-	},
-	{
+export const gameConfig = persistent<GameConfig>({
+	key: "game-config",
+	storage_type: "sessionStorage",
+	start_value: {
 		kanaType: "hiragana",
 		monographs: createKanaCheckboxColumn(hiragana.monographs, true),
 		monographsDiacritics: createKanaCheckboxColumn(
@@ -51,4 +50,4 @@ export const gameConfig = persistent<GameConfig>(
 			false
 		)
 	}
-)
+})

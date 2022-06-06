@@ -17,6 +17,7 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
+		"@furudean/svelte-persistent-store": "^0.7.0",
 		"@mdi/js": "^6.1.95",
 		"body-scroll-lock": "^3.1.5",
 		"canvas-confetti": "^1.4.0",
