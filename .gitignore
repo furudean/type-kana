@@ -7,3 +7,4 @@ node_modules
 /functions
 /.vercel_build_output
 .vercel
+/.vscode/settings.json
