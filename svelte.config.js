@@ -53,14 +53,12 @@ const config = {
 			default: true,
 			entries: ["*", ...listRoutesIn("/icon/")]
 		},
+		alias: {
+			$: "src"
+		},
 		vite: {
 			ssr: {
 				noExternal: ["svelte-hero-icons"]
-			},
-			resolve: {
-				alias: {
-					$: path.resolve("./src")
-				}
 			},
 			plugins: [
 				replace({
