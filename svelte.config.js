@@ -1,18 +1,7 @@
 import sveltePreprocess from "svelte-preprocess"
 import adapterVercel from "@sveltejs/adapter-vercel"
 import path from "path"
-import replace from "@rollup/plugin-replace"
-import { execSync } from "child_process"
 import { readdirSync } from "fs"
-
-function execSyncSafe(command) {
-	try {
-		return execSync(command).toString().trim()
-	} catch (error) {
-		console.warn(`execSyncSafe: command ${command} failed!`)
-		return `'${command}' failed`
-	}
-}
 
 /**
  * Lists urls of all static routes in `path`.
@@ -55,20 +44,6 @@ const config = {
 		},
 		alias: {
 			$: "src"
-		},
-		vite: {
-			ssr: {
-				noExternal: ["svelte-hero-icons"]
-			},
-			plugins: [
-				replace({
-					preventAssignment: true,
-					values: {
-						COMMIT_HASH_SHORT: execSyncSafe("git rev-parse --short HEAD"),
-						COMMIT_HASH_LONG: execSyncSafe("git rev-parse HEAD")
-					}
-				})
-			]
 		}
 	},
 

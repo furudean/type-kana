@@ -9,13 +9,13 @@
 	"author": "furudean (https://github.com/furudean)",
 	"type": "module",
 	"scripts": {
-		"build": "svelte-kit build",
+		"build": "vite build",
 		"check": "svelte-check --compiler-warnings css-unused-selector:ignore",
-		"dev": "svelte-kit dev",
+		"dev": "vite dev",
 		"format": "prettier --write .",
 		"lint": "prettier --check .",
 		"prepare": "svelte-kit sync",
-		"preview": "svelte-kit preview"
+		"preview": "vite preview"
 	},
 	"dependencies": {
 		"@furudean/svelte-persistent-store": "^0.7.0",
