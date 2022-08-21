@@ -19,7 +19,7 @@
 	},
 	"dependencies": {
 		"@furudean/svelte-persistent-store": "^0.8.0",
-		"@mdi/js": "^6.1.95",
+		"@mdi/js": "^7.0.96",
 		"body-scroll-lock": "^3.1.5",
 		"canvas-confetti": "^1.4.0",
 		"common-tags": "^1.8.0",
