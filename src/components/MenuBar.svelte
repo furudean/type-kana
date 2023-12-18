@@ -13,5 +13,6 @@
 		position: sticky;
 		bottom: 0;
 		isolation: isolate;
+		z-index: 1;
 	}
 </style>
