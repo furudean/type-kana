@@ -3,6 +3,7 @@
 	import Icon from "$/components/MaterialIcon.svelte"
 	import { createEventDispatcher, onMount } from "svelte"
 	import { loadDropSound, loadVictorySound, playDropSound } from "$/lib/sound"
+	import { quiz } from "$/stores/quiz"
 
 	const dispatch = createEventDispatcher()
 
@@ -67,6 +68,9 @@
 		title="Finish session"
 		on:mouseenter={() => {
 			loadVictorySound()
+		}}
+		on:click={() => {
+			quiz.updateDuration()
 		}}
 	>
 		<Icon path={mdiCheck} />

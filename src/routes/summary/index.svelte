@@ -11,10 +11,13 @@
 	import Icon from "$/components/MaterialIcon.svelte"
 	import { mdiArrowLeft, mdiRestart } from "@mdi/js"
 	import ProgressBar from "$/components/ProgressBar.svelte"
+	import { quiz } from "$/stores/quiz"
+	import { prettyTime } from "$lib/util"
 
 	$: correct = $summary.correct
 	$: incorrect = $summary.incorrect
 	$: unquizzed = $summary.unquizzed
+	$: duration = $summary.duration
 
 	$: answered = correct.length + incorrect.length
 	$: accuracy = correct.length / answered
@@ -43,7 +46,10 @@
 			{Math.round(accuracy * 100)}% correct,
 		{/if}
 		{answered}{answered !== total ? "/" + total : ""}
-		answered
+		answered,
+		{#if duration}
+			{prettyTime(duration)}
+		{/if}
 	</p>
 
 	{#if correct.length > 0}
@@ -80,16 +86,32 @@
 			<SummaryBox items={unquizzed} fill={false} truncateAt={15} />
 		</section>
 	{/if}
+
+	{#if [...correct, ...incorrect].length > 0}
+		<section>
+			<h2>Kana times</h2>
+			<SummaryBox
+				time
+				items={[...correct, ...incorrect].sort(
+					(a, b) => b.duration - a.duration
+				)}
+				truncateAt={10}
+			/>
+		</section>
+	{/if}
 </div>
 
 <MenuBar class="glass-morphism">
 	<div class="menu content-width content-padding center">
 		{#if unquizzed.length > 0}
-			<p>There are {unquizzed.length} left to quiz. Finish up?</p>
+			<p>
+				There {unquizzed.length === 1 ? "is" : "are"}
+				{unquizzed.length} left to quiz. Finish up?
+			</p>
 		{/if}
 		<div class="menu-items">
 			{#if unquizzed.length > 0}
-				<Button href="/session">
+				<Button href="/session" on:click={() => quiz.refreshTime()}>
 					<Icon path={mdiArrowLeft} size="1.25em" />
 					Keep going
 				</Button>
