@@ -12,16 +12,12 @@ export interface QuizItem {
 }
 
 export interface Quiz {
-	time: number
-	duration: number
 	unquizzed: QuizItem[]
 	quizzed: QuizItem[]
 }
 
 function createQuiz(dictionary: string[]): Quiz {
 	return {
-		time: Date.now(),
-		duration: 0,
 		unquizzed: shuffleArray(dictionary).map((kana) => ({ kana })),
 		quizzed: []
 	}
@@ -30,8 +26,6 @@ function createQuiz(dictionary: string[]): Quiz {
 export interface QuizStore extends Readable<Quiz> {
 	insert(index: number, item: QuizItem): void
 	pop(callback: (item: QuizItem) => QuizItem): void
-	refreshTime(): void
-	updateDuration(): void
 	reset(): void
 }
 
@@ -64,24 +58,11 @@ export function createQuizStore(): QuizStore {
 			})
 		},
 		pop(callback) {
-			update(({ unquizzed, quizzed, ...state }) => ({
-				...state,
+			update(({ unquizzed, quizzed }) => ({
 				// remove item from unquizzed
 				unquizzed: unquizzed.slice(1),
 				// add kana to quizzed array
 				quizzed: [...quizzed, callback(unquizzed[0])]
-			}))
-		},
-		refreshTime() {
-			update(({ time, ...state }) => ({
-				...state,
-				time: Date.now()
-			}))
-		},
-		updateDuration() {
-			update(({ duration, ...state }) => ({
-				...state,
-				duration: duration + Date.now() - state.time
 			}))
 		},
 		reset() {

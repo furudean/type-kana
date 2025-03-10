@@ -41,6 +41,6 @@ export const summary = derived(quiz, ($quiz): Summary => {
 			.filter((item) => item.isCorrectAnswer)
 			.map(createSummaryKana),
 		unquizzed: $quiz.unquizzed.map(createSummaryKana),
-		duration: $quiz.duration / 1000
+		duration: $quiz.quizzed.reduce((sum, item) => sum + item.duration, 0) / 1000
 	}
 })

@@ -128,13 +128,8 @@
 		loadMinimizeSound()
 	})
 
-	// Update duration and go to results if queue is empty
-	$: if (unquizzed.length === 0) {
-		quiz.updateDuration()
-		setTimeout(() => {
-			goto("summary")
-		}, 500)
-	}
+	// go to results if queue is empty
+	$: unquizzed.length === 0 && setTimeout(() => goto("summary"), 500)
 </script>
 
 <svelte:head>

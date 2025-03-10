@@ -89,7 +89,7 @@
 
 	{#if [...correct, ...incorrect].length > 0}
 		<section>
-			<h2>Kana times</h2>
+			<h2>Time to response</h2>
 			<SummaryBox
 				time
 				items={[...correct, ...incorrect].sort(
@@ -111,7 +111,7 @@
 		{/if}
 		<div class="menu-items">
 			{#if unquizzed.length > 0}
-				<Button href="/session" on:click={() => quiz.refreshTime()}>
+				<Button href="/session">
 					<Icon path={mdiArrowLeft} size="1.25em" />
 					Keep going
 				</Button>

@@ -69,9 +69,6 @@
 		on:mouseenter={() => {
 			loadVictorySound()
 		}}
-		on:click={() => {
-			quiz.updateDuration()
-		}}
 	>
 		<Icon path={mdiCheck} />
 	</a>
