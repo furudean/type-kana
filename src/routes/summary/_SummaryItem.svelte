@@ -2,31 +2,46 @@
 	import type { SummaryKana } from "$/stores/summary"
 	import { isHiragana, isKatakana } from "wanakana"
 	import { tooltip } from "./_Tooltip.svelte"
+	import { prettyTime } from "$lib/util"
 
 	export let item: SummaryKana
 	export let fill = false
+	export let time = false
 </script>
 
-<div
-	class="summary-item"
-	class:hiragana={isHiragana(item.kana)}
-	class:katakana={isKatakana(item.kana)}
-	class:fill
-	tabindex="0"
-	use:tooltip={item}
->
-	{item.kana}
-	{#if item.incorrectTimes > 1}
-		<span
-			class="badge"
-			aria-label="answered incorrectly {item.incorrectTimes} times"
-		>
-			x{item.incorrectTimes}
-		</span>
+<div class="summary-container">
+	<div
+		class="summary-item"
+		class:hiragana={isHiragana(item.kana)}
+		class:katakana={isKatakana(item.kana)}
+		class:fill
+		tabindex="0"
+		use:tooltip={!time ? item : undefined}
+	>
+		{item.kana}
+		{#if item.incorrectTimes > 1}
+			<span
+				class="badge"
+				aria-label="answered incorrectly {item.incorrectTimes} times"
+			>
+				x{item.incorrectTimes}
+			</span>
+		{/if}
+	</div>
+	{#if time}
+		<div class="summary-time">
+			{prettyTime(item.duration / 1000)}
+		</div>
 	{/if}
 </div>
 
 <style lang="postcss">
+	.summary-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
 	.summary-item {
 		--border-size: 3px;
 
@@ -49,6 +64,14 @@
 		&:focus-visible {
 			border-color: var(--focus-color);
 		}
+	}
+
+	.summary-time {
+		margin-top: var(--gap);
+		margin-left: 1em;
+		line-height: 1;
+		font-family: "M+ 2c";
+		color: var(--text-color);
 	}
 
 	.badge {

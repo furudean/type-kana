@@ -42,3 +42,12 @@ export function uniqArray<T>(array: T[]): T[] {
 export function clamp(min: number, num: number, max: number): number {
 	return num <= min ? min : num >= max ? max : num
 }
+
+export function prettyTime(seconds: number): string {
+	const hours = Math.floor(seconds / 3600)
+	const minutes = Math.floor((seconds % 3600) / 60)
+	const secs =
+		seconds <= 60 ? (seconds % 60).toFixed(1) : Math.floor(seconds % 60)
+
+	return `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m ` : ""}${secs}s`
+}

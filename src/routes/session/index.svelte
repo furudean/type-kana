@@ -28,6 +28,7 @@
 	let streakLength = 0
 	let inputElement: HTMLInputElement
 	let lastQuizzedElement: HTMLDivElement
+	let time = Date.now()
 
 	$: unquizzed = $quiz.unquizzed
 	$: quizzed = $quiz.quizzed
@@ -81,7 +82,7 @@
 			playErrorSound()
 			streakLength = 0
 
-			// Add item back at the end of queue at a random position;
+			// Add item back at the end of queue at a random position
 			if ($settings.retryIncorrectAnswers) {
 				const index = Math.min(randomInt(5, 12), unquizzed.length)
 				quiz.insert(index, currentItem)
@@ -91,8 +92,12 @@
 		quiz.pop((item) => ({
 			...item,
 			answered: input,
-			isCorrectAnswer: isCorrectAnswer(input, item.kana)
+			isCorrectAnswer: isCorrectAnswer(input, item.kana),
+			duration: item.duration ?? 0 + Date.now() - time
 		}))
+
+		// Reset time for next kana
+		time = Date.now()
 
 		if (unquizzed.length < 5) {
 			prefetch("summary")

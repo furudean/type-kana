@@ -7,12 +7,14 @@ export interface SummaryKana {
 	kana: string
 	answers: string[]
 	incorrectTimes: number
+	duration: number
 }
 
 interface Summary {
 	incorrect: SummaryKana[]
 	correct: SummaryKana[]
 	unquizzed: SummaryKana[]
+	duration: number
 }
 
 export const summary = derived(quiz, ($quiz): Summary => {
@@ -26,7 +28,8 @@ export const summary = derived(quiz, ($quiz): Summary => {
 			incorrectTimes: isCorrectAnswer
 				? 0
 				: dupes.filter((item) => item.isCorrectAnswer === isCorrectAnswer)
-						.length
+						.length,
+			duration: dupes.reduce((sum, item) => sum + item.duration, 0)
 		}
 	}
 
@@ -37,6 +40,7 @@ export const summary = derived(quiz, ($quiz): Summary => {
 		correct: uniqQuizzed
 			.filter((item) => item.isCorrectAnswer)
 			.map(createSummaryKana),
-		unquizzed: $quiz.unquizzed.map(createSummaryKana)
+		unquizzed: $quiz.unquizzed.map(createSummaryKana),
+		duration: $quiz.quizzed.reduce((sum, item) => sum + item.duration, 0) / 1000
 	}
 })

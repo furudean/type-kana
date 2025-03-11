@@ -8,6 +8,7 @@ export interface QuizItem {
 	answered?: string
 	incorrectTimes?: number
 	isCorrectAnswer?: boolean
+	duration?: number
 }
 
 export interface Quiz {
@@ -46,13 +47,13 @@ export function createQuizStore(): QuizStore {
 	return {
 		subscribe,
 		insert(index, item) {
-			update(({ unquizzed, quizzed }) => {
+			update(({ unquizzed, ...state }) => {
 				const before = unquizzed.slice(0, index)
 				const after = unquizzed.slice(index)
 
 				return {
-					unquizzed: [...before, item, ...after],
-					quizzed
+					...state,
+					unquizzed: [...before, item, ...after]
 				}
 			})
 		},

@@ -4,6 +4,7 @@
 
 	export let items: SummaryKana[]
 	export let fill = true
+	export let time = false
 	export let truncateAt = Infinity
 
 	let expanded = false
@@ -16,7 +17,7 @@
 
 <div class="summary-box">
 	{#each truncatedItems as item (item.kana)}
-		<SummaryItem {item} {fill} />
+		<SummaryItem {time} {item} {fill} />
 	{/each}
 	{#if shouldTruncate}
 		<button
