@@ -5,6 +5,7 @@
 	import { mdiArrowLeft, mdiDelete } from "@mdi/js"
 	import MenuBar from "$/components/MenuBar.svelte"
 	import { prettyTime } from "$lib/util"
+	import { isHiragana, isKatakana } from "wanakana"
 
 	function formatDate(timestamp: number): string {
 		const date = new Date(timestamp)
@@ -61,7 +62,11 @@
 			<p class="subtitle">Accumulated errors across all sessions</p>
 			<div class="kana-grid">
 				{#each mostDifficult as { kana, errors }}
-					<div class="kana-card">
+					<div
+						class="kana-card"
+						class:hiragana={isHiragana(kana)}
+						class:katakana={isKatakana(kana)}
+					>
 						<span class="kana">{kana}</span>
 						<span class="error-count">
 							{errors} error{errors !== 1 ? "s" : ""}
@@ -109,6 +114,8 @@
 									{#each session.incorrect as item}
 										<span
 											class="kana-item"
+											class:hiragana={isHiragana(item.kana)}
+											class:katakana={isKatakana(item.kana)}
 											title="{item.incorrectTimes} error(s)"
 										>
 											{item.kana}
@@ -184,7 +191,22 @@
 
 		&:hover {
 			transform: translateY(-2px);
-			border-color: var(--primary);
+		}
+
+		&.hiragana {
+			border-color: var(--accent-color);
+
+			&:hover {
+				border-color: var(--accent-color);
+			}
+		}
+
+		&.katakana {
+			border-color: var(--secondary-accent-color);
+
+			&:hover {
+				border-color: var(--secondary-accent-color);
+			}
 		}
 	}
 
@@ -306,6 +328,16 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 0.25em;
+
+		&.hiragana {
+			border-color: var(--accent-color);
+			color: var(--accent-color);
+		}
+
+		&.katakana {
+			border-color: var(--secondary-accent-color);
+			color: var(--secondary-accent-color);
+		}
 	}
 
 	.error-badge {

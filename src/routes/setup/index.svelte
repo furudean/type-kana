@@ -4,7 +4,7 @@
 	import Radio from "$/components/Radio.svelte"
 	import Button from "$/components/Button.svelte"
 	import Icon from "$/components/MaterialIcon.svelte"
-	import { mdiArrowRight, mdiArrowLeft } from "@mdi/js"
+	import { mdiArrowRight, mdiArrowLeft, mdiHistory } from "@mdi/js"
 	import { dictionary } from "$/stores/dictionary"
 	import { onMount } from "svelte"
 	import {
@@ -75,6 +75,10 @@
 			<Button href="/" style="outline">
 				<Icon path={mdiArrowLeft} size="1.25em" />
 				Back
+			</Button>
+			<Button href="/history" style="outline">
+				<Icon path={mdiHistory} size="1.25em" />
+				History
 			</Button>
 			<Button
 				href="session"
