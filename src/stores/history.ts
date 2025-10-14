@@ -71,4 +71,3 @@ export const difficultKanas = derived(history, ($history) => {
 		.map(([kana, errors]) => ({ kana, errors }))
 		.sort((a, b) => b.errors - a.errors)
 })
-

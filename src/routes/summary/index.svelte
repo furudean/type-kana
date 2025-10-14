@@ -155,7 +155,12 @@
 				<Icon path={mdiHistory} size="1.5em" />
 				History
 			</Button>
-			<Button href="/setup" style={unquizzed.length === 0 && incorrect.length === 0 ? "fill" : "outline"}>
+			<Button
+				href="/setup"
+				style={unquizzed.length === 0 && incorrect.length === 0
+					? "fill"
+					: "outline"}
+			>
 				<Icon path={mdiRestart} size="1.5em" />
 				Start over
 			</Button>

@@ -63,7 +63,9 @@
 				{#each mostDifficult as { kana, errors }}
 					<div class="kana-card">
 						<span class="kana">{kana}</span>
-						<span class="error-count">{errors} error{errors !== 1 ? "s" : ""}</span>
+						<span class="error-count">
+							{errors} error{errors !== 1 ? "s" : ""}
+						</span>
 					</div>
 				{/each}
 			</div>
@@ -87,9 +89,9 @@
 						<div class="session-stats">
 							<div class="stat">
 								<span class="stat-label">Accuracy</span>
-								<span class="stat-value"
-									>{Math.round(session.accuracy * 100)}%</span
-								>
+								<span class="stat-value">
+									{Math.round(session.accuracy * 100)}%
+								</span>
 							</div>
 							<div class="stat">
 								<span class="stat-label">Answered</span>
@@ -105,7 +107,10 @@
 								<span class="label">Incorrect:</span>
 								<div class="kanas">
 									{#each session.incorrect as item}
-										<span class="kana-item" title="{item.incorrectTimes} error(s)">
+										<span
+											class="kana-item"
+											title="{item.incorrectTimes} error(s)"
+										>
 											{item.kana}
 											{#if item.incorrectTimes > 1}
 												<sup class="error-badge">{item.incorrectTimes}</sup>
@@ -327,4 +332,3 @@
 		margin-left: -0.5em;
 	}
 </style>
-
