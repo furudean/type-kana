@@ -16,7 +16,7 @@
 	import Header from "./_header.svelte"
 	import Button from "$/components/Button.svelte"
 	import Icon from "$/components/MaterialIcon.svelte"
-	import { mdiArrowRight } from "@mdi/js"
+	import { mdiArrowRight, mdiHistory } from "@mdi/js"
 
 	export let stargazers: number
 </script>
@@ -33,14 +33,27 @@
 			Japanese syllabaries.
 		</p>
 
-		<Button href="/setup">
-			Start
-			<Icon size="1.25em" path={mdiArrowRight} />
-		</Button>
+		<div class="buttons">
+			<Button href="/setup">
+				Start
+				<Icon size="1.25em" path={mdiArrowRight} />
+			</Button>
+			<Button href="/history" style="outline">
+				<Icon size="1.25em" path={mdiHistory} />
+				History
+			</Button>
+		</div>
 	</div>
 </section>
 
 <style lang="postcss">
+	.buttons {
+		display: flex;
+		gap: 1em;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
 	* :global(.button .svg-icon) {
 		margin-right: -0.5em;
 	}

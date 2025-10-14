@@ -5,14 +5,17 @@
 	import Button from "$/components/Button.svelte"
 	import { onMount } from "svelte"
 	import { confettiScreen } from "$/lib/confetti"
-	import { playVictorySound } from "$/lib/sound"
+	import { playVictorySound, playDropSound } from "$/lib/sound"
 	import MenuBar from "$/components/MenuBar.svelte"
 	import Counters from "./_Counters.svelte"
 	import Icon from "$/components/MaterialIcon.svelte"
-	import { mdiArrowLeft, mdiRestart } from "@mdi/js"
+	import { mdiArrowLeft, mdiRestart, mdiHistory, mdiRefresh } from "@mdi/js"
 	import ProgressBar from "$/components/ProgressBar.svelte"
 	import { quiz } from "$/stores/quiz"
 	import { prettyTime } from "$lib/util"
+	import { history } from "$/stores/history"
+	import { gameConfig } from "$/stores/game-config"
+	import { goto } from "$app/navigation"
 
 	$: correct = $summary.correct
 	$: incorrect = $summary.incorrect
@@ -23,12 +26,38 @@
 	$: accuracy = correct.length / answered
 	$: total = correct.length + incorrect.length + unquizzed.length
 
+	let sessionSaved = false
+
 	onMount(() => {
 		if (correct.length > 0) {
 			playVictorySound()
 			confettiScreen()
 		}
+
+		// Save the session to history (only once)
+		if (!sessionSaved && answered > 0) {
+			history.addSession({
+				timestamp: Date.now(),
+				kanaType: $gameConfig.kanaType,
+				accuracy: accuracy || 0,
+				totalAnswered: answered,
+				duration: duration,
+				correct: correct.map((item) => item.kana),
+				incorrect: incorrect.map((item) => ({
+					kana: item.kana,
+					incorrectTimes: item.incorrectTimes
+				}))
+			})
+			sessionSaved = true
+		}
 	})
+
+	function retryIncorrect() {
+		playDropSound()
+		const incorrectKanas = incorrect.map((item) => item.kana)
+		quiz.resetWithKanas(incorrectKanas)
+		goto("/session")
+	}
 </script>
 
 <svelte:head>
@@ -116,7 +145,22 @@
 					Keep going
 				</Button>
 			{/if}
-			<Button href="/setup" style={unquizzed.length === 0 ? "fill" : "outline"}>
+			{#if incorrect.length > 0}
+				<Button on:click={retryIncorrect} style="outline">
+					<Icon path={mdiRefresh} size="1.5em" />
+					Retry incorrect
+				</Button>
+			{/if}
+			<Button href="/history" style="outline">
+				<Icon path={mdiHistory} size="1.5em" />
+				History
+			</Button>
+			<Button
+				href="/setup"
+				style={unquizzed.length === 0 && incorrect.length === 0
+					? "fill"
+					: "outline"}
+			>
 				<Icon path={mdiRestart} size="1.5em" />
 				Start over
 			</Button>

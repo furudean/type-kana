@@ -27,6 +27,7 @@ export interface QuizStore extends Readable<Quiz> {
 	insert(index: number, item: QuizItem): void
 	pop(callback: (item: QuizItem) => QuizItem): void
 	reset(): void
+	resetWithKanas(kanas: string[]): void
 }
 
 export function createQuizStore(): QuizStore {
@@ -67,6 +68,12 @@ export function createQuizStore(): QuizStore {
 		},
 		reset() {
 			set(createQuiz(dictionary))
+		},
+		resetWithKanas(kanas) {
+			set({
+				unquizzed: shuffleArray(kanas).map((kana) => ({ kana })),
+				quizzed: []
+			})
 		}
 	}
 }
