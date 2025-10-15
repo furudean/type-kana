@@ -15,6 +15,7 @@
 	import { quiz } from "$/stores/quiz"
 	import { browser } from "$app/env"
 	import MenuBar from "$/components/MenuBar.svelte"
+	import { settings } from "$/stores/settings"
 
 	onMount(() => {
 		if (browser) {
@@ -55,6 +56,35 @@
 				value="both"
 			>
 				Both
+			</Radio>
+		</div>
+	</fieldset>
+	<fieldset class="font-style">
+		<legend>Font style...</legend>
+		<div class="radio-buttons">
+			<Radio
+				id="font-style-noto-sans"
+				name="font-style"
+				bind:group={$settings.fontFamily}
+				value="Noto Sans JP"
+			>
+				Noto Sans JP
+			</Radio>
+			<Radio
+				id="font-style-hina-mincho"
+				name="font-style"
+				bind:group={$settings.fontFamily}
+				value="Hina Mincho"
+			>
+				Hina Mincho
+			</Radio>
+			<Radio
+				id="font-style-random"
+				name="font-style"
+				bind:group={$settings.fontFamily}
+				value="random"
+			>
+				Random
 			</Radio>
 		</div>
 	</fieldset>
@@ -102,7 +132,8 @@
 		min-height: 100vh;
 	}
 
-	.kana-type legend {
+	.kana-type legend,
+	.font-style legend {
 		margin-bottom: 1em;
 	}
 
@@ -169,6 +200,10 @@
 		display: flex;
 		margin-top: 2em;
 		justify-content: center;
+	}
+
+	.font-style {
+		margin-top: 1em;
 	}
 
 	legend {

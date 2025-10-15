@@ -1,11 +1,22 @@
 <script lang="ts">
 	import { getAnswers } from "$/lib/answer"
+	import { settings } from "$/stores/settings"
+	import { onMount } from "svelte"
 
 	export let kana: string
 	export let answered: string = undefined
 	export let isCorrectAnswer: boolean = undefined
 	export let isCurrent = false
 	export let element: HTMLDivElement = undefined
+
+	let currentFont = "Noto Sans JP"
+
+	// Update font when settings change
+	$: if ($settings.fontFamily === "random") {
+		currentFont = (Math as any).random() < 0.5 ? "Noto Sans JP" : "Hina Mincho"
+	} else {
+		currentFont = $settings.fontFamily
+	}
 
 	$: hasAnswer = answered !== undefined
 	$: hasCorrectAnswer = hasAnswer ? isCorrectAnswer : false
@@ -19,6 +30,7 @@
 	class:is-incorrect={hasIncorrectAnswer}
 	class:is-current={isCurrent}
 	bind:this={element}
+	style="font-family: {currentFont}, sans-serif !important; font-weight: 400 !important;"
 >
 	<div class="kana">{kana}</div>
 	{#if hasIncorrectAnswer}

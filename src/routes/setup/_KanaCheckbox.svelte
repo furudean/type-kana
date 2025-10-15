@@ -7,6 +7,7 @@
 	import { createEventDispatcher } from "svelte"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
+	import { font } from "$/stores/font"
 
 	export let item: KanaCheckbox
 	export let rowIndex: number
@@ -16,6 +17,7 @@
 	const dispatch = createEventDispatcher()
 
 	let isLongHover = false
+	let randomFont = "Noto Sans JP"
 
 	const enableHover = () => (isLongHover = true)
 	const disableHover = () => (isLongHover = false)
@@ -25,6 +27,11 @@
 	$: style = animationDelay
 		? `animation-delay: ${animationDelay}ms; transition-delay: ${animationDelay}ms`
 		: null
+
+	// Generate random font for this specific component instance
+	$: if ($font === "random") {
+		randomFont = (Math as any).random() < 0.5 ? "Noto Sans JP" : "Hina Mincho"
+	}
 
 	function transitionEnd(event: TransitionEvent) {
 		event.stopPropagation()
@@ -52,9 +59,16 @@
 	class:long-hover={isLongHover && kanaType === "both"}
 	class:extended-click-area={kanaType === "both" && item.checked}
 	class:wide={item.kana === "ん"}
-	{style}
 	aria-pressed={item.checked}
 	title={`Select '${getAnswers(item.kana)[0]}'`}
+	style={style
+		? style +
+		  "; font-family: " +
+		  ($font === "random" ? randomFont : $font) +
+		  ", sans-serif !important; font-weight: 400 !important;"
+		: "font-family: " +
+		  ($font === "random" ? randomFont : $font) +
+		  ", sans-serif !important; font-weight: 400 !important;"}
 	on:click={() => {
 		item.checked = !item.checked
 		playCheckboxSelectSound(rowIndex, rowLength, item.checked)
@@ -98,8 +112,13 @@
 	.checkbox-kana {
 		--border-width: 3px;
 
-		all: initial;
-		font-family: "M+ 2c";
+		/* Reset button styles */
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+		cursor: pointer;
+
 		font-size: 1.5em;
 		line-height: 1;
 		white-space: nowrap;

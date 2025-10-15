@@ -3,6 +3,7 @@
 	import { isHiragana, isKatakana } from "wanakana"
 	import { tooltip } from "./_Tooltip.svelte"
 	import { prettyTime } from "$lib/util"
+	import { font } from "$/stores/font"
 
 	export let item: SummaryKana
 	export let fill = false
@@ -17,6 +18,9 @@
 		class:fill
 		tabindex="0"
 		use:tooltip={!time ? item : undefined}
+		style="font-family: {$font === 'random'
+			? 'Noto Sans JP'
+			: $font}, sans-serif !important; font-weight: 400 !important;"
 	>
 		{item.kana}
 		{#if item.incorrectTimes > 1}
@@ -29,7 +33,12 @@
 		{/if}
 	</div>
 	{#if time}
-		<div class="summary-time">
+		<div
+			class="summary-time"
+			style="font-family: {$font === 'random'
+				? 'Noto Sans JP'
+				: $font}, sans-serif !important; font-weight: 400 !important;"
+		>
 			{prettyTime(item.duration / 1000)}
 		</div>
 	{/if}
@@ -45,14 +54,18 @@
 	.summary-item {
 		--border-size: 3px;
 
-		all: initial;
+		/* Reset button styles */
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+
 		display: inline-block;
 		position: relative;
 		margin-top: var(--gap);
 		margin-left: var(--gap);
 		font-size: 1.5em;
 		line-height: 1;
-		font-family: "M+ 2c";
 		padding: 0.2em;
 		border-radius: var(--standard-border-radius);
 		cursor: default;
@@ -70,7 +83,6 @@
 		margin-top: var(--gap);
 		margin-left: 1em;
 		line-height: 1;
-		font-family: "M+ 2c";
 		color: var(--text-color);
 	}
 
