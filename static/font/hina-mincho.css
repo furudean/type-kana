@@ -1,7 +1,7 @@
 @font-face {
-  font-family: 'Hina Mincho';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('./hina-mincho-400.ttf') format('truetype');
+	font-family: "Hina Mincho";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("./hina-mincho-400.ttf") format("truetype");
 }
