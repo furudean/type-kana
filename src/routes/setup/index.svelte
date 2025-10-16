@@ -59,35 +59,6 @@
 			</Radio>
 		</div>
 	</fieldset>
-	<fieldset class="font-style">
-		<legend>Font style...</legend>
-		<div class="radio-buttons">
-			<Radio
-				id="font-style-noto-sans"
-				name="font-style"
-				bind:group={$settings.fontFamily}
-				value="Noto Sans JP"
-			>
-				Noto Sans JP
-			</Radio>
-			<Radio
-				id="font-style-hina-mincho"
-				name="font-style"
-				bind:group={$settings.fontFamily}
-				value="Hina Mincho"
-			>
-				Hina Mincho
-			</Radio>
-			<Radio
-				id="font-style-random"
-				name="font-style"
-				bind:group={$settings.fontFamily}
-				value="random"
-			>
-				Random
-			</Radio>
-		</div>
-	</fieldset>
 	<section class="columns">
 		<Column bind:rows={$gameConfig.monographs} label="Monographs" />
 		<Column
@@ -132,8 +103,7 @@
 		min-height: 100vh;
 	}
 
-	.kana-type legend,
-	.font-style legend {
+	.kana-type legend {
 		margin-bottom: 1em;
 	}
 
@@ -200,10 +170,6 @@
 		display: flex;
 		margin-top: 2em;
 		justify-content: center;
-	}
-
-	.font-style {
-		margin-top: 1em;
 	}
 
 	legend {

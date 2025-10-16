@@ -211,6 +211,37 @@
 				</Radio>
 			</fieldset>
 
+			<fieldset>
+				<legend>Font style</legend>
+
+				<Radio
+					id="font-style-noto-sans"
+					name="font-style"
+					bind:group={$settings.fontFamily}
+					value="Noto Sans JP"
+				>
+					Noto Sans JP
+				</Radio>
+
+				<Radio
+					id="font-style-hina-mincho"
+					name="font-style"
+					bind:group={$settings.fontFamily}
+					value="Hina Mincho"
+				>
+					Hina Mincho
+				</Radio>
+
+				<Radio
+					id="font-style-random"
+					name="font-style"
+					bind:group={$settings.fontFamily}
+					value="random"
+				>
+					Random
+				</Radio>
+			</fieldset>
+
 			<hr />
 
 			<h2>Audio</h2>
