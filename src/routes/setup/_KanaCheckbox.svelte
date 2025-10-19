@@ -7,8 +7,6 @@
 	import { createEventDispatcher } from "svelte"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
-	import { font } from "$/stores/font"
-
 	export let item: KanaCheckbox
 	export let rowIndex: number
 	export let rowLength: number
@@ -17,7 +15,6 @@
 	const dispatch = createEventDispatcher()
 
 	let isLongHover = false
-	let randomFont = "Noto Sans JP"
 
 	const enableHover = () => (isLongHover = true)
 	const disableHover = () => (isLongHover = false)
@@ -27,11 +24,6 @@
 	$: style = animationDelay
 		? `animation-delay: ${animationDelay}ms; transition-delay: ${animationDelay}ms`
 		: null
-
-	// Generate random font for this specific component instance
-	$: if ($font === "random") {
-		randomFont = (Math as any).random() < 0.5 ? "Noto Sans JP" : "Hina Mincho"
-	}
 
 	function transitionEnd(event: TransitionEvent) {
 		event.stopPropagation()
@@ -63,12 +55,8 @@
 	title={`Select '${getAnswers(item.kana)[0]}'`}
 	style={style
 		? style +
-		  "; font-family: " +
-		  ($font === "random" ? randomFont : $font) +
-		  ", sans-serif !important; font-weight: 400 !important;"
-		: "font-family: " +
-		  ($font === "random" ? randomFont : $font) +
-		  ", sans-serif !important; font-weight: 400 !important;"}
+		  "; font-family: 'M+ 2c', sans-serif !important; font-weight: 400 !important;"
+		: "font-family: 'M+ 2c', sans-serif !important; font-weight: 400 !important;"}
 	on:click={() => {
 		item.checked = !item.checked
 		playCheckboxSelectSound(rowIndex, rowLength, item.checked)

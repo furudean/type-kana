@@ -27,6 +27,7 @@
 	import { goto } from "$app/navigation"
 
 	import Dialog from "$/components/Dialog.svelte"
+	import { quiz } from "$/stores/quiz"
 
 	let volumeIconPath: string
 	let volumeIconViewBox: string
@@ -92,6 +93,13 @@
 		loadTapSound()
 		if (location.hash === "#settings") show(true)
 	})
+
+	// Update quiz fonts when font family setting changes
+	let previousFontFamily = $settings.fontFamily
+	$: if ($settings.fontFamily !== previousFontFamily) {
+		previousFontFamily = $settings.fontFamily
+		quiz.updateFonts()
+	}
 </script>
 
 <svelte:window on:popstate={onPopState} />

@@ -8,12 +8,15 @@
 	export let isCorrectAnswer: boolean = undefined
 	export let isCurrent = false
 	export let element: HTMLDivElement = undefined
+	export let assignedFont: string = undefined
 
 	let currentFont = "Noto Sans JP"
 
-	// Update font when settings change
-	$: if ($settings.fontFamily === "random") {
-		currentFont = (Math as any).random() < 0.5 ? "Noto Sans JP" : "Hina Mincho"
+	// Use assigned font if available, otherwise fall back to settings
+	$: if (assignedFont) {
+		currentFont = assignedFont
+	} else if ($settings.fontFamily === "random") {
+		currentFont = Math.random() < 0.5 ? "Noto Sans JP" : "Hina Mincho"
 	} else {
 		currentFont = $settings.fontFamily
 	}
@@ -56,6 +59,7 @@
 		font-weight: 400;
 		line-height: 1;
 		text-align: center;
+		font-family: "M+ 2c", sans-serif !important;
 	}
 
 	.is-current {

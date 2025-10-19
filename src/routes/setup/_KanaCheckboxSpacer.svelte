@@ -1,23 +1,13 @@
 <script lang="ts">
 	export let item: KanaCheckbox | null
 	export let fill = false
-	import { font } from "$/stores/font"
-
-	let randomFont = "Noto Sans JP"
-
-	// Generate random font for this specific component instance
-	$: if ($font === "random") {
-		randomFont = (Math as any).random() < 0.5 ? "Noto Sans JP" : "Hina Mincho"
-	}
 </script>
 
 <div
 	class="checkbox-kana spacer"
 	class:fill
 	aria-hidden="true"
-	style="font-family: {$font === 'random'
-		? randomFont
-		: $font}, sans-serif !important; font-weight: 400 !important;"
+	style="font-family: 'M+ 2c', sans-serif !important; font-weight: 400 !important;"
 >
 	<span>{item?.kana ?? "あ"}</span>
 </div>
