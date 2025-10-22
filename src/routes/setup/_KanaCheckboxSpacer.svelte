@@ -3,12 +3,7 @@
 	export let fill = false
 </script>
 
-<div
-	class="checkbox-kana spacer"
-	class:fill
-	aria-hidden="true"
-	style="font-family: 'M+ 2c', sans-serif !important; font-weight: 400 !important;"
->
+<div class="checkbox-kana spacer kana-font" class:fill aria-hidden="true">
 	<span>{item?.kana ?? "あ"}</span>
 </div>
 

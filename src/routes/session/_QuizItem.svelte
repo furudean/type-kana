@@ -33,7 +33,7 @@
 	class:is-incorrect={hasIncorrectAnswer}
 	class:is-current={isCurrent}
 	bind:this={element}
-	style="font-family: {currentFont}, sans-serif !important; font-weight: 400 !important;"
+	style="font-family: {currentFont}, sans-serif; font-weight: 400;"
 >
 	<div class="kana">{kana}</div>
 	{#if hasIncorrectAnswer}
@@ -59,7 +59,7 @@
 		font-weight: 400;
 		line-height: 1;
 		text-align: center;
-		font-family: "M+ 2c", sans-serif !important;
+		font-family: "M+ 2c", sans-serif;
 	}
 
 	.is-current {

@@ -88,7 +88,7 @@
 		margin-left: 0.75em;
 
 		&:first-child {
-			margin-left: 0 !important;
+			margin-left: 0;
 		}
 	}
 

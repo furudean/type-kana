@@ -45,7 +45,7 @@
 </script>
 
 <button
-	class="checkbox-kana"
+	class="checkbox-kana kana-font"
 	role="checkbox"
 	class:selected={item.checked}
 	class:long-hover={isLongHover && kanaType === "both"}
@@ -53,10 +53,7 @@
 	class:wide={item.kana === "ん"}
 	aria-pressed={item.checked}
 	title={`Select '${getAnswers(item.kana)[0]}'`}
-	style={style
-		? style +
-		  "; font-family: 'M+ 2c', sans-serif !important; font-weight: 400 !important;"
-		: "font-family: 'M+ 2c', sans-serif !important; font-weight: 400 !important;"}
+	{style}
 	on:click={() => {
 		item.checked = !item.checked
 		playCheckboxSelectSound(rowIndex, rowLength, item.checked)

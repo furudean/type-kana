@@ -20,7 +20,7 @@
 		use:tooltip={!time ? item : undefined}
 		style="font-family: {$font === 'random'
 			? 'Noto Sans JP'
-			: $font}, sans-serif !important; font-weight: 400 !important;"
+			: $font}, sans-serif; font-weight: 400;"
 	>
 		{item.kana}
 		{#if item.incorrectTimes > 1}
@@ -37,7 +37,7 @@
 			class="summary-time"
 			style="font-family: {$font === 'random'
 				? 'Noto Sans JP'
-				: $font}, sans-serif !important; font-weight: 400 !important;"
+				: $font}, sans-serif; font-weight: 400;"
 		>
 			{prettyTime(item.duration / 1000)}
 		</div>
