@@ -7,7 +7,6 @@
 	import { createEventDispatcher } from "svelte"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
-
 	export let item: KanaCheckbox
 	export let rowIndex: number
 	export let rowLength: number
@@ -46,15 +45,15 @@
 </script>
 
 <button
-	class="checkbox-kana"
+	class="checkbox-kana kana-font"
 	role="checkbox"
 	class:selected={item.checked}
 	class:long-hover={isLongHover && kanaType === "both"}
 	class:extended-click-area={kanaType === "both" && item.checked}
 	class:wide={item.kana === "ん"}
-	{style}
 	aria-pressed={item.checked}
 	title={`Select '${getAnswers(item.kana)[0]}'`}
+	{style}
 	on:click={() => {
 		item.checked = !item.checked
 		playCheckboxSelectSound(rowIndex, rowLength, item.checked)
@@ -98,8 +97,13 @@
 	.checkbox-kana {
 		--border-width: 3px;
 
-		all: initial;
-		font-family: "M+ 2c";
+		/* Reset button styles */
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+		cursor: pointer;
+
 		font-size: 1.5em;
 		line-height: 1;
 		white-space: nowrap;

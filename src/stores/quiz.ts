@@ -2,6 +2,7 @@ import { shuffleArray } from "$/lib/random"
 import type { Readable } from "svelte/store"
 import { dictionary as dictionaryStore } from "./dictionary"
 import { persistent } from "@furudean/svelte-persistent-store"
+import { settings } from "./settings"
 
 export interface QuizItem {
 	kana: string
@@ -9,6 +10,7 @@ export interface QuizItem {
 	incorrectTimes?: number
 	isCorrectAnswer?: boolean
 	duration?: number
+	assignedFont?: string
 }
 
 export interface Quiz {
@@ -16,9 +18,21 @@ export interface Quiz {
 	quizzed: QuizItem[]
 }
 
-function createQuiz(dictionary: string[]): Quiz {
+function assignRandomFont(): string {
+	return Math.random() < 0.5 ? "Noto Sans JP" : "Hina Mincho"
+}
+
+function createQuizItem(kana: string, fontFamily: string): QuizItem {
+	const assignedFont = fontFamily === "random" ? assignRandomFont() : fontFamily
+
+	return { kana, assignedFont }
+}
+
+function createQuiz(dictionary: string[], fontFamily: string): Quiz {
 	return {
-		unquizzed: shuffleArray(dictionary).map((kana) => ({ kana })),
+		unquizzed: shuffleArray(dictionary).map((kana) =>
+			createQuizItem(kana, fontFamily)
+		),
 		quizzed: []
 	}
 }
@@ -28,10 +42,12 @@ export interface QuizStore extends Readable<Quiz> {
 	pop(callback: (item: QuizItem) => QuizItem): void
 	reset(): void
 	resetWithKanas(kanas: string[]): void
+	updateFonts(): void
 }
 
 export function createQuizStore(): QuizStore {
 	let dictionary: string[]
+	let currentFontFamily: string = "Noto Sans JP"
 
 	// keep dictionary in sync
 	// smell: since unsubscribe is never called, this leaks
@@ -39,10 +55,15 @@ export function createQuizStore(): QuizStore {
 		dictionary = value
 	})
 
+	// keep font family in sync
+	settings.subscribe((value) => {
+		currentFontFamily = value.fontFamily
+	})
+
 	const { subscribe, set, update } = persistent({
 		key: "quiz-session",
 		storage_type: "sessionStorage",
-		start_value: createQuiz(dictionary)
+		start_value: createQuiz(dictionary, currentFontFamily)
 	})
 
 	return {
@@ -52,9 +73,14 @@ export function createQuizStore(): QuizStore {
 				const before = unquizzed.slice(0, index)
 				const after = unquizzed.slice(index)
 
+				// Ensure the item has an assigned font
+				const itemWithFont = item.assignedFont
+					? item
+					: createQuizItem(item.kana, currentFontFamily)
+
 				return {
 					...state,
-					unquizzed: [...before, item, ...after]
+					unquizzed: [...before, itemWithFont, ...after]
 				}
 			})
 		},
@@ -67,13 +93,33 @@ export function createQuizStore(): QuizStore {
 			}))
 		},
 		reset() {
-			set(createQuiz(dictionary))
+			set(createQuiz(dictionary, currentFontFamily))
 		},
 		resetWithKanas(kanas) {
 			set({
-				unquizzed: shuffleArray(kanas).map((kana) => ({ kana })),
+				unquizzed: shuffleArray(kanas).map((kana) =>
+					createQuizItem(kana, currentFontFamily)
+				),
 				quizzed: []
 			})
+		},
+		updateFonts() {
+			update(({ unquizzed, quizzed }) => ({
+				unquizzed: unquizzed.map((item) => ({
+					...item,
+					assignedFont:
+						currentFontFamily === "random"
+							? assignRandomFont()
+							: currentFontFamily
+				})),
+				quizzed: quizzed.map((item) => ({
+					...item,
+					assignedFont:
+						currentFontFamily === "random"
+							? assignRandomFont()
+							: currentFontFamily
+				}))
+			}))
 		}
 	}
 }

@@ -27,6 +27,7 @@
 	import { goto } from "$app/navigation"
 
 	import Dialog from "$/components/Dialog.svelte"
+	import { quiz } from "$/stores/quiz"
 
 	let volumeIconPath: string
 	let volumeIconViewBox: string
@@ -92,6 +93,13 @@
 		loadTapSound()
 		if (location.hash === "#settings") show(true)
 	})
+
+	// Update quiz fonts when font family setting changes
+	let previousFontFamily = $settings.fontFamily
+	$: if ($settings.fontFamily !== previousFontFamily) {
+		previousFontFamily = $settings.fontFamily
+		quiz.updateFonts()
+	}
 </script>
 
 <svelte:window on:popstate={onPopState} />
@@ -208,6 +216,37 @@
 					value="dark"
 				>
 					Dark
+				</Radio>
+			</fieldset>
+
+			<fieldset>
+				<legend>Font style</legend>
+
+				<Radio
+					id="font-style-noto-sans"
+					name="font-style"
+					bind:group={$settings.fontFamily}
+					value="Noto Sans JP"
+				>
+					Noto Sans JP
+				</Radio>
+
+				<Radio
+					id="font-style-hina-mincho"
+					name="font-style"
+					bind:group={$settings.fontFamily}
+					value="Hina Mincho"
+				>
+					Hina Mincho
+				</Radio>
+
+				<Radio
+					id="font-style-random"
+					name="font-style"
+					bind:group={$settings.fontFamily}
+					value="random"
+				>
+					Random
 				</Radio>
 			</fieldset>
 

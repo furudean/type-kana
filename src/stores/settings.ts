@@ -9,6 +9,7 @@ export interface GameSettings {
 	retryIncorrectAnswers: boolean
 	mistakeDelayMs: number
 	confetti: boolean
+	fontFamily: "Noto Sans JP" | "Hina Mincho" | "random"
 }
 
 const DEFAULT_VALUE: GameSettings = {
@@ -19,7 +20,8 @@ const DEFAULT_VALUE: GameSettings = {
 	volume: 50,
 	retryIncorrectAnswers: true,
 	mistakeDelayMs: 500,
-	confetti: true
+	confetti: true,
+	fontFamily: "Noto Sans JP"
 }
 
 export const settings = persistent<GameSettings>({

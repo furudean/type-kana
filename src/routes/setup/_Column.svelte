@@ -86,6 +86,6 @@
 	}
 
 	.column :global(.row > .checkbox-kana:not(:last-child)) {
-		margin-right: 10px !important;
+		margin-right: 10px;
 	}
 </style>

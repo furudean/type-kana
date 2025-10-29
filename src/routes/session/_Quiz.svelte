@@ -32,24 +32,29 @@
 
 <section class="quiz">
 	<div class="kana-queue">
-		{#each [...queue].slice(0, 15) as { kana }}
-			<QuizItemComponent {kana} />
+		{#each [...queue].slice(0, 15) as { kana, assignedFont }}
+			<QuizItemComponent {kana} {assignedFont} />
 		{/each}
 	</div>
 	<div class="current-kana">
 		{#if currentItem}
-			<QuizItemComponent kana={currentItem.kana} isCurrent={true} />
+			<QuizItemComponent
+				kana={currentItem.kana}
+				assignedFont={currentItem.assignedFont}
+				isCurrent={true}
+			/>
 		{/if}
 	</div>
 	<div class="kana-quizzed">
-		{#each quizzedSlice as { kana, answered, isCorrectAnswer }, i}
+		{#each quizzedSlice as { kana, answered, isCorrectAnswer, assignedFont }, i}
 			{#if i !== 0}
-				<QuizItemComponent {kana} {answered} {isCorrectAnswer} />
+				<QuizItemComponent {kana} {answered} {isCorrectAnswer} {assignedFont} />
 			{:else}
 				<QuizItemComponent
 					{kana}
 					{answered}
 					{isCorrectAnswer}
+					{assignedFont}
 					bind:element={lastQuizzedElement}
 				/>
 			{/if}

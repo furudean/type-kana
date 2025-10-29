@@ -15,6 +15,7 @@
 	import { quiz } from "$/stores/quiz"
 	import { browser } from "$app/env"
 	import MenuBar from "$/components/MenuBar.svelte"
+	import { settings } from "$/stores/settings"
 
 	onMount(() => {
 		if (browser) {
