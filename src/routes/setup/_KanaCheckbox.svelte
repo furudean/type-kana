@@ -72,6 +72,7 @@
 			class:katakana={["katakana", "both"].includes(kanaType)}
 			on:transitionend={transitionEnd}
 			on:transitioncancel={transitionEnd}
+			translate="no"
 		>
 			{["katakana", "both"].includes(kanaType)
 				? toKatakana(item.kana)
@@ -86,6 +87,7 @@
 					delay: animationDelay,
 					easing: cubicOut
 				}}
+				translate="no"
 			>
 				{item.kana}
 			</div>
