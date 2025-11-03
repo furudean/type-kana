@@ -35,9 +35,9 @@
 	bind:this={element}
 	style="font-family: {currentFont}, sans-serif; font-weight: 400;"
 >
-	<div class="kana" translate="no">{kana}</div>
+	<div class="kana" lang="ja-JP" translate="no">{kana}</div>
 	{#if hasIncorrectAnswer}
-		<div class="furigana" translate="no">{getAnswers(kana)[0]}</div>
+		<div class="furigana" lang="ja-JP" translate="no">{getAnswers(kana)[0]}</div>
 	{/if}
 </div>
 

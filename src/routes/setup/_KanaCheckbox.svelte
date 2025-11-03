@@ -72,6 +72,7 @@
 			class:katakana={["katakana", "both"].includes(kanaType)}
 			on:transitionend={transitionEnd}
 			on:transitioncancel={transitionEnd}
+			lang="ja-JP"
 			translate="no"
 		>
 			{["katakana", "both"].includes(kanaType)
@@ -87,6 +88,7 @@
 					delay: animationDelay,
 					easing: cubicOut
 				}}
+				lang="ja-JP"
 				translate="no"
 			>
 				{item.kana}
