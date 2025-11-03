@@ -67,7 +67,7 @@
 						class:hiragana={isHiragana(kana)}
 						class:katakana={isKatakana(kana)}
 					>
-						<span class="kana">{kana}</span>
+						<span class="kana" lang="ja-JP" translate="no">{kana}</span>
 						<span class="error-count">
 							{errors} error{errors !== 1 ? "s" : ""}
 						</span>
@@ -117,6 +117,8 @@
 											class:hiragana={isHiragana(item.kana)}
 											class:katakana={isKatakana(item.kana)}
 											title="{item.incorrectTimes} error(s)"
+											lang="ja-JP"
+											translate="no"
 										>
 											{item.kana}
 											{#if item.incorrectTimes > 1}

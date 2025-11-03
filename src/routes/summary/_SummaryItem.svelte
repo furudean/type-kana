@@ -21,6 +21,8 @@
 		style="font-family: {$font === 'random'
 			? 'Noto Sans JP'
 			: $font}, sans-serif; font-weight: 400;"
+		lang="ja-JP"
+		translate="no"
 	>
 		{item.kana}
 		{#if item.incorrectTimes > 1}
