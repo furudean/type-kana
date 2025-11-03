@@ -37,7 +37,9 @@
 >
 	<div class="kana" lang="ja-JP" translate="no">{kana}</div>
 	{#if hasIncorrectAnswer}
-		<div class="furigana" lang="ja-JP" translate="no">{getAnswers(kana)[0]}</div>
+		<div class="furigana" lang="ja-JP" translate="no">
+			{getAnswers(kana)[0]}
+		</div>
 	{/if}
 </div>
 
