@@ -219,7 +219,9 @@ function timestampToSeconds(timestamp: string): number {
 }
 
 /** Finds the audio sprite entry for a given kana */
-function findAudioSpriteEntry(kana: string): { start: string; end: string; duration: number } | null {
+function findAudioSpriteEntry(
+	kana: string
+): { start: string; end: string; duration: number } | null {
 	// Normalize kana to hiragana
 	const normalizedKana = toHiragana(kana)
 
