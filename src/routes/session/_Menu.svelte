@@ -3,7 +3,6 @@
 	import Icon from "$/components/MaterialIcon.svelte"
 	import { createEventDispatcher, onMount } from "svelte"
 	import { loadDropSound, loadVictorySound, playDropSound } from "$/lib/sound"
-	import { quiz } from "$/stores/quiz"
 
 	const dispatch = createEventDispatcher()
 

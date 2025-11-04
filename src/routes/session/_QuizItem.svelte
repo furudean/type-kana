@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getAnswers } from "$/lib/answer"
 	import { settings } from "$/stores/settings"
-	import { onMount } from "svelte"
 
 	export let kana: string
 	export let answered: string = undefined
