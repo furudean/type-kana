@@ -162,7 +162,7 @@
 					? "fill"
 					: "outline"}
 			>
-				<Icon path={mdiRestart} size="1.5em" />
+				<Icon path={mdiArrowLeft} size="1.5em" />
 				Main
 			</Button>
 			{#if answered > 0}
