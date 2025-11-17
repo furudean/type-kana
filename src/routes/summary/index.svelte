@@ -16,6 +16,7 @@
 	import { history } from "$/stores/history"
 	import { gameConfig } from "$/stores/game-config"
 	import { goto } from "$app/navigation"
+	import { dictionary } from "$/stores/dictionary"
 
 	$: correct = $summary.correct
 	$: incorrect = $summary.incorrect
@@ -162,8 +163,21 @@
 					: "outline"}
 			>
 				<Icon path={mdiRestart} size="1.5em" />
-				Start over
+				Main
 			</Button>
+			{#if answered > 0}
+				<Button
+					href="/session"
+					disabled={$dictionary.length === 0}
+					on:click={() => {
+						playDropSound()
+						quiz.reset()
+					}}
+					>
+					<Icon path={mdiRestart} size="1.5em" />
+					Restar quiz
+				</Button>
+			{/if}
 		</div>
 	</div>
 </MenuBar>
