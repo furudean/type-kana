@@ -175,7 +175,7 @@
 					}}
 					>
 					<Icon path={mdiRestart} size="1.5em" />
-					Restar quiz
+					Quiz again
 				</Button>
 			{/if}
 		</div>
