@@ -163,7 +163,7 @@
 					: "outline"}
 			>
 				<Icon path={mdiArrowLeft} size="1.5em" />
-				Main
+				Change kana
 			</Button>
 			{#if answered > 0}
 				<Button
