@@ -173,7 +173,7 @@
 						playDropSound()
 						quiz.reset()
 					}}
-					>
+				>
 					<Icon path={mdiRestart} size="1.5em" />
 					Quiz again
 				</Button>
