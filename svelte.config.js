@@ -24,7 +24,7 @@ function listRoutesIn(p) {
 
 	const routes = filenames.map((filename) => {
 		const name = path.parse(filename).name
-		return path.join("/", p, name)
+		return path.posix.join("/", p, name)
 	})
 
 	return routes

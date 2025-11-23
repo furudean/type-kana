@@ -12,7 +12,9 @@
 		playErrorSound,
 		loadMaximizeSound,
 		loadMinimizeSound,
-		loadVictorySound
+		loadVictorySound,
+		loadHiraganaSound,
+		playHiraganaSound
 	} from "$/lib/sound"
 	import { randomInt } from "$/lib/random"
 	import { settings } from "$/stores/settings"
@@ -77,6 +79,7 @@
 
 		if (isCorrect) {
 			playProgressSound(streakLength)
+			playHiraganaSound(currentItem.kana)
 			streakLength += 1
 		} else {
 			playErrorSound()
@@ -126,6 +129,7 @@
 		loadErrorSound()
 		loadMaximizeSound()
 		loadMinimizeSound()
+		loadHiraganaSound()
 	})
 
 	// go to results if queue is empty
