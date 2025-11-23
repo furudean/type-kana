@@ -140,13 +140,26 @@
 			</p>
 		{/if}
 		<div class="menu-items">
+			{#if unquizzed.length == 0}
+				<Button
+					href="/session"
+					disabled={$dictionary.length === 0}
+					on:click={() => {
+						playDropSound()
+						quiz.reset()
+					}}
+				>
+					<Icon path={mdiRestart} size="1.5em" />
+					Quiz again
+				</Button>
+			{/if}
 			{#if unquizzed.length > 0}
 				<Button href="/session">
 					<Icon path={mdiArrowLeft} size="1.25em" />
 					Keep going
 				</Button>
 			{/if}
-			{#if incorrect.length > 0}
+			{#if incorrect.length > 0 && unquizzed.length == 0}
 				<Button on:click={retryIncorrect} style="outline">
 					<Icon path={mdiRefresh} size="1.5em" />
 					Retry incorrect
@@ -165,19 +178,6 @@
 				<Icon path={mdiArrowLeft} size="1.5em" />
 				Change kana
 			</Button>
-			{#if answered > 0}
-				<Button
-					href="/session"
-					disabled={$dictionary.length === 0}
-					on:click={() => {
-						playDropSound()
-						quiz.reset()
-					}}
-				>
-					<Icon path={mdiRestart} size="1.5em" />
-					Quiz again
-				</Button>
-			{/if}
 		</div>
 	</div>
 </MenuBar>
@@ -210,6 +210,7 @@
 
 	.menu-items {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 1em;
 
 		> :global(.button .svg-icon) {
