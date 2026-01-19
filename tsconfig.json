@@ -7,6 +7,6 @@
 	"sourceMap": true,
 	"strict": true,
 	"compilerOptions": {
-		"lib": ["webworker"],
+		"lib": ["webworker"]
 	}
 }
