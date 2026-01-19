@@ -8,10 +8,5 @@
 	"strict": true,
 	"compilerOptions": {
 		"lib": ["webworker"],
-		"paths": {
-			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"],
-			"$/*": ["./src/*"]
-		}
 	}
 }
