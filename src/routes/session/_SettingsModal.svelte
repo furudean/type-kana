@@ -3,6 +3,7 @@
 	import { osTheme } from "$/stores/theme"
 	import {
 		loadTapSound,
+		playKanaSound,
 		playMaximizeSound,
 		playMinimizeSound,
 		playTapSound
@@ -29,9 +30,6 @@
 	import Dialog from "$/components/Dialog.svelte"
 	import { quiz } from "$/stores/quiz"
 
-	let volumeIconPath: string
-	let volumeIconViewBox: string
-	let volumeIconColor: string
 	let dialog: Dialog
 
 	let open: boolean
@@ -39,6 +37,7 @@
 	let resetOnClose = false
 
 	const playTapSoundThrottled = throttle(playTapSound, 80)
+	const playVoiceSoundThrottled = throttle(() => playKanaSound("あ"), 700)
 
 	export function show(init = false) {
 		dialog.showModal()
@@ -71,23 +70,30 @@
 		}
 	}
 
-	$: {
-		const vol = $settings.volume
-
+	function getVolumeIcon(vol: number) {
 		if (vol === 0) {
-			volumeIconPath = mdiVolumeOff
-			volumeIconViewBox = "0 0 24 24"
-			volumeIconColor = "var(--highlight-color)"
+			return {
+				path: mdiVolumeOff,
+				viewBox: "0 0 24 24",
+				color: "var(--highlight-color)"
+			}
 		} else if (vol < 50) {
-			volumeIconPath = mdiVolumeMedium
-			volumeIconViewBox = "2 0 24 24"
-			volumeIconColor = "currentColor"
+			return {
+				path: mdiVolumeMedium,
+				viewBox: "2 0 24 24",
+				color: "currentColor"
+			}
 		} else if (vol >= 50) {
-			volumeIconPath = mdiVolumeHigh
-			volumeIconViewBox = "0 0 24 24"
-			volumeIconColor = "currentColor"
+			return {
+				path: mdiVolumeHigh,
+				viewBox: "0 0 24 24",
+				color: "currentColor"
+			}
 		}
 	}
+
+	$: interfaceVolumeIcon = getVolumeIcon($settings.volume)
+	$: voiceVolumeIcon = getVolumeIcon($settings.voiceVolume)
 
 	onMount(async () => {
 		loadTapSound()
@@ -253,13 +259,13 @@
 			<hr />
 
 			<h2>Audio</h2>
-			<label for="audio-volume-setting" class="sr-only">Volume (%)</label>
+			<label for="audio-volume-setting">Interface volume</label>
 			<div class="volume-slider">
 				<Icon
 					title="Volume icon"
-					bind:path={volumeIconPath}
-					bind:viewBox={volumeIconViewBox}
-					color={volumeIconColor}
+					bind:path={interfaceVolumeIcon.path}
+					bind:viewBox={interfaceVolumeIcon.viewBox}
+					color={interfaceVolumeIcon.color}
 					size="1.5em"
 					ariaHidden={true}
 				/>
@@ -271,6 +277,27 @@
 					tooltip="[value]%"
 					width="12rem"
 					on:input={playTapSoundThrottled}
+				/>
+			</div>
+
+			<label for="audio-volume-setting">Voice volume</label>
+			<div class="volume-slider">
+				<Icon
+					title="Volume icon"
+					bind:path={voiceVolumeIcon.path}
+					bind:viewBox={voiceVolumeIcon.viewBox}
+					color={voiceVolumeIcon.color}
+					size="1.5em"
+					ariaHidden={true}
+				/>
+				<Range
+					id="audio-volume-setting"
+					bind:value={$settings.voiceVolume}
+					min={0}
+					max={150}
+					tooltip="[value]%"
+					width="12rem"
+					on:input={playVoiceSoundThrottled}
 				/>
 			</div>
 

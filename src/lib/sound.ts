@@ -4,9 +4,12 @@ import {
 	getAudioBuffer,
 	detuneWithPlaybackRate,
 	createGainNode,
-	createPreloader
+	createPreloader,
+	getVoiceGain
 } from "./audio"
 import { sleep } from "$/lib/util"
+import { toHiragana } from "wanakana"
+import { audioSprite } from "$/stores/audio-sprite"
 
 export const loadProgressSound = createPreloader(
 	["audio/drop_002.ogg", "audio/drop_002.mp3"],
@@ -201,4 +204,68 @@ export async function playVictorySound() {
 	const source = createAudioSource(audioBuffer)
 
 	source.start()
+}
+
+/** Converts timestamp string "MM:SS" or "MM:SS.mmm" or "SS.mmm" to seconds */
+function timestampToSeconds(timestamp: string): number {
+	if (timestamp.includes(":")) {
+		// Format: "MM:SS" or "MM:SS.mmm"
+		const [minutes, secondsStr] = timestamp.split(":")
+		const seconds = parseFloat(secondsStr)
+		return parseFloat(minutes) * 60 + seconds
+	} else {
+		// Format: "SS" or "SS.mmm" (just seconds)
+		return parseFloat(timestamp)
+	}
+}
+
+/** Finds the audio sprite entry for a given kana */
+function findAudioSpriteEntry(
+	kana: string
+): { start: string; end: string; duration: number } | null {
+	// Normalize kana to hiragana
+	const normalizedKana = toHiragana(kana)
+
+	// Search through all sprite categories (in order of priority)
+	const entry =
+		audioSprite.monographs[normalizedKana] ||
+		audioSprite.monographDiacritics[normalizedKana] ||
+		audioSprite.digraphs[normalizedKana] ||
+		audioSprite.digraphsDiacritics[normalizedKana]
+
+	if (!entry) return null
+
+	const startTime = timestampToSeconds(entry.start)
+	const endTime = timestampToSeconds(entry.end)
+	const duration = endTime - startTime
+
+	return {
+		start: entry.start,
+		end: entry.end,
+		duration: duration
+	}
+}
+
+export const loadHiraganaSound = createPreloader("audio/kana.wav")
+
+export async function playKanaSound(kana: string) {
+	try {
+		const spriteEntry = findAudioSpriteEntry(kana)
+
+		if (!spriteEntry) {
+			console.warn(`No audio sprite entry found for kana: ${kana}`)
+			return
+		}
+
+		const audioBuffer = await getAudioBuffer("audio/kana.wav")
+		const source = createAudioSource(audioBuffer, getVoiceGain())
+
+		const offset = timestampToSeconds(spriteEntry.start)
+		const duration = spriteEntry.duration
+
+		// Start playback at the specific offset for the calculated duration
+		source.start(0, offset, duration)
+	} catch (error) {
+		console.warn(`Failed to play hiragana sound for ${kana}:`, error)
+	}
 }

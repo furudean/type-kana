@@ -6,6 +6,7 @@ export interface GameSettings {
 	showErrorMarker: boolean
 	showProgressBar: boolean
 	volume: number
+	voiceVolume: number
 	retryIncorrectAnswers: boolean
 	mistakeDelayMs: number
 	confetti: boolean
@@ -18,6 +19,7 @@ const DEFAULT_VALUE: GameSettings = {
 	showErrorMarker: false,
 	showProgressBar: true,
 	volume: 50,
+	voiceVolume: 35,
 	retryIncorrectAnswers: true,
 	mistakeDelayMs: 500,
 	confetti: true,

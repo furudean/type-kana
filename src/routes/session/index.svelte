@@ -12,7 +12,9 @@
 		playErrorSound,
 		loadMaximizeSound,
 		loadMinimizeSound,
-		loadVictorySound
+		loadVictorySound,
+		loadHiraganaSound,
+		playKanaSound
 	} from "$/lib/sound"
 	import { randomInt } from "$/lib/random"
 	import { settings } from "$/stores/settings"
@@ -77,9 +79,11 @@
 
 		if (isCorrect) {
 			playProgressSound(streakLength)
+			playKanaSound(currentItem.kana)
 			streakLength += 1
 		} else {
 			playErrorSound()
+			playKanaSound(currentItem.kana)
 			streakLength = 0
 
 			// Add item back at the end of queue at a random position
@@ -126,6 +130,7 @@
 		loadErrorSound()
 		loadMaximizeSound()
 		loadMinimizeSound()
+		loadHiraganaSound()
 	})
 
 	// go to results if queue is empty

@@ -2,7 +2,8 @@ import { AudioContext } from "standardized-audio-context"
 import type { GainNode } from "standardized-audio-context"
 
 let audioContext: AudioContext
-let rootGain: GainNode<AudioContext>
+let interfaceGain: GainNode<AudioContext>
+let voiceGain: GainNode<AudioContext>
 
 export function getAudioContext() {
 	if (!audioContext) {
@@ -11,13 +12,22 @@ export function getAudioContext() {
 	return audioContext
 }
 
-export function getRootGain() {
-	if (!rootGain) {
+export function getInterfaceGain() {
+	if (!interfaceGain) {
 		const ctx = getAudioContext()
-		rootGain = ctx.createGain()
-		rootGain.connect(ctx.destination)
+		interfaceGain = ctx.createGain()
+		interfaceGain.connect(ctx.destination)
 	}
-	return rootGain
+	return interfaceGain
+}
+
+export function getVoiceGain() {
+	if (!voiceGain) {
+		const ctx = getAudioContext()
+		voiceGain = ctx.createGain()
+		voiceGain.connect(ctx.destination)
+	}
+	return voiceGain
 }
 
 const audioCache = new Map<string, AudioBuffer>()
@@ -54,7 +64,7 @@ export async function getAudioBuffer(
 
 export function createAudioSource(
 	buffer: AudioBuffer,
-	gainNode = getRootGain()
+	gainNode = getInterfaceGain()
 ) {
 	const source = getAudioContext().createBufferSource()
 	source.buffer = buffer
@@ -68,7 +78,7 @@ export function createAudioSource(
 export function createGainNode() {
 	const gainNode = getAudioContext().createGain()
 
-	gainNode.connect(getRootGain())
+	gainNode.connect(getInterfaceGain())
 
 	return gainNode
 }
