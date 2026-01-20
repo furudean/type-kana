@@ -83,6 +83,7 @@
 			streakLength += 1
 		} else {
 			playErrorSound()
+			playKanaSound(currentItem.kana)
 			streakLength = 0
 
 			// Add item back at the end of queue at a random position
