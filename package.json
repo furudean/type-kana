@@ -25,7 +25,7 @@
 		"common-tags": "^1.8.0",
 		"dialog-polyfill": "^0.5.6",
 		"standardized-audio-context": "^25.1.11",
-		"svelte-hero-icons": "^4.0.1",
+		"svelte-hero-icons": "^5.0.0",
 		"wanakana": "^5.0.0"
 	},
 	"devDependencies": {
