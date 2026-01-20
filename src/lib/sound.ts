@@ -246,9 +246,9 @@ function findAudioSpriteEntry(
 	}
 }
 
-export const loadHiraganaSound = createPreloader("audio/hiragana.wav")
+export const loadHiraganaSound = createPreloader("audio/kana.wav")
 
-export async function playHiraganaSound(kana: string) {
+export async function playKanaSound(kana: string) {
 	try {
 		const spriteEntry = findAudioSpriteEntry(kana)
 
@@ -257,7 +257,7 @@ export async function playHiraganaSound(kana: string) {
 			return
 		}
 
-		const audioBuffer = await getAudioBuffer("audio/hiragana.wav")
+		const audioBuffer = await getAudioBuffer("audio/kana.wav")
 		const source = createAudioSource(audioBuffer, getVoiceGain())
 
 		const offset = timestampToSeconds(spriteEntry.start)

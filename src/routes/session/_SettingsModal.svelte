@@ -3,7 +3,7 @@
 	import { osTheme } from "$/stores/theme"
 	import {
 		loadTapSound,
-		playHiraganaSound,
+		playKanaSound,
 		playMaximizeSound,
 		playMinimizeSound,
 		playTapSound
@@ -37,7 +37,7 @@
 	let resetOnClose = false
 
 	const playTapSoundThrottled = throttle(playTapSound, 80)
-	const playVoiceSoundThrottled = throttle(() => playHiraganaSound("あ"), 700)
+	const playVoiceSoundThrottled = throttle(() => playKanaSound("あ"), 700)
 
 	export function show(init = false) {
 		dialog.showModal()

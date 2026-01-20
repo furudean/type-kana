@@ -14,7 +14,7 @@
 		loadMinimizeSound,
 		loadVictorySound,
 		loadHiraganaSound,
-		playHiraganaSound
+		playKanaSound
 	} from "$/lib/sound"
 	import { randomInt } from "$/lib/random"
 	import { settings } from "$/stores/settings"
@@ -79,7 +79,7 @@
 
 		if (isCorrect) {
 			playProgressSound(streakLength)
-			playHiraganaSound(currentItem.kana)
+			playKanaSound(currentItem.kana)
 			streakLength += 1
 		} else {
 			playErrorSound()
