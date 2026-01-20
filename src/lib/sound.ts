@@ -4,7 +4,8 @@ import {
 	getAudioBuffer,
 	detuneWithPlaybackRate,
 	createGainNode,
-	createPreloader
+	createPreloader,
+	getVoiceGain
 } from "./audio"
 import { sleep } from "$/lib/util"
 import { toHiragana } from "wanakana"
@@ -257,7 +258,7 @@ export async function playHiraganaSound(kana: string) {
 		}
 
 		const audioBuffer = await getAudioBuffer("audio/hiragana.wav")
-		const source = createAudioSource(audioBuffer)
+		const source = createAudioSource(audioBuffer, getVoiceGain())
 
 		const offset = timestampToSeconds(spriteEntry.start)
 		const duration = spriteEntry.duration

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from "$app/env"
 	import { resolvedTheme } from "$/stores/theme"
-	import { getAudioContext, getRootGain } from "$/lib/audio"
+	import { getAudioContext, getInterfaceGain, getVoiceGain } from "$/lib/audio"
 	import { settings } from "$/stores/settings"
 	import "$/styles/theme.postcss"
 	import "$/styles/global.postcss"
@@ -20,16 +20,12 @@
 		// https://web.dev/color-scheme/
 		root.style.colorScheme = theme
 	}
-
-	function setVolume(volume: number) {
-		getRootGain().gain.value = volume
-	}
-
 	// keep active theme in sync with the store
 	$: browser && setTheme($resolvedTheme)
 
 	// keep volume in sync with settings
-	$: browser && setVolume($settings.volume / 100)
+	$: browser && (getInterfaceGain().gain.value = $settings.volume / 100)
+	$: browser && (getVoiceGain().gain.value = $settings.voiceVolume / 100)
 </script>
 
 <svelte:window
