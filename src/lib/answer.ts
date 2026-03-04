@@ -17,9 +17,21 @@ export const exceptionalAnswers = new Map([
 	["ぢ", ["di", "ji"]],
 	["づ", ["du", "zu"]],
 
-	["じゃ", ["ja", "jya"]],
-	["じゅ", ["ju", "jyu"]],
-	["じょ", ["jo", "jyo"]]
+	["しゃ", ["sha", "sya"]],
+	["しゅ", ["shu", "syu"]],
+	["しょ", ["sho", "syo"]],
+
+	["ちゃ", ["cha", "tya"]],
+	["ちゅ", ["chu", "tyu"]],
+	["ちょ", ["cho", "tyo"]],
+
+	["じゃ", ["ja", "jya", "zya"]],
+	["じゅ", ["ju", "jyu", "zyu"]],
+	["じょ", ["jo", "jyo", "zyo"]],
+
+	["ぢゃ", ["ja", "dya"]],
+	["ぢゅ", ["ju", "dyu"]],
+	["ぢょ", ["jo", "dyo"]]
 ])
 
 /** Gets acceptable answers for the given kana */
