@@ -24,7 +24,7 @@ export const exceptionalAnswers = new Map([
 	["ちゃ", ["cha", "tya"]],
 	["ちゅ", ["chu", "tyu"]],
 	["ちょ", ["cho", "tyo"]],
-	
+
 	["じゃ", ["ja", "jya", "zya"]],
 	["じゅ", ["ju", "jyu", "zyu"]],
 	["じょ", ["jo", "jyo", "zyo"]],
