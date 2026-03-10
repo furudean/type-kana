@@ -31,7 +31,9 @@ export const exceptionalAnswers = new Map([
 
 	["ぢゃ", ["ja", "dya"]],
 	["ぢゅ", ["ju", "dyu"]],
-	["ぢょ", ["jo", "dyo"]]
+	["ぢょ", ["jo", "dyo"]],
+
+	["ん", ["n", "nn"]]
 ])
 
 /** Gets acceptable answers for the given kana */
