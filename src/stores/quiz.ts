@@ -1,7 +1,7 @@
 import { shuffleArray } from "$/lib/random"
 import type { Readable } from "svelte/store"
 import { dictionary as dictionaryStore } from "./dictionary"
-import { persistent } from "@furudean/svelte-persistent-store"
+import { persistent } from "$/lib/persistent"
 import { settings } from "./settings"
 
 export interface QuizItem {

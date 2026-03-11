@@ -1,5 +1,5 @@
 import { hiragana } from "$/lib/db"
-import { persistent } from "@furudean/svelte-persistent-store"
+import { persistent } from "$/lib/persistent"
 
 function createKanaCheckbox(kana: string, checked: boolean): KanaCheckbox {
 	if (kana) {

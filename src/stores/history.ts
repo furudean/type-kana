@@ -1,4 +1,4 @@
-import { persistent } from "@furudean/svelte-persistent-store"
+import { persistent } from "$/lib/persistent"
 import { writable, derived } from "svelte/store"
 
 export interface SessionHistory {
