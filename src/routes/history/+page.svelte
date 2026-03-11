@@ -45,8 +45,8 @@
 		}
 	}
 
-	$: sessions = $history.sessions
-	$: mostDifficult = $difficultKanas.slice(0, 20)
+	let sessions = $derived($history.sessions)
+	let mostDifficult = $derived($difficultKanas.slice(0, 20))
 </script>
 
 <svelte:head>
@@ -143,7 +143,7 @@
 			Back
 		</Button>
 		{#if sessions.length > 0}
-			<Button on:click={clearHistory} style="outline">
+			<Button onclick={clearHistory} style="outline">
 				<Icon path={mdiDelete} size="1.5em" />
 				Clear history
 			</Button>

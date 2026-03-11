@@ -5,17 +5,23 @@
 	import { prettyTime } from "$lib/util"
 	import { font } from "$/stores/font"
 
-	export let item: SummaryKana
-	export let fill = false
-	export let time = false
+	interface Props {
+		item: SummaryKana;
+		fill?: boolean;
+		time?: boolean;
+	}
+
+	let { item, fill = false, time = false }: Props = $props();
 </script>
 
 <div class="summary-container">
+	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 	<div
 		class="summary-item"
 		class:hiragana={isHiragana(item.kana)}
 		class:katakana={isKatakana(item.kana)}
 		class:fill
+		role="img"
 		tabindex="0"
 		use:tooltip={!time ? item : undefined}
 		style="font-family: {$font === 'random'

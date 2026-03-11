@@ -1,13 +1,28 @@
 <script lang="ts">
-	export let title: string = undefined
-	export let disabled = false
-	export let style: "fill" | "outline" = "fill"
-	export let type: "submit" | "button" = "button"
+	interface Props {
+		title?: string;
+		disabled?: boolean;
+		style?: "fill" | "outline";
+		type?: "submit" | "button";
+		// link props
+		href?: string;
+		target?: string;
+		rel?: string;
+		onclick?: (e: MouseEvent) => void;
+		children?: import('svelte').Snippet;
+	}
 
-	// link props
-	export let href: string = undefined
-	export let target: string = undefined
-	export let rel: string = undefined
+	let {
+		title = undefined,
+		disabled = false,
+		style = "fill",
+		type = "button",
+		href = undefined,
+		target = undefined,
+		rel = undefined,
+		onclick,
+		children
+	}: Props = $props();
 </script>
 
 {#if !href}
@@ -17,10 +32,10 @@
 		class:disabled
 		{title}
 		{disabled}
-		on:click
+		{onclick}
 	>
 		<div class="effect">
-			<slot />
+			{@render children?.()}
 		</div>
 	</button>
 {:else}
@@ -33,11 +48,11 @@
 		{target}
 		{rel}
 		{title}
-		on:click
+		{onclick}
 		data-sveltekit-prefetch
 	>
 		<div class="effect">
-			<slot />
+			{@render children?.()}
 		</div>
 	</a>
 {/if}

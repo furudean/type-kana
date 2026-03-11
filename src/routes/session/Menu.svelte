@@ -6,7 +6,7 @@
 
 	const dispatch = createEventDispatcher()
 
-	let isRestartAnimationPlaying = false
+	let isRestartAnimationPlaying = $state(false)
 
 	function menuEvent(type: string) {
 		dispatch("menuEvent", { type })
@@ -26,7 +26,7 @@
 		type="button"
 		class="button tilt"
 		title="Open game settings"
-		on:click={() => {
+		onclick={() => {
 			menuEvent("openSettings")
 			if (document.activeElement instanceof HTMLElement) {
 				document.activeElement.blur()
@@ -43,7 +43,7 @@
 		class="button tilt"
 		class:reset-animation-playing={isRestartAnimationPlaying}
 		title="Restart quiz"
-		on:click={() => {
+		onclick={() => {
 			menuEvent("restart")
 			playDropSound()
 			isRestartAnimationPlaying = true
@@ -52,7 +52,7 @@
 		<span class="tilt-animation-container">
 			<span
 				class="reset-animation-container"
-				on:animationend={() => {
+				onanimationend={() => {
 					isRestartAnimationPlaying = false
 				}}
 			>
@@ -65,7 +65,7 @@
 		href="/summary"
 		class="button"
 		title="Finish session"
-		on:mouseenter={() => {
+		onmouseenter={() => {
 			loadVictorySound()
 		}}
 	>

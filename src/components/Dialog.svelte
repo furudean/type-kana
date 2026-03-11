@@ -1,11 +1,19 @@
 <script lang="ts">
+	import { createBubbler } from 'svelte/legacy';
+
+	const bubble = createBubbler();
 	import { onMount } from "svelte"
 	import { scrollLock } from "$/lib/scoll-lock"
 	import { createEventDispatcher } from "svelte"
 
 	const dispatch = createEventDispatcher()
 
-	export let open = false
+	interface Props {
+		open?: boolean;
+		children?: import('svelte').Snippet;
+	}
+
+	let { open = $bindable(false), children }: Props = $props();
 
 	let dialog: HTMLDialogElement
 
@@ -55,9 +63,9 @@
 	bind:this={dialog}
 	use:clickOutside={() => open && dispatch("clickoutside")}
 	use:scrollLock
-	on:close
+	onclose={bubble('close')}
 >
-	<slot />
+	{@render children?.()}
 </dialog>
 
 <style lang="postcss">

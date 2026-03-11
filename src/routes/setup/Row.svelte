@@ -9,10 +9,14 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let row: KanaCheckboxRow
 
-	let columnAnimationDelay = 0
-	let animationDelay = 0
+	interface Props {
+		row: KanaCheckboxRow;
+		animationDelay?: number;
+	}
+
+	let { row = $bindable(), animationDelay: columnAnimationDelay = 0 }: Props = $props();
+	let animationDelay = $state(0)
 
 	function isRowSelected(row: KanaCheckboxRow): boolean {
 		return row.filter((item) => item !== null).every((item) => item.checked)
@@ -33,13 +37,13 @@
 		dispatch("animationFinished")
 	}
 
-	export { columnAnimationDelay as animationDelay }
+	
 </script>
 
 <div
 	class="row"
 	role="row"
-	aria-label={getAnswers(row[0].kana)[0].slice(0, row[0].kana.length) +
+	aria-label={getAnswers(row[0]!.kana)[0].slice(0, row[0]!.kana.length) +
 		"- sounds"}
 >
 	<Checkbox
@@ -47,7 +51,7 @@
 		checked={isRowSelected(row)}
 		indeterminate={!isRowSelected(row) &&
 			row.filter((item) => item !== null).some((item) => item.checked)}
-		on:click={() => {
+		onclick={() => {
 			const newState = !isRowSelected(row)
 			const diffItems = row
 				.filter((item) => item !== null)
@@ -61,11 +65,12 @@
 	{#each row as item, index (item?.kana ?? index)}
 		{#if item && browser}
 			<KanaCheckbox
-				bind:item
+				{item}
+				onchange={(newItem) => { row = row.map((r, i) => i === index ? newItem : r) as KanaCheckboxRow }}
 				rowIndex={index}
 				rowLength={row.length}
 				animationDelay={columnAnimationDelay || animationDelay * index}
-				on:animationFinished={index === row.length - 1 && onAnimationFinished}
+				on:animationFinished={() => { if (index === row.length - 1) onAnimationFinished() }}
 			/>
 		{:else}
 			<KanaCheckboxSpacer {item} fill={!browser} />

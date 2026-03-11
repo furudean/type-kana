@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import Quiz from "./Quiz.svelte"
 	import Input from "./Input.svelte"
 	import Menu from "./Menu.svelte"
@@ -26,15 +28,15 @@
 	const ALPHANUMERIC = /^[a-z0-9]+$/i
 
 	let settingsModal: SettingsModal
-	let input: string
+	let input = $state('')
 	let streakLength = 0
-	let inputElement: HTMLInputElement
-	let lastQuizzedElement: HTMLDivElement
+	let inputElement: HTMLInputElement | undefined = $state()
+	let lastQuizzedElement: HTMLDivElement | undefined = $state()
 	let time = Date.now()
 
-	$: unquizzed = $quiz.unquizzed
-	$: quizzed = $quiz.quizzed
-	$: currentItem = unquizzed[0]
+	let unquizzed = $derived($quiz.unquizzed)
+	let quizzed = $derived($quiz.quizzed)
+	let currentItem = $derived(unquizzed[0])
 
 	function handleMenuEvent(event: CustomEvent) {
 		switch (event.detail.type) {
@@ -53,6 +55,7 @@
 
 	function confettiAtCurrent() {
 		if (!$settings.confetti) return
+		if (!lastQuizzedElement) return
 
 		const { y, x, height, width } = lastQuizzedElement.getBoundingClientRect()
 
@@ -121,7 +124,7 @@
 			event.key.length === 1 && // skip if control character
 			ALPHANUMERIC.test(event.key)
 		) {
-			inputElement.focus()
+			inputElement?.focus()
 		}
 	}
 
@@ -134,14 +137,16 @@
 	})
 
 	// go to results if queue is empty
-	$: unquizzed.length === 0 && setTimeout(() => goto("summary"), 500)
+	run(() => {
+		unquizzed.length === 0 && setTimeout(() => goto("summary"), 500)
+	});
 </script>
 
 <svelte:head>
 	<title>Session · Type Kana</title>
 </svelte:head>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window onkeydown={handleKeydown} />
 
 <ProgressBar />
 <Quiz {unquizzed} {quizzed} {input} bind:lastQuizzedElement />

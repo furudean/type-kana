@@ -1,17 +1,30 @@
 <script lang="ts">
-	export let id: string = undefined
-	export let name: string = undefined
-	export let checked: boolean = undefined
-	export let value: any
-	export let disabled: boolean = undefined
-	export let group: any = undefined
+	interface Props {
+		id?: string;
+		name?: string;
+		checked?: boolean;
+		value: any;
+		disabled?: boolean;
+		group?: any;
+		children?: import('svelte').Snippet;
+	}
+
+	let {
+		id = undefined,
+		name = undefined,
+		checked = undefined,
+		value,
+		disabled = undefined,
+		group = $bindable(undefined),
+		children
+	}: Props = $props();
 </script>
 
 <div class="radio-button">
 	<input type="radio" {id} {name} {value} bind:group {checked} {disabled} />
-	{#if $$slots.default}
+	{#if children}
 		<label for={id}>
-			<slot />
+			{@render children?.()}
 		</label>
 	{/if}
 </div>

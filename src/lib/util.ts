@@ -9,7 +9,7 @@ export async function sleep(ms: number): Promise<void> {
 export function throttle<F extends Function>(fn: F, ms: number): F {
 	let isWaiting = false
 
-	return function (...args: any[]) {
+	return function (this: unknown, ...args: any[]) {
 		if (!isWaiting) {
 			isWaiting = true
 

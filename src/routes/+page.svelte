@@ -4,8 +4,12 @@
 	import Icon from "$/components/MaterialIcon.svelte"
 	import { mdiArrowRight, mdiHistory } from "@mdi/js"
 
-	export let data: { stargazers: number }
-	$: stargazers = data.stargazers
+	interface Props {
+		data: { stargazers: number };
+	}
+
+	let { data }: Props = $props();
+	let stargazers = $derived(data.stargazers)
 </script>
 
 <svelte:head>

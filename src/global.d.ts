@@ -42,6 +42,6 @@ declare interface KanaCheckbox {
 	checked: boolean
 }
 
-declare type KanaCheckboxRow = KanaCheckbox[]
+declare type KanaCheckboxRow = (KanaCheckbox | null)[]
 
 declare type KanaCheckboxColumn = KanaCheckboxRow[]

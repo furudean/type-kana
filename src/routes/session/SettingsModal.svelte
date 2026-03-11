@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { settings } from "$/stores/settings"
 	import { osTheme } from "$/stores/theme"
 	import {
@@ -32,9 +34,9 @@
 
 	let dialog: Dialog
 
-	let open: boolean
+	let open = $state(false)
 
-	let resetOnClose = false
+	let resetOnClose = $state(false)
 
 	const playTapSoundThrottled = throttle(playTapSound, 80)
 	const playVoiceSoundThrottled = throttle(() => playKanaSound("あ"), 700)
@@ -83,7 +85,7 @@
 				viewBox: "2 0 24 24",
 				color: "currentColor"
 			}
-		} else if (vol >= 50) {
+		} else {
 			return {
 				path: mdiVolumeHigh,
 				viewBox: "0 0 24 24",
@@ -92,8 +94,8 @@
 		}
 	}
 
-	$: interfaceVolumeIcon = getVolumeIcon($settings.volume)
-	$: voiceVolumeIcon = getVolumeIcon($settings.voiceVolume)
+	let interfaceVolumeIcon = $derived(getVolumeIcon($settings.volume))
+	let voiceVolumeIcon = $derived(getVolumeIcon($settings.voiceVolume))
 
 	onMount(async () => {
 		loadTapSound()
@@ -101,14 +103,16 @@
 	})
 
 	// Update quiz fonts when font family setting changes
-	let previousFontFamily = $settings.fontFamily
-	$: if ($settings.fontFamily !== previousFontFamily) {
-		previousFontFamily = $settings.fontFamily
-		quiz.updateFonts()
-	}
+	let previousFontFamily = $state($settings.fontFamily)
+	run(() => {
+		if ($settings.fontFamily !== previousFontFamily) {
+			previousFontFamily = $settings.fontFamily
+			quiz.updateFonts()
+		}
+	});
 </script>
 
-<svelte:window on:popstate={onPopState} />
+<svelte:window onpopstate={onPopState} />
 
 <Dialog bind:this={dialog} bind:open on:clickoutside={close} on:close={onClose}>
 	<form method="dialog" class="content-width">
@@ -263,8 +267,8 @@
 			<div class="volume-slider">
 				<Icon
 					title="Volume icon"
-					bind:path={interfaceVolumeIcon.path}
-					bind:viewBox={interfaceVolumeIcon.viewBox}
+					path={interfaceVolumeIcon.path}
+					viewBox={interfaceVolumeIcon.viewBox}
 					color={interfaceVolumeIcon.color}
 					size="1.5em"
 					ariaHidden={true}
@@ -284,8 +288,8 @@
 			<div class="volume-slider">
 				<Icon
 					title="Volume icon"
-					bind:path={voiceVolumeIcon.path}
-					bind:viewBox={voiceVolumeIcon.viewBox}
+					path={voiceVolumeIcon.path}
+					viewBox={voiceVolumeIcon.viewBox}
 					color={voiceVolumeIcon.color}
 					size="1.5em"
 					ariaHidden={true}

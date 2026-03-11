@@ -9,10 +9,10 @@ type Options = Omit<ConfettiOptions, "disableForReducedMotion">
  * `canvas-confetti`, but with defaults!
  */
 export function confetti(options: Options): Promise<undefined> {
-	return c({
+	return (c({
 		...options,
 		disableForReducedMotion: true
-	})
+	}) as Promise<undefined>)
 }
 
 export async function confettiScreen() {

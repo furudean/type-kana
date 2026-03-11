@@ -7,23 +7,34 @@
 	import { createEventDispatcher } from "svelte"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
-	export let item: KanaCheckbox
-	export let rowIndex: number
-	export let rowLength: number
-	export let animationDelay = 0
+	interface Props {
+		item: KanaCheckbox;
+		onchange?: (item: KanaCheckbox) => void;
+		rowIndex: number;
+		rowLength: number;
+		animationDelay?: number;
+	}
+
+	let {
+		item,
+		onchange,
+		rowIndex,
+		rowLength,
+		animationDelay = 0
+	}: Props = $props();
 
 	const dispatch = createEventDispatcher()
 
-	let isLongHover = false
+	let isLongHover = $state(false)
 
 	const enableHover = () => (isLongHover = true)
 	const disableHover = () => (isLongHover = false)
 
-	$: kanaType = $gameConfig.kanaType
-	$: showPopover = kanaType === "both" && item.checked
-	$: style = animationDelay
+	let kanaType = $derived($gameConfig.kanaType)
+	let showPopover = $derived(kanaType === "both" && item.checked)
+	let style = $derived(animationDelay
 		? `animation-delay: ${animationDelay}ms; transition-delay: ${animationDelay}ms`
-		: null
+		: null)
 
 	function transitionEnd(event: TransitionEvent) {
 		event.stopPropagation()
@@ -51,12 +62,13 @@
 	class:long-hover={isLongHover && kanaType === "both"}
 	class:extended-click-area={kanaType === "both" && item.checked}
 	class:wide={item.kana === "ん"}
-	aria-pressed={item.checked}
+	aria-checked={item.checked}
 	title={`Select '${getAnswers(item.kana)[0]}'`}
 	{style}
-	on:click={() => {
-		item.checked = !item.checked
-		playCheckboxSelectSound(rowIndex, rowLength, item.checked)
+	onclick={() => {
+		const newChecked = !item.checked
+		onchange?.({ ...item, checked: newChecked })
+		playCheckboxSelectSound(rowIndex, rowLength, newChecked)
 	}}
 	use:longHover={{
 		delay: 500,
@@ -70,8 +82,8 @@
 			class="block base"
 			class:hiragana={kanaType === "hiragana"}
 			class:katakana={["katakana", "both"].includes(kanaType)}
-			on:transitionend={transitionEnd}
-			on:transitioncancel={transitionEnd}
+			ontransitionend={transitionEnd}
+			ontransitioncancel={transitionEnd}
 			lang="ja-JP"
 			translate="no"
 		>
@@ -82,7 +94,7 @@
 		{#if showPopover}
 			<div
 				class="block hiragana popover"
-				on:animationend={animationEnd}
+				onanimationend={animationEnd}
 				out:fade={{
 					duration: 125,
 					delay: animationDelay,

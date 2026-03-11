@@ -6,28 +6,37 @@
 	import Icon from "$/components/MaterialIcon.svelte"
 	import { mdiClose as errorMarkerIcon } from "@mdi/js"
 
-	export let unquizzed: QuizItem[]
-	export let quizzed: QuizItem[]
-	export let input = ""
-	export let lastQuizzedElement: HTMLDivElement
+	interface Props {
+		unquizzed: QuizItem[];
+		quizzed: QuizItem[];
+		input?: string;
+		lastQuizzedElement?: HTMLDivElement;
+	}
 
-	$: queue = unquizzed.slice(1)
-	$: quizzedSlice = [...quizzed].reverse().slice(0, 15)
-	$: currentItem = unquizzed[0]
-	$: errorMarkerVisible = showErrorMarker(currentItem?.kana, input)
+	let {
+		unquizzed,
+		quizzed,
+		input = "",
+		lastQuizzedElement = $bindable()
+	}: Props = $props();
+
 
 	function showErrorMarker(kana?: string, input?: string): boolean {
 		if (
 			$settings.showErrorMarker &&
 			kana &&
-			input?.length > 0 &&
+			input && input.length > 0 &&
 			$settings.autoCommit !== "strict"
 		) {
-			return !getAnswers(kana).some((answer) => answer.startsWith(input))
+			return !getAnswers(kana).some((answer) => answer.startsWith(input!))
 		} else {
 			return false
 		}
 	}
+	let queue = $derived(unquizzed.slice(1))
+	let quizzedSlice = $derived([...quizzed].reverse().slice(0, 15))
+	let currentItem = $derived(unquizzed[0])
+	let errorMarkerVisible = $derived(showErrorMarker(currentItem?.kana, input))
 </script>
 
 <section class="quiz">

@@ -83,7 +83,7 @@
 			<Button
 				href="session"
 				disabled={$dictionary.length === 0}
-				on:click={() => {
+				onclick={() => {
 					playDropSound()
 					quiz.reset()
 				}}

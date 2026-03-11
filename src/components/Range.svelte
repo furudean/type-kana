@@ -1,28 +1,45 @@
 <script lang="ts">
+	import { passive, createBubbler } from 'svelte/legacy';
+
+	const bubble = createBubbler();
 	import { createEventDispatcher } from "svelte"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
 
-	export let id: string = undefined
-	export let value: number
-	export let min: number = 0
-	export let max: number = 100
-	export let step: number = 1
-	export let list: string | undefined = undefined
 
-	export let width = "100%"
-	export let inline = false
-	export let tooltip: string | boolean = undefined
+	interface Props {
+		id?: string;
+		value: number;
+		min?: number;
+		max?: number;
+		step?: number;
+		list?: string | undefined;
+		width?: string;
+		inline?: boolean;
+		tooltip?: string | boolean;
+	}
+
+	let {
+		id = undefined,
+		value = $bindable(),
+		min = 0,
+		max = 100,
+		step = 1,
+		list = undefined,
+		width = "100%",
+		inline = false,
+		tooltip = undefined
+	}: Props = $props();
 
 	const dispatch = createEventDispatcher()
 
 	let rangeElement: HTMLElement
 
-	let precision = Number(step) < 1 ? step.toString().split(".")[1].length : 0
-	let hasTooltip = !["false", "no"].includes(tooltip.toString())
-	let hasFocus = false
-	let isTooltipVisible = false
-	let tooltipStyle = ""
+	let precision = $derived(Number(step) < 1 ? step.toString().split(".")[1].length : 0)
+	let hasTooltip = $derived(tooltip !== undefined && !["false", "no"].includes(tooltip.toString()))
+	let hasFocus = $state(false)
+	let isTooltipVisible = $state(false)
+	let tooltipStyle = $state("")
 
 	function enter() {
 		if (hasTooltip) {
@@ -58,7 +75,7 @@
 	}
 </script>
 
-<svelte:window on:resize|passive={updateTooltipPosition} />
+<svelte:window use:passive={['resize', () => updateTooltipPosition]} />
 
 <div class="range" class:inline={inline || width !== "100%"}>
 	{#if hasTooltip && isTooltipVisible}
@@ -83,18 +100,18 @@
 		bind:value
 		style:width
 		bind:this={rangeElement}
-		on:input={handleInput}
-		on:mouseenter={enter}
-		on:mouseleave={leave}
-		on:focus={() => {
+		oninput={handleInput}
+		onmouseenter={enter}
+		onmouseleave={leave}
+		onfocus={() => {
 			hasFocus = true
 			enter()
 		}}
-		on:focusout={() => {
+		onfocusout={() => {
 			hasFocus = false
 			leave()
 		}}
-		on:change
+		onchange={bubble('change')}
 	/>
 </div>
 

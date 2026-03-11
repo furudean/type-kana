@@ -1,10 +1,25 @@
 <script lang="ts">
-	export let title: string = undefined
-	export let id: string = undefined
-	export let checked: boolean
-	export let indeterminate: boolean = undefined
-	export let disabled: boolean = undefined
-	export let ariaLabel: string = undefined
+	interface Props {
+		title?: string;
+		id?: string;
+		checked: boolean;
+		indeterminate?: boolean;
+		disabled?: boolean;
+		ariaLabel?: string;
+		onclick?: (e: MouseEvent) => void;
+		children?: import('svelte').Snippet;
+	}
+
+	let {
+		title = undefined,
+		id = undefined,
+		checked = $bindable(),
+		indeterminate = undefined,
+		disabled = undefined,
+		ariaLabel = undefined,
+		onclick,
+		children
+	}: Props = $props();
 </script>
 
 <div class="checkbox">
@@ -16,11 +31,11 @@
 		{disabled}
 		{indeterminate}
 		aria-label={ariaLabel}
-		on:click
+		{onclick}
 	/>
-	{#if $$slots.default}
+	{#if children}
 		<label for={id}>
-			<slot />
+			{@render children?.()}
 		</label>
 	{/if}
 </div>

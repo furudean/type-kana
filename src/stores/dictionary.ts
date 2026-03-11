@@ -5,7 +5,7 @@ import { gameConfig } from "./game-config"
 function toDictionary(column: KanaCheckboxColumn): string[] {
 	return column
 		.flat(2)
-		.filter((item) => item?.checked)
+		.filter((item): item is KanaCheckbox => item?.checked ?? false)
 		.map((item) => item.kana)
 }
 

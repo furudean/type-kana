@@ -46,7 +46,7 @@ export interface QuizStore extends Readable<Quiz> {
 }
 
 export function createQuizStore(): QuizStore {
-	let dictionary: string[]
+	let dictionary: string[] = []
 	let currentFontFamily: string = "Noto Sans JP"
 
 	// keep dictionary in sync

@@ -9,15 +9,16 @@
 
 	// modified from https://github.com/stephane-vanraes/renderless-svelte/blob/master/src/Tooltip.svelte
 
-	const focused = writable<SummaryKana>(null)
-	const rect = writable<DOMRect>(null)
+	const focused = writable<SummaryKana | null>(null)
+	const rect = writable<DOMRect | null>(null)
 
-	export function tooltip(node: HTMLElement, item: SummaryKana) {
+	export function tooltip(node: HTMLElement, item: SummaryKana | undefined) {
+		if (!item) return
 		function enter() {
 			document.addEventListener("scroll", updateRect)
 			window.addEventListener("resize", updateRect)
 
-			focused.set(item)
+			focused.set(item!)
 			updateRect()
 		}
 
@@ -94,7 +95,7 @@
 		class="tooltip"
 		out:fade|global={{ duration: 200, delay: 400, easing: cubicOut }}
 	>
-		<div class="arrow" style={arrowStyle} aria-hidden="true" />
+		<div class="arrow" style={arrowStyle} aria-hidden="true"></div>
 		<div
 			class="body"
 			style={bodyStyle}

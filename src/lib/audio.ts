@@ -40,7 +40,7 @@ export async function getAudioBuffer(
 	const cachedUrl = urlsArray.find((url) => audioCache.has(url))
 
 	if (cachedUrl) {
-		return audioCache.get(cachedUrl)
+		return audioCache.get(cachedUrl)!
 	}
 
 	for (const url of urlsArray) {
