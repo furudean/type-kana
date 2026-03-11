@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let src: Record<string, unknown>[][] = undefined
+	export let src: unknown[][] = undefined
 	export let size = "1em"
 	export let solid = false
 	export let ariaHidden: boolean = undefined

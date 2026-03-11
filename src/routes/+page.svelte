@@ -1,24 +1,11 @@
-<script lang="ts" context="module">
-	import type { Load } from "@sveltejs/kit"
-
-	export const load: Load = async ({ fetch }) => {
-		const res = await fetch("https://api.github.com/repos/furudean/type-kana")
-		const { stargazers_count } = await res.json()
-		return {
-			props: {
-				stargazers: stargazers_count
-			}
-		}
-	}
-</script>
-
 <script lang="ts">
-	import Header from "./_header.svelte"
+	import Header from "./Header.svelte"
 	import Button from "$/components/Button.svelte"
 	import Icon from "$/components/MaterialIcon.svelte"
 	import { mdiArrowRight, mdiHistory } from "@mdi/js"
 
-	export let stargazers: number
+	export let data: { stargazers: number }
+	$: stargazers = data.stargazers
 </script>
 
 <svelte:head>

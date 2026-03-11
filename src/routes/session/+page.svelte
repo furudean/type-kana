@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Quiz from "./_Quiz.svelte"
-	import Input from "./_Input.svelte"
-	import Menu from "./_Menu.svelte"
-	import SettingsModal from "./_SettingsModal.svelte"
+	import Quiz from "./Quiz.svelte"
+	import Input from "./Input.svelte"
+	import Menu from "./Menu.svelte"
+	import SettingsModal from "./SettingsModal.svelte"
 	import { quiz } from "$/stores/quiz"
 	import { isCorrectAnswer } from "$/lib/answer"
 	import {
@@ -20,7 +20,7 @@
 	import { settings } from "$/stores/settings"
 	import ProgressBar from "$/components/ProgressBar.svelte"
 	import { onMount, tick } from "svelte"
-	import { goto, prefetch } from "$app/navigation"
+	import { goto, preloadData } from "$app/navigation"
 	import { confettiAtCoordinates } from "$/lib/confetti"
 
 	const ALPHANUMERIC = /^[a-z0-9]+$/i
@@ -104,7 +104,7 @@
 		time = Date.now()
 
 		if (unquizzed.length < 5) {
-			prefetch("summary")
+			preloadData("/summary")
 			loadVictorySound()
 		}
 

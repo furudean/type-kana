@@ -83,7 +83,7 @@
 			<div
 				class="block hiragana popover"
 				on:animationend={animationEnd}
-				out:fade|local={{
+				out:fade={{
 					duration: 125,
 					delay: animationDelay,
 					easing: cubicOut

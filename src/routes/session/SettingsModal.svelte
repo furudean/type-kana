@@ -150,7 +150,7 @@
 				</Radio>
 
 				{#if $settings.autoCommit === "strict"}
-					<div transition:fade={{ duration: 150, easing: cubicOut }}>
+					<div transition:fade|global={{ duration: 150, easing: cubicOut }}>
 						<input
 							id="mistake-delay-setting"
 							type="number"

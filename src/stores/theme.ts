@@ -1,7 +1,7 @@
 import { derived } from "svelte/store"
 import type { Readable } from "svelte/store"
 import { settings } from "./settings"
-import { browser } from "$app/env"
+import { browser } from "$app/environment"
 
 /**
  * Inspiration from

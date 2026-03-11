@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { playCheckboxSelectSeriesSound } from "$/lib/sound"
 	import Checkbox from "$/components/Checkbox.svelte"
-	import Row from "./_Row.svelte"
+	import Row from "./Row.svelte"
 
 	export let rows: KanaCheckboxRow[]
 	export let label: string

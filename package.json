@@ -24,13 +24,13 @@
 		"common-tags": "^1.8.0",
 		"dialog-polyfill": "^0.5.6",
 		"standardized-audio-context": "^25.1.11",
-		"svelte-hero-icons": "^4.0.1",
+		"svelte-hero-icons": "~4.0.3",
 		"wanakana": "^5.0.0"
 	},
 	"devDependencies": {
 		"@rollup/plugin-replace": "^4.0.0",
 		"@sveltejs/adapter-vercel": "^1.0.0-next.50",
-		"@sveltejs/kit": "^1.0.0-next.322",
+		"@sveltejs/kit": "^1.20.4",
 		"@types/body-scroll-lock": "^3.1.0",
 		"@types/canvas-confetti": "^1.4.2",
 		"@types/common-tags": "^1.8.1",
@@ -43,12 +43,13 @@
 		"postcss-nested": "^5.0.6",
 		"postcss-pseudo-is": "^0.3.0",
 		"prettier": "^2.3.2",
-		"prettier-plugin-svelte": "^2.3.1",
-		"svelte": "^3.46.2",
-		"svelte-check": "^2.3.0",
-		"svelte-preprocess": "^4.7.4",
+		"prettier-plugin-svelte": "^2.10.1",
+		"svelte": "^4.0.0",
+		"svelte-check": "^3.4.3",
+		"svelte-preprocess": "^5.0.3",
 		"tslib": "^2.0.1",
-		"typescript": "^4.3.5"
+		"typescript": "~5.4.5",
+		"vite": "^4.5.0"
 	},
 	"engines": {
 		"node": "22.x"

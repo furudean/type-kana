@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { SummaryKana } from "$/stores/summary"
 	import { isHiragana, isKatakana } from "wanakana"
-	import { tooltip } from "./_Tooltip.svelte"
+	import { tooltip } from "./Tooltip.svelte"
 	import { prettyTime } from "$lib/util"
 	import { font } from "$/stores/font"
 

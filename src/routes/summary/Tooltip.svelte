@@ -92,7 +92,7 @@
 {#if $focused}
 	<div
 		class="tooltip"
-		out:fade={{ duration: 200, delay: 400, easing: cubicOut }}
+		out:fade|global={{ duration: 200, delay: 400, easing: cubicOut }}
 	>
 		<div class="arrow" style={arrowStyle} aria-hidden="true" />
 		<div

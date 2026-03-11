@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SummaryKana } from "$/stores/summary"
-	import SummaryItem from "./_SummaryItem.svelte"
+	import SummaryItem from "./SummaryItem.svelte"
 
 	export let items: SummaryKana[]
 	export let fill = true

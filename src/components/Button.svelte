@@ -34,7 +34,7 @@
 		{rel}
 		{title}
 		on:click
-		sveltekit:prefetch
+		data-sveltekit-prefetch
 	>
 		<div class="effect">
 			<slot />

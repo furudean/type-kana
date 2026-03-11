@@ -23,8 +23,7 @@ function listRoutesIn(p) {
 	}
 
 	const routes = filenames.map((filename) => {
-		const name = path.parse(filename).name
-		return path.posix.join("/", p, name)
+		return path.posix.join("/", p, filename)
 	})
 
 	return routes
@@ -38,8 +37,6 @@ const config = {
 	kit: {
 		adapter: adapterVercel(),
 		prerender: {
-			enabled: true,
-			default: true,
 			entries: ["*", ...listRoutesIn("/icon/")]
 		},
 		alias: {

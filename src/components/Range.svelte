@@ -66,7 +66,7 @@
 			class="tooltip"
 			aria-hidden="true"
 			style={tooltipStyle}
-			transition:fade={{ duration: 125, easing: cubicOut }}
+			transition:fade|global={{ duration: 125, easing: cubicOut }}
 		>
 			{typeof tooltip === "string" && !["yes", "true"].includes(tooltip)
 				? tooltip.replace("[value]", value.toFixed(precision))

@@ -2,10 +2,10 @@
 	import { getAnswers } from "$/lib/answer"
 	import { playCheckboxSelectSeriesSound } from "$/lib/sound"
 	import Checkbox from "$/components/Checkbox.svelte"
-	import KanaCheckbox from "./_KanaCheckbox.svelte"
-	import KanaCheckboxSpacer from "./_KanaCheckboxSpacer.svelte"
+	import KanaCheckbox from "./KanaCheckbox.svelte"
+	import KanaCheckboxSpacer from "./KanaCheckboxSpacer.svelte"
 	import { createEventDispatcher } from "svelte"
-	import { browser } from "$app/env"
+	import { browser } from "$app/environment"
 
 	const dispatch = createEventDispatcher()
 
