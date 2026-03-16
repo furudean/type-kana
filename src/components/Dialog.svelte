@@ -1,11 +1,20 @@
 <script lang="ts">
 	import { onMount } from "svelte"
 	import { scrollLock } from "$/lib/scoll-lock"
-	import { createEventDispatcher } from "svelte"
 
-	const dispatch = createEventDispatcher()
+	interface Props {
+		open?: boolean
+		children?: import("svelte").Snippet
+		onclickoutside?: () => void
+		onclose?: (event: Event) => void
+	}
 
-	export let open = false
+	let {
+		open = $bindable(false),
+		children,
+		onclickoutside,
+		onclose
+	}: Props = $props()
 
 	let dialog: HTMLDialogElement
 
@@ -53,11 +62,11 @@
 <dialog
 	{open}
 	bind:this={dialog}
-	use:clickOutside={() => open && dispatch("clickoutside")}
+	use:clickOutside={() => open && onclickoutside?.()}
 	use:scrollLock
-	on:close
+	{onclose}
 >
-	<slot />
+	{@render children?.()}
 </dialog>
 
 <style lang="postcss">

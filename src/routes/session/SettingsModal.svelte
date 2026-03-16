@@ -32,9 +32,9 @@
 
 	let dialog: Dialog
 
-	let open: boolean
+	let open = $state(false)
 
-	let resetOnClose = false
+	let resetOnClose = $state(false)
 
 	const playTapSoundThrottled = throttle(playTapSound, 80)
 	const playVoiceSoundThrottled = throttle(() => playKanaSound("あ"), 700)
@@ -42,8 +42,8 @@
 	export function show(init = false) {
 		dialog.showModal()
 
-		!init && playMaximizeSound()
-		location.hash !== "#settings" && goto($page.url.pathname + "#settings")
+		if (!init) playMaximizeSound()
+		if (location.hash !== "#settings") goto($page.url.pathname + "#settings")
 	}
 
 	export function close() {
@@ -54,7 +54,7 @@
 		playMinimizeSound()
 
 		if (!resetOnClose) {
-			location.hash === "#settings" && goto($page.url.pathname) // remove fragment
+			if (location.hash === "#settings") goto($page.url.pathname) // remove fragment
 		} else {
 			localStorage.clear()
 			sessionStorage.clear()
@@ -83,7 +83,7 @@
 				viewBox: "2 0 24 24",
 				color: "currentColor"
 			}
-		} else if (vol >= 50) {
+		} else {
 			return {
 				path: mdiVolumeHigh,
 				viewBox: "0 0 24 24",
@@ -92,8 +92,8 @@
 		}
 	}
 
-	$: interfaceVolumeIcon = getVolumeIcon($settings.volume)
-	$: voiceVolumeIcon = getVolumeIcon($settings.voiceVolume)
+	let interfaceVolumeIcon = $derived(getVolumeIcon($settings.volume))
+	let voiceVolumeIcon = $derived(getVolumeIcon($settings.voiceVolume))
 
 	onMount(async () => {
 		loadTapSound()
@@ -101,16 +101,18 @@
 	})
 
 	// Update quiz fonts when font family setting changes
-	let previousFontFamily = $settings.fontFamily
-	$: if ($settings.fontFamily !== previousFontFamily) {
-		previousFontFamily = $settings.fontFamily
-		quiz.updateFonts()
-	}
+	let previousFontFamily = $state($settings.fontFamily)
+	$effect(() => {
+		if ($settings.fontFamily !== previousFontFamily) {
+			previousFontFamily = $settings.fontFamily
+			quiz.updateFonts()
+		}
+	})
 </script>
 
-<svelte:window on:popstate={onPopState} />
+<svelte:window onpopstate={onPopState} />
 
-<Dialog bind:this={dialog} bind:open on:clickoutside={close} on:close={onClose}>
+<Dialog bind:this={dialog} bind:open onclickoutside={close} onclose={onClose}>
 	<form method="dialog" class="content-width">
 		<div class="content-padding">
 			<h1 id="settings-heading">Settings</h1>
@@ -150,7 +152,7 @@
 				</Radio>
 
 				{#if $settings.autoCommit === "strict"}
-					<div transition:fade={{ duration: 150, easing: cubicOut }}>
+					<div transition:fade|global={{ duration: 150, easing: cubicOut }}>
 						<input
 							id="mistake-delay-setting"
 							type="number"
@@ -263,8 +265,8 @@
 			<div class="volume-slider">
 				<Icon
 					title="Volume icon"
-					bind:path={interfaceVolumeIcon.path}
-					bind:viewBox={interfaceVolumeIcon.viewBox}
+					path={interfaceVolumeIcon.path}
+					viewBox={interfaceVolumeIcon.viewBox}
 					color={interfaceVolumeIcon.color}
 					size="1.5em"
 					ariaHidden={true}
@@ -276,7 +278,7 @@
 					max={150}
 					tooltip="[value]%"
 					width="12rem"
-					on:input={playTapSoundThrottled}
+					oninput={playTapSoundThrottled}
 				/>
 			</div>
 
@@ -284,8 +286,8 @@
 			<div class="volume-slider">
 				<Icon
 					title="Volume icon"
-					bind:path={voiceVolumeIcon.path}
-					bind:viewBox={voiceVolumeIcon.viewBox}
+					path={voiceVolumeIcon.path}
+					viewBox={voiceVolumeIcon.viewBox}
 					color={voiceVolumeIcon.color}
 					size="1.5em"
 					ariaHidden={true}
@@ -297,7 +299,7 @@
 					max={150}
 					tooltip="[value]%"
 					width="12rem"
-					on:input={playVoiceSoundThrottled}
+					oninput={playVoiceSoundThrottled}
 				/>
 			</div>
 

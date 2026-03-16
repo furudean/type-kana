@@ -1,9 +1,19 @@
 <script lang="ts">
-	export let src: Record<string, unknown>[][] = undefined
-	export let size = "1em"
-	export let solid = false
-	export let ariaHidden: boolean = undefined
-	export let ariaLabel: string = undefined
+	interface Props {
+		src?: Record<string, string>[][]
+		size?: string
+		solid?: boolean
+		ariaHidden?: boolean
+		ariaLabel?: string
+	}
+
+	let {
+		src = undefined,
+		size = "1em",
+		solid = false,
+		ariaHidden = undefined,
+		ariaLabel = undefined
+	}: Props = $props()
 </script>
 
 {#if src}
@@ -18,7 +28,7 @@
 			width={size}
 			height={size}
 		>
-			{#each src[0] ?? [] as att}
+			{#each src[0] ?? [] as att, i (i)}
 				<path {...att} />
 			{/each}
 		</svg>
@@ -34,7 +44,7 @@
 			width={size}
 			height={size}
 		>
-			{#each src[1] ?? [] as att}
+			{#each src[1] ?? [] as att, i (i)}
 				<path {...att} />
 			{/each}
 		</svg>

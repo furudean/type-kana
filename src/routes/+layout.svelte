@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from "$app/env"
+	import { browser } from "$app/environment"
 	import { resolvedTheme } from "$/stores/theme"
 	import { getAudioContext, getInterfaceGain, getVoiceGain } from "$/lib/audio"
 	import { settings } from "$/stores/settings"
@@ -7,9 +7,15 @@
 	import "$/styles/global.postcss"
 	import { page } from "$app/stores"
 	import "dialog-polyfill/dist/dialog-polyfill.css"
+	interface Props {
+		children?: import("svelte").Snippet
+	}
+
+	let { children }: Props = $props()
 
 	function setTheme(theme: string) {
 		const root = document.querySelector<HTMLHtmlElement>(":root")
+		if (!root) return
 
 		// adds if it doesn't already exist
 		root.classList.add("theme-set-by-js")
@@ -21,15 +27,21 @@
 		root.style.colorScheme = theme
 	}
 	// keep active theme in sync with the store
-	$: browser && setTheme($resolvedTheme)
+	$effect(() => {
+		if (browser) setTheme($resolvedTheme)
+	})
 
 	// keep volume in sync with settings
-	$: browser && (getInterfaceGain().gain.value = $settings.volume / 100)
-	$: browser && (getVoiceGain().gain.value = $settings.voiceVolume / 100)
+	$effect(() => {
+		if (browser) getInterfaceGain().gain.value = $settings.volume / 100
+	})
+	$effect(() => {
+		if (browser) getVoiceGain().gain.value = $settings.voiceVolume / 100
+	})
 </script>
 
 <svelte:window
-	on:mousedown|once={() => {
+	onmousedown={() => {
 		const audioContext = getAudioContext()
 
 		// https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
@@ -47,7 +59,7 @@
 </svelte:head>
 
 <main>
-	<slot />
+	{@render children?.()}
 </main>
 
 <style lang="postcss">

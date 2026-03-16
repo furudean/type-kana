@@ -1,18 +1,29 @@
 <script lang="ts">
 	import type { SummaryKana } from "$/stores/summary"
-	import SummaryItem from "./_SummaryItem.svelte"
+	import SummaryItem from "./SummaryItem.svelte"
 
-	export let items: SummaryKana[]
-	export let fill = true
-	export let time = false
-	export let truncateAt = Infinity
+	interface Props {
+		items: SummaryKana[]
+		fill?: boolean
+		time?: boolean
+		truncateAt?: number
+	}
 
-	let expanded = false
+	let {
+		items,
+		fill = true,
+		time = false,
+		truncateAt = Infinity
+	}: Props = $props()
+
+	let expanded = $state(false)
 
 	// "- 3" makes sure the amount of items truncated is longer than the button
-	$: shouldTruncate = truncateAt <= items.length - 3
-	$: truncateIndex = shouldTruncate && expanded ? Infinity : truncateAt
-	$: truncatedItems = items.slice(0, truncateIndex)
+	let shouldTruncate = $derived(truncateAt <= items.length - 3)
+	let truncateIndex = $derived(
+		shouldTruncate && expanded ? Infinity : truncateAt
+	)
+	let truncatedItems = $derived(items.slice(0, truncateIndex))
 </script>
 
 <div class="summary-box">
@@ -26,7 +37,7 @@
 			title={expanded
 				? "Hide expanded items"
 				: `Display ${items.length - truncatedItems.length} hidden items`}
-			on:click={() => (expanded = !expanded)}
+			onclick={() => (expanded = !expanded)}
 		>
 			{expanded
 				? "show less"

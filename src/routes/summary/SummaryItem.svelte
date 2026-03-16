@@ -1,21 +1,27 @@
 <script lang="ts">
 	import type { SummaryKana } from "$/stores/summary"
 	import { isHiragana, isKatakana } from "wanakana"
-	import { tooltip } from "./_Tooltip.svelte"
+	import { tooltip } from "./Tooltip.svelte"
 	import { prettyTime } from "$lib/util"
 	import { font } from "$/stores/font"
 
-	export let item: SummaryKana
-	export let fill = false
-	export let time = false
+	interface Props {
+		item: SummaryKana
+		fill?: boolean
+		time?: boolean
+	}
+
+	let { item, fill = false, time = false }: Props = $props()
 </script>
 
 <div class="summary-container">
+	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 	<div
 		class="summary-item"
 		class:hiragana={isHiragana(item.kana)}
 		class:katakana={isKatakana(item.kana)}
 		class:fill
+		role="img"
 		tabindex="0"
 		use:tooltip={!time ? item : undefined}
 		style="font-family: {$font === 'random'
@@ -73,7 +79,8 @@
 		cursor: default;
 		user-select: none;
 		border: var(--border-size) solid transparent;
-		transition: 75ms var(--standard-curve) color,
+		transition:
+			75ms var(--standard-curve) color,
 			75ms var(--standard-curve) border-color;
 
 		&:focus-visible {

@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	import { writable } from "svelte/store"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
@@ -9,15 +9,16 @@
 
 	// modified from https://github.com/stephane-vanraes/renderless-svelte/blob/master/src/Tooltip.svelte
 
-	const focused = writable<SummaryKana>(null)
-	const rect = writable<DOMRect>(null)
+	const focused = writable<SummaryKana | null>(null)
+	const rect = writable<DOMRect | null>(null)
 
-	export function tooltip(node: HTMLElement, item: SummaryKana) {
+	export function tooltip(node: HTMLElement, item: SummaryKana | undefined) {
+		if (!item) return
 		function enter() {
 			document.addEventListener("scroll", updateRect)
 			window.addEventListener("resize", updateRect)
 
-			focused.set(item)
+			focused.set(item!)
 			updateRect()
 		}
 
@@ -47,7 +48,6 @@
 
 <script lang="ts">
 	import { clamp, uniqArray } from "$/lib/util"
-	import { afterUpdate, tick } from "svelte"
 
 	function listWrongAnswers(item: SummaryKana): string {
 		const answers = getAnswers(item.kana)
@@ -75,16 +75,18 @@
 		return `top: ${top}px; left: ${left}px;`
 	}
 
-	let tooltipBody: HTMLElement
-	let arrowStyle: string
-	let bodyStyle: string
+	let tooltipBody: HTMLElement | undefined = $state()
+	let arrowStyle = $state("")
+	let bodyStyle = $state("")
 
-	afterUpdate(async () => {
-		if (tooltipBody && $rect) {
-			// wait for the DOM to update...
-			await tick()
-			arrowStyle = calculateArrowStyle($rect)
-			bodyStyle = calculateBodyStyle($rect, tooltipBody.getBoundingClientRect())
+	$effect(() => {
+		const currentRect = $rect
+		if (tooltipBody && currentRect) {
+			arrowStyle = calculateArrowStyle(currentRect)
+			bodyStyle = calculateBodyStyle(
+				currentRect,
+				tooltipBody.getBoundingClientRect()
+			)
 		}
 	})
 </script>
@@ -92,9 +94,9 @@
 {#if $focused}
 	<div
 		class="tooltip"
-		out:fade={{ duration: 200, delay: 400, easing: cubicOut }}
+		out:fade|global={{ duration: 200, delay: 400, easing: cubicOut }}
 	>
-		<div class="arrow" style={arrowStyle} aria-hidden="true" />
+		<div class="arrow" style={arrowStyle} aria-hidden="true"></div>
 		<div
 			class="body"
 			style={bodyStyle}
@@ -133,7 +135,9 @@
 		border-color: transparent transparent var(--background-color-inverse)
 			transparent;
 		transform: translateX(-50%);
-		transition: 75ms var(--standard-curve) top, 75ms var(--standard-curve) left;
+		transition:
+			75ms var(--standard-curve) top,
+			75ms var(--standard-curve) left;
 	}
 
 	.body {
@@ -149,7 +153,9 @@
 		text-align: center;
 		min-width: 32px;
 		max-width: 15em;
-		transition: 75ms var(--standard-curve) top, 75ms var(--standard-curve) left;
+		transition:
+			75ms var(--standard-curve) top,
+			75ms var(--standard-curve) left;
 	}
 
 	.body :global(.svg-icon) {

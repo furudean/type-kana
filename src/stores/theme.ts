@@ -1,14 +1,14 @@
 import { derived } from "svelte/store"
 import type { Readable } from "svelte/store"
 import { settings } from "./settings"
-import { browser } from "$app/env"
+import { browser } from "$app/environment"
 
 /**
  * Inspiration from
  * https://github.com/DylanVann/perfect-dark-mode/blob/64f6c5c296254ee36f8df36e6a82ed1da7b883f0/packages/perfect-dark-mode/src/createPerfectDarkMode.ts#L98
  */
 function createOSThemeStore(): Readable<string> {
-	const listeners = new Set<(theme: string) => any>()
+	const listeners = new Set<(theme: string) => void>()
 	let colorScheme = "light"
 
 	function onChangeMediaQuery(event: MediaQueryListEvent): void {

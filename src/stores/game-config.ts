@@ -1,7 +1,10 @@
 import { hiragana } from "$/lib/db"
-import { persistent } from "@furudean/svelte-persistent-store"
+import { persistent } from "$/lib/persistent"
 
-function createKanaCheckbox(kana: string, checked: boolean): KanaCheckbox {
+function createKanaCheckbox(
+	kana: string | null,
+	checked: boolean
+): KanaCheckbox | null {
 	if (kana) {
 		return {
 			kana: kana,
@@ -13,14 +16,14 @@ function createKanaCheckbox(kana: string, checked: boolean): KanaCheckbox {
 }
 
 function createKanaCheckboxRow(
-	kana: string[],
+	kana: (string | null)[],
 	checked: boolean
 ): KanaCheckboxRow {
 	return kana.map((kana) => createKanaCheckbox(kana, checked))
 }
 
 function createKanaCheckboxColumn(
-	kanaRows: string[][],
+	kanaRows: (string | null)[][],
 	checked: boolean
 ): KanaCheckboxColumn {
 	return kanaRows.map((row) => createKanaCheckboxRow(row, checked))

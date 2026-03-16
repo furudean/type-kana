@@ -40,7 +40,7 @@ export async function getAudioBuffer(
 	const cachedUrl = urlsArray.find((url) => audioCache.has(url))
 
 	if (cachedUrl) {
-		return audioCache.get(cachedUrl)
+		return audioCache.get(cachedUrl)!
 	}
 
 	for (const url of urlsArray) {
@@ -53,7 +53,7 @@ export async function getAudioBuffer(
 			audioCache.set(url, audioBuffer)
 
 			return audioBuffer
-		} catch (error) {
+		} catch {
 			console.warn(
 				`Failed to decode "${url}". The format is probably unsupported on this browser.`
 			)

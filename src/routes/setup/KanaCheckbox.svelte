@@ -4,26 +4,38 @@
 	import { toKatakana } from "wanakana"
 	import { playCheckboxSelectSound } from "$/lib/sound"
 	import { longHover } from "$/lib/long-hover"
-	import { createEventDispatcher } from "svelte"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
-	export let item: KanaCheckbox
-	export let rowIndex: number
-	export let rowLength: number
-	export let animationDelay = 0
+	interface Props {
+		item: KanaCheckbox
+		onchange?: (item: KanaCheckbox) => void
+		rowIndex: number
+		rowLength: number
+		animationDelay?: number
+		onanimationFinished?: () => void
+	}
 
-	const dispatch = createEventDispatcher()
+	let {
+		item,
+		onchange,
+		rowIndex,
+		rowLength,
+		animationDelay = 0,
+		onanimationFinished
+	}: Props = $props()
 
-	let isLongHover = false
+	let isLongHover = $state(false)
 
 	const enableHover = () => (isLongHover = true)
 	const disableHover = () => (isLongHover = false)
 
-	$: kanaType = $gameConfig.kanaType
-	$: showPopover = kanaType === "both" && item.checked
-	$: style = animationDelay
-		? `animation-delay: ${animationDelay}ms; transition-delay: ${animationDelay}ms`
-		: null
+	let kanaType = $derived($gameConfig.kanaType)
+	let showPopover = $derived(kanaType === "both" && item.checked)
+	let style = $derived(
+		animationDelay
+			? `animation-delay: ${animationDelay}ms; transition-delay: ${animationDelay}ms`
+			: null
+	)
 
 	function transitionEnd(event: TransitionEvent) {
 		event.stopPropagation()
@@ -31,7 +43,7 @@
 		// One transition event is fired per modified property. We want to make
 		// sure to only catch one of these per animation cycle
 		if (event.propertyName === "background-color") {
-			dispatch("animationFinished")
+			onanimationFinished?.()
 		}
 	}
 
@@ -39,7 +51,7 @@
 		event.stopPropagation()
 
 		if (kanaType !== "both") {
-			dispatch("animationFinished")
+			onanimationFinished?.()
 		}
 	}
 </script>
@@ -51,12 +63,13 @@
 	class:long-hover={isLongHover && kanaType === "both"}
 	class:extended-click-area={kanaType === "both" && item.checked}
 	class:wide={item.kana === "ん"}
-	aria-pressed={item.checked}
+	aria-checked={item.checked}
 	title={`Select '${getAnswers(item.kana)[0]}'`}
 	{style}
-	on:click={() => {
-		item.checked = !item.checked
-		playCheckboxSelectSound(rowIndex, rowLength, item.checked)
+	onclick={() => {
+		const newChecked = !item.checked
+		onchange?.({ ...item, checked: newChecked })
+		playCheckboxSelectSound(rowIndex, rowLength, newChecked)
 	}}
 	use:longHover={{
 		delay: 500,
@@ -70,8 +83,8 @@
 			class="block base"
 			class:hiragana={kanaType === "hiragana"}
 			class:katakana={["katakana", "both"].includes(kanaType)}
-			on:transitionend={transitionEnd}
-			on:transitioncancel={transitionEnd}
+			ontransitionend={transitionEnd}
+			ontransitioncancel={transitionEnd}
 			lang="ja-JP"
 			translate="no"
 		>
@@ -82,8 +95,8 @@
 		{#if showPopover}
 			<div
 				class="block hiragana popover"
-				on:animationend={animationEnd}
-				out:fade|local={{
+				onanimationend={animationEnd}
+				out:fade={{
 					duration: 125,
 					delay: animationDelay,
 					easing: cubicOut
@@ -142,8 +155,8 @@
 	}
 
 	.block {
-		--transition: 125ms var(--standard-curve) color,
-			125ms var(--standard-curve) background,
+		--transition:
+			125ms var(--standard-curve) color, 125ms var(--standard-curve) background,
 			125ms var(--standard-curve) border-color;
 
 		color: var(--text-color-light);
@@ -233,12 +246,16 @@
 	.checkbox-kana:not(.selected):focus-visible .block {
 		color: var(--focus-color);
 		border-color: var(--focus-color);
-		transition: var(--transition), 75ms var(--standard-curve) color,
+		transition:
+			var(--transition),
+			75ms var(--standard-curve) color,
 			75ms var(--standard-curve) border-color;
 	}
 
 	.checkbox-kana.selected:focus-visible .block {
 		border-color: var(--focus-color);
-		transition: var(--transition), 75ms var(--standard-curve) border-color;
+		transition:
+			var(--transition),
+			75ms var(--standard-curve) border-color;
 	}
 </style>

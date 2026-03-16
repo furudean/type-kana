@@ -2,10 +2,18 @@
 	import type { SummaryKana } from "$/stores/summary"
 	import { isHiragana, isKatakana } from "wanakana"
 
-	export let items: SummaryKana[]
+	interface Props {
+		items: SummaryKana[]
+	}
 
-	$: numHiragana = items.filter(({ kana }) => isHiragana(kana)).length
-	$: numKatakana = items.filter(({ kana }) => isKatakana(kana)).length
+	let { items }: Props = $props()
+
+	let numHiragana = $derived(
+		items.filter(({ kana }) => isHiragana(kana)).length
+	)
+	let numKatakana = $derived(
+		items.filter(({ kana }) => isKatakana(kana)).length
+	)
 </script>
 
 {#if numHiragana > 0}

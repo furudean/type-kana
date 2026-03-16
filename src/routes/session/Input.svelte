@@ -1,24 +1,32 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte"
 	import { mdiChevronRight, mdiAutorenew } from "@mdi/js"
 	import Icon from "$/components/MaterialIcon.svelte"
 	import { settings } from "$/stores/settings"
 	import { getAnswers, isCorrectAnswer } from "$/lib/answer"
 
-	export let input = ""
-	export let currentKana: string = null
-	export let inputElement: HTMLInputElement
+	interface Props {
+		input?: string
+		currentKana?: string
+		inputElement?: HTMLInputElement
+		onsubmit?: (data: { input: string }) => void
+	}
+
+	let {
+		input = $bindable(""),
+		currentKana = undefined,
+		inputElement = $bindable(),
+		onsubmit
+	}: Props = $props()
 
 	const WHITESPACE = /^\s+$/
-	const dispatch = createEventDispatcher()
 
 	let blocked = false
-	let shakeAnimationPlaying = false
+	let shakeAnimationPlaying = $state(false)
 
 	function handleSubmit() {
 		if (input === "") return
 
-		const isCorrect = isCorrectAnswer(input, currentKana)
+		const isCorrect = currentKana ? isCorrectAnswer(input, currentKana) : false
 
 		if (!isCorrect) {
 			if (blocked) return
@@ -30,7 +38,7 @@
 			}
 		}
 
-		dispatch("submit", { input })
+		onsubmit?.({ input })
 		input = ""
 	}
 
@@ -50,7 +58,7 @@
 		event: InputEvent & { currentTarget: EventTarget & HTMLInputElement }
 	) {
 		if (isCompositionEvent(event)) return
-		if (currentKana === null) return
+		if (!currentKana) return
 		if (event.data === null) return // control key was pressed
 
 		// remove any excess spaces from string
@@ -77,14 +85,17 @@
 <form
 	class="answer-input content-width"
 	class:shake-animation-playing={shakeAnimationPlaying}
-	on:submit|preventDefault={handleSubmit}
-	on:animationend={() => (shakeAnimationPlaying = false)}
+	onsubmit={(e) => {
+		e.preventDefault()
+		handleSubmit()
+	}}
+	onanimationend={() => (shakeAnimationPlaying = false)}
 >
 	<input
 		type="text"
 		class="text-field"
 		bind:value={input}
-		on:input={handleInput}
+		oninput={handleInput as (e: Event) => void}
 		placeholder="your answer"
 		lang="ja"
 		autocapitalize="none"
@@ -102,7 +113,7 @@
 			type="button"
 			class="button"
 			title="Auto submit active. Tap to disable."
-			on:click={() => settings.set({ ...$settings, autoCommit: "disabled" })}
+			onclick={() => settings.set({ ...$settings, autoCommit: "disabled" })}
 		>
 			<Icon
 				size="0.75em"

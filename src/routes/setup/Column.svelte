@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { playCheckboxSelectSeriesSound } from "$/lib/sound"
 	import Checkbox from "$/components/Checkbox.svelte"
-	import Row from "./_Row.svelte"
+	import Row from "./Row.svelte"
 
-	export let rows: KanaCheckboxRow[]
-	export let label: string
+	interface Props {
+		rows: KanaCheckboxRow[]
+		label: string
+	}
 
-	let animationDelay = 0
+	let { rows = $bindable(), label }: Props = $props()
+
+	let animationDelay = $state(0)
 
 	function isRowSelected(row: KanaCheckboxRow): boolean {
 		return row.filter((item) => item !== null).every((item) => item.checked)
@@ -29,11 +33,10 @@
 
 <section class="column" aria-label={label}>
 	<div class="row select-all">
-		<!-- svelte-ignore a11y-label-has-associated-control -->
 		<label>
 			<Checkbox
 				checked={rows.every(isRowSelected)}
-				on:click={() => {
+				onclick={() => {
 					const everyRowChecked = rows.every(isRowSelected)
 					rows = rows.map(selectRow(!everyRowChecked))
 
@@ -43,11 +46,13 @@
 			<span>Select all</span>
 		</label>
 	</div>
-	{#each rows as row, index}
+	{#each rows as _row, index (index)}
 		<Row
-			bind:row
+			bind:row={rows[index]}
 			animationDelay={animationDelay * index}
-			on:animationFinished={index === rows.length - 1 && onAnimationFinished}
+			onanimationFinished={() => {
+				if (index === rows.length - 1) onAnimationFinished()
+			}}
 		/>
 	{/each}
 </section>

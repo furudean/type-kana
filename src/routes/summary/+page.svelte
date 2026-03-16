@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { summary } from "$/stores/summary"
-	import SummaryBox from "./_SummaryBox.svelte"
-	import Tooltip from "./_Tooltip.svelte"
+	import SummaryBox from "./SummaryBox.svelte"
+	import Tooltip from "./Tooltip.svelte"
 	import Button from "$/components/Button.svelte"
 	import { onMount } from "svelte"
 	import { confettiScreen } from "$/lib/confetti"
 	import { playVictorySound, playDropSound } from "$/lib/sound"
 	import MenuBar from "$/components/MenuBar.svelte"
-	import Counters from "./_Counters.svelte"
+	import Counters from "./Counters.svelte"
 	import Icon from "$/components/MaterialIcon.svelte"
 	import { mdiArrowLeft, mdiRestart, mdiHistory, mdiRefresh } from "@mdi/js"
 	import ProgressBar from "$/components/ProgressBar.svelte"
@@ -18,14 +18,14 @@
 	import { goto } from "$app/navigation"
 	import { dictionary } from "$/stores/dictionary"
 
-	$: correct = $summary.correct
-	$: incorrect = $summary.incorrect
-	$: unquizzed = $summary.unquizzed
-	$: duration = $summary.duration
+	let correct = $derived($summary.correct)
+	let incorrect = $derived($summary.incorrect)
+	let unquizzed = $derived($summary.unquizzed)
+	let duration = $derived($summary.duration)
 
-	$: answered = correct.length + incorrect.length
-	$: accuracy = correct.length / answered
-	$: total = correct.length + incorrect.length + unquizzed.length
+	let answered = $derived(correct.length + incorrect.length)
+	let accuracy = $derived(correct.length / answered)
+	let total = $derived(correct.length + incorrect.length + unquizzed.length)
 
 	let sessionSaved = false
 
@@ -144,7 +144,7 @@
 				<Button
 					href="/session"
 					disabled={$dictionary.length === 0}
-					on:click={() => {
+					onclick={() => {
 						playDropSound()
 						quiz.reset()
 					}}
@@ -160,7 +160,7 @@
 				</Button>
 			{/if}
 			{#if incorrect.length > 0 && unquizzed.length == 0}
-				<Button on:click={retryIncorrect} style="outline">
+				<Button onclick={retryIncorrect} style="outline">
 					<Icon path={mdiRefresh} size="1.5em" />
 					Retry incorrect
 				</Button>

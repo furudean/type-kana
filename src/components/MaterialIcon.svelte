@@ -1,12 +1,25 @@
 <script lang="ts">
-	export let size = "1em"
-	export let width = size
-	export let height = size
-	export let color = "currentColor"
-	export let viewBox = "0 0 24 24"
-	export let path: string
-	export let title = undefined
-	export let ariaHidden = false
+	interface Props {
+		size?: string
+		width?: string | number
+		height?: string | number
+		color?: string
+		viewBox?: string
+		path: string
+		title?: string
+		ariaHidden?: boolean
+	}
+
+	let {
+		size = "1em",
+		width = size,
+		height = size,
+		color = "currentColor",
+		viewBox = "0 0 24 24",
+		path,
+		title = undefined,
+		ariaHidden = false
+	}: Props = $props()
 </script>
 
 <svg

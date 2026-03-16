@@ -1,10 +1,14 @@
 <script lang="ts">
-	let classNames: string | undefined
-	export { classNames as class }
+	interface Props {
+		class: string | undefined
+		children?: import("svelte").Snippet
+	}
+
+	let { class: classNames, children }: Props = $props()
 </script>
 
 <section class="menu-bar {classNames}">
-	<slot />
+	{@render children?.()}
 </section>
 
 <style lang="postcss">

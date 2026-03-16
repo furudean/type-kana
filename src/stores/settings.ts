@@ -1,4 +1,4 @@
-import { persistent } from "@furudean/svelte-persistent-store"
+import { persistent } from "$/lib/persistent"
 
 export interface GameSettings {
 	autoCommit: "forgiving" | "strict" | "disabled"

@@ -2,7 +2,9 @@
 	font-family: "M+ 2c";
 	font-style: normal;
 	font-weight: 100;
-	src: local("M+ 2c thin"), local("mplus-2c-thin"),
+	src:
+		local("M+ 2c thin"),
+		local("mplus-2c-thin"),
 		url("mplus-2c-thin.ttf") format("truetype");
 	font-display: swap;
 }
@@ -11,7 +13,9 @@
 	font-family: "M+ 2c";
 	font-style: normal;
 	font-weight: 300;
-	src: local("M+ 2c light"), local("mplus-2c-light"),
+	src:
+		local("M+ 2c light"),
+		local("mplus-2c-light"),
 		url("mplus-2c-light.ttf") format("truetype");
 	font-display: swap;
 }
@@ -20,7 +24,9 @@
 	font-family: "M+ 2c";
 	font-style: normal;
 	font-weight: 400;
-	src: local("M+ 2c regular"), local("mplus-2c-regular"),
+	src:
+		local("M+ 2c regular"),
+		local("mplus-2c-regular"),
 		url("mplus-2c-regular.ttf") format("truetype");
 	font-display: swap;
 }
@@ -29,7 +35,9 @@
 	font-family: "M+ 2c";
 	font-style: normal;
 	font-weight: 500;
-	src: local("M+ 2c medium"), local("mplus-2c-medium"),
+	src:
+		local("M+ 2c medium"),
+		local("mplus-2c-medium"),
 		url("mplus-2c-medium.ttf") format("truetype");
 	font-display: swap;
 }
@@ -38,7 +46,9 @@
 	font-family: "M+ 2c";
 	font-style: normal;
 	font-weight: 700;
-	src: local("M+ 2c bold"), local("mplus-2c-bold"),
+	src:
+		local("M+ 2c bold"),
+		local("mplus-2c-bold"),
 		url("mplus-2c-bold.ttf") format("truetype");
 	font-display: swap;
 }
@@ -47,7 +57,9 @@
 	font-family: "M+ 2c";
 	font-style: normal;
 	font-weight: 800;
-	src: local("M+ 2c heavy"), local("mplus-2c-heavy"),
+	src:
+		local("M+ 2c heavy"),
+		local("mplus-2c-heavy"),
 		url("mplus-2c-heavy.ttf") format("truetype");
 	font-display: swap;
 }
@@ -56,7 +68,9 @@
 	font-family: "M+ 2c";
 	font-style: normal;
 	font-weight: 900;
-	src: local("M+ 2c black"), local("mplus-2c-black"),
+	src:
+		local("M+ 2c black"),
+		local("mplus-2c-black"),
 		url("mplus-2c-black.ttf") format("truetype");
 	font-display: swap;
 }

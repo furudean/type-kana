@@ -12,7 +12,7 @@ export function confetti(options: Options): Promise<undefined> {
 	return c({
 		...options,
 		disableForReducedMotion: true
-	})
+	}) as Promise<undefined>
 }
 
 export async function confettiScreen() {

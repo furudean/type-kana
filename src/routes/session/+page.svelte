@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Quiz from "./_Quiz.svelte"
-	import Input from "./_Input.svelte"
-	import Menu from "./_Menu.svelte"
-	import SettingsModal from "./_SettingsModal.svelte"
+	import Quiz from "./Quiz.svelte"
+	import Input from "./Input.svelte"
+	import Menu from "./Menu.svelte"
+	import SettingsModal from "./SettingsModal.svelte"
 	import { quiz } from "$/stores/quiz"
 	import { isCorrectAnswer } from "$/lib/answer"
 	import {
@@ -20,24 +20,24 @@
 	import { settings } from "$/stores/settings"
 	import ProgressBar from "$/components/ProgressBar.svelte"
 	import { onMount, tick } from "svelte"
-	import { goto, prefetch } from "$app/navigation"
+	import { goto, preloadData } from "$app/navigation"
 	import { confettiAtCoordinates } from "$/lib/confetti"
 
 	const ALPHANUMERIC = /^[a-z0-9]+$/i
 
 	let settingsModal: SettingsModal
-	let input: string
+	let input = $state("")
 	let streakLength = 0
-	let inputElement: HTMLInputElement
-	let lastQuizzedElement: HTMLDivElement
+	let inputElement: HTMLInputElement | undefined = $state()
+	let lastQuizzedElement: HTMLDivElement | undefined = $state()
 	let time = Date.now()
 
-	$: unquizzed = $quiz.unquizzed
-	$: quizzed = $quiz.quizzed
-	$: currentItem = unquizzed[0]
+	let unquizzed = $derived($quiz.unquizzed)
+	let quizzed = $derived($quiz.quizzed)
+	let currentItem = $derived(unquizzed[0])
 
-	function handleMenuEvent(event: CustomEvent) {
-		switch (event.detail.type) {
+	function handleMenuEvent({ type }: { type: string }) {
+		switch (type) {
 			case "openSettings":
 				settingsModal.show()
 				break
@@ -53,6 +53,7 @@
 
 	function confettiAtCurrent() {
 		if (!$settings.confetti) return
+		if (!lastQuizzedElement) return
 
 		const { y, x, height, width } = lastQuizzedElement.getBoundingClientRect()
 
@@ -72,9 +73,8 @@
 		)
 	}
 
-	async function handleSubmit(event: CustomEvent) {
+	async function handleSubmit({ input }: { input: string }) {
 		if (!currentItem) return
-		const input = event.detail.input
 		const isCorrect = isCorrectAnswer(input, currentItem.kana)
 
 		if (isCorrect) {
@@ -104,12 +104,12 @@
 		time = Date.now()
 
 		if (unquizzed.length < 5) {
-			prefetch("summary")
+			preloadData("/summary")
 			loadVictorySound()
 		}
 
 		await tick()
-		isCorrect && confettiAtCurrent()
+		if (isCorrect) confettiAtCurrent()
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -121,7 +121,7 @@
 			event.key.length === 1 && // skip if control character
 			ALPHANUMERIC.test(event.key)
 		) {
-			inputElement.focus()
+			inputElement?.focus()
 		}
 	}
 
@@ -134,22 +134,24 @@
 	})
 
 	// go to results if queue is empty
-	$: unquizzed.length === 0 && setTimeout(() => goto("summary"), 500)
+	$effect(() => {
+		if (unquizzed.length === 0) setTimeout(() => goto("summary"), 500)
+	})
 </script>
 
 <svelte:head>
 	<title>Session · Type Kana</title>
 </svelte:head>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window onkeydown={handleKeydown} />
 
 <ProgressBar />
 <Quiz {unquizzed} {quizzed} {input} bind:lastQuizzedElement />
 <Input
 	bind:input
-	on:submit={handleSubmit}
+	onsubmit={handleSubmit}
 	currentKana={currentItem?.kana}
 	bind:inputElement
 />
-<Menu on:menuEvent={handleMenuEvent} />
+<Menu onmenuEvent={handleMenuEvent} />
 <SettingsModal bind:this={settingsModal} />

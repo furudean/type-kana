@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Column from "./_Column.svelte"
+	import Column from "./Column.svelte"
 	import { gameConfig } from "$/stores/game-config"
 	import Radio from "$/components/Radio.svelte"
 	import Button from "$/components/Button.svelte"
@@ -13,7 +13,7 @@
 		playDropSound
 	} from "$/lib/sound"
 	import { quiz } from "$/stores/quiz"
-	import { browser } from "$app/env"
+	import { browser } from "$app/environment"
 	import MenuBar from "$/components/MenuBar.svelte"
 
 	onMount(() => {
@@ -83,7 +83,7 @@
 			<Button
 				href="session"
 				disabled={$dictionary.length === 0}
-				on:click={() => {
+				onclick={() => {
 					playDropSound()
 					quiz.reset()
 				}}

@@ -45,8 +45,8 @@
 		}
 	}
 
-	$: sessions = $history.sessions
-	$: mostDifficult = $difficultKanas.slice(0, 20)
+	let sessions = $derived($history.sessions)
+	let mostDifficult = $derived($difficultKanas.slice(0, 20))
 </script>
 
 <svelte:head>
@@ -61,7 +61,7 @@
 			<h2>Most Difficult Kanas</h2>
 			<p class="subtitle">Accumulated errors across all sessions</p>
 			<div class="kana-grid">
-				{#each mostDifficult as { kana, errors }}
+				{#each mostDifficult as { kana, errors } (kana)}
 					<div
 						class="kana-card"
 						class:hiragana={isHiragana(kana)}
@@ -85,7 +85,7 @@
 		<section class="sessions-list">
 			<h2>Past Sessions ({sessions.length})</h2>
 			<div class="sessions">
-				{#each sessions as session}
+				{#each sessions as session (session.id)}
 					<div class="session-card">
 						<div class="session-header">
 							<span class="timestamp">{formatDate(session.timestamp)}</span>
@@ -111,7 +111,7 @@
 							<div class="incorrect-kanas">
 								<span class="label">Incorrect:</span>
 								<div class="kanas">
-									{#each session.incorrect as item}
+									{#each session.incorrect as item (item.kana)}
 										<span
 											class="kana-item"
 											class:hiragana={isHiragana(item.kana)}
@@ -143,7 +143,7 @@
 			Back
 		</Button>
 		{#if sessions.length > 0}
-			<Button on:click={clearHistory} style="outline">
+			<Button onclick={clearHistory} style="outline">
 				<Icon path={mdiDelete} size="1.5em" />
 				Clear history
 			</Button>

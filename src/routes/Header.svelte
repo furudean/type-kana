@@ -6,7 +6,11 @@
 	import HeroIcon from "$/components/HeroIcon.svelte"
 	import { commitHashLong, commitHashShort } from "$/lib/version"
 
-	export let stargazers: number
+	interface Props {
+		stargazers: number
+	}
+
+	let { stargazers }: Props = $props()
 </script>
 
 <section class="header content-padding">

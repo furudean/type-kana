@@ -6,10 +6,13 @@ export async function sleep(ms: number): Promise<void> {
 
 /** Returns a throttled version of `fn`, skipping calls that happen within
  * `ms` milliseconds. */
-export function throttle<F extends Function>(fn: F, ms: number): F {
+export function throttle<F extends (...args: unknown[]) => unknown>(
+	fn: F,
+	ms: number
+): F {
 	let isWaiting = false
 
-	return function (...args: any[]) {
+	return function (this: unknown, ...args: unknown[]) {
 		if (!isWaiting) {
 			isWaiting = true
 
@@ -19,7 +22,7 @@ export function throttle<F extends Function>(fn: F, ms: number): F {
 				isWaiting = false
 			}, ms)
 		}
-	} as any // Cast needed for compiler to not freak out
+	} as unknown as F
 }
 
 export function roundN(num: number, decimalPlaces: number): number {
@@ -30,7 +33,7 @@ export function roundN(num: number, decimalPlaces: number): number {
 export function uniqBy<T>(array: T[], keyFn: (item: T) => string): T[] {
 	const seen = new Set<string>()
 	return array.filter((item) => {
-		let key = keyFn(item)
+		const key = keyFn(item)
 		return seen.has(key) ? false : seen.add(key)
 	})
 }

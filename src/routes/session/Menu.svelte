@@ -1,15 +1,19 @@
 <script lang="ts">
 	import { mdiCogOutline, mdiArrowLeft, mdiRestart, mdiCheck } from "@mdi/js"
 	import Icon from "$/components/MaterialIcon.svelte"
-	import { createEventDispatcher, onMount } from "svelte"
+	import { onMount } from "svelte"
 	import { loadDropSound, loadVictorySound, playDropSound } from "$/lib/sound"
 
-	const dispatch = createEventDispatcher()
+	interface Props {
+		onmenuEvent?: (data: { type: string }) => void
+	}
 
-	let isRestartAnimationPlaying = false
+	let { onmenuEvent }: Props = $props()
+
+	let isRestartAnimationPlaying = $state(false)
 
 	function menuEvent(type: string) {
-		dispatch("menuEvent", { type })
+		onmenuEvent?.({ type })
 	}
 
 	onMount(() => {
@@ -18,7 +22,7 @@
 </script>
 
 <section class="menu">
-	<a href="setup" class="button" title="Go back" sveltekit:prefetch>
+	<a href="setup" class="button" title="Go back" data-sveltekit-prefetch>
 		<Icon path={mdiArrowLeft} />
 	</a>
 
@@ -26,7 +30,7 @@
 		type="button"
 		class="button tilt"
 		title="Open game settings"
-		on:click={() => {
+		onclick={() => {
 			menuEvent("openSettings")
 			if (document.activeElement instanceof HTMLElement) {
 				document.activeElement.blur()
@@ -43,7 +47,7 @@
 		class="button tilt"
 		class:reset-animation-playing={isRestartAnimationPlaying}
 		title="Restart quiz"
-		on:click={() => {
+		onclick={() => {
 			menuEvent("restart")
 			playDropSound()
 			isRestartAnimationPlaying = true
@@ -52,7 +56,7 @@
 		<span class="tilt-animation-container">
 			<span
 				class="reset-animation-container"
-				on:animationend={() => {
+				onanimationend={() => {
 					isRestartAnimationPlaying = false
 				}}
 			>
@@ -65,7 +69,7 @@
 		href="/summary"
 		class="button"
 		title="Finish session"
-		on:mouseenter={() => {
+		onmouseenter={() => {
 			loadVictorySound()
 		}}
 	>
@@ -98,7 +102,8 @@
 		margin-left: 0.25em;
 		padding: 0.175em;
 		border-radius: 50%;
-		transition: transform 50ms var(--standard-curve),
+		transition:
+			transform 50ms var(--standard-curve),
 			color 125ms var(--standard-curve),
 			background-color 125ms var(--standard-curve),
 			border-color 125ms var(--standard-curve);

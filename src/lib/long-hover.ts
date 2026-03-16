@@ -29,7 +29,7 @@ export function longHover(
 		clearTimeout(timeout)
 		if (active) {
 			active = false
-			end()
+			end?.()
 		}
 	}
 

@@ -2,27 +2,40 @@
 	import { getAnswers } from "$/lib/answer"
 	import { settings } from "$/stores/settings"
 
-	export let kana: string
-	export let answered: string = undefined
-	export let isCorrectAnswer: boolean = undefined
-	export let isCurrent = false
-	export let element: HTMLDivElement = undefined
-	export let assignedFont: string = undefined
-
-	let currentFont = "Noto Sans JP"
-
-	// Use assigned font if available, otherwise fall back to settings
-	$: if (assignedFont) {
-		currentFont = assignedFont
-	} else if ($settings.fontFamily === "random") {
-		currentFont = Math.random() < 0.5 ? "Noto Sans JP" : "Hina Mincho"
-	} else {
-		currentFont = $settings.fontFamily
+	interface Props {
+		kana: string
+		answered?: string
+		isCorrectAnswer?: boolean
+		isCurrent?: boolean
+		element?: HTMLDivElement
+		assignedFont?: string
 	}
 
-	$: hasAnswer = answered !== undefined
-	$: hasCorrectAnswer = hasAnswer ? isCorrectAnswer : false
-	$: hasIncorrectAnswer = hasAnswer ? !isCorrectAnswer : false
+	let {
+		kana,
+		answered = undefined,
+		isCorrectAnswer = undefined,
+		isCurrent = false,
+		element = $bindable(undefined),
+		assignedFont = undefined
+	}: Props = $props()
+
+	let currentFont = $state("Noto Sans JP")
+
+	// Use assigned font if available, otherwise fall back to settings
+	$effect(() => {
+		if (assignedFont) {
+			currentFont = assignedFont
+		} else if ($settings.fontFamily === "random") {
+			currentFont = Math.random() < 0.5 ? "Noto Sans JP" : "Hina Mincho"
+		} else {
+			currentFont = $settings.fontFamily
+		}
+	})
+
+	let hasAnswer = $derived(answered !== undefined)
+	let hasCorrectAnswer = $derived(hasAnswer ? isCorrectAnswer : false)
+	let hasIncorrectAnswer = $derived(hasAnswer ? !isCorrectAnswer : false)
 </script>
 
 <div
