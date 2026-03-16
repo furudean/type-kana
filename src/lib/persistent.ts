@@ -30,7 +30,7 @@ export function persistent<T>(options: Options<T>) {
 
 	const storage =
 		typeof window !== "undefined"
-			? window[storage_type] ?? undefined
+			? (window[storage_type] ?? undefined)
 			: undefined
 
 	const store = writable(start_value, function start() {

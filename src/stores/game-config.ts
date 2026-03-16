@@ -1,7 +1,10 @@
 import { hiragana } from "$/lib/db"
 import { persistent } from "$/lib/persistent"
 
-function createKanaCheckbox(kana: string | null, checked: boolean): KanaCheckbox | null {
+function createKanaCheckbox(
+	kana: string | null,
+	checked: boolean
+): KanaCheckbox | null {
 	if (kana) {
 		return {
 			kana: kana,

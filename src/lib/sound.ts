@@ -227,7 +227,10 @@ function findAudioSpriteEntry(
 	const normalizedKana = toHiragana(kana)
 
 	// Search through all sprite categories (in order of priority)
-	const sprites = audioSprite as Record<string, Record<string, { start: string; end: string }>>
+	const sprites = audioSprite as Record<
+		string,
+		Record<string, { start: string; end: string }>
+	>
 	const entry =
 		sprites.monographs[normalizedKana] ||
 		sprites.monographDiacritics[normalizedKana] ||

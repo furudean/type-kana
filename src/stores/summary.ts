@@ -24,7 +24,11 @@ export const summary = derived(quiz, ($quiz): Summary => {
 		const dupes = $quiz.quizzed.filter((item) => item.kana === kana)
 		return {
 			kana,
-			answers: uniqArray(dupes.map((item) => item.answered).filter((a): a is string => a !== undefined)),
+			answers: uniqArray(
+				dupes
+					.map((item) => item.answered)
+					.filter((a): a is string => a !== undefined)
+			),
 			incorrectTimes: isCorrectAnswer
 				? 0
 				: dupes.filter((item) => item.isCorrectAnswer === isCorrectAnswer)
@@ -41,6 +45,7 @@ export const summary = derived(quiz, ($quiz): Summary => {
 			.filter((item) => item.isCorrectAnswer)
 			.map(createSummaryKana),
 		unquizzed: $quiz.unquizzed.map(createSummaryKana),
-		duration: $quiz.quizzed.reduce((sum, item) => sum + (item.duration ?? 0), 0) / 1000
+		duration:
+			$quiz.quizzed.reduce((sum, item) => sum + (item.duration ?? 0), 0) / 1000
 	}
 })
