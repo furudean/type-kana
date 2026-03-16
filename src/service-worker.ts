@@ -1,3 +1,4 @@
+/// <reference lib="WebWorker" />
 import { build, files, version } from "$service-worker"
 
 const ASSETS = `cache${version}`
