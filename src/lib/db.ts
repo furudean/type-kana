@@ -1,7 +1,7 @@
 // https://en.wikipedia.org/wiki/Hiragana#Table_of_hiragana
 
 export const hiragana = {
-	monographs: [
+	gojuon: [
 		["あ", "い", "う", "え", "お"],
 		["か", "き", "く", "け", "こ"],
 		["さ", "し", "す", "せ", "そ"],
@@ -14,14 +14,14 @@ export const hiragana = {
 		["わ", null, null, null, "を"],
 		["ん"]
 	],
-	monographDiacritics: [
+	dakuon: [
 		["が", "ぎ", "ぐ", "げ", "ご"],
 		["ざ", "じ", "ず", "ぜ", "ぞ"],
 		["だ", "ぢ", "づ", "で", "ど"],
 		["ば", "び", "ぶ", "べ", "ぼ"],
 		["ぱ", "ぴ", "ぷ", "ぺ", "ぽ"]
 	],
-	digraphs: [
+	yoon: [
 		["きゃ", "きゅ", "きょ"],
 		["しゃ", "しゅ", "しょ"],
 		["ちゃ", "ちゅ", "ちょ"],
@@ -30,7 +30,7 @@ export const hiragana = {
 		["みゃ", "みゅ", "みょ"],
 		["りゃ", "りゅ", "りょ"]
 	],
-	digraphsDiacritics: [
+	dakuonYoon: [
 		["ぎゃ", "ぎゅ", "ぎょ"],
 		["じゃ", "じゅ", "じょ"],
 		// ["ぢゃ", "ぢゅ", "ぢょ"],

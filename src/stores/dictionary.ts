@@ -11,10 +11,10 @@ function toDictionary(column: KanaCheckboxColumn): string[] {
 
 export const selectedKana = derived(gameConfig, ($columns) => {
 	return [
-		...toDictionary($columns.monographs),
-		...toDictionary($columns.monographsDiacritics),
-		...toDictionary($columns.digraphs),
-		...toDictionary($columns.digraphsDiacritics)
+		...toDictionary($columns.gojuon),
+		...toDictionary($columns.dakuon),
+		...toDictionary($columns.yoon),
+		...toDictionary($columns.dakuonYoon)
 	]
 })
 

@@ -59,16 +59,10 @@
 		</div>
 	</fieldset>
 	<section class="columns">
-		<Column bind:rows={$gameConfig.monographs} label="Monographs" />
-		<Column
-			bind:rows={$gameConfig.monographsDiacritics}
-			label="Monographs with diacritics"
-		/>
-		<Column bind:rows={$gameConfig.digraphs} label="Digraphs" />
-		<Column
-			bind:rows={$gameConfig.digraphsDiacritics}
-			label="Digraphs with diacritics"
-		/>
+		<Column bind:rows={$gameConfig.gojuon} label="Gojūon" />
+		<Column bind:rows={$gameConfig.dakuon} label="Dakuon" />
+		<Column bind:rows={$gameConfig.yoon} label="Yōon" />
+		<Column bind:rows={$gameConfig.dakuonYoon} label="Dakuon Yōon" />
 	</section>
 	<MenuBar class="glass-morphism contrast">
 		<div class="menu content-padding">

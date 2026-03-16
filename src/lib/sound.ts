@@ -232,10 +232,10 @@ function findAudioSpriteEntry(
 		Record<string, { start: string; end: string }>
 	>
 	const entry =
-		sprites.monographs[normalizedKana] ||
-		sprites.monographDiacritics[normalizedKana] ||
-		sprites.digraphs[normalizedKana] ||
-		sprites.digraphsDiacritics[normalizedKana]
+		sprites.gojuon[normalizedKana] ||
+		sprites.dakuon[normalizedKana] ||
+		sprites.yoon[normalizedKana] ||
+		sprites.dakuonYoon[normalizedKana]
 
 	if (!entry) return null
 

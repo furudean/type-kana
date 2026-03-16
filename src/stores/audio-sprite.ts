@@ -1,5 +1,5 @@
 export const audioSprite = {
-	monographs: {
+	gojuon: {
 		あ: { start: "0:00", end: "0:00.33" },
 		い: { start: "0:00.7", end: "0:1" },
 		う: { start: "0:01.4", end: "0:01.75" },
@@ -47,7 +47,7 @@ export const audioSprite = {
 		を: { start: "0:45.1", end: "0:45.5" },
 		ん: { start: "0:46.7", end: "0:47" }
 	},
-	monographDiacritics: {
+	dakuon: {
 		が: { start: "0:48.6", end: "0:49" },
 		ぎ: { start: "0:49.4", end: "0:49.8" },
 		ぐ: { start: "0:50.2", end: "0:50.6" },
@@ -74,7 +74,7 @@ export const audioSprite = {
 		ぺ: { start: "1:11.9", end: "1:12.3" },
 		ぽ: { start: "1:12.7", end: "1:13" }
 	},
-	digraphs: {
+	yoon: {
 		きゃ: { start: "1:15.2", end: "1:15.5" },
 		きゅ: { start: "1:16.1", end: "1:16.5" },
 		きょ: { start: "1:16.9", end: "1:17.3" },
@@ -97,7 +97,7 @@ export const audioSprite = {
 		りゅ: { start: "1:39.5", end: "1:39.9" },
 		りょ: { start: "1:40.3", end: "1:40.6" }
 	},
-	digraphsDiacritics: {
+	dakuonYoon: {
 		ぎゃ: { start: "1:43", end: "1:43.4" },
 		ぎゅ: { start: "1:43.9", end: "1:44.3" },
 		ぎょ: { start: "1:44.7", end: "1:45.1" },

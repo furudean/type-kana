@@ -31,10 +31,10 @@ function createKanaCheckboxColumn(
 
 interface GameConfig {
 	kanaType: "hiragana" | "katakana" | "both"
-	monographs: KanaCheckboxColumn
-	monographsDiacritics: KanaCheckboxColumn
-	digraphs: KanaCheckboxColumn
-	digraphsDiacritics: KanaCheckboxColumn
+	gojuon: KanaCheckboxColumn
+	dakuon: KanaCheckboxColumn
+	yoon: KanaCheckboxColumn
+	dakuonYoon: KanaCheckboxColumn
 }
 
 export const gameConfig = persistent<GameConfig>({
@@ -42,15 +42,9 @@ export const gameConfig = persistent<GameConfig>({
 	storage_type: "sessionStorage",
 	start_value: {
 		kanaType: "hiragana",
-		monographs: createKanaCheckboxColumn(hiragana.monographs, true),
-		monographsDiacritics: createKanaCheckboxColumn(
-			hiragana.monographDiacritics,
-			true
-		),
-		digraphs: createKanaCheckboxColumn(hiragana.digraphs, false),
-		digraphsDiacritics: createKanaCheckboxColumn(
-			hiragana.digraphsDiacritics,
-			false
-		)
+		gojuon: createKanaCheckboxColumn(hiragana.gojuon, true),
+		dakuon: createKanaCheckboxColumn(hiragana.dakuon, true),
+		yoon: createKanaCheckboxColumn(hiragana.yoon, false),
+		dakuonYoon: createKanaCheckboxColumn(hiragana.dakuonYoon, false)
 	}
 })
