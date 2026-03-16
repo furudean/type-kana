@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { settings } from "$/stores/settings"
 	import { osTheme } from "$/stores/theme"
 	import {
@@ -104,17 +102,17 @@
 
 	// Update quiz fonts when font family setting changes
 	let previousFontFamily = $state($settings.fontFamily)
-	run(() => {
+	$effect(() => {
 		if ($settings.fontFamily !== previousFontFamily) {
 			previousFontFamily = $settings.fontFamily
 			quiz.updateFonts()
 		}
-	});
+	})
 </script>
 
 <svelte:window onpopstate={onPopState} />
 
-<Dialog bind:this={dialog} bind:open on:clickoutside={close} on:close={onClose}>
+<Dialog bind:this={dialog} bind:open onclickoutside={close} onclose={onClose}>
 	<form method="dialog" class="content-width">
 		<div class="content-padding">
 			<h1 id="settings-heading">Settings</h1>
@@ -280,7 +278,7 @@
 					max={150}
 					tooltip="[value]%"
 					width="12rem"
-					on:input={playTapSoundThrottled}
+					oninput={playTapSoundThrottled}
 				/>
 			</div>
 
@@ -301,7 +299,7 @@
 					max={150}
 					tooltip="[value]%"
 					width="12rem"
-					on:input={playVoiceSoundThrottled}
+					oninput={playVoiceSoundThrottled}
 				/>
 			</div>
 

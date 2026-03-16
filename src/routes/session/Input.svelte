@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { preventDefault } from 'svelte/legacy';
-
-	import { createEventDispatcher } from "svelte"
 	import { mdiChevronRight, mdiAutorenew } from "@mdi/js"
 	import Icon from "$/components/MaterialIcon.svelte"
 	import { settings } from "$/stores/settings"
@@ -11,12 +8,12 @@
 		input?: string;
 		currentKana?: string;
 		inputElement?: HTMLInputElement;
+		onsubmit?: (data: { input: string }) => void;
 	}
 
-	let { input = $bindable(""), currentKana = undefined, inputElement = $bindable() }: Props = $props();
+	let { input = $bindable(""), currentKana = undefined, inputElement = $bindable(), onsubmit }: Props = $props();
 
 	const WHITESPACE = /^\s+$/
-	const dispatch = createEventDispatcher()
 
 	let blocked = false
 	let shakeAnimationPlaying = $state(false)
@@ -36,7 +33,7 @@
 			}
 		}
 
-		dispatch("submit", { input })
+		onsubmit?.({ input })
 		input = ""
 	}
 
@@ -83,7 +80,7 @@
 <form
 	class="answer-input content-width"
 	class:shake-animation-playing={shakeAnimationPlaying}
-	onsubmit={preventDefault(handleSubmit)}
+	onsubmit={(e) => { e.preventDefault(); handleSubmit() }}
 	onanimationend={() => (shakeAnimationPlaying = false)}
 >
 	<input

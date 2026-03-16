@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { getAnswers } from "$/lib/answer"
 	import { settings } from "$/stores/settings"
 
@@ -25,7 +23,7 @@
 	let currentFont = $state("Noto Sans JP")
 
 	// Use assigned font if available, otherwise fall back to settings
-	run(() => {
+	$effect(() => {
 		if (assignedFont) {
 			currentFont = assignedFont
 		} else if ($settings.fontFamily === "random") {
@@ -33,7 +31,7 @@
 		} else {
 			currentFont = $settings.fontFamily
 		}
-	});
+	})
 
 	let hasAnswer = $derived(answered !== undefined)
 	let hasCorrectAnswer = $derived(hasAnswer ? isCorrectAnswer : false)

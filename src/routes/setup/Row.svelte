@@ -4,18 +4,15 @@
 	import Checkbox from "$/components/Checkbox.svelte"
 	import KanaCheckbox from "./KanaCheckbox.svelte"
 	import KanaCheckboxSpacer from "./KanaCheckboxSpacer.svelte"
-	import { createEventDispatcher } from "svelte"
 	import { browser } from "$app/environment"
-
-	const dispatch = createEventDispatcher()
-
 
 	interface Props {
 		row: KanaCheckboxRow;
 		animationDelay?: number;
+		onanimationFinished?: () => void;
 	}
 
-	let { row = $bindable(), animationDelay: columnAnimationDelay = 0 }: Props = $props();
+	let { row = $bindable(), animationDelay: columnAnimationDelay = 0, onanimationFinished }: Props = $props();
 	let animationDelay = $state(0)
 
 	function isRowSelected(row: KanaCheckboxRow): boolean {
@@ -34,7 +31,7 @@
 
 	function onAnimationFinished() {
 		animationDelay = 0
-		dispatch("animationFinished")
+		onanimationFinished?.()
 	}
 
 	
@@ -70,7 +67,7 @@
 				rowIndex={index}
 				rowLength={row.length}
 				animationDelay={columnAnimationDelay || animationDelay * index}
-				on:animationFinished={() => { if (index === row.length - 1) onAnimationFinished() }}
+				onanimationFinished={() => { if (index === row.length - 1) onAnimationFinished() }}
 			/>
 		{:else}
 			<KanaCheckboxSpacer {item} fill={!browser} />

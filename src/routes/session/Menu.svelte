@@ -1,15 +1,19 @@
 <script lang="ts">
 	import { mdiCogOutline, mdiArrowLeft, mdiRestart, mdiCheck } from "@mdi/js"
 	import Icon from "$/components/MaterialIcon.svelte"
-	import { createEventDispatcher, onMount } from "svelte"
+	import { onMount } from "svelte"
 	import { loadDropSound, loadVictorySound, playDropSound } from "$/lib/sound"
 
-	const dispatch = createEventDispatcher()
+	interface Props {
+		onmenuEvent?: (data: { type: string }) => void;
+	}
+
+	let { onmenuEvent }: Props = $props()
 
 	let isRestartAnimationPlaying = $state(false)
 
 	function menuEvent(type: string) {
-		dispatch("menuEvent", { type })
+		onmenuEvent?.({ type })
 	}
 
 	onMount(() => {

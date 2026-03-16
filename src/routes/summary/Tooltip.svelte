@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	import { writable } from "svelte/store"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
@@ -48,7 +48,6 @@
 
 <script lang="ts">
 	import { clamp, uniqArray } from "$/lib/util"
-	import { afterUpdate, tick } from "svelte"
 
 	function listWrongAnswers(item: SummaryKana): string {
 		const answers = getAnswers(item.kana)
@@ -76,16 +75,18 @@
 		return `top: ${top}px; left: ${left}px;`
 	}
 
-	let tooltipBody: HTMLElement
-	let arrowStyle: string
-	let bodyStyle: string
+	let tooltipBody: HTMLElement | undefined = $state()
+	let arrowStyle = $state("")
+	let bodyStyle = $state("")
 
-	afterUpdate(async () => {
-		if (tooltipBody && $rect) {
-			// wait for the DOM to update...
-			await tick()
-			arrowStyle = calculateArrowStyle($rect)
-			bodyStyle = calculateBodyStyle($rect, tooltipBody.getBoundingClientRect())
+	$effect(() => {
+		const currentRect = $rect
+		if (tooltipBody && currentRect) {
+			arrowStyle = calculateArrowStyle(currentRect)
+			bodyStyle = calculateBodyStyle(
+				currentRect,
+				tooltipBody.getBoundingClientRect()
+			)
 		}
 	})
 </script>
@@ -134,7 +135,9 @@
 		border-color: transparent transparent var(--background-color-inverse)
 			transparent;
 		transform: translateX(-50%);
-		transition: 75ms var(--standard-curve) top, 75ms var(--standard-curve) left;
+		transition:
+			75ms var(--standard-curve) top,
+			75ms var(--standard-curve) left;
 	}
 
 	.body {
@@ -150,7 +153,9 @@
 		text-align: center;
 		min-width: 32px;
 		max-width: 15em;
-		transition: 75ms var(--standard-curve) top, 75ms var(--standard-curve) left;
+		transition:
+			75ms var(--standard-curve) top,
+			75ms var(--standard-curve) left;
 	}
 
 	.body :global(.svg-icon) {

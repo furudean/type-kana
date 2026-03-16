@@ -4,7 +4,6 @@
 	import { toKatakana } from "wanakana"
 	import { playCheckboxSelectSound } from "$/lib/sound"
 	import { longHover } from "$/lib/long-hover"
-	import { createEventDispatcher } from "svelte"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
 	interface Props {
@@ -13,6 +12,7 @@
 		rowIndex: number;
 		rowLength: number;
 		animationDelay?: number;
+		onanimationFinished?: () => void;
 	}
 
 	let {
@@ -20,10 +20,9 @@
 		onchange,
 		rowIndex,
 		rowLength,
-		animationDelay = 0
+		animationDelay = 0,
+		onanimationFinished
 	}: Props = $props();
-
-	const dispatch = createEventDispatcher()
 
 	let isLongHover = $state(false)
 
@@ -42,7 +41,7 @@
 		// One transition event is fired per modified property. We want to make
 		// sure to only catch one of these per animation cycle
 		if (event.propertyName === "background-color") {
-			dispatch("animationFinished")
+			onanimationFinished?.()
 		}
 	}
 
@@ -50,7 +49,7 @@
 		event.stopPropagation()
 
 		if (kanaType !== "both") {
-			dispatch("animationFinished")
+			onanimationFinished?.()
 		}
 	}
 </script>

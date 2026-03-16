@@ -1,11 +1,6 @@
 <script lang="ts">
-	import { passive, createBubbler } from 'svelte/legacy';
-
-	const bubble = createBubbler();
-	import { createEventDispatcher } from "svelte"
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
-
 
 	interface Props {
 		id?: string;
@@ -17,6 +12,8 @@
 		width?: string;
 		inline?: boolean;
 		tooltip?: string | boolean;
+		oninput?: () => void;
+		onchange?: (event: Event) => void;
 	}
 
 	let {
@@ -28,10 +25,10 @@
 		list = undefined,
 		width = "100%",
 		inline = false,
-		tooltip = undefined
+		tooltip = undefined,
+		oninput,
+		onchange
 	}: Props = $props();
-
-	const dispatch = createEventDispatcher()
 
 	let rangeElement: HTMLElement
 
@@ -70,12 +67,16 @@
 	}
 
 	function handleInput(event: Event) {
-		dispatch("input", (event as any).detail)
+		oninput?.()
 		enter()
 	}
-</script>
 
-<svelte:window use:passive={['resize', () => updateTooltipPosition]} />
+	$effect(() => {
+		const handler = () => updateTooltipPosition()
+		window.addEventListener('resize', handler, { passive: true })
+		return () => window.removeEventListener('resize', handler)
+	})
+</script>
 
 <div class="range" class:inline={inline || width !== "100%"}>
 	{#if hasTooltip && isTooltipVisible}
@@ -111,7 +112,7 @@
 			hasFocus = false
 			leave()
 		}}
-		onchange={bubble('change')}
+		{onchange}
 	/>
 </div>
 

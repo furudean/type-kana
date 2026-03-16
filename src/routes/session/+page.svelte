@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import Quiz from "./Quiz.svelte"
 	import Input from "./Input.svelte"
 	import Menu from "./Menu.svelte"
@@ -38,8 +36,8 @@
 	let quizzed = $derived($quiz.quizzed)
 	let currentItem = $derived(unquizzed[0])
 
-	function handleMenuEvent(event: CustomEvent) {
-		switch (event.detail.type) {
+	function handleMenuEvent({ type }: { type: string }) {
+		switch (type) {
 			case "openSettings":
 				settingsModal.show()
 				break
@@ -75,9 +73,8 @@
 		)
 	}
 
-	async function handleSubmit(event: CustomEvent) {
+	async function handleSubmit({ input }: { input: string }) {
 		if (!currentItem) return
-		const input = event.detail.input
 		const isCorrect = isCorrectAnswer(input, currentItem.kana)
 
 		if (isCorrect) {
@@ -137,9 +134,9 @@
 	})
 
 	// go to results if queue is empty
-	run(() => {
+	$effect(() => {
 		unquizzed.length === 0 && setTimeout(() => goto("summary"), 500)
-	});
+	})
 </script>
 
 <svelte:head>
@@ -152,9 +149,9 @@
 <Quiz {unquizzed} {quizzed} {input} bind:lastQuizzedElement />
 <Input
 	bind:input
-	on:submit={handleSubmit}
+	onsubmit={handleSubmit}
 	currentKana={currentItem?.kana}
 	bind:inputElement
 />
-<Menu on:menuEvent={handleMenuEvent} />
+<Menu onmenuEvent={handleMenuEvent} />
 <SettingsModal bind:this={settingsModal} />

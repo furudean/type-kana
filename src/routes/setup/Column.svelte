@@ -51,7 +51,7 @@
 		<Row
 			bind:row={rows[index]}
 			animationDelay={animationDelay * index}
-			on:animationFinished={() => { if (index === rows.length - 1) onAnimationFinished() }}
+			onanimationFinished={() => { if (index === rows.length - 1) onAnimationFinished() }}
 		/>
 	{/each}
 </section>
