@@ -10,7 +10,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "vite build",
-		"check": "svelte-check --compiler-warnings css-unused-selector:ignore",
+		"check": "svelte-check",
 		"dev": "vite dev",
 		"format": "prettier --write .",
 		"lint": "prettier --check .",
