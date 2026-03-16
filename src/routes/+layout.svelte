@@ -28,15 +28,15 @@
 	}
 	// keep active theme in sync with the store
 	$effect(() => {
-		browser && setTheme($resolvedTheme)
+		if (browser) setTheme($resolvedTheme)
 	})
 
 	// keep volume in sync with settings
 	$effect(() => {
-		browser && (getInterfaceGain().gain.value = $settings.volume / 100)
+		if (browser) getInterfaceGain().gain.value = $settings.volume / 100
 	})
 	$effect(() => {
-		browser && (getVoiceGain().gain.value = $settings.voiceVolume / 100)
+		if (browser) getVoiceGain().gain.value = $settings.voiceVolume / 100
 	})
 </script>
 

@@ -6,7 +6,7 @@
 		items: SummaryKana[]
 		fill?: boolean
 		time?: boolean
-		truncateAt?: any
+		truncateAt?: number
 	}
 
 	let {

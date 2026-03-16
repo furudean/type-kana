@@ -3,9 +3,9 @@
 		id?: string
 		name?: string
 		checked?: boolean
-		value: any
+		value: unknown
 		disabled?: boolean
-		group?: any
+		group?: unknown
 		children?: import("svelte").Snippet
 	}
 

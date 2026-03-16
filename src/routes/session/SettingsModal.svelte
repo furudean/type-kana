@@ -42,8 +42,8 @@
 	export function show(init = false) {
 		dialog.showModal()
 
-		!init && playMaximizeSound()
-		location.hash !== "#settings" && goto($page.url.pathname + "#settings")
+		if (!init) playMaximizeSound()
+		if (location.hash !== "#settings") goto($page.url.pathname + "#settings")
 	}
 
 	export function close() {
@@ -54,7 +54,7 @@
 		playMinimizeSound()
 
 		if (!resetOnClose) {
-			location.hash === "#settings" && goto($page.url.pathname) // remove fragment
+			if (location.hash === "#settings") goto($page.url.pathname) // remove fragment
 		} else {
 			localStorage.clear()
 			sessionStorage.clear()

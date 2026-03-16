@@ -9,10 +9,10 @@
 
 <h1>Error {page.status}</h1>
 
-<p>{@html page.error?.message}</p>
+<p>{page.error?.message}</p>
 
-{#if dev && (page.error as any)?.stack}
-	<pre>{(page.error as any).stack}</pre>
+{#if dev && (page.error as { stack?: string })?.stack}
+	<pre>{(page.error as { stack?: string }).stack}</pre>
 {/if}
 
 {#if page.status === 404}

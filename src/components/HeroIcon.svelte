@@ -28,7 +28,7 @@
 			width={size}
 			height={size}
 		>
-			{#each src[0] ?? [] as att}
+			{#each src[0] ?? [] as att, i (i)}
 				<path {...att} />
 			{/each}
 		</svg>
@@ -44,7 +44,7 @@
 			width={size}
 			height={size}
 		>
-			{#each src[1] ?? [] as att}
+			{#each src[1] ?? [] as att, i (i)}
 				<path {...att} />
 			{/each}
 		</svg>

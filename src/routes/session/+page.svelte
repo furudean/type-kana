@@ -109,7 +109,7 @@
 		}
 
 		await tick()
-		isCorrect && confettiAtCurrent()
+		if (isCorrect) confettiAtCurrent()
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -135,7 +135,7 @@
 
 	// go to results if queue is empty
 	$effect(() => {
-		unquizzed.length === 0 && setTimeout(() => goto("summary"), 500)
+		if (unquizzed.length === 0) setTimeout(() => goto("summary"), 500)
 	})
 </script>
 

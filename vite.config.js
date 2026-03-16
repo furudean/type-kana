@@ -5,7 +5,7 @@ import { execSync } from "child_process"
 function execSyncSafe(command) {
 	try {
 		return execSync(command).toString().trim()
-	} catch (error) {
+	} catch {
 		console.warn(`execSyncSafe: command ${command} failed!`)
 		return `'${command}' failed`
 	}

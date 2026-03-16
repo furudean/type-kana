@@ -33,7 +33,6 @@
 
 <section class="column" aria-label={label}>
 	<div class="row select-all">
-		<!-- svelte-ignore a11y_label_has_associated_control -->
 		<label>
 			<Checkbox
 				checked={rows.every(isRowSelected)}
@@ -47,7 +46,7 @@
 			<span>Select all</span>
 		</label>
 	</div>
-	{#each rows as row, index}
+	{#each rows as _row, index (index)}
 		<Row
 			bind:row={rows[index]}
 			animationDelay={animationDelay * index}

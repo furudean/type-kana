@@ -17,7 +17,7 @@ declare interface HTMLDialogElement extends HTMLElement {
 	showModal(): void
 	addEventListener<K extends keyof HTMLElementEventMap>(
 		type: K,
-		listener: (this: HTMLDialogElement, ev: HTMLElementEventMap[K]) => any,
+		listener: (this: HTMLDialogElement, ev: HTMLElementEventMap[K]) => void,
 		options?: boolean | AddEventListenerOptions
 	): void
 	addEventListener(
@@ -27,7 +27,7 @@ declare interface HTMLDialogElement extends HTMLElement {
 	): void
 	removeEventListener<K extends keyof HTMLElementEventMap>(
 		type: K,
-		listener: (this: HTMLDialogElement, ev: HTMLElementEventMap[K]) => any,
+		listener: (this: HTMLDialogElement, ev: HTMLElementEventMap[K]) => void,
 		options?: boolean | EventListenerOptions
 	): void
 	removeEventListener(

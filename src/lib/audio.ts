@@ -53,7 +53,7 @@ export async function getAudioBuffer(
 			audioCache.set(url, audioBuffer)
 
 			return audioBuffer
-		} catch (error) {
+		} catch {
 			console.warn(
 				`Failed to decode "${url}". The format is probably unsupported on this browser.`
 			)

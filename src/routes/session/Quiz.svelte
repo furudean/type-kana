@@ -41,7 +41,7 @@
 
 <section class="quiz">
 	<div class="kana-queue">
-		{#each [...queue].slice(0, 15) as { kana, assignedFont }}
+		{#each [...queue].slice(0, 15) as { kana, assignedFont }, i (i)}
 			<QuizItemComponent {kana} {assignedFont} />
 		{/each}
 	</div>
@@ -55,7 +55,7 @@
 		{/if}
 	</div>
 	<div class="kana-quizzed">
-		{#each quizzedSlice as { kana, answered, isCorrectAnswer, assignedFont }, i}
+		{#each quizzedSlice as { kana, answered, isCorrectAnswer, assignedFont }, i (i)}
 			{#if i !== 0}
 				<QuizItemComponent {kana} {answered} {isCorrectAnswer} {assignedFont} />
 			{:else}

@@ -1,12 +1,12 @@
 <script lang="ts">
 	interface Props {
 		size?: string
-		width?: any
-		height?: any
+		width?: string | number
+		height?: string | number
 		color?: string
 		viewBox?: string
 		path: string
-		title?: any
+		title?: string
 		ariaHidden?: boolean
 	}
 

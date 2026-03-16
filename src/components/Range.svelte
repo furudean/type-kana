@@ -70,7 +70,7 @@
 		}
 	}
 
-	function handleInput(event: Event) {
+	function handleInput() {
 		oninput?.()
 		enter()
 	}
