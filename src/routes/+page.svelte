@@ -2,7 +2,7 @@
 	import Header from "./Header.svelte"
 	import Button from "$/components/Button.svelte"
 	import Icon from "$/components/MaterialIcon.svelte"
-	import { mdiArrowRight, mdiHistory } from "@mdi/js"
+	import { mdiArrowRight } from "@mdi/js"
 
 	interface Props {
 		data: { stargazers: number }
@@ -28,10 +28,6 @@
 			<Button href="/setup">
 				Start
 				<Icon size="1.25em" path={mdiArrowRight} />
-			</Button>
-			<Button href="/history" style="outline">
-				<Icon size="1.25em" path={mdiHistory} />
-				History
 			</Button>
 		</div>
 	</div>

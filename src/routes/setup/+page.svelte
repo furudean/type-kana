@@ -4,7 +4,7 @@
 	import Radio from "$/components/Radio.svelte"
 	import Button from "$/components/Button.svelte"
 	import Icon from "$/components/MaterialIcon.svelte"
-	import { mdiArrowRight, mdiArrowLeft, mdiHistory } from "@mdi/js"
+	import { mdiArrowRight, mdiArrowLeft } from "@mdi/js"
 	import { dictionary } from "$/stores/dictionary"
 	import { onMount } from "svelte"
 	import {
