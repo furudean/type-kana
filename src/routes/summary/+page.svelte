@@ -165,18 +165,13 @@
 					Retry incorrect
 				</Button>
 			{/if}
+			<Button href="/setup" style="outline">
+				<Icon path={mdiArrowLeft} size="1.5em" />
+				Change kana
+			</Button>
 			<Button href="/history" style="outline">
 				<Icon path={mdiHistory} size="1.5em" />
 				History
-			</Button>
-			<Button
-				href="/setup"
-				style={unquizzed.length === 0 && incorrect.length === 0
-					? "fill"
-					: "outline"}
-			>
-				<Icon path={mdiArrowLeft} size="1.5em" />
-				Change kana
 			</Button>
 		</div>
 	</div>

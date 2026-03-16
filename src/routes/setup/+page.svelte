@@ -70,10 +70,6 @@
 				<Icon path={mdiArrowLeft} size="1.25em" />
 				Back
 			</Button>
-			<Button href="/history" style="outline">
-				<Icon path={mdiHistory} size="1.25em" />
-				History
-			</Button>
 			<Button
 				href="session"
 				disabled={$dictionary.length === 0}
