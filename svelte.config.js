@@ -1,4 +1,4 @@
-import sveltePreprocess from "svelte-preprocess"
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
 import adapterVercel from "@sveltejs/adapter-vercel"
 import path from "path"
 import { readdirSync } from "fs"
@@ -44,8 +44,7 @@ const config = {
 		}
 	},
 
-	// options passed to svelte.preprocess (https://svelte.dev/docs#svelte_preprocess)
-	preprocess: sveltePreprocess({ postcss: true, typescript: true })
+	preprocess: vitePreprocess()
 }
 
 export default config
