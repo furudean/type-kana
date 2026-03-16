@@ -1,10 +1,10 @@
 <script lang="ts">
 	interface Props {
-		src?: Record<string, string>[][];
-		size?: string;
-		solid?: boolean;
-		ariaHidden?: boolean;
-		ariaLabel?: string;
+		src?: Record<string, string>[][]
+		size?: string
+		solid?: boolean
+		ariaHidden?: boolean
+		ariaLabel?: string
 	}
 
 	let {
@@ -13,7 +13,7 @@
 		solid = false,
 		ariaHidden = undefined,
 		ariaLabel = undefined
-	}: Props = $props();
+	}: Props = $props()
 </script>
 
 {#if src}

@@ -3,12 +3,12 @@
 	import { settings } from "$/stores/settings"
 
 	interface Props {
-		kana: string;
-		answered?: string;
-		isCorrectAnswer?: boolean;
-		isCurrent?: boolean;
-		element?: HTMLDivElement;
-		assignedFont?: string;
+		kana: string
+		answered?: string
+		isCorrectAnswer?: boolean
+		isCurrent?: boolean
+		element?: HTMLDivElement
+		assignedFont?: string
 	}
 
 	let {
@@ -18,7 +18,7 @@
 		isCurrent = false,
 		element = $bindable(undefined),
 		assignedFont = undefined
-	}: Props = $props();
+	}: Props = $props()
 
 	let currentFont = $state("Noto Sans JP")
 

@@ -6,12 +6,12 @@
 	import { font } from "$/stores/font"
 
 	interface Props {
-		item: SummaryKana;
-		fill?: boolean;
-		time?: boolean;
+		item: SummaryKana
+		fill?: boolean
+		time?: boolean
 	}
 
-	let { item, fill = false, time = false }: Props = $props();
+	let { item, fill = false, time = false }: Props = $props()
 </script>
 
 <div class="summary-container">
@@ -79,7 +79,8 @@
 		cursor: default;
 		user-select: none;
 		border: var(--border-size) solid transparent;
-		transition: 75ms var(--standard-curve) color,
+		transition:
+			75ms var(--standard-curve) color,
 			75ms var(--standard-curve) border-color;
 
 		&:focus-visible {

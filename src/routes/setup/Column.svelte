@@ -4,11 +4,11 @@
 	import Row from "./Row.svelte"
 
 	interface Props {
-		rows: KanaCheckboxRow[];
-		label: string;
+		rows: KanaCheckboxRow[]
+		label: string
 	}
 
-	let { rows = $bindable(), label }: Props = $props();
+	let { rows = $bindable(), label }: Props = $props()
 
 	let animationDelay = $state(0)
 
@@ -51,7 +51,9 @@
 		<Row
 			bind:row={rows[index]}
 			animationDelay={animationDelay * index}
-			onanimationFinished={() => { if (index === rows.length - 1) onAnimationFinished() }}
+			onanimationFinished={() => {
+				if (index === rows.length - 1) onAnimationFinished()
+			}}
 		/>
 	{/each}
 </section>

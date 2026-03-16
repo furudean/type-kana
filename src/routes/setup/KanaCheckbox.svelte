@@ -7,12 +7,12 @@
 	import { fade } from "svelte/transition"
 	import { cubicOut } from "svelte/easing"
 	interface Props {
-		item: KanaCheckbox;
-		onchange?: (item: KanaCheckbox) => void;
-		rowIndex: number;
-		rowLength: number;
-		animationDelay?: number;
-		onanimationFinished?: () => void;
+		item: KanaCheckbox
+		onchange?: (item: KanaCheckbox) => void
+		rowIndex: number
+		rowLength: number
+		animationDelay?: number
+		onanimationFinished?: () => void
 	}
 
 	let {
@@ -22,7 +22,7 @@
 		rowLength,
 		animationDelay = 0,
 		onanimationFinished
-	}: Props = $props();
+	}: Props = $props()
 
 	let isLongHover = $state(false)
 
@@ -31,9 +31,11 @@
 
 	let kanaType = $derived($gameConfig.kanaType)
 	let showPopover = $derived(kanaType === "both" && item.checked)
-	let style = $derived(animationDelay
-		? `animation-delay: ${animationDelay}ms; transition-delay: ${animationDelay}ms`
-		: null)
+	let style = $derived(
+		animationDelay
+			? `animation-delay: ${animationDelay}ms; transition-delay: ${animationDelay}ms`
+			: null
+	)
 
 	function transitionEnd(event: TransitionEvent) {
 		event.stopPropagation()
@@ -153,8 +155,8 @@
 	}
 
 	.block {
-		--transition: 125ms var(--standard-curve) color,
-			125ms var(--standard-curve) background,
+		--transition:
+			125ms var(--standard-curve) color, 125ms var(--standard-curve) background,
 			125ms var(--standard-curve) border-color;
 
 		color: var(--text-color-light);
@@ -244,12 +246,16 @@
 	.checkbox-kana:not(.selected):focus-visible .block {
 		color: var(--focus-color);
 		border-color: var(--focus-color);
-		transition: var(--transition), 75ms var(--standard-curve) color,
+		transition:
+			var(--transition),
+			75ms var(--standard-curve) color,
 			75ms var(--standard-curve) border-color;
 	}
 
 	.checkbox-kana.selected:focus-visible .block {
 		border-color: var(--focus-color);
-		transition: var(--transition), 75ms var(--standard-curve) border-color;
+		transition:
+			var(--transition),
+			75ms var(--standard-curve) border-color;
 	}
 </style>

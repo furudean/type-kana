@@ -3,13 +3,17 @@
 	import { isHiragana, isKatakana } from "wanakana"
 
 	interface Props {
-		items: SummaryKana[];
+		items: SummaryKana[]
 	}
 
-	let { items }: Props = $props();
+	let { items }: Props = $props()
 
-	let numHiragana = $derived(items.filter(({ kana }) => isHiragana(kana)).length)
-	let numKatakana = $derived(items.filter(({ kana }) => isKatakana(kana)).length)
+	let numHiragana = $derived(
+		items.filter(({ kana }) => isHiragana(kana)).length
+	)
+	let numKatakana = $derived(
+		items.filter(({ kana }) => isKatakana(kana)).length
+	)
 </script>
 
 {#if numHiragana > 0}

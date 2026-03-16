@@ -5,10 +5,13 @@
 
 	// filter quizzed items that had a correct answer, only these count toward
 	// the total
-	let quizzedCorrect = $derived($quiz.quizzed.filter((item) => item.isCorrectAnswer))
+	let quizzedCorrect = $derived(
+		$quiz.quizzed.filter((item) => item.isCorrectAnswer)
+	)
 
-	let progress =
-		$derived(quizzedCorrect.length / (quizzedCorrect.length + $quiz.unquizzed.length))
+	let progress = $derived(
+		quizzedCorrect.length / (quizzedCorrect.length + $quiz.unquizzed.length)
+	)
 
 	let style = $derived(`margin-right: ${(1 - roundN(progress, 2)) * 100}%`)
 </script>

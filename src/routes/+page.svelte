@@ -5,10 +5,10 @@
 	import { mdiArrowRight, mdiHistory } from "@mdi/js"
 
 	interface Props {
-		data: { stargazers: number };
+		data: { stargazers: number }
 	}
 
-	let { data }: Props = $props();
+	let { data }: Props = $props()
 	let stargazers = $derived(data.stargazers)
 </script>
 

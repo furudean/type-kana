@@ -3,13 +3,18 @@
 	import { scrollLock } from "$/lib/scoll-lock"
 
 	interface Props {
-		open?: boolean;
-		children?: import('svelte').Snippet;
-		onclickoutside?: () => void;
-		onclose?: (event: Event) => void;
+		open?: boolean
+		children?: import("svelte").Snippet
+		onclickoutside?: () => void
+		onclose?: (event: Event) => void
 	}
 
-	let { open = $bindable(false), children, onclickoutside, onclose }: Props = $props();
+	let {
+		open = $bindable(false),
+		children,
+		onclickoutside,
+		onclose
+	}: Props = $props()
 
 	let dialog: HTMLDialogElement
 

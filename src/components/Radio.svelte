@@ -1,12 +1,12 @@
 <script lang="ts">
 	interface Props {
-		id?: string;
-		name?: string;
-		checked?: boolean;
-		value: any;
-		disabled?: boolean;
-		group?: any;
-		children?: import('svelte').Snippet;
+		id?: string
+		name?: string
+		checked?: boolean
+		value: any
+		disabled?: boolean
+		group?: any
+		children?: import("svelte").Snippet
 	}
 
 	let {
@@ -17,7 +17,7 @@
 		disabled = undefined,
 		group = $bindable(undefined),
 		children
-	}: Props = $props();
+	}: Props = $props()
 </script>
 
 <div class="radio-button">

@@ -1,11 +1,10 @@
 <script lang="ts">
 	interface Props {
-		class: string | undefined;
-		children?: import('svelte').Snippet;
+		class: string | undefined
+		children?: import("svelte").Snippet
 	}
 
-	let { class: classNames, children }: Props = $props();
-	
+	let { class: classNames, children }: Props = $props()
 </script>
 
 <section class="menu-bar {classNames}">

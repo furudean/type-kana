@@ -7,10 +7,10 @@
 	import { commitHashLong, commitHashShort } from "$/lib/version"
 
 	interface Props {
-		stargazers: number;
+		stargazers: number
 	}
 
-	let { stargazers }: Props = $props();
+	let { stargazers }: Props = $props()
 </script>
 
 <section class="header content-padding">

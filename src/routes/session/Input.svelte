@@ -5,13 +5,18 @@
 	import { getAnswers, isCorrectAnswer } from "$/lib/answer"
 
 	interface Props {
-		input?: string;
-		currentKana?: string;
-		inputElement?: HTMLInputElement;
-		onsubmit?: (data: { input: string }) => void;
+		input?: string
+		currentKana?: string
+		inputElement?: HTMLInputElement
+		onsubmit?: (data: { input: string }) => void
 	}
 
-	let { input = $bindable(""), currentKana = undefined, inputElement = $bindable(), onsubmit }: Props = $props();
+	let {
+		input = $bindable(""),
+		currentKana = undefined,
+		inputElement = $bindable(),
+		onsubmit
+	}: Props = $props()
 
 	const WHITESPACE = /^\s+$/
 
@@ -80,7 +85,10 @@
 <form
 	class="answer-input content-width"
 	class:shake-animation-playing={shakeAnimationPlaying}
-	onsubmit={(e) => { e.preventDefault(); handleSubmit() }}
+	onsubmit={(e) => {
+		e.preventDefault()
+		handleSubmit()
+	}}
 	onanimationend={() => (shakeAnimationPlaying = false)}
 >
 	<input

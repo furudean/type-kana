@@ -5,7 +5,7 @@
 	import { loadDropSound, loadVictorySound, playDropSound } from "$/lib/sound"
 
 	interface Props {
-		onmenuEvent?: (data: { type: string }) => void;
+		onmenuEvent?: (data: { type: string }) => void
 	}
 
 	let { onmenuEvent }: Props = $props()
@@ -102,7 +102,8 @@
 		margin-left: 0.25em;
 		padding: 0.175em;
 		border-radius: 50%;
-		transition: transform 50ms var(--standard-curve),
+		transition:
+			transform 50ms var(--standard-curve),
 			color 125ms var(--standard-curve),
 			background-color 125ms var(--standard-curve),
 			border-color 125ms var(--standard-curve);

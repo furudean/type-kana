@@ -1,13 +1,13 @@
 <script lang="ts">
 	interface Props {
-		size?: string;
-		width?: any;
-		height?: any;
-		color?: string;
-		viewBox?: string;
-		path: string;
-		title?: any;
-		ariaHidden?: boolean;
+		size?: string
+		width?: any
+		height?: any
+		color?: string
+		viewBox?: string
+		path: string
+		title?: any
+		ariaHidden?: boolean
 	}
 
 	let {
@@ -19,7 +19,7 @@
 		path,
 		title = undefined,
 		ariaHidden = false
-	}: Props = $props();
+	}: Props = $props()
 </script>
 
 <svg

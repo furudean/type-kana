@@ -3,10 +3,10 @@
 	import SummaryItem from "./SummaryItem.svelte"
 
 	interface Props {
-		items: SummaryKana[];
-		fill?: boolean;
-		time?: boolean;
-		truncateAt?: any;
+		items: SummaryKana[]
+		fill?: boolean
+		time?: boolean
+		truncateAt?: any
 	}
 
 	let {
@@ -14,13 +14,15 @@
 		fill = true,
 		time = false,
 		truncateAt = Infinity
-	}: Props = $props();
+	}: Props = $props()
 
 	let expanded = $state(false)
 
 	// "- 3" makes sure the amount of items truncated is longer than the button
 	let shouldTruncate = $derived(truncateAt <= items.length - 3)
-	let truncateIndex = $derived(shouldTruncate && expanded ? Infinity : truncateAt)
+	let truncateIndex = $derived(
+		shouldTruncate && expanded ? Infinity : truncateAt
+	)
 	let truncatedItems = $derived(items.slice(0, truncateIndex))
 </script>
 

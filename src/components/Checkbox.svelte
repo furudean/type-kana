@@ -1,13 +1,13 @@
 <script lang="ts">
 	interface Props {
-		title?: string;
-		id?: string;
-		checked: boolean;
-		indeterminate?: boolean;
-		disabled?: boolean;
-		ariaLabel?: string;
-		onclick?: (e: MouseEvent) => void;
-		children?: import('svelte').Snippet;
+		title?: string
+		id?: string
+		checked: boolean
+		indeterminate?: boolean
+		disabled?: boolean
+		ariaLabel?: string
+		onclick?: (e: MouseEvent) => void
+		children?: import("svelte").Snippet
 	}
 
 	let {
@@ -19,7 +19,7 @@
 		ariaLabel = undefined,
 		onclick,
 		children
-	}: Props = $props();
+	}: Props = $props()
 </script>
 
 <div class="checkbox">

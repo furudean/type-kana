@@ -3,17 +3,17 @@
 	import { cubicOut } from "svelte/easing"
 
 	interface Props {
-		id?: string;
-		value: number;
-		min?: number;
-		max?: number;
-		step?: number;
-		list?: string | undefined;
-		width?: string;
-		inline?: boolean;
-		tooltip?: string | boolean;
-		oninput?: () => void;
-		onchange?: (event: Event) => void;
+		id?: string
+		value: number
+		min?: number
+		max?: number
+		step?: number
+		list?: string | undefined
+		width?: string
+		inline?: boolean
+		tooltip?: string | boolean
+		oninput?: () => void
+		onchange?: (event: Event) => void
 	}
 
 	let {
@@ -28,12 +28,16 @@
 		tooltip = undefined,
 		oninput,
 		onchange
-	}: Props = $props();
+	}: Props = $props()
 
 	let rangeElement: HTMLElement
 
-	let precision = $derived(Number(step) < 1 ? step.toString().split(".")[1].length : 0)
-	let hasTooltip = $derived(tooltip !== undefined && !["false", "no"].includes(tooltip.toString()))
+	let precision = $derived(
+		Number(step) < 1 ? step.toString().split(".")[1].length : 0
+	)
+	let hasTooltip = $derived(
+		tooltip !== undefined && !["false", "no"].includes(tooltip.toString())
+	)
 	let hasFocus = $state(false)
 	let isTooltipVisible = $state(false)
 	let tooltipStyle = $state("")
@@ -73,8 +77,8 @@
 
 	$effect(() => {
 		const handler = () => updateTooltipPosition()
-		window.addEventListener('resize', handler, { passive: true })
-		return () => window.removeEventListener('resize', handler)
+		window.addEventListener("resize", handler, { passive: true })
+		return () => window.removeEventListener("resize", handler)
 	})
 </script>
 

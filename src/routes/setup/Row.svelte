@@ -7,12 +7,16 @@
 	import { browser } from "$app/environment"
 
 	interface Props {
-		row: KanaCheckboxRow;
-		animationDelay?: number;
-		onanimationFinished?: () => void;
+		row: KanaCheckboxRow
+		animationDelay?: number
+		onanimationFinished?: () => void
 	}
 
-	let { row = $bindable(), animationDelay: columnAnimationDelay = 0, onanimationFinished }: Props = $props();
+	let {
+		row = $bindable(),
+		animationDelay: columnAnimationDelay = 0,
+		onanimationFinished
+	}: Props = $props()
 	let animationDelay = $state(0)
 
 	function isRowSelected(row: KanaCheckboxRow): boolean {
@@ -33,8 +37,6 @@
 		animationDelay = 0
 		onanimationFinished?.()
 	}
-
-	
 </script>
 
 <div
@@ -63,11 +65,17 @@
 		{#if item && browser}
 			<KanaCheckbox
 				{item}
-				onchange={(newItem) => { row = row.map((r, i) => i === index ? newItem : r) as KanaCheckboxRow }}
+				onchange={(newItem) => {
+					row = row.map((r, i) =>
+						i === index ? newItem : r
+					) as KanaCheckboxRow
+				}}
 				rowIndex={index}
 				rowLength={row.length}
 				animationDelay={columnAnimationDelay || animationDelay * index}
-				onanimationFinished={() => { if (index === row.length - 1) onAnimationFinished() }}
+				onanimationFinished={() => {
+					if (index === row.length - 1) onAnimationFinished()
+				}}
 			/>
 		{:else}
 			<KanaCheckboxSpacer {item} fill={!browser} />

@@ -1,15 +1,15 @@
 <script lang="ts">
 	interface Props {
-		title?: string;
-		disabled?: boolean;
-		style?: "fill" | "outline";
-		type?: "submit" | "button";
+		title?: string
+		disabled?: boolean
+		style?: "fill" | "outline"
+		type?: "submit" | "button"
 		// link props
-		href?: string;
-		target?: string;
-		rel?: string;
-		onclick?: (e: MouseEvent) => void;
-		children?: import('svelte').Snippet;
+		href?: string
+		target?: string
+		rel?: string
+		onclick?: (e: MouseEvent) => void
+		children?: import("svelte").Snippet
 	}
 
 	let {
@@ -22,7 +22,7 @@
 		rel = undefined,
 		onclick,
 		children
-	}: Props = $props();
+	}: Props = $props()
 </script>
 
 {#if !href}
@@ -84,7 +84,8 @@
 		border-radius: var(--standard-border-radius);
 		padding: calc(var(--padding-vertical) - var(--border-size))
 			calc(var(--padding-horizontal) - var(--border-size));
-		transition: transform 50ms var(--standard-curve),
+		transition:
+			transform 50ms var(--standard-curve),
 			color 75ms var(--standard-curve),
 			background-color 75ms var(--standard-curve),
 			border-color 75ms var(--standard-curve);

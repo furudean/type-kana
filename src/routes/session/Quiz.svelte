@@ -7,10 +7,10 @@
 	import { mdiClose as errorMarkerIcon } from "@mdi/js"
 
 	interface Props {
-		unquizzed: QuizItem[];
-		quizzed: QuizItem[];
-		input?: string;
-		lastQuizzedElement?: HTMLDivElement;
+		unquizzed: QuizItem[]
+		quizzed: QuizItem[]
+		input?: string
+		lastQuizzedElement?: HTMLDivElement
 	}
 
 	let {
@@ -18,14 +18,14 @@
 		quizzed,
 		input = "",
 		lastQuizzedElement = $bindable()
-	}: Props = $props();
-
+	}: Props = $props()
 
 	function showErrorMarker(kana?: string, input?: string): boolean {
 		if (
 			$settings.showErrorMarker &&
 			kana &&
-			input && input.length > 0 &&
+			input &&
+			input.length > 0 &&
 			$settings.autoCommit !== "strict"
 		) {
 			return !getAnswers(kana).some((answer) => answer.startsWith(input!))

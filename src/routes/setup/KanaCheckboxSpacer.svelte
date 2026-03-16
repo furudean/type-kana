@@ -1,10 +1,10 @@
 <script lang="ts">
 	interface Props {
-		item: KanaCheckbox | null;
-		fill?: boolean;
+		item: KanaCheckbox | null
+		fill?: boolean
 	}
 
-	let { item, fill = false }: Props = $props();
+	let { item, fill = false }: Props = $props()
 </script>
 
 <div class="checkbox-kana spacer kana-font" class:fill aria-hidden="true">

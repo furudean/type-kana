@@ -8,10 +8,10 @@
 	import { page } from "$app/stores"
 	import "dialog-polyfill/dist/dialog-polyfill.css"
 	interface Props {
-		children?: import('svelte').Snippet;
+		children?: import("svelte").Snippet
 	}
 
-	let { children }: Props = $props();
+	let { children }: Props = $props()
 
 	function setTheme(theme: string) {
 		const root = document.querySelector<HTMLHtmlElement>(":root")

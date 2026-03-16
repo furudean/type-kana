@@ -26,7 +26,7 @@
 	const ALPHANUMERIC = /^[a-z0-9]+$/i
 
 	let settingsModal: SettingsModal
-	let input = $state('')
+	let input = $state("")
 	let streakLength = 0
 	let inputElement: HTMLInputElement | undefined = $state()
 	let lastQuizzedElement: HTMLDivElement | undefined = $state()
