@@ -31,7 +31,7 @@
 	}
 </script>
 
-<section class="column" aria-label={label}>
+<section class="column" aria-labelledby="h2">
 	<div class="row select-all">
 		<label>
 			<Checkbox
@@ -43,7 +43,7 @@
 					playCheckboxSelectSeriesSound(8, !everyRowChecked)
 				}}
 			/>
-			<span>Select all</span>
+			<h2>{label}</h2>
 		</label>
 	</div>
 	{#each rows as _row, index (index)}
@@ -58,6 +58,10 @@
 </section>
 
 <style lang="postcss">
+	h2 {
+		all: inherit;
+	}
+
 	.column {
 		display: inline-block;
 		margin-bottom: 3em;
