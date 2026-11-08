@@ -30,7 +30,7 @@
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@rollup/plugin-replace": "^6.0.3",
-		"@sveltejs/adapter-vercel": "^6.3.3",
+		"@sveltejs/adapter-node": "^5.5.8",
 		"@sveltejs/kit": "^2.55.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@types/body-scroll-lock": "^3.1.2",

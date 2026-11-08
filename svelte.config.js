@@ -1,5 +1,5 @@
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
-import adapterVercel from "@sveltejs/adapter-vercel"
+import adapterNode from "@sveltejs/adapter-node"
 import path from "path"
 import { readdirSync } from "fs"
 
@@ -35,7 +35,7 @@ const config = {
 	extensions: [".svelte"],
 
 	kit: {
-		adapter: adapterVercel(),
+		adapter: adapterNode(),
 		prerender: {
 			entries: ["*", ...listRoutesIn("/icon/")]
 		},
