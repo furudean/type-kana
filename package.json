@@ -27,7 +27,7 @@
 		"@types/body-scroll-lock": "^3.1.2",
 		"@types/canvas-confetti": "^1.9.0",
 		"@types/common-tags": "^1.8.4",
-		"@types/node": "^22.0.0",
+		"@types/node": "^25.5.0",
 		"autoprefixer": "^10.4.27",
 		"body-scroll-lock": "^3.1.5",
 		"canvas-confetti": "^1.9.4",
